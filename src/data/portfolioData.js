@@ -562,20 +562,15 @@ export const terminalCommands = {
   help: [
     "Comandos disponíveis:",
     "",
-    "  sobre      - Resumo sobre Ricardo Vendramini & Vendramini Informática",
-    "  skills     - Lista das principais competências técnicas",
-    "  projetos   - Lista dos projetos em destaque",
-    "  livros     - Livros e publicações",
-    "  contato    - Informações de contato direto",
-    "  clear      - Limpa a tela do terminal",
+    "  sobre        - Resumo sobre Ricardo Vendramini & Vendramini Informática",
+    "  skills       - Lista das principais competências técnicas",
+    "  projetos     - Lista dos projetos em destaque",
+    "  livros       - Livros e publicações",
+    "  contato      - Informações de contato direto",
+    "  achievements - Status de conquistas e segredos encontrados 🏆",
+    "  clear        - Limpa o histórico do terminal",
     "",
-    "⚡ EASTER EGGS — Comandos Secretos:",
-    "",
-    "★ game       - Lista os jogos Arcade disponíveis no terminal",
-    "★ matrix     - Protocolo Matrix: ativa chuva de código no background",
-    "★ sudo rm    - Tente deletar o portfólio... se tiver coragem 😈",
-    "★ root       - Acesse o painel root secreto do sistema 🔐",
-    "★ konami     - Sequência secreta: ↑↑↓↓←→←→ B A (no teclado)"
+    "Digite qualquer comando para executar."
   ],
   games: [
     "⚡ ARCADE CENTER — Jogos Disponíveis:",

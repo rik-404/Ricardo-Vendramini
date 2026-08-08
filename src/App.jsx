@@ -87,6 +87,13 @@ export default function App() {
   const triggerEasterEgg = () => {
     setEasterEggOpen(true);
     setMatrixCanvasMode(true);
+    try {
+      const saved = JSON.parse(localStorage.getItem('ricardodev_achievements') || '[]');
+      if (!saved.includes('konami')) {
+        saved.push('konami');
+        localStorage.setItem('ricardodev_achievements', JSON.stringify(saved));
+      }
+    } catch {}
   };
 
   const triggerMatrixOnly = () => {

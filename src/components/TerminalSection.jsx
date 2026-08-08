@@ -14,10 +14,81 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
   const [adminMode, setAdminMode] = useState(false); // waiting for password
   const [rickrollActive, setRickrollActive] = useState(false);
   const [showPostIt, setShowPostIt] = useState(false);
+  const [achievements, setAchievements] = useState(() => {
+    try {
+      const saved = localStorage.getItem('ricardodev_achievements');
+      return saved ? new Set(JSON.parse(saved)) : new Set();
+    } catch { return new Set(); }
+  });
+
+  const unlockAchievement = (id) => {
+    setAchievements((prev) => {
+      const next = new Set(prev);
+      next.add(id);
+      localStorage.setItem('ricardodev_achievements', JSON.stringify([...next]));
+      return next;
+    });
+  };
 
   const outputContainerRef = useRef(null);
   const canvasRef = useRef(null);
   const gameLoopRef = useRef(null);
+  const sectionRef = useRef(null);
+  const inputRef = useRef(null);
+  const postItTriggeredRef = useRef(false);
+  const lastActivityRef = useRef(Date.now());
+
+  // Track input typing or game activity to reset idle timer
+  useEffect(() => {
+    lastActivityRef.current = Date.now();
+  }, [inputVal, gameActive]);
+
+  // 5-second idle viewport timer: only drops if user is NOT playing game AND NOT typing
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    let timer = null;
+
+    const checkAndTrigger = () => {
+      if (postItTriggeredRef.current || gameActive) return;
+
+      const isInputFocused = document.activeElement === inputRef.current;
+      const isTyping = inputVal.trim().length > 0;
+      const timeSinceActivity = Date.now() - lastActivityRef.current;
+
+      if (timeSinceActivity >= 5000 && !isInputFocused && !isTyping) {
+        postItTriggeredRef.current = true;
+        setShowPostIt(true);
+      } else {
+        // Re-check in 1 second if still idle in viewport
+        timer = setTimeout(checkAndTrigger, 1000);
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting && !postItTriggeredRef.current && !gameActive) {
+          lastActivityRef.current = Date.now();
+          if (timer) clearTimeout(timer);
+          timer = setTimeout(checkAndTrigger, 5000);
+        } else {
+          if (timer) {
+            clearTimeout(timer);
+            timer = null;
+          }
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(sectionRef.current);
+
+    return () => {
+      if (timer) clearTimeout(timer);
+      observer.disconnect();
+    };
+  }, [gameActive, inputVal]);
 
   // Game internal state ref for 60fps canvas loop
   const gameStateRef = useRef({
@@ -513,6 +584,8 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
 
     // Root command — easter egg with falling post-it
     if (cmd === 'root') {
+      postItTriggeredRef.current = true;
+      unlockAchievement('root');
       setInputVal('');
       setHistory([
         ...newHistory,
@@ -540,6 +613,7 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
     }
 
     if (cmd === 'matrix') {
+      unlockAchievement('matrix');
       newHistory.push('> Executando protocolo Matrix...');
       setHistory(newHistory);
       setInputVal('');
@@ -548,6 +622,7 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
     }
 
     if (cmd === 'navinha' || cmd === 'play' || cmd === 'space' || cmd === 'invaders') {
+      unlockAchievement('navinha');
       startGame();
       setInputVal('');
       return;
@@ -555,6 +630,7 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
 
     // Easter Egg: sudo rm -rf
     if (cmd.includes('sudo') && cmd.includes('rm')) {
+      unlockAchievement('sudo_rm');
       setInputVal('');
       const step1 = [...newHistory, '', '⚠️  WARNING', '', '> sudo rm -rf /portfolio', '', 'Deleting portfolio...'];
       setHistory(step1);
@@ -607,6 +683,28 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
       return;
     }
 
+    if (cmd === 'achievements' || cmd === 'conquistas' || cmd === 'secrets') {
+      const count = achievements.size;
+      setHistory([
+        ...newHistory,
+        '',
+        `🏆 CONQUISTAS & SEGREDOS (${count}/5)`,
+        '────────────────────────────────────────────────',
+        achievements.has('matrix') ? ' ✅ [DESBLOQUEADO] Protocolo Matrix (matrix)' : ' 🔒 [BLOQUEADO] ???',
+        achievements.has('navinha') ? ' ✅ [DESBLOQUEADO] Arcade Space Invaders (navinha)' : ' 🔒 [BLOQUEADO] ???',
+        achievements.has('sudo_rm') ? ' ✅ [DESBLOQUEADO] Protocolo Autodestruição (sudo rm)' : ' 🔒 [BLOQUEADO] ???',
+        achievements.has('root') ? ' ✅ [DESBLOQUEADO] Acesso Root & Post-it (root)' : ' 🔒 [BLOQUEADO] ???',
+        achievements.has('konami') ? ' ✅ [DESBLOQUEADO] Código Konami Clássico' : ' 🔒 [BLOQUEADO] ???',
+        '────────────────────────────────────────────────',
+        count === 5
+          ? '🌟 PARABÉNS! Você encontrou todos os segredos!'
+          : '💡 Explore o terminal e o site para encontrar os segredos ocultos.',
+        ''
+      ]);
+      setInputVal('');
+      return;
+    }
+
     if (cmd === 'help') {
       setHistory([...newHistory, ...terminalCommands.help]);
     } else if (cmd === 'sobre') {
@@ -627,7 +725,7 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
   };
 
   return (
-    <section className="py-24 relative z-10">
+    <section ref={sectionRef} className="py-24 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -760,6 +858,7 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
                 {adminMode ? '🔐 senha:' : 'ricardo@dev:~$'}
               </span>
               <input
+                ref={inputRef}
                 type={adminMode ? 'password' : 'text'}
                 value={inputVal}
                 onChange={(e) => setInputVal(e.target.value)}
@@ -820,26 +919,22 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
               />
 
               {/* Content */}
-              <p className="text-[10px] text-amber-700/60 font-mono uppercase tracking-widest mb-3">
-                📌 Senha do Sistema
+              <p className="text-[10px] text-amber-800/70 font-mono uppercase tracking-widest mb-1.5 font-bold flex items-center justify-between">
+                <span>📌 MEMO // DEV</span>
+                <span className="text-[9px] text-amber-700/50">v4.2</span>
               </p>
 
-              <div className="border-b-2 border-dashed border-amber-600/30 mb-3" />
+              <div className="border-b border-dashed border-amber-700/30 mb-2.5" />
 
-              <p className="text-xl font-bold text-amber-900 font-mono tracking-wide mb-1" style={{ fontFamily: "'Caveat', cursive, monospace" }}>
-                Usuário: root
-              </p>
-              <p className="text-2xl font-extrabold text-amber-950 font-mono" style={{ fontFamily: "'Caveat', cursive, monospace" }}>
-                Senha: admin
-              </p>
+              <div className="space-y-1 font-mono text-xs text-amber-950 font-medium bg-amber-900/10 p-2 rounded border border-amber-800/20">
+                <p><span className="text-amber-800/80">user:</span> <strong className="text-amber-950 font-bold">root</strong></p>
+                <p><span className="text-amber-800/80">pass:</span> <strong className="text-amber-950 font-bold">admin</strong></p>
+              </div>
 
-              <div className="border-b-2 border-dashed border-amber-600/30 mt-3 mb-3" />
+              <div className="border-b border-dashed border-amber-700/30 my-2.5" />
 
-              <p className="text-[9px] text-amber-700/50 font-mono italic">
-                ⚠️ Não conta pra ninguém!
-              </p>
-              <p className="text-[9px] text-amber-700/40 font-mono mt-1">
-                — colado aqui por: Ricardo 😅
+              <p className="text-[9.5px] text-amber-900/75 font-mono italic leading-tight">
+                ⚠️ Lembrete: trocar credenciais padrão antes do deploy em produção!
               </p>
             </div>
 
