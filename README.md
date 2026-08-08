@@ -131,7 +131,7 @@ sites/ricardo-vendramini/
 **Ricardo Vendramini**  
 *Desenvolvedor, Líder & Criador de Soluções Digitais*  
 - 🏢 **Empresa**: Vendramini Informática
-- 📧 **E-mail**: [contato@ricardovendramini.dev](mailto:contato@ricardovendramini.dev)
+- 📧 **E-mail**: [ricardovendramini.contato@gmail.com](mailto:ricardovendramini.contato@gmail.com)
 - 💼 **LinkedIn**: [Ricardo Vendramini Cassimiro](https://www.linkedin.com/in/ricardovendraminicassimiro/)
 - 📷 **Instagram**: [@404_rik](https://www.instagram.com/404_rik)
 
