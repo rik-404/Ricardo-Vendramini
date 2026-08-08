@@ -6,6 +6,13 @@ export default function CustomCursor() {
   const [isHovered, setIsHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isTouch, setIsTouch] = useState(false);
+  const [swatMode, setSwatMode] = useState(false);
+
+  useEffect(() => {
+    const handleSwat = (e) => setSwatMode(e.detail);
+    window.addEventListener('fly-swat', handleSwat);
+    return () => window.removeEventListener('fly-swat', handleSwat);
+  }, []);
 
   useEffect(() => {
     // Check if device is touch primary
@@ -53,7 +60,7 @@ export default function CustomCursor() {
     return () => cancelAnimationFrame(animationFrame);
   }, [position, isTouch]);
 
-  if (isTouch || !isVisible) return null;
+  if (isTouch || !isVisible || swatMode) return null;
 
   return (
     <>

@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Code, Layers, Sparkles, Terminal, ChevronDown, Rocket, Building2 } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
+import FlyEasterEgg from './FlyEasterEgg';
 
 export default function HeroSection() {
+  const heroRef = useRef(null);
+  const titleRef = useRef(null);
   const prefixText = "Eu transformo ideias em ";
   const gradientText = "experiências digitais.";
   const fullText = prefixText + gradientText;
@@ -27,6 +30,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
+      ref={heroRef}
       className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden"
     >
       {/* Glow Orbs Backdrop Cyan to Green */}
@@ -65,6 +69,7 @@ export default function HeroSection() {
 
         {/* Main Headline with Typewriter Effect */}
         <motion.h1
+          ref={titleRef}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -167,6 +172,9 @@ export default function HeroSection() {
           <ChevronDown className="w-5 h-5 text-[#00ff88]" />
         </motion.div>
       </div>
+
+      {/* Mosca aleatória que pousa no título */}
+      <FlyEasterEgg containerRef={heroRef} titleRef={titleRef} />
     </section>
   );
 }
