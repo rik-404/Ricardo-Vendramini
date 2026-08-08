@@ -12,7 +12,7 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
   const [level, setLevel] = useState(1);
   const [gameState, setGameState] = useState('PLAYING'); // PLAYING | GAMEOVER | VICTORY
 
-  const bottomRef = useRef(null);
+  const outputContainerRef = useRef(null);
   const canvasRef = useRef(null);
   const gameLoopRef = useRef(null);
 
@@ -470,8 +470,62 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
       return;
     }
 
-    if (cmd === 'game' || cmd === 'play' || cmd === 'space' || cmd === 'invaders' || cmd === 'navinha') {
+    if (cmd === 'navinha' || cmd === 'play' || cmd === 'space' || cmd === 'invaders') {
       startGame();
+      setInputVal('');
+      return;
+    }
+
+    // Easter Egg: sudo rm -rf
+    if (cmd.includes('sudo') && cmd.includes('rm')) {
+      setInputVal('');
+      const step1 = [...newHistory, '', '⚠️  WARNING', '', '> sudo rm -rf /portfolio', '', 'Deleting portfolio...'];
+      setHistory(step1);
+
+      setTimeout(() => {
+        setHistory((prev) => [...prev, '', '[███░░░░░░░░░░░░] 21%']);
+      }, 800);
+
+      setTimeout(() => {
+        setHistory((prev) => [...prev, '[████████░░░░░░░] 57%']);
+      }, 1800);
+
+      setTimeout(() => {
+        setHistory((prev) => [...prev, '[███████████████] 100%']);
+      }, 2800);
+
+      setTimeout(() => {
+        // Flash the screen
+        const section = document.querySelector('.terminal-flash-target');
+        if (section) {
+          section.style.transition = 'filter 0.1s';
+          section.style.filter = 'brightness(3) invert(1)';
+          setTimeout(() => {
+            section.style.filter = 'none';
+          }, 150);
+        }
+        setHistory((prev) => [...prev, '', '> A tela pisca...']);
+      }, 3600);
+
+      setTimeout(() => {
+        setHistory((prev) => [
+          ...prev,
+          '',
+          '🎉 Brincadeira!',
+          '',
+          'Boa tentativa. 😎',
+          'Acha que eu deixaria deletar meu portfólio assim? Sou dev, não estagiário.',
+          '',
+          '> Sistema intacto. Nenhum arquivo foi removido.',
+          '[OK] Firewall Ricardo.DEV ativo. Boa sorte na próxima.'
+        ]);
+      }, 4500);
+
+      return;
+    }
+
+    if (cmd === 'game' || cmd === 'games' || cmd === 'arcade') {
+      setHistory([...newHistory, ...terminalCommands.games]);
       setInputVal('');
       return;
     }
@@ -489,7 +543,7 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
     } else if (cmd === 'contato') {
       setHistory([...newHistory, 'CONTATO: contato@ricardovendramini.dev | LinkedIn & GitHub: Ricardo Vendramini']);
     } else {
-      setHistory([...newHistory, `Comando não reconhecido: '${cmd}'. Digite 'help' ou 'game' para o Arcade.`]);
+      setHistory([...newHistory, `Comando não reconhecido: '${cmd}'. Digite 'help' para ver os comandos.`]);
     }
 
     setInputVal('');
@@ -516,7 +570,7 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
         </div>
 
         {/* Terminal Window Mockup */}
-        <div className="max-w-4xl mx-auto glass-card rounded-2xl border border-[#00ff88]/30 overflow-hidden shadow-glow-md font-mono text-xs sm:text-sm">
+        <div className="terminal-flash-target max-w-4xl mx-auto glass-card rounded-2xl border border-[#00ff88]/30 overflow-hidden shadow-glow-md font-mono text-xs sm:text-sm">
           
           {/* Top Bar */}
           <div className="bg-[#040705] px-4 py-3 border-b border-white/10 flex items-center justify-between">
@@ -597,6 +651,26 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
                       ? 'text-emerald-400'
                       : line.startsWith('STATUS:')
                       ? 'text-[#00ff88] font-extrabold'
+                      : line.startsWith('★')
+                      ? 'text-[#f59e0b] font-semibold drop-shadow-[0_0_6px_rgba(245,158,11,0.4)]'
+                      : line.startsWith('⚡')
+                      ? 'text-[#a855f7] font-extrabold text-sm tracking-wide drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]'
+                      : line.startsWith('Comandos')
+                      ? 'text-[#00f2fe] font-bold'
+                      : line.includes('WARNING')
+                      ? 'text-red-500 font-extrabold text-base animate-pulse'
+                      : line.startsWith('[███')
+                      ? 'text-red-400 font-mono font-bold'
+                      : line.includes('Deleting')
+                      ? 'text-red-400 font-bold'
+                      : line.includes('Brincadeira')
+                      ? 'text-[#00ff88] font-extrabold text-base drop-shadow-[0_0_10px_rgba(0,255,136,0.6)]'
+                      : line.includes('Boa tentativa')
+                      ? 'text-[#f59e0b] font-bold text-sm'
+                      : line.includes('Sou dev')
+                      ? 'text-slate-400 italic text-xs'
+                      : line.includes('Firewall')
+                      ? 'text-emerald-400 font-bold'
                       : 'text-slate-300'
                   }
                 >
@@ -626,7 +700,7 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
         </div>
 
         <p className="text-center text-xs font-mono text-slate-400 mt-4">
-          Digite <span className="text-[#00ff88]">game</span> para jogar o Arcade de Navinha ou explore a história.
+          Digite <code className="text-[#00ff88] bg-black/40 px-1.5 py-0.5 rounded border border-[#00ff88]/30">help</code> para ver todos os comandos disponíveis e <span className="text-[#a855f7]">easter eggs</span> secretos.
         </p>
 
       </div>

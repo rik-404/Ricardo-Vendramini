@@ -89,6 +89,11 @@ export default function App() {
     setMatrixCanvasMode(true);
   };
 
+  const triggerMatrixOnly = () => {
+    setMatrixCanvasMode(true);
+    setTimeout(() => setMatrixCanvasMode(false), 10000);
+  };
+
   const closeEasterEgg = () => {
     setEasterEggOpen(false);
     setTimeout(() => setMatrixCanvasMode(false), 5000);
@@ -120,7 +125,7 @@ export default function App() {
         <LeadershipSection />
         <BooksSection onSelectBook={setSelectedBook} />
         <AchievementsSection />
-        <TerminalSection onTriggerEasterEgg={triggerEasterEgg} />
+        <TerminalSection onTriggerEasterEgg={triggerMatrixOnly} />
         <TechLabSection />
         <ContactSection />
       </main>

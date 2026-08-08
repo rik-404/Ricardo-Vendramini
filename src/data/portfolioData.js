@@ -561,14 +561,27 @@ export const terminalCommands = {
   ],
   help: [
     "Comandos disponíveis:",
+    "",
     "  sobre      - Resumo sobre Ricardo Vendramini & Vendramini Informática",
     "  skills     - Lista das principais competências técnicas",
     "  projetos   - Lista dos projetos em destaque",
     "  livros     - Livros e publicações",
     "  contato    - Informações de contato direto",
-    "  game       - Inicia o jogo Arcade de Navinha Geometric (Space Invaders)",
     "  clear      - Limpa a tela do terminal",
-    "  matrix     - Ativa o modo especial de código"
+    "",
+    "⚡ EASTER EGGS — Comandos Secretos:",
+    "",
+    "★ game       - Lista os jogos Arcade disponíveis no terminal",
+    "★ matrix     - Protocolo Matrix: ativa chuva de código no background",
+    "★ sudo rm    - Tente deletar o portfólio... se tiver coragem 😈",
+    "★ konami     - Sequência secreta: ↑↑↓↓←→←→ B A (no teclado)"
+  ],
+  games: [
+    "⚡ ARCADE CENTER — Jogos Disponíveis:",
+    "",
+    "★ navinha    - Space Invaders Geometric: destrua aliens com formas geométricas",
+    "",
+    "Digite o nome do jogo para iniciar."
   ]
 };
 
