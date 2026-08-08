@@ -12,7 +12,7 @@ export const ACHIEVEMENTS_META = {
   titulo: {
     title: 'Tenha raiva de mim',
     description: 'Clique repetidamente no título para forçar uma falha crítica no sistema.',
-    hint: '🔍 Dica: vamos lutar box?',
+    hint: '🔍 Dica: Tenha raiva de logos...',
     icon: Zap,
   },
   konami: {
