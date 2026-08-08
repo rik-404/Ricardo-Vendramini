@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Terminal as TerminalIcon, Play, RefreshCw, Sparkles, X, Gamepad2, ArrowLeft, ArrowRight, Zap } from 'lucide-react';
 import { terminalCommands } from '../data/portfolioData';
+import { dispatchAchievementUnlocked } from './AchievementToast';
 
 export default function TerminalSection({ onTriggerEasterEgg }) {
   const [inputVal, setInputVal] = useState('');
@@ -22,12 +23,26 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
   });
 
   const unlockAchievement = (id) => {
-    setAchievements((prev) => {
-      const next = new Set(prev);
-      next.add(id);
-      localStorage.setItem('ricardodev_achievements', JSON.stringify([...next]));
-      return next;
-    });
+    let saved = [];
+    try {
+      saved = JSON.parse(localStorage.getItem('ricardodev_achievements') || '[]');
+    } catch {
+      saved = [];
+    }
+    if (!saved.includes(id)) {
+      saved.push(id);
+      localStorage.setItem('ricardodev_achievements', JSON.stringify(saved));
+      dispatchAchievementUnlocked(id);
+    }
+    setAchievements(new Set(saved));
+  };
+
+  const POSTIT_SHOWN_KEY = 'ricardodev_postit_shown';
+  const isPostItShown = () => {
+    try { return !!localStorage.getItem(POSTIT_SHOWN_KEY); } catch { return false; }
+  };
+  const markPostItShown = () => {
+    try { localStorage.setItem(POSTIT_SHOWN_KEY, '1'); } catch {}
   };
 
   const outputContainerRef = useRef(null);
@@ -56,8 +71,9 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
       const isTyping = inputVal.trim().length > 0;
       const timeSinceActivity = Date.now() - lastActivityRef.current;
 
-      if (timeSinceActivity >= 5000 && !isInputFocused && !isTyping) {
+      if (timeSinceActivity >= 5000 && !isInputFocused && !isTyping && !isPostItShown()) {
         postItTriggeredRef.current = true;
+        markPostItShown();
         setShowPostIt(true);
       } else {
         // Re-check in 1 second if still idle in viewport
@@ -601,6 +617,8 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
 
       // Post-it falls after a short delay
       setTimeout(() => {
+        if (isPostItShown()) return;
+        markPostItShown();
         setShowPostIt(true);
       }, 800);
 
@@ -683,20 +701,43 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
       return;
     }
 
-    if (cmd === 'achievements' || cmd === 'conquistas' || cmd === 'secrets') {
+if (cmd === 'achievements' || cmd === 'conquistas' || cmd === 'secrets' || cmd.startsWith('achievements ')) {
+      const args = cmd.split(/\s+/);
+      if (args.includes('reset')) {
+        try {
+          localStorage.removeItem('ricardodev_achievements');
+          localStorage.removeItem('ricardodev_fly_shown');
+          localStorage.removeItem('ricardodev_postit_shown');
+        } catch (e) {}
+        setAchievements(new Set());
+        setHistory([
+          ...newHistory,
+          '',
+          '🔄 CONQUISTAS REINICIADAS!',
+          '────────────────────────────────────────────────',
+          '> Todos os segredos, mosca e post-it foram resetados.',
+          '> Explore novamente para redescobrir os easter eggs. 🎮',
+          ''
+        ]);
+        setInputVal('');
+        return;
+      }
+
       const count = achievements.size;
       setHistory([
         ...newHistory,
         '',
-        `🏆 CONQUISTAS & SEGREDOS (${count}/5)`,
+        `🏆 CONQUISTAS & SEGREDOS (${count}/6)`,
         '────────────────────────────────────────────────',
         achievements.has('matrix') ? ' ✅ [DESBLOQUEADO] Protocolo Matrix (matrix)' : ' 🔒 [BLOQUEADO] ???',
         achievements.has('navinha') ? ' ✅ [DESBLOQUEADO] Arcade Space Invaders (navinha)' : ' 🔒 [BLOQUEADO] ???',
         achievements.has('sudo_rm') ? ' ✅ [DESBLOQUEADO] Protocolo Autodestruição (sudo rm)' : ' 🔒 [BLOQUEADO] ???',
         achievements.has('root') ? ' ✅ [DESBLOQUEADO] Acesso Root & Post-it (root)' : ' 🔒 [BLOQUEADO] ???',
         achievements.has('konami') ? ' ✅ [DESBLOQUEADO] Código Konami Clássico' : ' 🔒 [BLOQUEADO] ???',
+        achievements.has('titulo') ? ' ✅ [DESBLOQUEADO] Título Sobrecarregado (cliques no hero)' : ' 🔒 [BLOQUEADO] ???',
         '────────────────────────────────────────────────',
-        count === 5
+        '💡 Dica: digite "achievements reset" para zerar todos.',
+        count === 6
           ? '🌟 PARABÉNS! Você encontrou todos os segredos!'
           : '💡 Explore o terminal e o site para encontrar os segredos ocultos.',
         ''

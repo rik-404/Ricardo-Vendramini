@@ -568,6 +568,7 @@ export const terminalCommands = {
     "  livros       - Livros e publicações",
     "  contato      - Informações de contato direto",
     "  achievements - Status de conquistas e segredos encontrados 🏆",
+    "  achievements reset - Zera todas as conquistas e easter eggs 🔄",
     "  clear        - Limpa o histórico do terminal",
     "",
     "Digite qualquer comando para executar."

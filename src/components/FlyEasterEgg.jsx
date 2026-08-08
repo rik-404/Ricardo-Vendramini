@@ -2,6 +2,16 @@ import React, { useEffect, useRef, useState } from 'react';
 
 const SWATTER_CURSOR = `url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='48'%20height='48'%20viewBox='0%200%2048%2048'%3E%3Crect%20x='14'%20y='30'%20width='4'%20height='14'%20rx='2'%20fill='%238b5a2b'/%3E%3Crect%20x='7'%20y='5'%20width='34'%20height='27'%20rx='9'%20fill='%23e0b877'%20stroke='%238b5a2b'%20stroke-width='2'/%3E%3Ccircle%20cx='15'%20cy='12'%20r='1.5'%20fill='%238b5a2b'/%3E%3Ccircle%20cx='24'%20cy='12'%20r='1.5'%20fill='%238b5a2b'/%3E%3Ccircle%20cx='33'%20cy='12'%20r='1.5'%20fill='%238b5a2b'/%3E%3Ccircle%20cx='15'%20cy='19'%20r='1.5'%20fill='%238b5a2b'/%3E%3Ccircle%20cx='24'%20cy='19'%20r='1.5'%20fill='%238b5a2b'/%3E%3Ccircle%20cx='33'%20cy='19'%20r='1.5'%20fill='%238b5a2b'/%3E%3Ccircle%20cx='15'%20cy='26'%20r='1.5'%20fill='%238b5a2b'/%3E%3Ccircle%20cx='24'%20cy='26'%20r='1.5'%20fill='%238b5a2b'/%3E%3Ccircle%20cx='33'%20cy='26'%20r='1.5'%20fill='%238b5a2b'/%3E%3C/svg%3E") 24 18, auto`;
 
+const FLY_SHOWN_KEY = 'ricardodev_fly_shown';
+
+const isFlyShown = () => {
+  try { return !!localStorage.getItem(FLY_SHOWN_KEY); } catch { return false; }
+};
+
+const markFlyShown = () => {
+  try { localStorage.setItem(FLY_SHOWN_KEY, '1'); } catch {}
+};
+
 export default function FlyEasterEgg({ containerRef, titleRef }) {
   const [phase, setPhase] = useState('idle');
   const phaseRef = useRef(phase);
@@ -116,17 +126,20 @@ export default function FlyEasterEgg({ containerRef, titleRef }) {
   }
 
   function scheduleNext() {
+    if (isFlyShown()) return;
     const delay = 15000 + Math.random() * 30000;
     timersRef.current.push(setTimeout(spawnFly, delay));
   }
 
   function spawnFly() {
     if (phaseRef.current !== 'idle') return;
+    if (isFlyShown()) return;
     if (!containerRef.current || !titleRef.current) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       scheduleNext();
       return;
     }
+    markFlyShown();
 
     const container = containerRef.current.getBoundingClientRect();
     const title = titleRef.current.getBoundingClientRect();
@@ -212,6 +225,7 @@ export default function FlyEasterEgg({ containerRef, titleRef }) {
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    if (isFlyShown()) return undefined;
     scheduleNext();
     return () => {
       cancelAnimationFrame(rafRef.current);

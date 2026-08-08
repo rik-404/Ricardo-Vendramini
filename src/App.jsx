@@ -19,6 +19,7 @@ import AchievementsSection from './components/AchievementsSection';
 import TerminalSection from './components/TerminalSection';
 import TechLabSection from './components/TechLabSection';
 import EasterEggModal from './components/EasterEggModal';
+import AchievementToast, { dispatchAchievementUnlocked } from './components/AchievementToast';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 
@@ -92,6 +93,7 @@ export default function App() {
       if (!saved.includes('konami')) {
         saved.push('konami');
         localStorage.setItem('ricardodev_achievements', JSON.stringify(saved));
+        dispatchAchievementUnlocked('konami');
       }
     } catch {}
   };
@@ -173,6 +175,9 @@ export default function App() {
         isOpen={easterEggOpen}
         onClose={closeEasterEgg}
       />
+
+      {/* PC-style Achievement Unlock Notification */}
+      <AchievementToast />
     </div>
   );
 }

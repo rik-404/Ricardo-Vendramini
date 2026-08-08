@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, Sparkles } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
+import { dispatchAchievementUnlocked } from './AchievementToast';
 
 const navItems = [
   { label: 'Início', href: '#hero' },
@@ -19,6 +20,12 @@ export default function Navbar({ onTriggerEasterEgg }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [logoClicks, setLogoClicks] = useState(0);
   const [glitchPhase, setGlitchPhase] = useState(0); // 0=normal, 1=glitching, 2=broken, 3=bsod, 4=recovering
+  const [titleUnlocked, setTitleUnlocked] = useState(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem('ricardodev_achievements') || '[]');
+      return saved.includes('titulo');
+    } catch { return false; }
+  });
   const clickTimerRef = useRef(null);
 
   useEffect(() => {
@@ -60,6 +67,17 @@ export default function Navbar({ onTriggerEasterEgg }) {
   };
 
   const triggerGlitchSequence = () => {
+    // Unlock achievement (only first time)
+    try {
+      const saved = JSON.parse(localStorage.getItem('ricardodev_achievements') || '[]');
+      if (!saved.includes('titulo')) {
+        saved.push('titulo');
+        localStorage.setItem('ricardodev_achievements', JSON.stringify(saved));
+        dispatchAchievementUnlocked('titulo');
+      }
+      setTitleUnlocked(true);
+    } catch {}
+
     // Phase 1: Glitch effect on the title (flickering)
     setGlitchPhase(1);
 
@@ -140,6 +158,12 @@ export default function Navbar({ onTriggerEasterEgg }) {
           <a
             href="#hero"
             onClick={handleLogoClick}
+            onMouseEnter={() => {
+              if (!titleUnlocked && glitchPhase === 0) {
+                window.dispatchEvent(new CustomEvent('glove-cursor', { detail: true }));
+              }
+            }}
+            onMouseLeave={() => window.dispatchEvent(new CustomEvent('glove-cursor', { detail: false }))}
             className={`group flex items-center gap-3 text-lg font-extrabold tracking-tight text-white interactive-hover select-none ${
               glitchPhase === 1 ? 'animate-glitch-shake' : ''
             }`}
