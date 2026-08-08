@@ -129,7 +129,7 @@ export default function FlyEasterEgg({ containerRef, titleRef }) {
 
   function scheduleNext() {
     if (isMoscaUnlocked() || appearedRef.current) return;
-    const delay = 6000 + Math.random() * 9000;
+    const delay = 30000 + Math.random() * 10000; // 30 to 40 seconds idle at top
     timersRef.current.push(setTimeout(spawnFly, delay));
   }
 
@@ -137,6 +137,13 @@ export default function FlyEasterEgg({ containerRef, titleRef }) {
     if (phaseRef.current !== 'idle') return;
     if (isMoscaUnlocked() || appearedRef.current) return;
     if (!containerRef.current || !titleRef.current) return;
+
+    // Only spawn if user is at the header/hero section (scrollY <= 500)
+    if (window.scrollY > 500) {
+      timersRef.current.push(setTimeout(spawnFly, 5000));
+      return;
+    }
+
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       return;
     }

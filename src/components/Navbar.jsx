@@ -274,69 +274,72 @@ export default function Navbar({ onTriggerEasterEgg }) {
         )}
       </header>
 
-      {/* BSOD / Crash Error Overlay - Phase 3 */}
+      {/* BSOD / Cyberpunk Crash Error Overlay - Phase 3 */}
       {glitchPhase === 3 && (
         <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center"
+          className="fixed inset-0 z-[99999] flex items-center justify-center p-4"
           style={{ animation: 'bsodFlash 0.3s ease-out' }}
         >
-          {/* Scanline background */}
-          <div className="absolute inset-0 bg-[#0a0a2e]" />
+          {/* Deep dark emerald/crimson ambient background */}
+          <div className="absolute inset-0 bg-[#040705]/95 backdrop-blur-2xl" />
           <div
-            className="absolute inset-0 opacity-10"
+            className="absolute inset-0 opacity-20 pointer-events-none"
             style={{
-              backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)',
+              backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,136,0.06) 2px, rgba(0,255,136,0.06) 4px)',
             }}
           />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,255,136,0.12)_0%,transparent_70%)] pointer-events-none" />
 
-          <div className="relative text-center px-8 max-w-2xl mx-auto font-mono z-10">
-            {/* Error emoticon */}
-            <div className="text-6xl sm:text-8xl font-bold text-white mb-6" style={{ textShadow: '0 0 30px rgba(255,255,255,0.3)' }}>
+          <div className="relative text-center px-6 sm:px-8 py-8 sm:py-10 max-w-2xl mx-auto font-mono z-10 glass-card rounded-3xl border border-[#00ff88]/40 shadow-[0_0_80px_rgba(0,255,136,0.25)] bg-[#050c08]/90">
+            {/* Error emoticon with red/emerald glow */}
+            <div className="text-6xl sm:text-8xl font-extrabold text-[#ff4d4d] mb-6 drop-shadow-[0_0_25px_rgba(255,77,77,0.8)] animate-pulse">
               :(
             </div>
 
-            <p className="text-white text-sm sm:text-base mb-6 leading-relaxed">
-              Seu portfólio encontrou um problema e precisa ser reiniciado.
-              Estamos coletando algumas informações de erro e então
-              reiniciaremos para você.
+            <p className="text-slate-100 text-sm sm:text-base mb-3 leading-relaxed font-bold">
+              OCORREU UMA FALHA CRÍTICA NO SISTEMA RICARDO.DEV
+            </p>
+            <p className="text-slate-400 text-xs sm:text-sm mb-6 font-light leading-relaxed">
+              O núcleo do portfólio sofreu uma sobrecarga de cliques no logo. Coletando dados do dump de memória...
             </p>
 
-            <div className="w-48 h-1.5 mx-auto rounded-full bg-white/20 mb-6 overflow-hidden">
+            {/* Glowing neon progress bar */}
+            <div className="w-64 h-2 mx-auto rounded-full bg-slate-900 mb-3 overflow-hidden border border-[#00ff88]/30">
               <div
-                className="h-full bg-white rounded-full"
+                className="h-full bg-gradient-to-r from-[#00f2fe] via-[#10b981] to-[#00ff88] rounded-full shadow-[0_0_15px_rgba(0,255,136,0.8)]"
                 style={{ animation: 'bsodProgress 3.5s ease-in-out forwards' }}
               />
             </div>
 
-            <p className="text-white/60 text-xs mb-8">
-              42% concluído
+            <p className="text-[#00ff88] text-xs mb-6 font-mono font-bold">
+              [████████████████] 100% CONCLUÍDO
             </p>
 
-            <div className="text-left text-white/40 text-[10px] sm:text-xs space-y-1 mb-8">
-              <p>Código de parada: CLIQUE_EXCESSIVO_NO_LOGO</p>
-              <p>Módulo com falha: Ricardo.DEV.exe</p>
-              <p>Erro: ERR_USER_TOO_CURIOUS (0x00000DEV)</p>
+            <div className="text-left bg-black/60 p-4 rounded-xl border border-white/10 text-[11px] sm:text-xs space-y-1 mb-6 font-mono">
+              <p className="text-red-400"><span className="text-slate-500">STOP_CODE:</span> CLIQUE_EXCESSIVO_NO_LOGO</p>
+              <p className="text-cyan-400"><span className="text-slate-500">MODULE:</span> Ricardo.DEV.exe (0x00000DEV)</p>
+              <p className="text-emerald-400"><span className="text-slate-500">STATUS:</span> REBOOT_AUTOMATICO_INICIADO</p>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/20">
-              <p className="text-[#00ff88] text-sm font-bold mb-2">
-                😎 Brincadeira! Relaxa.
+            <div className="bg-[#0c2e17]/80 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-[#00ff88]/40 shadow-inner">
+              <p className="text-[#00ff88] text-sm font-bold mb-1 flex items-center justify-center gap-1.5">
+                <span>😎 Brincadeira! O sistema está intacto.</span>
               </p>
-              <p className="text-white/70 text-xs">
-                Achou que ia quebrar meu site clicando no logo? Sou dev, protejo até os cliques.
+              <p className="text-slate-300 text-xs">
+                Achou que iria derrubar meu site clicando no logo? Sou dev, o sistema é auto-regenerativo.
               </p>
-              <p className="text-white/40 text-[10px] mt-3">
-                Restaurando sistema em alguns segundos...
+              <p className="text-[#00f2fe] text-[10px] font-mono mt-2 animate-pulse">
+                Restaurando interface em alguns instantes...
               </p>
             </div>
           </div>
         </div>
       )}
 
-      {/* Recovery flash overlay - Phase 4 */}
+      {/* Recovery flash overlay - Phase 4 (Cyberpunk neon green flash) */}
       {glitchPhase === 4 && (
         <div
-          className="fixed inset-0 z-[9999] bg-white pointer-events-none"
+          className="fixed inset-0 z-[99999] bg-[#00ff88]/20 backdrop-blur-xl pointer-events-none"
           style={{ animation: 'recoveryFade 1.5s ease-out forwards' }}
         />
       )}
