@@ -574,7 +574,7 @@ export const terminalCommands = {
     "★ game       - Lista os jogos Arcade disponíveis no terminal",
     "★ matrix     - Protocolo Matrix: ativa chuva de código no background",
     "★ sudo rm    - Tente deletar o portfólio... se tiver coragem 😈",
-    "★ admin      - Acesse o painel root secreto do sistema 🔐",
+    "★ root       - Acesse o painel root secreto do sistema 🔐",
     "★ konami     - Sequência secreta: ↑↑↓↓←→←→ B A (no teclado)"
   ],
   games: [

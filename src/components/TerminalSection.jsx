@@ -640,10 +640,6 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-3">
             RICARDO.<span className="text-[#00ff88]">DEV</span> Terminal
           </h2>
-
-          <p className="text-slate-400 max-w-xl font-light text-sm">
-            Interaja com o terminal ou digite <code className="text-[#00ff88] font-mono bg-black/40 px-1.5 py-0.5 rounded border border-[#00ff88]/30">'game'</code> para iniciar o Arcade Retro de Navinha.
-          </p>
         </div>
 
         {/* Terminal Window Mockup */}
