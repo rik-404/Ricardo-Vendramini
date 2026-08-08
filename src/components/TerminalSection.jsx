@@ -11,6 +11,9 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
   const [lives, setLives] = useState(3);
   const [level, setLevel] = useState(1);
   const [gameState, setGameState] = useState('PLAYING'); // PLAYING | GAMEOVER | VICTORY
+  const [adminMode, setAdminMode] = useState(false); // waiting for password
+  const [rickrollActive, setRickrollActive] = useState(false);
+  const [showPostIt, setShowPostIt] = useState(false);
 
   const outputContainerRef = useRef(null);
   const canvasRef = useRef(null);
@@ -454,8 +457,82 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
     const cmd = inputVal.trim().toLowerCase();
     if (!cmd) return;
 
+    // Admin mode: waiting for password
+    if (adminMode) {
+      const maskedHistory = [...history, `senha: ${'*'.repeat(inputVal.trim().length)}`];
+      setInputVal('');
+
+      if (cmd === 'admin admin' || cmd === 'admin' || cmd === 'root') {
+        setAdminMode(false);
+        setShowPostIt(false);
+        setHistory([...maskedHistory, '', '[OK] Senha aceita. Autenticando...']);
+
+        setTimeout(() => {
+          setHistory((prev) => [...prev, '> Carregando painel administrativo...']);
+        }, 600);
+
+        setTimeout(() => {
+          setHistory((prev) => [...prev, '[░░░░░░░░░░░░░░░] 0% - Conectando ao servidor...']);
+        }, 1200);
+
+        setTimeout(() => {
+          setHistory((prev) => [...prev, '[████░░░░░░░░░░░] 28% - Carregando módulos...']);
+        }, 2000);
+
+        setTimeout(() => {
+          setHistory((prev) => [...prev, '[████████░░░░░░░] 55% - Verificando permissões...']);
+        }, 2800);
+
+        setTimeout(() => {
+          setHistory((prev) => [...prev, '[████████████░░░] 82% - Inicializando dashboard...']);
+        }, 3500);
+
+        setTimeout(() => {
+          setHistory((prev) => [...prev, '[███████████████] 100% - Pronto!']);
+        }, 4200);
+
+        setTimeout(() => {
+          setHistory((prev) => [...prev, '', '> Abrindo painel admin...']);
+        }, 4800);
+
+        setTimeout(() => {
+          // RICKROLL!
+          setRickrollActive(true);
+        }, 5500);
+
+        return;
+      } else {
+        setHistory([...maskedHistory, '', '❌ Senha incorreta. Acesso negado.', '> Tente novamente com o comando \'root\'.']);
+        setAdminMode(false);
+        setShowPostIt(false);
+        return;
+      }
+    }
+
     const newHistory = [...history, `ricardo@dev:~$ ${inputVal}`];
 
+    // Root command — easter egg with falling post-it
+    if (cmd === 'root') {
+      setInputVal('');
+      setHistory([
+        ...newHistory,
+        '',
+        '🔐 ACESSO RESTRITO — Painel Root Ricardo.DEV',
+        '',
+        '> Autenticação necessária.',
+        '> Digite a senha de root para continuar...',
+        '',
+        'senha:'
+      ]);
+      setAdminMode(true);
+
+      // Post-it falls after a short delay
+      setTimeout(() => {
+        setShowPostIt(true);
+      }, 800);
+
+      return;
+    }
     if (cmd === 'clear') {
       setHistory([]);
       setInputVal('');
@@ -683,13 +760,16 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
           {/* Terminal Input Form (Only visible when not playing game) */}
           {!gameActive && (
             <form onSubmit={handleCommandSubmit} className="bg-[#040705] px-4 py-3 border-t border-white/10 flex items-center gap-2">
-              <span className="text-[#00ff88] font-bold shrink-0">ricardo@dev:~$</span>
+              <span className={`font-bold shrink-0 ${adminMode ? 'text-yellow-400' : 'text-[#00ff88]'}`}>
+                {adminMode ? '🔐 senha:' : 'ricardo@dev:~$'}
+              </span>
               <input
-                type="text"
+                type={adminMode ? 'password' : 'text'}
                 value={inputVal}
                 onChange={(e) => setInputVal(e.target.value)}
-                placeholder="digite 'game', 'help' ou 'matrix'..."
+                placeholder={adminMode ? 'digite a senha...' : "digite 'help' para ver os comandos..."}
                 className="w-full bg-transparent text-white focus:outline-none font-mono text-xs sm:text-sm placeholder-slate-600"
+                autoFocus
               />
               <button type="submit" className="p-1.5 rounded bg-[#10b981]/20 text-[#00ff88] hover:bg-[#10b981]/40">
                 <Play className="w-3.5 h-3.5" />
@@ -704,6 +784,157 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
         </p>
 
       </div>
+
+      {/* FALLING POST-IT NOTE */}
+      {showPostIt && (
+        <div className="fixed inset-0 z-[9998] pointer-events-none flex items-start justify-center" style={{ perspective: '800px' }}>
+          <div
+            className="pointer-events-auto mt-32 sm:mt-40 relative cursor-grab active:cursor-grabbing"
+            style={{
+              animation: 'postItFall 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
+              transformOrigin: 'top center',
+            }}
+          >
+            {/* Tape strip */}
+            <div
+              className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-6 rounded-sm z-10"
+              style={{
+                background: 'linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.15) 100%)',
+                backdropFilter: 'blur(2px)',
+                transform: 'rotate(-2deg)',
+              }}
+            />
+
+            {/* Post-it body */}
+            <div
+              className="relative w-64 sm:w-72 p-6 rounded-sm shadow-2xl"
+              style={{
+                background: 'linear-gradient(135deg, #fef08a 0%, #fde047 50%, #facc15 100%)',
+                transform: 'rotate(-3deg)',
+                boxShadow: '4px 4px 15px rgba(0,0,0,0.3), inset 0 -3px 6px rgba(0,0,0,0.05)',
+              }}
+            >
+              {/* Folded corner */}
+              <div
+                className="absolute bottom-0 right-0 w-8 h-8"
+                style={{
+                  background: 'linear-gradient(135deg, transparent 50%, #eab308 50%)',
+                  borderTopLeftRadius: '4px',
+                }}
+              />
+
+              {/* Content */}
+              <p className="text-[10px] text-amber-700/60 font-mono uppercase tracking-widest mb-3">
+                📌 Senha do Sistema
+              </p>
+
+              <div className="border-b-2 border-dashed border-amber-600/30 mb-3" />
+
+              <p className="text-xl font-bold text-amber-900 font-mono tracking-wide mb-1" style={{ fontFamily: "'Caveat', cursive, monospace" }}>
+                Usuário: root
+              </p>
+              <p className="text-2xl font-extrabold text-amber-950 font-mono" style={{ fontFamily: "'Caveat', cursive, monospace" }}>
+                Senha: admin
+              </p>
+
+              <div className="border-b-2 border-dashed border-amber-600/30 mt-3 mb-3" />
+
+              <p className="text-[9px] text-amber-700/50 font-mono italic">
+                ⚠️ Não conta pra ninguém!
+              </p>
+              <p className="text-[9px] text-amber-700/40 font-mono mt-1">
+                — colado aqui por: Ricardo 😅
+              </p>
+            </div>
+
+            {/* Close post-it button */}
+            <button
+              onClick={() => setShowPostIt(false)}
+              className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-red-500 text-white text-xs font-bold flex items-center justify-center shadow-lg hover:bg-red-600 transition-colors pointer-events-auto z-20"
+              title="Tirar post-it"
+            >
+              ×
+            </button>
+          </div>
+
+          <style>{`
+            @keyframes postItFall {
+              0% {
+                opacity: 0;
+                transform: translateY(-200px) rotate(-15deg) scale(0.5);
+              }
+              60% {
+                opacity: 1;
+                transform: translateY(10px) rotate(2deg) scale(1.05);
+              }
+              80% {
+                transform: translateY(-5px) rotate(-1deg) scale(0.98);
+              }
+              100% {
+                opacity: 1;
+                transform: translateY(0) rotate(-3deg) scale(1);
+              }
+            }
+          `}</style>
+        </div>
+      )}
+
+      {/* RICKROLL OVERLAY */}
+      {rickrollActive && (
+        <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black">
+          {/* Close button */}
+          <button
+            onClick={() => setRickrollActive(false)}
+            className="absolute top-4 right-4 z-[10000] p-2 rounded-xl bg-white/10 text-white hover:bg-white/20 border border-white/20 backdrop-blur-sm transition-all group"
+            title="Fechar"
+          >
+            <X className="w-6 h-6 group-hover:rotate-90 transition-transform" />
+          </button>
+
+          {/* Top bar fake admin */}
+          <div className="absolute top-0 left-0 right-0 bg-[#1a1a2e] border-b border-white/10 px-6 py-3 flex items-center gap-3 z-[10000]">
+            <span className="w-3 h-3 rounded-full bg-red-500" />
+            <span className="w-3 h-3 rounded-full bg-yellow-500" />
+            <span className="w-3 h-3 rounded-full bg-green-500" />
+            <span className="ml-3 text-white/60 text-xs font-mono">RICARDO.DEV — Painel Administrativo v4.2.0</span>
+          </div>
+
+          {/* YouTube Video */}
+          <div className="w-full max-w-4xl aspect-video mt-12 rounded-2xl overflow-hidden border-2 border-[#00ff88]/30 shadow-[0_0_60px_rgba(0,255,136,0.2)]">
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&controls=0&loop=1&playlist=dQw4w9WgXcQ"
+              title="Admin Panel"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            />
+          </div>
+
+          {/* Troll message */}
+          <div className="mt-6 text-center px-4" style={{ animation: 'fadeInUp 0.5s ease-out 1s both' }}>
+            <p className="text-2xl sm:text-3xl font-extrabold text-white mb-2">
+              🎵 Never Gonna Give You Up!
+            </p>
+            <p className="text-white/60 text-sm font-mono">
+              Achou que tinha um painel admin de verdade? 😂
+            </p>
+            <p className="text-[#00ff88] text-xs font-mono mt-2">
+              Você foi Rickrolled pelo Ricardo.DEV 🎤
+            </p>
+          </div>
+
+          <style>{`
+            @keyframes fadeInUp {
+              from { opacity: 0; transform: translateY(20px); }
+              to { opacity: 1; transform: translateY(0); }
+            }
+          `}</style>
+        </div>
+      )}
+
     </section>
   );
 }
