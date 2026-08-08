@@ -566,6 +566,7 @@ export const terminalCommands = {
     "  projetos   - Lista dos projetos em destaque",
     "  livros     - Livros e publicações",
     "  contato    - Informações de contato direto",
+    "  game       - Inicia o jogo Arcade de Navinha Geometric (Space Invaders)",
     "  clear      - Limpa a tela do terminal",
     "  matrix     - Ativa o modo especial de código"
   ]
