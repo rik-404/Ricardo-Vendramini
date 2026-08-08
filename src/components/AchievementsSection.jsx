@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, CheckCircle, Flame, Shield, Star, Trophy } from 'lucide-react';
+import { Star, Trophy } from 'lucide-react';
 import { achievementsData } from '../data/portfolioData';
 
 export default function AchievementsSection() {

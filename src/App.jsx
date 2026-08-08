@@ -16,6 +16,7 @@ import LeadershipSection from './components/LeadershipSection';
 import BooksSection from './components/BooksSection';
 import BookModal from './components/BookModal';
 import AchievementsSection from './components/AchievementsSection';
+import AchievementsModal from './components/AchievementsModal';
 import TerminalSection from './components/TerminalSection';
 import TechLabSection from './components/TechLabSection';
 import EasterEggModal from './components/EasterEggModal';
@@ -27,6 +28,7 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [allProjectsOpen, setAllProjectsOpen] = useState(false);
   const [allSkillsOpen, setAllSkillsOpen] = useState(false);
+  const [achievementsModalOpen, setAchievementsModalOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [easterEggOpen, setEasterEggOpen] = useState(false);
   const [matrixCanvasMode, setMatrixCanvasMode] = useState(false);
@@ -60,7 +62,7 @@ export default function App() {
     };
   }, []);
 
-  // Konami Code Secret Listener: ↑ ↑ ↓ ↓ ← → ← → b a
+  // Global Secret Listeners: Konami Code & typing "matrix" anywhere
   useEffect(() => {
     const konamiCode = [
       'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
@@ -69,15 +71,41 @@ export default function App() {
     ];
     let konamiIndex = 0;
 
+    const matrixWord = ['m', 'a', 't', 'r', 'i', 'x'];
+    let matrixIndex = 0;
+
     const handleKeyDown = (e) => {
-      if (e.key === konamiCode[konamiIndex]) {
-        konamiIndex++;
-        if (konamiIndex === konamiCode.length) {
-          triggerEasterEgg();
+      const targetTag = e.target?.tagName?.toLowerCase();
+      const isInput = targetTag === 'input' || targetTag === 'textarea' || e.target?.isContentEditable;
+
+      if (!isInput) {
+        if (e.key === konamiCode[konamiIndex]) {
+          konamiIndex++;
+          if (konamiIndex === konamiCode.length) {
+            triggerEasterEgg();
+            konamiIndex = 0;
+          }
+        } else {
           konamiIndex = 0;
         }
-      } else {
-        konamiIndex = 0;
+
+        if (e.key.toLowerCase() === matrixWord[matrixIndex]) {
+          matrixIndex++;
+          if (matrixIndex === matrixWord.length) {
+            triggerMatrixOnly();
+            try {
+              const saved = JSON.parse(localStorage.getItem('ricardodev_achievements') || '[]');
+              if (!saved.includes('matrix')) {
+                saved.push('matrix');
+                localStorage.setItem('ricardodev_achievements', JSON.stringify(saved));
+                dispatchAchievementUnlocked('matrix');
+              }
+            } catch {}
+            matrixIndex = 0;
+          }
+        } else {
+          matrixIndex = 0;
+        }
       }
     };
 
@@ -134,7 +162,10 @@ export default function App() {
         <LeadershipSection />
         <BooksSection onSelectBook={setSelectedBook} />
         <AchievementsSection />
-        <TerminalSection onTriggerEasterEgg={triggerMatrixOnly} />
+        <TerminalSection
+          onTriggerEasterEgg={triggerMatrixOnly}
+          onOpenAchievements={() => setAchievementsModalOpen(true)}
+        />
         <TechLabSection />
         <ContactSection />
       </main>
@@ -156,6 +187,12 @@ export default function App() {
           setAllProjectsOpen(false);
           setSelectedProject(proj);
         }}
+      />
+
+      {/* Galeria de Conquistas & Segredos (Bloqueadas e Desbloqueadas) */}
+      <AchievementsModal
+        isOpen={achievementsModalOpen}
+        onClose={() => setAchievementsModalOpen(false)}
       />
 
       {/* Case Study Detail Modal (Renderizado no nível raiz z-[1000]) */}

@@ -224,16 +224,8 @@ export default function Navbar({ onTriggerEasterEgg }) {
             })}
           </nav>
 
-          {/* Action Button & Terminal Quick Trigger */}
+          {/* Action Button */}
           <div className="hidden md:flex items-center gap-3">
-            <button
-              onClick={onTriggerEasterEgg}
-              className="p-2 rounded-xl bg-[#0a1410] border border-[#00f2fe]/30 text-slate-300 hover:text-[#00ff88] hover:border-[#00ff88]/60 transition-all shadow-glow-sm"
-              title="Easter Egg Secreto"
-            >
-              <Sparkles className="w-4 h-4 text-[#00f2fe]" />
-            </button>
-            
             <a
               href="#contact"
               className="px-5 py-2.5 text-xs font-bold rounded-xl bg-gradient-to-r from-[#00f2fe] via-[#10b981] to-[#00ff88] text-black shadow-glow-sm hover:shadow-glow-md transition-all transform hover:-translate-y-0.5"

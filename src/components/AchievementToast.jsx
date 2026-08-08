@@ -1,37 +1,49 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Award, Gamepad2, KeyRound, Terminal, Trash2, Trophy, Sparkles, Zap } from 'lucide-react';
+import { Award, Bug, Gamepad2, KeyRound, Terminal, Trash2, Trophy, Sparkles, Zap, Activity } from 'lucide-react';
 
-const ACHIEVEMENTS_META = {
+export const ACHIEVEMENTS_META = {
+  mosca: {
+    title: 'Caçador de Bugs',
+    description: 'Elimine a mosquinha que pousou no hero do portfólio.',
+    hint: '🔍 Dica: Título parado atrai inseto...',
+    icon: Bug,
+  },
   titulo: {
-    title: 'Título Sobrecarregado',
+    title: 'Tenha raiva de mim',
     description: 'Clique repetidamente no título para forçar uma falha crítica no sistema.',
+    hint: '🔍 Dica: vamos lutar box?',
     icon: Zap,
   },
   konami: {
     title: 'Código Konami Clássico',
     description: 'Digite a sequência secreta ↑ ↑ ↓ ↓ ← → ← → B A para ativar o modo místico.',
+    hint: '🔍 Dica: Use as setas do teclado para inserir a combinação secreta clássica de videogame...',
     icon: Trophy,
   },
   matrix: {
     title: 'Protocolo Matrix',
     description: 'Digite "matrix" no terminal e veja a chuva de caracteres cair.',
+    hint: '🔍 Dica: Acesse o terminal e digite o nome de uma famosa franquia de ficção mística...',
     icon: Sparkles,
   },
   navinha: {
     title: 'Arcade Space Invaders',
     description: 'Inicie "navinha" e defenda o mundo de formas geométricas.',
+    hint: '🔍 Dica: Que tal dar um "play"?',
     icon: Gamepad2,
-  },
-  sudo_rm: {
-    title: 'Protocolo Autodestruição',
-    description: 'Execute "sudo rm -rf" e testemunhe a coragem (virtual) do sistema.',
-    icon: Trash2,
   },
   root: {
     title: 'Acesso Root & Post-it',
     description: 'Obtenha as credenciais de root no terminal.',
+    hint: '🔍 Dica: Tente solicitar acesso de superusuário digitando "root" no terminal...',
     icon: KeyRound,
+  },
+  tilt: {
+    title: 'Modo Tilt & Terremoto',
+    description: 'Executou o comando "tilt" no terminal e fez toda a estrutura do site balançar.',
+    hint: '🔍 Dica: Faça as coisas balançarem no terminal...',
+    icon: Activity,
   },
 };
 

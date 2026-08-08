@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
-import { Terminal as TerminalIcon, Play, RefreshCw, Sparkles, X, Gamepad2, ArrowLeft, ArrowRight, Zap } from 'lucide-react';
+import { Terminal as TerminalIcon, Play, RefreshCw, Sparkles, X, Gamepad2, ArrowLeft, ArrowRight, Zap, Trophy } from 'lucide-react';
 import { terminalCommands } from '../data/portfolioData';
 import { dispatchAchievementUnlocked } from './AchievementToast';
+import AchievementsModal from './AchievementsModal';
 
-export default function TerminalSection({ onTriggerEasterEgg }) {
+export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements }) {
   const [inputVal, setInputVal] = useState('');
   const [history, setHistory] = useState(terminalCommands.welcome);
   const [gameActive, setGameActive] = useState(false);
@@ -37,12 +39,17 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
     setAchievements(new Set(saved));
   };
 
-  const POSTIT_SHOWN_KEY = 'ricardodev_postit_shown';
-  const isPostItShown = () => {
-    try { return !!localStorage.getItem(POSTIT_SHOWN_KEY); } catch { return false; }
+  const ROOT_USED_KEY = 'ricardodev_root_used';
+  const isRootUsed = () => {
+    try { return !!localStorage.getItem(ROOT_USED_KEY); } catch { return false; }
   };
-  const markPostItShown = () => {
-    try { localStorage.setItem(POSTIT_SHOWN_KEY, '1'); } catch {}
+  const markRootUsed = () => {
+    try { localStorage.setItem(ROOT_USED_KEY, '1'); } catch {}
+  };
+
+  const closePostIt = () => {
+    setShowPostIt(false);
+    postItTriggeredRef.current = false;
   };
 
   const outputContainerRef = useRef(null);
@@ -58,6 +65,18 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
     lastActivityRef.current = Date.now();
   }, [inputVal, gameActive]);
 
+  // ESC key listener to close Rickroll overlay
+  useEffect(() => {
+    if (!rickrollActive) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setRickrollActive(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [rickrollActive]);
+
   // 5-second idle viewport timer: only drops if user is NOT playing game AND NOT typing
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -71,9 +90,8 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
       const isTyping = inputVal.trim().length > 0;
       const timeSinceActivity = Date.now() - lastActivityRef.current;
 
-      if (timeSinceActivity >= 5000 && !isInputFocused && !isTyping && !isPostItShown()) {
+      if (timeSinceActivity >= 5000 && !isInputFocused && !isTyping && !isRootUsed()) {
         postItTriggeredRef.current = true;
-        markPostItShown();
         setShowPostIt(true);
       } else {
         // Re-check in 1 second if still idle in viewport
@@ -585,6 +603,7 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
         setTimeout(() => {
           // RICKROLL!
           setRickrollActive(true);
+          unlockAchievement('root');
         }, 5500);
 
         return;
@@ -601,7 +620,7 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
     // Root command — easter egg with falling post-it
     if (cmd === 'root') {
       postItTriggeredRef.current = true;
-      unlockAchievement('root');
+      markRootUsed();
       setInputVal('');
       setHistory([
         ...newHistory,
@@ -617,8 +636,6 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
 
       // Post-it falls after a short delay
       setTimeout(() => {
-        if (isPostItShown()) return;
-        markPostItShown();
         setShowPostIt(true);
       }, 800);
 
@@ -639,59 +656,32 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
       return;
     }
 
+    if (cmd === 'konami') {
+      unlockAchievement('konami');
+      newHistory.push('> 🎮 Código Konami ativado! Abrindo modo místico...');
+      setHistory(newHistory);
+      setInputVal('');
+      if (onTriggerEasterEgg) onTriggerEasterEgg();
+      return;
+    }
+
+    if (cmd === 'tilt' || cmd === 'balancar' || cmd === 'terremoto') {
+      unlockAchievement('tilt');
+      newHistory.push('> ⚡ ALERTA DE SISMO: Modo TILT ativado! Balançando toda a estrutura do site...');
+      setHistory(newHistory);
+      setInputVal('');
+
+      document.body.classList.add('site-tilt-active');
+      setTimeout(() => {
+        document.body.classList.remove('site-tilt-active');
+      }, 3500);
+      return;
+    }
+
     if (cmd === 'navinha' || cmd === 'play' || cmd === 'space' || cmd === 'invaders') {
       unlockAchievement('navinha');
       startGame();
       setInputVal('');
-      return;
-    }
-
-    // Easter Egg: sudo rm -rf
-    if (cmd.includes('sudo') && cmd.includes('rm')) {
-      unlockAchievement('sudo_rm');
-      setInputVal('');
-      const step1 = [...newHistory, '', '⚠️  WARNING', '', '> sudo rm -rf /portfolio', '', 'Deleting portfolio...'];
-      setHistory(step1);
-
-      setTimeout(() => {
-        setHistory((prev) => [...prev, '', '[███░░░░░░░░░░░░] 21%']);
-      }, 800);
-
-      setTimeout(() => {
-        setHistory((prev) => [...prev, '[████████░░░░░░░] 57%']);
-      }, 1800);
-
-      setTimeout(() => {
-        setHistory((prev) => [...prev, '[███████████████] 100%']);
-      }, 2800);
-
-      setTimeout(() => {
-        // Flash the screen
-        const section = document.querySelector('.terminal-flash-target');
-        if (section) {
-          section.style.transition = 'filter 0.1s';
-          section.style.filter = 'brightness(3) invert(1)';
-          setTimeout(() => {
-            section.style.filter = 'none';
-          }, 150);
-        }
-        setHistory((prev) => [...prev, '', '> A tela pisca...']);
-      }, 3600);
-
-      setTimeout(() => {
-        setHistory((prev) => [
-          ...prev,
-          '',
-          '🎉 Brincadeira!',
-          '',
-          'Boa tentativa. 😎',
-          'Acha que eu deixaria deletar meu portfólio assim? Sou dev, não estagiário.',
-          '',
-          '> Sistema intacto. Nenhum arquivo foi removido.',
-          '[OK] Firewall Ricardo.DEV ativo. Boa sorte na próxima.'
-        ]);
-      }, 4500);
-
       return;
     }
 
@@ -701,45 +691,35 @@ export default function TerminalSection({ onTriggerEasterEgg }) {
       return;
     }
 
-if (cmd === 'achievements' || cmd === 'conquistas' || cmd === 'secrets' || cmd.startsWith('achievements ')) {
-      const args = cmd.split(/\s+/);
-      if (args.includes('reset')) {
-        try {
-          localStorage.removeItem('ricardodev_achievements');
-          localStorage.removeItem('ricardodev_fly_shown');
-          localStorage.removeItem('ricardodev_postit_shown');
-        } catch (e) {}
-        setAchievements(new Set());
-        setHistory([
-          ...newHistory,
-          '',
-          '🔄 CONQUISTAS REINICIADAS!',
-          '────────────────────────────────────────────────',
-          '> Todos os segredos, mosca e post-it foram resetados.',
-          '> Explore novamente para redescobrir os easter eggs. 🎮',
-          ''
-        ]);
-        setInputVal('');
-        return;
-      }
-
-      const count = achievements.size;
+    if (cmd === 'reset' || cmd === 'achievements reset' || cmd === 'reset achievements') {
+      try {
+        localStorage.removeItem('ricardodev_achievements');
+        localStorage.removeItem('ricardodev_fly_shown');
+        localStorage.removeItem('ricardodev_root_used');
+        localStorage.removeItem('ricardodev_postit_shown');
+      } catch (e) {}
+      setAchievements(new Set());
+      window.dispatchEvent(new CustomEvent('ricardodev-achievement-unlocked'));
       setHistory([
         ...newHistory,
         '',
-        `🏆 CONQUISTAS & SEGREDOS (${count}/6)`,
+        '🔄 CONQUISTAS REINICIADAS!',
         '────────────────────────────────────────────────',
-        achievements.has('matrix') ? ' ✅ [DESBLOQUEADO] Protocolo Matrix (matrix)' : ' 🔒 [BLOQUEADO] ???',
-        achievements.has('navinha') ? ' ✅ [DESBLOQUEADO] Arcade Space Invaders (navinha)' : ' 🔒 [BLOQUEADO] ???',
-        achievements.has('sudo_rm') ? ' ✅ [DESBLOQUEADO] Protocolo Autodestruição (sudo rm)' : ' 🔒 [BLOQUEADO] ???',
-        achievements.has('root') ? ' ✅ [DESBLOQUEADO] Acesso Root & Post-it (root)' : ' 🔒 [BLOQUEADO] ???',
-        achievements.has('konami') ? ' ✅ [DESBLOQUEADO] Código Konami Clássico' : ' 🔒 [BLOQUEADO] ???',
-        achievements.has('titulo') ? ' ✅ [DESBLOQUEADO] Título Sobrecarregado (cliques no hero)' : ' 🔒 [BLOQUEADO] ???',
-        '────────────────────────────────────────────────',
-        '💡 Dica: digite "achievements reset" para zerar todos.',
-        count === 6
-          ? '🌟 PARABÉNS! Você encontrou todos os segredos!'
-          : '💡 Explore o terminal e o site para encontrar os segredos ocultos.',
+        '> Todos os segredos, mosca e post-it foram resetados com sucesso.',
+        '> Explore novamente o site e o terminal para redescobrir os easter eggs! 🎮',
+        ''
+      ]);
+      setInputVal('');
+      return;
+    }
+
+    if (cmd === 'achievements' || cmd === 'conquistas' || cmd === 'secrets') {
+      setHistory([
+        ...newHistory,
+        '',
+        '🏆 GALERIA DE CONQUISTAS:',
+        '> Para visualizar todas as conquistas e segredos (bloqueadas e desbloqueadas), use o botão "Ver Galeria de Conquistas" localizado abaixo deste terminal.',
+        '> Para reiniciar todo o progresso de conquistas, digite "reset".',
         ''
       ]);
       setInputVal('');
@@ -915,9 +895,25 @@ if (cmd === 'achievements' || cmd === 'conquistas' || cmd === 'secrets' || cmd.s
 
         </div>
 
-        <p className="text-center text-xs font-mono text-slate-400 mt-4">
-          Digite <code className="text-[#00ff88] bg-black/40 px-1.5 py-0.5 rounded border border-[#00ff88]/30">help</code> para ver todos os comandos disponíveis e <span className="text-[#a855f7]">easter eggs</span> secretos.
-        </p>
+        {/* Button to view all achievements / secrets (Locked & Unlocked) */}
+        <div className="mt-8 flex flex-col items-center justify-center">
+          <motion.button
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
+            onClick={onOpenAchievements}
+            className="group relative inline-flex items-center gap-3 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-[#0c2e17] via-[#071f11] to-[#0c2e17] border border-[#00ff88]/40 hover:border-[#00ff88] text-white font-bold text-sm shadow-[0_0_25px_rgba(0,255,136,0.15)] hover:shadow-[0_0_35px_rgba(0,255,136,0.35)] transition-all duration-300 overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-[#00ff88]/15 via-transparent to-[#00f2fe]/15 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <Trophy className="w-5 h-5 text-[#00ff88] group-hover:rotate-12 transition-transform duration-300" />
+            <span className="relative z-10">Ver Galeria de Conquistas (Bloqueadas & Desbloqueadas)</span>
+            <span className="relative z-10 ml-1 px-2.5 py-0.5 rounded-full bg-[#00ff88]/20 text-[#00ff88] text-xs font-mono border border-[#00ff88]/40">
+              {achievements.size}/7
+            </span>
+          </motion.button>
+          <p className="text-xs font-mono text-slate-400 mt-2.5">
+            Digite <code className="text-[#00ff88] bg-black/40 px-1.5 py-0.5 rounded border border-[#00ff88]/30">help</code> no terminal para ver todos os comandos 🎮
+          </p>
+        </div>
 
       </div>
 
@@ -981,7 +977,7 @@ if (cmd === 'achievements' || cmd === 'conquistas' || cmd === 'secrets' || cmd.s
 
             {/* Close post-it button */}
             <button
-              onClick={() => setShowPostIt(false)}
+              onClick={closePostIt}
               className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-red-500 text-white text-xs font-bold flex items-center justify-center shadow-lg hover:bg-red-600 transition-colors pointer-events-auto z-20"
               title="Tirar post-it"
             >
@@ -1011,28 +1007,29 @@ if (cmd === 'achievements' || cmd === 'conquistas' || cmd === 'secrets' || cmd.s
         </div>
       )}
 
-      {/* RICKROLL OVERLAY */}
-      {rickrollActive && (
-        <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black">
-          {/* Close button */}
-          <button
-            onClick={() => setRickrollActive(false)}
-            className="absolute top-4 right-4 z-[10000] p-2 rounded-xl bg-white/10 text-white hover:bg-white/20 border border-white/20 backdrop-blur-sm transition-all group"
-            title="Fechar"
-          >
-            <X className="w-6 h-6 group-hover:rotate-90 transition-transform" />
-          </button>
-
+      {/* RICKROLL OVERLAY (Rendered via Portal to document.body at top z-index z-[999999]) */}
+      {rickrollActive && createPortal(
+        <div className="fixed inset-0 z-[999999] flex flex-col items-center justify-center bg-black/95 backdrop-blur-2xl p-4 overflow-y-auto">
           {/* Top bar fake admin */}
-          <div className="absolute top-0 left-0 right-0 bg-[#1a1a2e] border-b border-white/10 px-6 py-3 flex items-center gap-3 z-[10000]">
-            <span className="w-3 h-3 rounded-full bg-red-500" />
-            <span className="w-3 h-3 rounded-full bg-yellow-500" />
-            <span className="w-3 h-3 rounded-full bg-green-500" />
-            <span className="ml-3 text-white/60 text-xs font-mono">RICARDO.DEV — Painel Administrativo v4.2.0</span>
+          <div className="absolute top-0 left-0 right-0 bg-[#0d1510] border-b border-[#00ff88]/30 px-6 py-4 flex items-center justify-between z-[1000000]">
+            <div className="flex items-center gap-3">
+              <span className="w-3 h-3 rounded-full bg-red-500" />
+              <span className="w-3 h-3 rounded-full bg-yellow-500" />
+              <span className="w-3 h-3 rounded-full bg-green-500" />
+              <span className="ml-3 text-white/90 text-xs sm:text-sm font-mono font-bold">RICARDO.DEV — Painel Administrativo v4.2.0</span>
+            </div>
+            <button
+              onClick={() => setRickrollActive(false)}
+              className="px-3 py-1.5 rounded-xl bg-red-500/20 hover:bg-red-600 text-red-300 hover:text-white border border-red-500/40 transition-all font-mono text-xs flex items-center gap-1.5 cursor-pointer shadow-lg"
+              title="Fechar Painel"
+            >
+              <X className="w-4 h-4" />
+              <span>FECHAR PAINEL (ESC)</span>
+            </button>
           </div>
 
           {/* YouTube Video */}
-          <div className="w-full max-w-4xl aspect-video mt-12 rounded-2xl overflow-hidden border-2 border-[#00ff88]/30 shadow-[0_0_60px_rgba(0,255,136,0.2)]">
+          <div className="w-full max-w-4xl aspect-video mt-16 rounded-2xl overflow-hidden border-2 border-[#00ff88]/40 shadow-[0_0_80px_rgba(0,255,136,0.3)] bg-black">
             <iframe
               width="100%"
               height="100%"
@@ -1046,25 +1043,19 @@ if (cmd === 'achievements' || cmd === 'conquistas' || cmd === 'secrets' || cmd.s
           </div>
 
           {/* Troll message */}
-          <div className="mt-6 text-center px-4" style={{ animation: 'fadeInUp 0.5s ease-out 1s both' }}>
+          <div className="mt-6 text-center px-4">
             <p className="text-2xl sm:text-3xl font-extrabold text-white mb-2">
               🎵 Never Gonna Give You Up!
             </p>
-            <p className="text-white/60 text-sm font-mono">
+            <p className="text-slate-300 text-sm font-mono">
               Achou que tinha um painel admin de verdade? 😂
             </p>
-            <p className="text-[#00ff88] text-xs font-mono mt-2">
+            <p className="text-[#00ff88] text-xs font-mono mt-2 font-bold">
               Você foi Rickrolled pelo Ricardo.DEV 🎤
             </p>
           </div>
-
-          <style>{`
-            @keyframes fadeInUp {
-              from { opacity: 0; transform: translateY(20px); }
-              to { opacity: 1; transform: translateY(0); }
-            }
-          `}</style>
-        </div>
+        </div>,
+        document.body
       )}
 
     </section>

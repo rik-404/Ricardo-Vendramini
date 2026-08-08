@@ -1,0 +1,279 @@
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, Lock, Check, Trophy, Sparkles, HelpCircle, Eye, EyeOff } from 'lucide-react';
+import { ACHIEVEMENTS_META } from './AchievementToast';
+
+const ACHIEVEMENT_IDS = Object.keys(ACHIEVEMENTS_META);
+
+export default function AchievementsModal({ isOpen, onClose, achievements: externalAchievements }) {
+  const [activeTab, setActiveTab] = useState('all'); // 'all' | 'unlocked' | 'locked'
+  const [revealedHints, setRevealedHints] = useState({});
+  const [achievements, setAchievements] = useState(() => {
+    try {
+      const saved = localStorage.getItem('ricardodev_achievements');
+      return saved ? new Set(JSON.parse(saved)) : new Set();
+    } catch {
+      return new Set();
+    }
+  });
+
+  const loadAchievements = () => {
+    try {
+      const saved = localStorage.getItem('ricardodev_achievements');
+      setAchievements(saved ? new Set(JSON.parse(saved)) : new Set());
+    } catch {}
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      loadAchievements();
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    const handleUnlock = () => {
+      loadAchievements();
+    };
+    window.addEventListener('ricardodev-achievement-unlocked', handleUnlock);
+    return () => window.removeEventListener('ricardodev-achievement-unlocked', handleUnlock);
+  }, []);
+
+  const toggleHint = (id) => {
+    setRevealedHints((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+
+  const activeAchievements = externalAchievements || achievements;
+  const unlockedCount = ACHIEVEMENT_IDS.filter((id) => activeAchievements.has(id)).length;
+  const lockedCount = ACHIEVEMENT_IDS.length - unlockedCount;
+
+  const filteredIds = ACHIEVEMENT_IDS.filter((id) => {
+    const isUnlocked = activeAchievements.has(id);
+    if (activeTab === 'unlocked') return isUnlocked;
+    if (activeTab === 'locked') return !isUnlocked;
+    return true;
+  });
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-[99998] flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 bg-black/80 backdrop-blur-md"
+            onClick={onClose}
+          />
+
+          {/* Modal Container */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 30 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 30 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 26 }}
+            className="relative w-full max-w-lg rounded-3xl border border-[#00ff88]/40 bg-[#060b08]/95 backdrop-blur-xl shadow-[0_0_50px_rgba(0,255,136,0.2)] overflow-hidden flex flex-col max-h-[90vh]"
+          >
+            {/* Header */}
+            <div className="px-6 py-5 border-b border-white/10 flex items-center justify-between bg-[#08120b] shrink-0">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0c2e17] to-[#06200e] border border-[#00ff88]/50 flex items-center justify-center shadow-[0_0_15px_rgba(0,255,136,0.3)]">
+                  <Trophy className="w-5 h-5 text-[#00ff88]" />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-white">Galeria de Conquistas & Segredos</h3>
+                  <p className="text-[11px] font-mono text-[#00ff88]">
+                    {unlockedCount} de {ACHIEVEMENT_IDS.length} conquistas desbloqueadas
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={onClose}
+                className="p-2 rounded-xl bg-white/5 text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+                title="Fechar"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Progress Bar */}
+            <div className="w-full bg-slate-900 h-1.5 overflow-hidden shrink-0">
+              <div
+                className="h-full bg-gradient-to-r from-[#00ff88] to-[#00f2fe] transition-all duration-500"
+                style={{ width: `${(unlockedCount / ACHIEVEMENT_IDS.length) * 100}%` }}
+              />
+            </div>
+
+            {/* Tabs Selector Bar */}
+            <div className="px-6 pt-4 pb-2 border-b border-white/10 flex items-center justify-center gap-2 bg-[#050b07] shrink-0">
+              <button
+                onClick={() => setActiveTab('all')}
+                className={`px-4 py-2 rounded-xl text-xs font-bold font-mono transition-all duration-200 border flex items-center gap-1.5 ${
+                  activeTab === 'all'
+                    ? 'bg-[#0c2e17] text-[#00ff88] border-[#00ff88]/50 shadow-[0_0_12px_rgba(0,255,136,0.2)]'
+                    : 'bg-slate-900/60 text-slate-400 border-white/5 hover:text-white hover:bg-slate-800'
+                }`}
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Todas</span>
+                <span className="px-1.5 py-0.2 rounded-full bg-white/10 text-[10px]">
+                  {ACHIEVEMENT_IDS.length}
+                </span>
+              </button>
+
+              <button
+                onClick={() => setActiveTab('unlocked')}
+                className={`px-4 py-2 rounded-xl text-xs font-bold font-mono transition-all duration-200 border flex items-center gap-1.5 ${
+                  activeTab === 'unlocked'
+                    ? 'bg-[#0c2e17] text-[#00ff88] border-[#00ff88]/50 shadow-[0_0_12px_rgba(0,255,136,0.2)]'
+                    : 'bg-slate-900/60 text-slate-400 border-white/5 hover:text-white hover:bg-slate-800'
+                }`}
+              >
+                <Check className="w-3.5 h-3.5 text-[#00ff88]" />
+                <span>Liberadas</span>
+                <span className="px-1.5 py-0.2 rounded-full bg-[#00ff88]/20 text-[#00ff88] text-[10px]">
+                  {unlockedCount}
+                </span>
+              </button>
+
+              <button
+                onClick={() => setActiveTab('locked')}
+                className={`px-4 py-2 rounded-xl text-xs font-bold font-mono transition-all duration-200 border flex items-center gap-1.5 ${
+                  activeTab === 'locked'
+                    ? 'bg-[#0c2e17] text-[#00ff88] border-[#00ff88]/50 shadow-[0_0_12px_rgba(0,255,136,0.2)]'
+                    : 'bg-slate-900/60 text-slate-400 border-white/5 hover:text-white hover:bg-slate-800'
+                }`}
+              >
+                <Lock className="w-3.5 h-3.5 text-slate-400" />
+                <span>Bloqueadas</span>
+                <span className="px-1.5 py-0.2 rounded-full bg-slate-800 text-slate-400 text-[10px]">
+                  {lockedCount}
+                </span>
+              </button>
+            </div>
+
+            {/* List of Achievements */}
+            <div className="px-4 py-4 overflow-y-auto space-y-3 flex-1">
+              {filteredIds.length === 0 ? (
+                <div className="py-12 text-center flex flex-col items-center justify-center">
+                  {activeTab === 'unlocked' ? (
+                    <>
+                      <Lock className="w-10 h-10 text-slate-600 mb-3" />
+                      <p className="text-sm font-bold text-white mb-1">Nenhuma conquista liberada ainda</p>
+                      <p className="text-xs text-slate-400 max-w-xs font-mono">
+                        Explore as seções do site, clique em elementos e use o terminal para desbloquear os segredos! 🎮
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <Trophy className="w-10 h-10 text-[#00ff88] mb-3 animate-bounce" />
+                      <p className="text-base font-bold text-white mb-1">Parabéns! Você fez 100%! 🌟</p>
+                      <p className="text-xs text-[#00ff88] max-w-xs font-mono leading-relaxed mt-1">
+                        Que tal fazer tudo de novo? Use <code className="bg-black/60 px-1.5 py-0.5 rounded text-white border border-[#00ff88]/40 font-bold">achievements reset</code> no terminal! 🎮
+                      </p>
+                    </>
+                  )}
+                </div>
+              ) : (
+                filteredIds.map((id) => {
+                  const meta = ACHIEVEMENTS_META[id];
+                  const unlocked = activeAchievements.has(id);
+                  const Icon = meta.icon;
+                  const globalIndex = ACHIEVEMENT_IDS.indexOf(id) + 1;
+                  const isHintRevealed = !!revealedHints[id];
+
+                  return (
+                    <div
+                      key={id}
+                      className={`flex items-start gap-4 p-3.5 rounded-2xl border transition-all duration-300 ${
+                        unlocked
+                          ? 'bg-[#0c2e17]/60 border-[#10b981]/50 shadow-[0_0_15px_rgba(0,255,136,0.05)]'
+                          : 'bg-black/50 border-white/10 opacity-85 hover:opacity-100'
+                      }`}
+                    >
+                      <div
+                        className={`relative flex-shrink-0 w-11 h-11 rounded-xl border flex items-center justify-center mt-0.5 ${
+                          unlocked
+                            ? 'border-[#00ff88]/60 bg-gradient-to-br from-[#0c2e17] to-[#06200e] text-[#00ff88] shadow-[0_0_12px_rgba(0,255,136,0.25)]'
+                            : 'border-slate-800 bg-slate-950 text-amber-500/70'
+                        }`}
+                      >
+                        {unlocked ? <Icon className="w-5 h-5" /> : <HelpCircle className="w-5 h-5 text-amber-500/70" />}
+                      </div>
+
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center justify-between gap-2 mb-1">
+                          <h4 className={`text-sm font-bold ${unlocked ? 'text-white' : 'text-amber-400/90 font-mono'}`}>
+                            {unlocked ? meta.title : `Conquista Bloqueada #${globalIndex}`}
+                          </h4>
+                          {unlocked ? (
+                            <span className="flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-[#00ff88] shrink-0 bg-[#00ff88]/10 px-2 py-0.5 rounded-md border border-[#00ff88]/30">
+                              <Check className="w-3 h-3" /> Desbloqueada
+                            </span>
+                          ) : (
+                            <span className="flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-amber-400/80 shrink-0 bg-amber-500/10 px-2 py-0.5 rounded-md border border-amber-500/20">
+                              <Lock className="w-3 h-3" /> Oculta
+                            </span>
+                          )}
+                        </div>
+
+                        {unlocked ? (
+                          <p className="text-xs text-slate-300 font-light leading-relaxed mt-1">
+                            {meta.description}
+                          </p>
+                        ) : isHintRevealed ? (
+                          <div className="mt-2 p-2.5 rounded-xl bg-black/60 border border-amber-500/30 flex items-start justify-between gap-2 animate-fadeIn">
+                            <p className="text-[11px] font-mono text-amber-300/90 leading-relaxed italic">
+                              {meta.hint}
+                            </p>
+                            <button
+                              onClick={() => toggleHint(id)}
+                              className="p-1 rounded bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white shrink-0 transition-colors"
+                              title="Ocultar dica"
+                            >
+                              <EyeOff className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        ) : (
+                          <div className="mt-2 flex items-center justify-between gap-2 bg-black/40 p-2.5 rounded-xl border border-white/5">
+                            <span className="text-[11px] font-mono text-slate-500 italic">
+                              Dica oculta • Clique no olho para ver
+                            </span>
+                            <button
+                              onClick={() => toggleHint(id)}
+                              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs font-mono transition-colors"
+                              title="Revelar dica"
+                            >
+                              <Eye className="w-3.5 h-3.5" />
+                              <span>Ver Dica</span>
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })
+              )}
+            </div>
+
+            {/* Footer */}
+            <div className="px-6 py-4 border-t border-white/10 bg-[#040805] text-center shrink-0">
+              <p className="text-[11px] font-mono text-slate-400">
+                {unlockedCount === ACHIEVEMENT_IDS.length ? (
+                  <span className="text-[#00ff88]">
+                    🌟 Você fez 100%! Que tal fazer tudo de novo? Use <code className="text-white font-bold bg-black/60 px-1 py-0.5 rounded border border-[#00ff88]/30">achievements reset</code> no terminal!
+                  </span>
+                ) : (
+                  '🎮 Clique no ícone do olho para revelar a dica de cada segredo bloqueado!'
+                )}
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+}
