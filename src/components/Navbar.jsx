@@ -74,7 +74,7 @@ export default function Navbar({ onTriggerEasterEgg }) {
           </div>
           <div className="flex flex-col">
             <span className="font-sans text-base tracking-wider flex items-center gap-1.5 font-extrabold">
-              RICARDO <span className="text-gradient-green">VENDRAMINI</span>
+              RICARDO<span className="text-gradient-green">.DEV</span>
               <span className="w-2 h-2 rounded-full bg-[#00ff88] animate-pulse shadow-glow-sm" />
             </span>
             <span className="text-[10px] font-mono text-slate-400 font-normal tracking-widest uppercase flex items-center gap-1">

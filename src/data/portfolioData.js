@@ -13,6 +13,8 @@ import eliteHouseImg from '../images/books/portifolio/Elite-House-Piracicaba.png
 import vendraminiSiteImg from '../images/books/portifolio/Vendramin-Informatica.png';
 import reiDasRomsImg from '../images/books/portifolio/Rei-das-Roms.png';
 import festaFacilImg from '../images/books/portifolio/Festa-Facil.png';
+import c4t4t4uImg from '../images/books/portifolio/C4t4t4u-Eletronicos.png';
+import ciganaMorganaImg from '../images/books/portifolio/Cigana-Morgana.png';
 
 export const personalInfo = {
   name: "Ricardo Vendramini",
@@ -22,11 +24,13 @@ export const personalInfo = {
   headline: "Eu transformo ideias em experiências digitais.",
   subheadline: "Desenvolvedor, líder e criador de soluções digitais. Da primeira linha de código ao produto colocado em produção.",
   bioShort: "Profissional de tecnologia com visão holística de produto, combinando forte competência técnica em desenvolvimento de software com liderança, gestão e resolução estratégica de problemas.",
+  aboutTitle: "Minha trajetória, minha visão e o que me move",
   aboutStory: [
-    "Minha jornada na tecnologia começou impulsionada pela curiosidade insaciável de entender como as coisas funcionam por trás das telas. O que começou como linhas de código exploratórias transformou-se em uma paixão por criar soluções digitais reais e eficientes.",
-    "Com a fundação da Vendramini Informática e ao longo da minha trajetória, percebi que tecnologia de ponta só cumpre seu propósito quando resolve problemas reais das pessoas e dos negócios. Por isso, desenvolvi uma visão abrangente que conecta a arquitetura técnica à experiência do usuário e à gestão de equipes.",
-    "Hoje, atuo não apenas construindo software robusto e escalável, mas também liderando processos, otimizando fluxos de trabalho e transformando visão estratégica em produtos de alto valor entregues em produção."
+    "Minha relação com a tecnologia começou pela curiosidade de entender como as coisas funcionam. O que começou com experiências e linhas de código se transformou em uma busca constante por criar soluções que realmente façam diferença.",
+    "Ao longo dessa jornada, passei a enxergar o desenvolvimento de uma forma mais ampla. Para mim, criar software não é apenas escrever código: é entender um problema, pensar na experiência de quem vai utilizar a solução e encontrar uma maneira eficiente de transformar uma ideia em algo real.",
+    "Hoje, uno desenvolvimento, tecnologia, gestão e liderança para construir projetos que vão além da parte técnica. Gosto de participar de todo o processo — da ideia e planejamento à implementação, publicação e evolução do produto."
   ],
+  aboutQuote: "Não quero apenas escrever código. Quero construir coisas que façam sentido.",
   location: "Brasil",
   photoUrl: ricardoPhoto,
   companyLogoUrl: companyLogo,
@@ -42,46 +46,68 @@ export const personalInfo = {
 };
 
 export const statsData = [
-  { id: 1, label: "Projetos desenvolvidos", value: 25, prefix: "+", suffix: "" },
-  { id: 2, label: "Sistemas em produção", value: 12, prefix: "+", suffix: "" },
-  { id: 3, label: "Plataformas & Sites publicados", value: 30, prefix: "+", suffix: "" },
-  { id: 4, label: "Tecnologias no ecossistema", value: 18, prefix: "", suffix: "" },
-  { id: 5, label: "Anos de experiência", value: 5, prefix: "+", suffix: "" },
-  { id: 6, label: "Soluções ativas em produção", value: 10, prefix: "+", suffix: "" }
+  { id: 1, label: "Repositórios Criados", value: 32, prefix: "+", suffix: "" },
+  { id: 2, label: "Sistemas em Produção", value: 6, prefix: "", suffix: "" },
+  { id: 3, label: "Plataformas & Sites Publicados", value: 30, prefix: "+", suffix: "" },
+  { id: 4, label: "Tecnologias no Ecossistema", value: 18, prefix: "", suffix: "" },
+  { id: 5, label: "Anos de Trajetória", value: 9, prefix: "+", suffix: "" },
+  { id: 6, label: "Soluções Comerciais Ativas", value: 6, prefix: "", suffix: "" }
 ];
 
 export const timelineData = [
   {
-    year: "2025 - Presente",
-    title: "Liderança Técnica & Arquitetura de Produtos",
-    description: "Atuação na concepção, liderança de desenvolvimento e implantação de plataformas web e sistemas corporativos de alta disponibilidade pela Vendramini Informática.",
-    projects: ["Elite House Piracicaba", "Vendramini Informática"],
-    technologies: ["React", "TypeScript", "Node.js", "Supabase", "Vercel"],
+    year: "2017 - 2018",
+    title: "Primeiro Contato & Início na TI — Menor Aprendiz MSB",
+    description: "Entrada no mercado de trabalho como Menor Aprendiz de Assistente Administrativo no departamento de TI da MSB. Primeira imersão prática com suporte operacional, rotinas técnicas e o início da trajetória profissional no universo da tecnologia.",
+    projects: ["Suporte Operacional & Infraestrutura MSB"],
+    technologies: ["Assistência de TI", "Suporte Operacional", "Rotinas Administrativas"],
     achievements: [
-      "Modernização de arquitetura legada para microsserviços",
-      "Redução expressiva no tempo de carregamento e resposta de APIs"
+      "Primeiro contato profissional com rotinas e gestão de tecnologia",
+      "Desenvolvimento de disciplinas de suporte, organização e processos de TI"
     ]
   },
   {
-    year: "2022 - 2024",
-    title: "Desenvolvedor Full Stack & Gestão de Soluções",
-    description: "Construção de ecossistemas web completos, integração com bancos de dados relacionais e APIs de alta performance.",
-    projects: ["Festa Fácil", "PetLife"],
-    technologies: ["JavaScript", "React", "Node.js", "SQL", "Tailwind CSS"],
+    year: "2018 - Presente",
+    title: "Fundação & Abertura da Vendramini Informática",
+    description: "Nascimento da Vendramini Informática. Inicialmente operada na sala de casa, focada na manutenção de hardware, diagnóstico de computadores e assistência técnica especializada, evoluindo progressivamente para o desenvolvimento de soluções digitais e engenharia de software.",
+    projects: ["Vendramini Informática", "Suporte Técnico & Manutenção de Hardware"],
+    technologies: ["Manutenção de Hardware", "Diagnóstico Técnico", "Redes & Infraestrutura", "Atendimento a Clientes"],
     achievements: [
-      "Lançamento de 5+ produtos digitais em tempo recorde",
-      "Implementação de pipeline CI/CD automatizado"
+      "Fundação da empresa e início das operações em assistência de hardware",
+      "Construção de base sólida de clientes e transição gradual para soluções digitais web"
     ]
   },
   {
-    year: "2020 - 2022",
-    title: "Fundação Técnica & Projetos Especiais",
-    description: "Imersão em infraestrutura Linux, redes, Git, desenvolvimento frontend interativo e primeiras automações de negócios.",
-    projects: ["Cigana Morgana"],
-    technologies: ["HTML5", "CSS3", "JavaScript", "Linux", "Git"],
+    year: "2019 - 2023",
+    title: "Atuação Multidisciplinar & Gestão Paralela da Empresa",
+    description: "Período de atuação profissional em outros segmentos no mercado corporativo, enquanto mantinha em paralelo a operação contínua, atendimento a clientes e serviços técnicos da Vendramini Informática.",
+    projects: ["Vendramini Informática", "Gestão de Atendimentos Paralelos"],
+    technologies: ["Gestão de Tempo", "Atendimento ao Cliente", "Manutenção de Hardware", "Autodidatismo em TI"],
     achievements: [
-      "Criação de soluções personalizadas com alta interatividade",
-      "Domínio de ambientes de servidor e configuração de rotas"
+      "Manutenção ativa da carteira de clientes e reputação técnica da Vendramini Informática",
+      "Desenvolvimento de alta resiliência, capacidade de conciliação de rotinas e disciplina"
+    ]
+  },
+  {
+    year: "2023",
+    title: "Técnico de Informática Júnior — ORION SOFTWARES E EQUIPAMENTOS LTDA",
+    description: "Atuação como Técnico de Informática Júnior na ORION Softwares e Equipamentos LTDA. Atendimento especializado focado na resolução de problemas de hardware e softwares proprietários, aliando suporte técnico a uma imersão no universo do desenvolvimento de software.",
+    projects: ["Softwares Proprietários Orion", "Diagnóstico HW/SW"],
+    technologies: ["Softwares Proprietários", "Suporte Técnico Nível 2/3", "Diagnóstico HW/SW", "Ambientes de Desenvolvimento"],
+    achievements: [
+      "Experiência aprofundada na resolução técnica de incidentes em sistemas proprietários",
+      "Proximidade técnica com os fluxos e ciclo de vida de desenvolvimento de software"
+    ]
+  },
+  {
+    year: "2023 - Presente",
+    title: "Supervisor de Atendimento — Conexão Marketing",
+    description: "Atuação como Supervisor de Atendimento na Conexão Marketing. Liderança de equipe, organização de processos corporativos, controle de projetos, acompanhamento de metas, resolução analítica de conflitos de colaboradores e promoção de alta performance operacional.",
+    projects: ["Supervisão de Operações & Atendimento", "Gestão de Projetos & Pessoas"],
+    technologies: ["Liderança de Pessoas", "Gestão de Projetos", "Resolução de Conflitos", "Controle de KPIs", "Gestão de Operações"],
+    achievements: [
+      "Liderança estratégica de equipe com foco em organização de processos e mediação humana",
+      "Controle e acompanhamento constante de cronogramas de projetos e SLAs de atendimento"
     ]
   }
 ];
@@ -258,24 +284,68 @@ export const skillsData = [
 
   // Deploy & Infraestrutura
   {
-    name: "Vercel",
-    category: "deploy",
-    level: "Especialista",
-    percentage: 95,
-    description: "Deploy automatizado, hospedagem serverless de alta performance, configuração de domínios e CI/CD.",
-    relatedProjects: ["Elite House Piracicaba", "Vendramini Informática"]
-  },
-  {
     name: "Hostinger",
     category: "deploy",
     level: "Avançado",
     percentage: 90,
-    description: "Hospedagem de sites e sistemas corporativos, gestão de zonas DNS, registros de domínio e certificados SSL.",
-    relatedProjects: ["Vendramini Informática", "Elite House Piracicaba"]
+    description: "Hospedagem, domínios, gestão de zonas DNS e certificados SSL aplicados em projetos como Elite House Piracicaba.",
+    relatedProjects: ["Elite House Piracicaba"]
+  },
+  {
+    name: "Vercel",
+    category: "deploy",
+    level: "Especialista",
+    percentage: 95,
+    description: "Deploy automatizado, hospedagem serverless de alta performance e integração de domínios em projetos como Vendramini Informática, C4T4T4U Eletrônicos e Cigana Morgana.",
+    relatedProjects: ["Vendramini Informática", "C4T4T4U Eletrônicos", "Cigana Morgana"]
+  },
+  {
+    name: "Git / GitHub Pages",
+    category: "deploy",
+    level: "Especialista",
+    percentage: 96,
+    description: "Versionamento de código e hospedagem de aplicações estáticas e projetos open source (Rei das Roms, Festa Fácil).",
+    relatedProjects: ["Rei das Roms", "Festa Fácil Personalizados"]
   }
 ];
 
 export const projectsData = [
+  {
+    id: "cigana-morgana",
+    name: "Cigana Morgana",
+    subtitle: "Landing Page Mística, Oráculos & Agendamentos Online",
+    category: "Portal Institucional / Landing Page",
+    image: ciganaMorganaImg,
+    badge: "Em Produção • Vercel",
+    shortDescription: "Landing page moderna e imersiva para consultoria mística (Tarot, Baralho Cigano, Mesa Radiônica e eventos). Possui animação de fundo interativa em HTML5 Canvas (starfield com rastro de brilhos no cursor), galeria interativa com lightbox, carrossel de depoimentos, FAQ sanfonado e agendamento direto via WhatsApp API.",
+    problem: "A consultora mística necessitava de uma vitrine digital sofisticada e envolvente que transmitisse autoridade, beleza visual e facilitasse o agendamento direto de consultas online e presenciais.",
+    idea: "Desenvolver um portal místico com estética cyberpunk/glassmorphism em tons de roxo profundo e dourado imperial, efeitos gráficos interativos em Canvas API 2D e conversão em 1-clique pelo WhatsApp.",
+    construction: "Construído puramente em HTML5 semântico (meta tags OpenGraph e acessibilidade), CSS3 Vanilla (Design System com variáveis, backdrop-filter glassmorphism, animações fluidas) e JavaScript ES6+ (Canvas 2D starfield, manipulação da DOM, sliders, modais e lightbox). Hospedado na Vercel.",
+    result: "Experiência visual mística de alto valor percebido, tempo de resposta instantâneo sem frameworks pesados, galeria de eventos e canal de agendamento automatizado no WhatsApp.",
+    technologies: ["HTML5", "CSS3", "JavaScript ES6+", "Canvas API 2D", "Vercel", "WhatsApp API", "SEO"],
+    date: "2026",
+    link: "https://ciganamorgana.vercel.app/",
+    github: null,
+    status: "Em Produção"
+  },
+  {
+    id: "c4t4t4u-eletronicos",
+    name: "C4T4T4U Eletrônicos",
+    subtitle: "E-Commerce, Orçamentos & Gestão de Ordens de Serviço (O.S.)",
+    category: "E-Commerce / SaaS",
+    image: c4t4t4uImg,
+    badge: "v1.0.2 • Em Produção",
+    shortDescription: "Plataforma completa de e-commerce e gestão corporativa para loja de eletrônicos e assistência técnica. Integra vitrine virtual com carrinho drawer, checkout via WhatsApp, módulo de Orçamentos com conversão automática para Ordens de Serviço (O.S.), emissão impressa em 2 vias A4, cadastro PF/PJ, controle RBAC de 3 níveis e backend Supabase cloud.",
+    problem: "A empresa de eletrônicos e assistência técnica necessitava de um ecossistema integrado para gerenciar simultaneamente a vitrine de produtos online, a captação de orçamentos e a operação técnica de ordens de serviço (O.S.) com emissão de comprovantes de garantia impressos.",
+    idea: "Desenvolver uma aplicação SPA robusta desacoplada com checkout de orçamentos via WhatsApp, conversão inteligente de cotações aprovadas para Ordens de Serviço (#OS-xxxx), controle de permissões por vendedor/admin (RBAC) e sincronização cloud no Supabase.",
+    construction: "Construído com HTML5 semântico, CSS3 Vanilla (Design System glassmorphism, temas HSL/RGB, @media print para folha A4 em 2 vias), JavaScript ES6+ puro (+140 funções nativas para CRUD, estado e filtros) e Supabase (PostgreSQL cloud com RLS). Hospedado na Vercel com Clean URLs.",
+    result: "Mais de 40 telas e modais operacionais, conversão instantânea de orçamentos aprovados em O.S., emissão de ordens de serviço em 2 vias impressas (Loja e Cliente), notificações diretas via WhatsApp e zero dependência de frameworks pesados.",
+    technologies: ["HTML5", "CSS3", "JavaScript ES6+", "Supabase", "PostgreSQL", "Vercel", "WhatsApp API"],
+    date: "2026",
+    link: "https://c4t4t4ueletronicos.vercel.app/",
+    github: null,
+    status: "Em Produção"
+  },
   {
     id: "elite-house-piracicaba",
     name: "Elite House Piracicaba",
@@ -353,35 +423,45 @@ export const projectsData = [
 export const experienceData = [
   {
     period: "2023 - Presente",
+    role: "Supervisor de Atendimento",
+    company: "Conexão Marketing",
+    summary: "Liderança estratégica de equipe de atendimento, organização de processos corporativos, controle operacional de projetos, acompanhamento de metas (KPIs/SLAs) e mediação analítica de conflitos de colaboradores.",
+    highlights: [
+      "Liderança de pessoas, desenvolvimento contínuo da equipe e mediação de conflitos interpessoais.",
+      "Organização e estruturação de processos operacionais com acompanhamento rigoroso de cronogramas.",
+      "Comunicação direta com stakeholders e otimização dos fluxos de atendimento corporativo."
+    ]
+  },
+  {
+    period: "2023",
+    role: "Técnico de Informática Júnior",
+    company: "ORION SOFTWARES E EQUIPAMENTOS LTDA",
+    summary: "Atuação em suporte técnico especializado focado em resolução de problemas de hardware e softwares proprietários, aliando atendimento a uma imersão técnica no ecossistema de desenvolvimento de software.",
+    highlights: [
+      "Atendimento técnico focado na resolução analítica de incidentes em softwares proprietários.",
+      "Manutenção e suporte especializado em hardware, periféricos e sistemas de diagnóstico.",
+      "Intermediação técnica com as equipes de engenharia de desenvolvimento de produtos."
+    ]
+  },
+  {
+    period: "2018 - Presente",
     role: "Líder de Tecnologia & Fundador",
     company: "Vendramini Informática",
-    summary: "Atuação no direcionamento técnico de projetos, definição de stack arquitetural, desenvolvimento de módulos críticos e coordenação de cronogramas.",
+    summary: "Fundação da empresa, operada inicialmente na sala de casa com foco em manutenção de hardware e assistência técnica, evoluindo para arquitetura de software web, criação de sistemas em produção e liderança técnica.",
     highlights: [
-      "Arquitetura de sistemas web resilientes com foco em experiência do usuário e alta performance.",
-      "Liderança direta em processos de tomada de decisão técnica, reduzindo débitos técnicos e otimizando fluxos.",
-      "Integração contínua de novas tecnologias e padrões de desenvolvimento moderno."
+      "Construção e publicação de soluções web completas (React, TypeScript, Supabase, Tailwind).",
+      "Evolução contínua da empresa da assistência técnica em hardware para engenharia de software.",
+      "Manutenção ativa da carteira de clientes corporativos e soluções ativas."
     ]
   },
   {
-    period: "2021 - 2023",
-    role: "Especialista em Gestão de Processos & Soluções de TI",
-    company: "Operações Corporativas",
-    summary: "Coordenação de fluxos de atendimento, otimização de rotinas técnicas e intermediação entre requisitos de negócios e equipes de TI.",
+    period: "2017 - 2018",
+    role: "Menor Aprendiz de Assistente Administrativo em TI",
+    company: "MSB",
+    summary: "Primeira experiência profissional atuando no departamento de TI em assistência administrativa, suporte operacional e rotinas técnicas iniciais de tecnologia.",
     highlights: [
-      "Mapeamento e redesenho de processos operacionais para eliminar gargalos e retrabalho.",
-      "Implementação de ferramentas de suporte técnico e gestão de chamados com melhoria do SLA.",
-      "Capacitação de equipes e promoção de cultura focada em resolução eficiente de problemas."
-    ]
-  },
-  {
-    period: "2019 - 2021",
-    role: "Analista de Suporte Técnico & Infraestrutura",
-    company: "Serviços de Tecnologia",
-    summary: "Gerenciamento de ambiente Linux/Windows, configuração de servidores, diagnóstico de redes e manutenção de infraestrutura de TI.",
-    highlights: [
-      "Administração de sistemas e implementação de rotinas de backup e segurança.",
-      "Atendimento técnico especializado resolvendo incidentes complexos de software e hardware.",
-      "Automação de tarefas repetitivas através de scripts shell e ferramentas internas."
+      "Primeiro contato prático com infraestrutura, chamados internos e processos de TI.",
+      "Desenvolvimento de disciplina, suporte ao usuário e organização de rotinas técnicas."
     ]
   }
 ];

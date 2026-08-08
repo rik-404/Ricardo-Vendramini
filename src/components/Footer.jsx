@@ -56,7 +56,7 @@ export default function Footer() {
           />
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <div className="flex items-center gap-2 text-white font-extrabold tracking-wider text-base">
-              <span>RICARDO <span className="text-gradient-green">VENDRAMINI</span></span>
+              <span>RICARDO<span className="text-gradient-green">.DEV</span></span>
               <span className="w-2 h-2 rounded-full bg-[#00ff88] animate-pulse" />
             </div>
             <p className="text-xs font-mono text-[#00ff88] group-hover:underline transition-colors flex items-center gap-1">
@@ -87,7 +87,7 @@ export default function Footer() {
 
         {/* Right Rights */}
         <div className="flex flex-col items-center md:items-end gap-1 text-xs font-mono text-slate-500 text-center md:text-right">
-          <span>© {currentYear} Ricardo Vendramini.</span>
+          <span>© {currentYear} Ricardo.DEV.</span>
           <span className="text-[11px] text-slate-600">Todos os direitos reservados.</span>
         </div>
 

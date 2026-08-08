@@ -10,6 +10,7 @@ import SkillsSection from './components/SkillsSection';
 import ProjectsSection from './components/ProjectsSection';
 import ProjectModal from './components/ProjectModal';
 import AllProjectsModal from './components/AllProjectsModal';
+import AllSkillsModal from './components/AllSkillsModal';
 import ExperienceSection from './components/ExperienceSection';
 import LeadershipSection from './components/LeadershipSection';
 import BooksSection from './components/BooksSection';
@@ -24,19 +25,38 @@ import Footer from './components/Footer';
 export default function App() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [allProjectsOpen, setAllProjectsOpen] = useState(false);
+  const [allSkillsOpen, setAllSkillsOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [easterEggOpen, setEasterEggOpen] = useState(false);
   const [matrixCanvasMode, setMatrixCanvasMode] = useState(false);
 
-  // Force scroll to top on page refresh/load
+  // Preserve and restore exact scroll position on page reload
   useEffect(() => {
     if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual';
+      window.history.scrollRestoration = 'auto';
     }
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    if (window.location.hash) {
-      window.history.replaceState(null, '', window.location.pathname);
+
+    const savedPos = sessionStorage.getItem('portfolioScrollPos');
+    if (savedPos !== null) {
+      const pos = parseInt(savedPos, 10);
+      setTimeout(() => {
+        window.scrollTo(0, pos);
+      }, 50);
     }
+
+    let timeoutId;
+    const handleScroll = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        sessionStorage.setItem('portfolioScrollPos', window.scrollY.toString());
+      }, 100);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   // Konami Code Secret Listener: ↑ ↑ ↓ ↓ ← → ← → b a
@@ -91,7 +111,7 @@ export default function App() {
         <AboutSection />
         <StatsSection />
         <TimelineSection />
-        <SkillsSection />
+        <SkillsSection onOpenAllSkills={() => setAllSkillsOpen(true)} />
         <ProjectsSection
           onSelectProject={setSelectedProject}
           onOpenAllProjects={() => setAllProjectsOpen(true)}
@@ -107,6 +127,12 @@ export default function App() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Catálogo Completo de Tecnologias & Conhecimentos (Renderizado no nível raiz z-[999]) */}
+      <AllSkillsModal
+        isOpen={allSkillsOpen}
+        onClose={() => setAllSkillsOpen(false)}
+      />
 
       {/* Galeria Completa de Projetos (Renderizada no nível raiz z-[999]) */}
       <AllProjectsModal
