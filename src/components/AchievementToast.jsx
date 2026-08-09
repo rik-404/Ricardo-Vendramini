@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Award, Bug, Gamepad2, KeyRound, Terminal, Trash2, Trophy, Sparkles, Zap, Activity, Languages } from 'lucide-react';
+import { Award, Bug, Gamepad2, KeyRound, Terminal, Trash2, Trophy, Sparkles, Zap, Activity, Languages, X } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 export const ACHIEVEMENT_IDS = ['mosca', 'titulo', 'konami', 'matrix', 'navinha', 'root', 'tilt', 'breakout', 'starwars', 'clean', 'polyglot'];
@@ -54,9 +54,13 @@ export default function AchievementToast() {
   const queueRef = useRef([]);
   const showingRef = useRef(false);
   const timerRef = useRef(null);
-  const progressRef = useRef(null);
 
   const showNext = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+
     const next = queueRef.current.shift() || null;
     if (!next) {
       showingRef.current = false;
@@ -65,13 +69,12 @@ export default function AchievementToast() {
     }
     setCurrent(next);
     showingRef.current = true;
-    if (progressRef.current) {
-      progressRef.current.style.animation = 'none';
-      void progressRef.current.offsetWidth;
-      progressRef.current.style.animation = 'achvProgress 4.2s linear forwards';
-    }
     playUnlockSound();
     timerRef.current = setTimeout(showNext, 4600);
+  };
+
+  const handleDismiss = () => {
+    showNext();
   };
 
   useEffect(() => {
@@ -80,6 +83,7 @@ export default function AchievementToast() {
       if (!meta) return;
       queueRef.current.push({
         id: e.detail.id,
+        keyId: `${e.detail.id}-${Date.now()}`,
         title: t(`achievements.meta.${e.detail.id}.title`),
         description: t(`achievements.meta.${e.detail.id}.description`),
         Icon: meta.icon,
@@ -96,34 +100,34 @@ export default function AchievementToast() {
   }, [t]);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {current && (
         <motion.div
-          key={current.id}
-          initial={{ opacity: 0, x: 80, scale: 0.9 }}
-          animate={{ opacity: 1, x: 0, scale: 1 }}
-          exit={{ opacity: 0, x: 120, scale: 0.9 }}
-          transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-          className="fixed top-4 right-4 z-[99999] w-80 sm:w-96 pointer-events-none"
+          key={current.keyId || current.id}
+          initial={{ opacity: 0, y: -20, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -20, scale: 0.9 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+          className="fixed top-4 right-4 z-[99999] w-80 sm:w-96"
           role="status"
           aria-live="polite"
         >
           <div className="relative overflow-hidden rounded-2xl border border-[#00ff88]/40 bg-[#050d08]/95 backdrop-blur-md shadow-[0_0_35px_rgba(0,255,136,0.25),0_10px_30px_rgba(0,0,0,0.6)]">
             {/* Progress bar */}
             <div
-              ref={progressRef}
+              key={`bar-${current.keyId || current.id}`}
               className="absolute top-0 left-0 h-[3px] bg-gradient-to-r from-[#00ff88] to-[#00f2fe]"
               style={{ width: '100%', transformOrigin: 'left', animation: 'achvProgress 4.2s linear forwards' }}
             />
 
-            <div className="flex items-center gap-4 p-4">
+            <div className="flex items-center gap-3.5 p-4">
               {/* Trophy icon with glow */}
               <div className="relative flex-shrink-0">
                 <div className="absolute inset-0 rounded-full bg-[#00ff88]/30 blur-lg" />
-                <div className="relative w-12 h-12 rounded-full bg-gradient-to-br from-[#0c2e17] to-[#06200e] border border-[#00ff88]/50 flex items-center justify-center">
+                <div className="relative w-11 h-11 rounded-full bg-gradient-to-br from-[#0c2e17] to-[#06200e] border border-[#00ff88]/50 flex items-center justify-center">
                   {(() => {
                     const Icon = current.Icon;
-                    return <Icon className="w-6 h-6 text-[#00ff88]" />;
+                    return <Icon className="w-5 h-5 text-[#00ff88]" />;
                   })()}
                 </div>
               </div>
@@ -140,6 +144,15 @@ export default function AchievementToast() {
                   {current.description}
                 </p>
               </div>
+
+              {/* Close button */}
+              <button
+                onClick={handleDismiss}
+                className="p-1 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-colors cursor-pointer shrink-0"
+                aria-label="Fechar"
+              >
+                <X className="w-4 h-4" />
+              </button>
             </div>
           </div>
         </motion.div>
