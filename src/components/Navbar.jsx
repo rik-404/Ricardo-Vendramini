@@ -76,7 +76,7 @@ function CliRow({ onOpenTerminal }) {
       <span className="flex items-center gap-2.5">
         <Terminal className="w-4 h-4 text-[#00ff88]" />
         <span className="text-xs font-mono font-bold hdr-util-label">
-          <span className="text-[#00ff88]">&gt;_</span> CLI
+          CLI
         </span>
       </span>
       <span className="flex items-center gap-1.5">
@@ -404,7 +404,7 @@ export default function Navbar({ onTriggerEasterEgg, onOpenTerminal, theme, onTo
 
       {/* BSOD / Cyberpunk Crash Error Overlay - Phase 3 */}
       {glitchPhase === 3 && (
-        <div className="chpw-theme-dark fixed inset-0 z-[99999] flex items-center justify-center p-4" style={{ animation: 'bsodFlash 0.3s ease-out' }}>
+        <div className="crash-scope fixed inset-0 z-[99999] flex items-center justify-center p-4" style={{ animation: 'bsodFlash 0.3s ease-out' }}>
           <div className="absolute inset-0 bg-[#040705]/95 backdrop-blur-2xl" />
           <div
             className="absolute inset-0 opacity-20 pointer-events-none"
@@ -546,6 +546,22 @@ export default function Navbar({ onTriggerEasterEgg, onOpenTerminal, theme, onTo
         }
         .chpw-header.chpw-header-light .hdr-drawer-label { color: #64748b; }
         .chpw-header.chpw-header-light .hdr-drawer-divider { border-color: rgba(15, 23, 42, 0.1); }
+        .chpw-header.chpw-header-light .chpw-util-open {
+          background: rgba(16, 185, 129, 0.15);
+          color: #047857;
+          border-color: rgba(16, 185, 129, 0.5);
+        }
+        .chpw-header.chpw-header-light .chpw-util-open .hdr-util-icon { color: #047857; }
+        .chpw-header.chpw-header-light .hdr-util-active-pt {
+          color: #047857; background: rgba(16, 185, 129, 0.14);
+          box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.4);
+        }
+        .chpw-header.chpw-header-light .hdr-util-active-en {
+          color: #0891b2; background: rgba(8, 145, 178, 0.12);
+          box-shadow: inset 0 0 0 1px rgba(8, 145, 178, 0.4);
+        }
+        .chpw-header.chpw-header-light .chpw-drawer [class*="text-[#00ff88]"] { color: #047857 !important; }
+        .chpw-header.chpw-header-light .chpw-drawer [class*="text-[#00f2fe]"] { color: #0891b2 !important; }
 
         /* ---------------------------------------------------------
            Animations

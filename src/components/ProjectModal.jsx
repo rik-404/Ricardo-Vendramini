@@ -10,7 +10,7 @@ export default function ProjectModal({ project, onClose }) {
 
   return (
     <AnimatePresence>
-      <div className="chpw-theme-dark fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+      <div className="proj-modal fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -45,7 +45,7 @@ export default function ProjectModal({ project, onClose }) {
             </button>
 
             {/* Header Title Overlay */}
-            <div className="absolute bottom-6 left-6 right-6">
+            <div className="proj-header-overlay absolute bottom-6 left-6 right-6">
               <span className="text-xs font-mono text-[#00ff88] uppercase tracking-wider block mb-1">
                 {project.category} • {lang === 'en' ? 'Case Study' : 'Estudo de Caso'}
               </span>

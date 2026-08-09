@@ -673,6 +673,159 @@ html.theme-light .chpw-theme-dark [class*="border-white/"] {
   border-color: rgba(255, 255, 255, 0.12) !important;
 }
 
+/* ── Overlay de Viagem no Tempo (Time Travel) → tema claro ──
+   O overlay troca o chpw-theme-dark por timewalk-scope: em
+   Light Mode a estética neon vira um HUD com fundo branco. */
+html.theme-light .timewalk-scope {
+  background-color: #f4faf7 !important;
+  background-image: radial-gradient(circle at 50% 45%, rgba(16, 185, 129, 0.1), transparent 62%) !important;
+  color: #0f172a !important;
+}
+html.theme-light .timewalk-scope [class*="text-[#00ff88]"] {
+  color: #047857 !important;
+}
+html.theme-light .timewalk-scope [class*="text-cyan-400"] {
+  color: #0e7490 !important;
+}
+html.theme-light .timewalk-scope [class*="text-yellow-400"] {
+  color: #b45309 !important;
+}
+html.theme-light .timewalk-scope [class*="text-red-400"] {
+  color: #dc2626 !important;
+}
+html.theme-light .timewalk-scope [class*="border-[#00ff88]"] {
+  border-color: #059669 !important;
+}
+html.theme-light .timewalk-scope [class*="bg-[#05150a]"],
+html.theme-light .timewalk-scope [class*="bg-[#09120c]"] {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+}
+html.theme-light .timewalk-scope [class*="bg-red-950"] {
+  background-color: #fee2e2 !important;
+}
+html.theme-light .timewalk-scope [class*="bg-yellow-950"] {
+  background-color: #fef3c7 !important;
+}
+html.theme-light .timewalk-scope [class*="bg-cyan-950"] {
+  background-color: #cffafe !important;
+}
+html.theme-light .timewalk-scope [class*="bg-black/90"] {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+}
+html.theme-light .timewalk-scope [class*="bg-black/80"] {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+}
+html.theme-light .timewalk-scope [class*="bg-black/70"] {
+  background-color: rgba(255, 255, 255, 0.78) !important;
+}
+/* Grade de estradas cyberpunk → linhas escuras sobre branco */
+html.theme-light .timewalk-scope .tw-grid {
+  background-image:
+    linear-gradient(to right, rgba(13, 148, 136, 0.3) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(8, 145, 178, 0.28) 1px, transparent 1px) !important;
+}
+html.theme-light .timewalk-scope .tw-streak {
+  background: linear-gradient(to left, #0d9488, transparent) !important;
+  box-shadow: 0 0 8px rgba(13, 148, 136, 0.55) !important;
+}
+html.theme-light .timewalk-scope .tw-vortex {
+  background: conic-gradient(from 0deg, rgba(5, 150, 105, 0) 0deg, rgba(8, 145, 178, 0.35) 40deg, rgba(5, 150, 105, 0) 80deg, rgba(5, 150, 105, 0.25) 160deg, rgba(8, 145, 178, 0.35) 220deg, rgba(5, 150, 105, 0) 280deg) !important;
+}
+html.theme-light .timewalk-scope .tw-ring {
+  background: conic-gradient(from 0deg, transparent 0deg, #059669 30deg, transparent 70deg, transparent 180deg, #0891b2 210deg, transparent 250deg) !important;
+}
+html.theme-light .timewalk-scope [class*="shadow-[0_0_20px_rgba(0,255,136,0.4)]"] {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.25) !important;
+}
+
+/* ── Overlay BSOD / Falha Crítica → adapta ao tema claro ── */
+html.theme-light .crash-scope {
+  background-color: #eef5f0 !important;
+  color-scheme: light;
+}
+html.theme-light .crash-scope [class*="bg-[#040705]"],
+html.theme-light .crash-scope [class*="bg-[#050c08]"] {
+  background-color: rgba(238, 245, 240, 0.95) !important;
+}
+html.theme-light .crash-scope [class*="bg-black/60"] {
+  background-color: rgba(248, 250, 252, 0.85) !important;
+}
+html.theme-light .crash-scope [class*="bg-slate-900"] {
+  background-color: rgba(15, 23, 42, 0.08) !important;
+}
+html.theme-light .crash-scope [class*="bg-[#0c2e17]"] {
+  background-color: rgba(209, 250, 229, 0.6) !important;
+}
+html.theme-light .crash-scope .text-white,
+html.theme-light .crash-scope [class*="text-slate-100"],
+html.theme-light .crash-scope [class*="text-slate-200"] {
+  color: #0f172a !important;
+}
+html.theme-light .crash-scope [class*="text-slate-300"] {
+  color: #1e293b !important;
+}
+html.theme-light .crash-scope [class*="text-slate-400"] {
+  color: #475569 !important;
+}
+html.theme-light .crash-scope [class*="text-slate-500"] {
+  color: #64748b !important;
+}
+html.theme-light .crash-scope [class*="text-[#00ff88]"] {
+  color: #047857 !important;
+}
+html.theme-light .crash-scope [class*="text-[#00f2fe]"] {
+  color: #0891b2 !important;
+}
+html.theme-light .crash-scope [class*="text-red-400"] {
+  color: #dc2626 !important;
+}
+html.theme-light .crash-scope [class*="text-cyan-400"] {
+  color: #0e7490 !important;
+}
+html.theme-light .crash-scope [class*="text-emerald-400"] {
+  color: #047857 !important;
+}
+html.theme-light .crash-scope [class*="text-[#ff4d4d]"] {
+  color: #e52222 !important;
+}
+html.theme-light .crash-scope [class*="border-[#00ff88]"] {
+  border-color: #059669 !important;
+}
+html.theme-light .crash-scope [class*="border-white/"] {
+  border-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+/* ── Modal Easter Egg (Matrix / Konami) → adapta ao tema claro ── */
+html.theme-light .easter-egg-scope {
+  background-color: rgba(238, 245, 240, 0.9) !important;
+  color-scheme: light;
+}
+html.theme-light .easter-egg-scope > [class*="bg-black/85"] {
+  background-color: rgba(248, 250, 252, 0.85) !important;
+}
+html.theme-light .easter-egg-scope [class*="bg-[#040705]"] {
+  background-color: #ffffff !important;
+  box-shadow: 0 0 50px rgba(16, 185, 129, 0.25) !important;
+}
+html.theme-light .easter-egg-scope [class*="bg-white/10"] {
+  background-color: rgba(15, 23, 42, 0.06) !important;
+}
+html.theme-light .easter-egg-scope [class*="bg-white/20"] {
+  background-color: rgba(15, 23, 42, 0.1) !important;
+}
+html.theme-light .easter-egg-scope [class*="bg-[#0c2e17]"] {
+  background-color: rgba(209, 250, 229, 0.6) !important;
+}
+html.theme-light .easter-egg-scope [class*="text-[#00ff88]"] {
+  color: #047857 !important;
+}
+html.theme-light .easter-egg-scope [class*="text-slate-200"] {
+  color: #1e293b !important;
+}
+html.theme-light .easter-egg-scope [class*="border-[#00ff88]"] {
+  border-color: #059669 !important;
+}
+
 /* =========================================================
    MODAL DE CONQUISTAS — adapta ao tema claro
 ========================================================= */
@@ -842,4 +995,100 @@ html.theme-light .book-tag,
 html.theme-light .book-tag [class*="text-[#00ff88]"],
 html.theme-light .book-tag [class*="text-[#00f2fe]"] {
   color: #047857 !important;
+}
+
+/* =========================================================
+   MODAL DE PROJETOS (lista + case completo) — tema claro
+========================================================= */
+html.theme-light .proj-modal {
+  color-scheme: light;
+}
+html.theme-light .proj-modal > [class*="bg-black/"] {
+  background-color: rgba(248, 250, 252, 0.92) !important;
+}
+html.theme-light .proj-modal [class*="bg-[#080d09]"],
+html.theme-light .proj-modal [class*="bg-[#0c140e]"],
+html.theme-light .proj-modal [class*="bg-[#0c2e17]/40"],
+html.theme-light .proj-modal [class*="bg-[#0c2e17]/70"],
+html.theme-light .proj-modal [class*="bg-[#061009]"],
+html.theme-light .proj-modal [class*="bg-[#09150d]"],
+html.theme-light .proj-modal [class*="bg-[#071318]"],
+html.theme-light .proj-modal [class*="bg-[#06100a]"],
+html.theme-light .proj-modal [class*="bg-[#08180e]"],
+html.theme-light .proj-modal [class*="bg-[#06140d]"] {
+  background-color: #f8fafc !important;
+}
+html.theme-light .proj-modal [class*="border-white/"] {
+  border-color: rgba(15, 23, 42, 0.1) !important;
+}
+html.theme-light .proj-modal .text-white,
+html.theme-light .proj-modal [class*="text-slate-100"],
+html.theme-light .proj-modal [class*="text-slate-200"],
+html.theme-light .proj-modal [class*="text-slate-300"] {
+  color: #0f172a !important;
+}
+html.theme-light .proj-modal [class*="text-slate-400"] {
+  color: #475569 !important;
+}
+html.theme-light .proj-modal [class*="text-[#00ff88]"],
+html.theme-light .proj-modal [class*="text-[#10b981]"],
+html.theme-light .proj-modal [class*="text-[#00f2fe]"] {
+  color: #047857 !important;
+}
+html.theme-light .proj-modal [class*="text-amber-400"] {
+  color: #b45309 !important;
+}
+html.theme-light .proj-modal [class*="bg-[#040705]"] {
+  background-color: rgba(209, 250, 229, 0.85) !important;
+}
+html.theme-light .proj-modal .proj-header-overlay .text-white,
+html.theme-light .proj-modal .proj-header-overlay [class*="text-slate-300"] {
+  color: #ffffff !important;
+}
+html.theme-light .proj-modal .proj-header-overlay [class*="text-[#00ff88]"] {
+  color: #34d399 !important;
+}
+html.theme-light .proj-modal [class*="hover:bg-white/20"]:hover {
+  background-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+/* =========================================================
+   CARDS DE PROJETOS (seção) — tags e botões legíveis no claro
+========================================================= */
+html.theme-light .proj-tag {
+  background-color: rgba(209, 250, 229, 0.85) !important;
+  border-color: rgba(16, 185, 129, 0.4) !important;
+}
+html.theme-light .proj-card [class*="text-[#00ff88]"],
+html.theme-light .proj-card [class*="text-[#10b981]"] {
+  color: #047857 !important;
+}
+html.theme-light .proj-card [class*="group-hover:text-[#00ff88]"]:hover {
+  color: #047857 !important;
+}
+html.theme-light .proj-card [class*="bg-[#00ff88]/10"] {
+  background-color: rgba(16, 185, 129, 0.15) !important;
+}
+html.theme-light .proj-card [class*="hover:bg-[#00ff88]/20"]:hover {
+  background: rgba(16, 185, 129, 0.25) !important;
+}
+
+/* ── Pill "Acessar Empresa" do Hero — fundo escuro p/ logo nítido ── */
+html.theme-light .hero-access-pill {
+  background: rgba(7, 32, 22, 0.85) !important;
+  border-color: rgba(16, 185, 129, 0.55) !important;
+  box-shadow: 0 2px 14px rgba(15, 23, 42, 0.18) !important;
+}
+html.theme-light .hero-access-pill [class*="text-slate-200"],
+html.theme-light .hero-access-pill [class*="text-slate-600"] {
+  color: #d7e8df !important;
+}
+html.theme-light .hero-access-pill [class*="text-[#00ff88]"] {
+  color: #34d399 !important;
+}
+
+/* ── Botão de Conquistas do CLI — texto branco no tema claro ── */
+html.theme-light .achv-cta-btn,
+html.theme-light .achv-cta-btn [class*="text-[#00ff88]"] {
+  color: #ffffff !important;
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="dark scroll-smooth">
+<html lang="pt-BR" class="scroll-smooth">
 
 <head>
   <meta charset="UTF-8" />
@@ -34,11 +34,33 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
-  <script type="module" crossorigin src="/assets/index-6fqVxaLr.js"></script>
+
+  <!-- Theme bootstrap: respeita o tema salvo; senão, usa “dia” ou o
+       tema claro do sistema, mantendo o botão do header para trocar. -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('ricardodev_theme');
+        var root = document.documentElement;
+        var useLight;
+        if (saved === 'light' || saved === 'dark') {
+          useLight = saved === 'light';
+        } else {
+          var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+          var hour = new Date().getHours();
+          var isDay = hour >= 6 && hour < 18;
+          useLight = isDay || prefersLight;
+        }
+        root.classList.toggle('theme-light', useLight);
+        root.style.colorScheme = useLight ? 'light' : 'dark';
+      } catch (e) {}
+    })();
+  </script>
+  <script type="module" crossorigin src="/assets/index-DwzrSr-A.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/vendor-lucide-CXQXj6TD.js">
   <link rel="modulepreload" crossorigin href="/assets/vendor-framer-BIvJmidw.js">
   <link rel="modulepreload" crossorigin href="/assets/vendor-react-OPgi-SWG.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-Dyrm6L5o.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-CoFxo8b_.css">
 </head>
 
 <body

@@ -53,7 +53,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-3 px-4 py-2 rounded-full glass-panel border border-[#00f2fe]/40 mb-8 shadow-glow-sm hover:border-[#00ff88] hover:scale-105 transition-all group cursor-pointer"
+          className="hero-access-pill inline-flex items-center gap-3 px-4 py-2 rounded-full glass-panel border border-[#00f2fe]/40 mb-8 shadow-glow-sm hover:border-[#00ff88] hover:scale-105 transition-all group cursor-pointer"
         >
           <img
             src={personalInfo.companyLogoUrl}
@@ -79,7 +79,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight max-w-5xl leading-[1.1] mb-6 min-h-[2.4em] sm:min-h-[2.2em] flex items-center justify-center flex-wrap"
+          className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight max-w-5xl leading-snug mb-6 min-h-[2.5em] sm:min-h-[2.4em] flex items-baseline justify-center flex-wrap overflow-visible"
         >
           <span>{currentPrefix}</span>
           {currentGradient && (
@@ -88,7 +88,7 @@ export default function HeroSection() {
             </span>
           )}
           {/* Blinking Cursor Bar */}
-          <span className="inline-block w-1 sm:w-1.5 h-[0.75em] bg-[#00ff88] animate-pulse ml-1 align-middle shadow-glow-sm rounded-sm" />
+          <span className="inline-block w-1 sm:w-1.5 h-[0.75em] bg-[#00ff88] animate-pulse ml-1 align-baseline shadow-glow-sm rounded-sm" />
         </motion.h1>
 
         {/* Subheadline */}

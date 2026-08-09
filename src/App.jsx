@@ -44,15 +44,20 @@ export default function App() {
   const [retro1999Open, setRetro1999Open] = useState(false);
   const [siteCleaned, setSiteCleaned] = useState(false);
   const [timeTravelMode, setTimeTravelMode] = useState(null); // 'TO_PAST' | 'TO_FUTURE' | null
+  // Global light/dark theme — applies `theme-light` class on <html>.
+  // Defaults: theme salvo pelo usuário > sistema (claro se for dia ou o SO
+  // for claro), com o botão do header sempre disponível para trocar.
   const [theme, setTheme] = useState(() => {
     try {
-      const saved = localStorage.getItem('ricardodev_theme') || 'dark';
-      document.documentElement.classList.toggle('theme-light', saved === 'light');
-      document.documentElement.style.colorScheme = saved === 'light' ? 'light' : 'dark';
-      return saved;
-    } catch {
-      return 'dark';
-    }
+      const saved = localStorage.getItem('ricardodev_theme');
+      if (saved === 'light' || saved === 'dark') {
+        return saved;
+      }
+    } catch {}
+    const prefersLight = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    const hour = new Date().getHours();
+    const isDay = hour >= 6 && hour < 18;
+    return isDay || prefersLight ? 'light' : 'dark';
   });
 
   // Global light/dark theme — applies `theme-light` class on <html>

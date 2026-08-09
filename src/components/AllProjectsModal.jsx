@@ -40,7 +40,7 @@ export default function AllProjectsModal({ isOpen, onClose, onSelectProject }) {
 
   return (
     <AnimatePresence>
-      <div className="chpw-theme-dark fixed inset-0 z-[999] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+      <div className="proj-modal fixed inset-0 z-[999] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -180,7 +180,7 @@ export default function AllProjectsModal({ isOpen, onClose, onSelectProject }) {
                           {project.technologies.map((tech, tIdx) => (
                             <span
                               key={tIdx}
-                              className="px-2 py-0.5 rounded bg-white/5 border border-white/5 text-[10px] font-mono text-slate-300"
+                              className="proj-tag px-2 py-0.5 rounded bg-white/5 border border-white/5 text-[10px] font-mono text-slate-300"
                             >
                               {tech}
                             </span>

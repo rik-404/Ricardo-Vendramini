@@ -68,7 +68,7 @@ export default function ProjectsSection({ onSelectProject, onOpenAllProjects }) 
             <div
               key={`${project.id}-${index}`}
               onClick={() => onSelectProject(project)}
-              className="w-[320px] sm:w-[380px] shrink-0 glass-card rounded-2xl overflow-hidden border border-[#10b981]/25 hover:border-[#00ff88]/70 transition-all duration-300 group cursor-pointer flex flex-col justify-between"
+              className="proj-card w-[320px] sm:w-[380px] shrink-0 glass-card rounded-2xl overflow-hidden border border-[#10b981]/25 hover:border-[#00ff88]/70 transition-all duration-300 group cursor-pointer flex flex-col justify-between"
             >
               <div>
                 {/* Image Container */}
@@ -111,13 +111,13 @@ export default function ProjectsSection({ onSelectProject, onOpenAllProjects }) 
                     {project.technologies.slice(0, 3).map((tech, tIdx) => (
                       <span
                         key={tIdx}
-                        className="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 text-[10px] font-mono text-slate-300 group-hover:border-[#10b981]/30 transition-colors"
+                        className="proj-tag px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 text-[10px] font-mono text-slate-300 group-hover:border-[#10b981]/30 transition-colors"
                       >
                         {tech}
                       </span>
                     ))}
                     {project.technologies.length > 3 && (
-                      <span className="px-2 py-1 rounded-md bg-white/[0.03] text-[10px] font-mono text-slate-400">
+                      <span className="proj-tag px-2 py-1 rounded-md bg-white/[0.03] text-[10px] font-mono text-slate-400">
                         +{project.technologies.length - 3}
                       </span>
                     )}

@@ -23,7 +23,7 @@ export default function EasterEggModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className="chpw-theme-dark fixed inset-0 z-[120] flex items-center justify-center p-4">
+    <div className="easter-egg-scope fixed inset-0 z-[120] flex items-center justify-center p-4">
       {/* Backdrop */}
       <div className="fixed inset-0 bg-black/85 backdrop-blur-md" onClick={onClose} />
 

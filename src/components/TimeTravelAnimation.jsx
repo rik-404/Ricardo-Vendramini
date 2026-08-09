@@ -134,7 +134,7 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="chpw-theme-dark fixed inset-0 z-[9999999] bg-black flex flex-col items-center justify-between p-6 overflow-hidden select-none font-mono text-white"
+        className="timewalk-scope fixed inset-0 z-[9999999] bg-black flex flex-col items-center justify-between p-6 overflow-hidden select-none font-mono text-white"
       >
         {/* Chromatic aberration border bleed while accelerating */}
         <div
@@ -162,7 +162,7 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
         {/* Animated Cyberpunk Grid Road (speed follows throttle) */}
         <div className="absolute inset-0 opacity-40 pointer-events-none overflow-hidden">
           <div
-            className="absolute inset-[-20%]"
+            className="tw-grid absolute inset-[-20%]"
             style={{
               backgroundImage:
                 'linear-gradient(to right, rgba(0, 255, 136, 0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 242, 254, 0.3) 1px, transparent 1px)',
@@ -181,7 +181,7 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
           {streaks.map((s, i) => (
             <div
               key={i}
-              className="absolute h-[2px] rounded-full"
+              className="tw-streak absolute h-[2px] rounded-full"
               style={{
                 top: `${s.top}%`,
                 left: '100%',
@@ -201,7 +201,7 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
           style={{ opacity: hasJumped ? 1 : 0 }}
         >
           <div
-            className="absolute -inset-[35%]"
+            className="tw-vortex absolute -inset-[35%]"
             style={{
               background:
                 'conic-gradient(from 0deg, rgba(0,255,136,0) 0deg, rgba(0,242,254,0.35) 40deg, rgba(0,255,136,0) 80deg, rgba(0,255,136,0.25) 160deg, rgba(0,242,254,0.35) 220deg, rgba(0,255,136,0) 280deg)',
@@ -287,7 +287,7 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
           <div className="relative my-auto flex flex-col items-center justify-center">
             {/* Flux capacitor rotating energy rings (speed up with throttle) */}
             <div
-              className="absolute w-[420px] h-[420px] rounded-full pointer-events-none"
+              className="tw-ring absolute w-[420px] h-[420px] rounded-full pointer-events-none"
               style={{
                 background: 'conic-gradient(from 0deg, transparent 0deg, #00ff88 30deg, transparent 70deg, transparent 180deg, #00f2fe 210deg, transparent 250deg)',
                 WebkitMask: 'radial-gradient(closest-side, transparent 76%, black 79%)',
@@ -297,7 +297,7 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
               }}
             />
             <div
-              className="absolute w-[340px] h-[340px] rounded-full pointer-events-none"
+              className="tw-ring absolute w-[340px] h-[340px] rounded-full pointer-events-none"
               style={{
                 background: 'conic-gradient(from 180deg, transparent 0deg, #00f2fe 25deg, transparent 60deg, transparent 220deg, #00ff88 255deg, transparent 290deg)',
                 WebkitMask: 'radial-gradient(closest-side, transparent 79%, black 82%)',
@@ -335,7 +335,7 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
               <div className="relative w-64 sm:w-80 h-28 sm:h-36 flex items-center justify-center">
                 <div className="absolute top-1/2 -right-20 -translate-y-1/2 w-32 sm:w-44 h-16 bg-gradient-to-r from-[#00f2fe]/80 via-[#00ff88]/40 to-transparent blur-md rounded-full pointer-events-none" />
 
-                <div className="relative z-10 p-5 rounded-3xl bg-gradient-to-r from-[#0c2417] via-[#040f09] to-[#0c2417] border-2 border-[#00ff88] shadow-[0_0_50px_rgba(0,255,136,0.6)] flex items-center gap-3">
+                <div className="dt-panel relative z-10 p-5 rounded-3xl bg-gradient-to-r from-[#0c2417] via-[#040f09] to-[#0c2417] border-2 border-[#00ff88] shadow-[0_0_50px_rgba(0,255,136,0.6)] flex items-center gap-3">
                   <Car className="w-12 h-12 sm:w-16 sm:h-16 text-[#00ff88] drop-shadow-[0_0_15px_#00ff88]" />
                   <div className="flex flex-col items-start">
                     <span className="text-base sm:text-xl font-extrabold text-white tracking-widest">
