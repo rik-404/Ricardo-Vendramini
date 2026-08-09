@@ -97,13 +97,40 @@ Inclui showcase de projetos reais em produção e estudos de engenharia de softw
 ## 🛠️ Tecnologias Utilizadas
 
 ### Core & Frameworks
-- **React 18**: Construção de componentes reativos e gerenciamento de estado.
-- **Vite 5**: Bundler e servidor de desenvolvimento ultrarrápido.
-- **Tailwind CSS 3**: Sistema de design utilitário de alta performance.
-- **Framer Motion 11**: Animações de transição, modais e scroll reativo.
-- **Lucide React**: Biblioteca de ícones vetoriais modernos.
-- **Canvas API 2D**: Renderização do starfield, efeito Matrix e jogo Arcade a 60fps.
-- **Web Audio API**: Efeitos sonoros sintéticos para notificações de conquista e ruídos de inseto.
+- **React 18** — Componentes reativos, hooks e gerenciamento de estado moderno.
+- **Vite 5** — Bundler e servidor de desenvolvimento ultrarrápido com *Figma* code splitting (chunks `vendor-react`, `vendor-framer`, `vendor-lucide`).
+- **Tailwind CSS 3** — Sistema de design utilitário de alta performance.
+- **Framer Motion 11** — Animações de transição, modais e scroll reativo de alto nível.
+- **Lucide React** — Biblioteca de ícones vetoriais modernos.
+- **Canvas API 2D** — Renderização do starfield, efeito Matrix, minijogos Arcade e partículas a 60fps.
+- **Web Audio API** — Efeitos sonoros sintéticos (notificações de conquista, arcade e ruídos de inseto).
+
+### Linguagens & Core
+- **TypeScript / JavaScript** — Tipagem estática rigorosa, interfaces genéricas e código escalável.
+- **Python 3** — Automações, scripts e manipulação avançada de dados.
+- **HTML5 & CSS3** — Semântica web, acessibilidade (a11y), SEO técnico, glassmorphism e temas neon.
+
+### Backend & Dados
+- **Node.js** — APIs e serviços backend.
+- **Supabase** — Banco PostgreSQL com **Row Level Security (RLS)** e autenticação.
+- **PostgreSQL & SQL** — Modelagem e consultas otimizadas.
+- **REST API & Webhooks** — Integrações (ex.: Facebook Ads) e serviços externos.
+- **TanStack Query** — Cache e gerenciamento de estado assíncrono.
+
+### UI, Design & Ferramentas
+- **Shadcn / Radix UI** — Componentes acessíveis e estilizáveis.
+- **Figma** — Prototipagem e design de interfaces.
+- **Git / GitHub & GitHub Pages** — Versionamento e hospedagem estática.
+- **VSCode** — Editor principal de desenvolvimento.
+- **Linux** — Ambiente de servidores e infraestrutura.
+
+### Deploy & Infraestrutura
+- **Vercel** — Deploy contínuo do portfólio ([ricardovendramini.vercel.app](https://ricardovendramini.vercel.app/)).
+- **Hostinger** — Hospedagem dos sites corporativos e institucionais.
+- **Redes & TCP/IP** — DNS, DHCP e serviços de rede.
+- **PWA & Service Worker** — Suporte offline para aplicações web.
+- **WordPress + Elementor Pro** — CMS para sites gerenciáveis.
+- **Desenvolvimento Assistido por IA (Lovable / Agentic)** — Aceleração de fluxos de produto.
 
 ---
 
