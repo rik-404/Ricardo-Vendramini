@@ -127,20 +127,23 @@ export default function FlyEasterEgg({ containerRef, titleRef }) {
     rafRef.current = requestAnimationFrame(updateFly);
   }
 
-  function scheduleNext() {
-    if (isMoscaUnlocked() || appearedRef.current) return;
-    const delay = 30000 + Math.random() * 10000; // 30 to 40 seconds idle at top
+  function scheduleNext(customDelay) {
+    if (isMoscaUnlocked()) return;
+    if (appearedRef.current && window.location.hash !== '#hero') return;
+    const delay = customDelay ?? (40000 + Math.random() * 10000); // 40 to 50 seconds delay
+    clearTimers();
     timersRef.current.push(setTimeout(spawnFly, delay));
   }
 
   function spawnFly() {
     if (phaseRef.current !== 'idle') return;
-    if (isMoscaUnlocked() || appearedRef.current) return;
+    if (isMoscaUnlocked()) return;
     if (!containerRef.current || !titleRef.current) return;
 
-    // Only spawn if user is at the header/hero section (scrollY <= 500)
-    if (window.scrollY > 500) {
-      timersRef.current.push(setTimeout(spawnFly, 5000));
+    // Only spawn if user is at the header/hero section (scrollY <= 500 or hash is #hero)
+    const isHeroHash = window.location.hash === '#hero';
+    if (window.scrollY > 500 && !isHeroHash) {
+      timersRef.current.push(setTimeout(spawnFly, 3000));
       return;
     }
 
@@ -241,10 +244,30 @@ export default function FlyEasterEgg({ containerRef, titleRef }) {
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
-    if (!isMoscaUnlocked()) {
-      scheduleNext();
-    }
+
+    const triggerForHeroHash = () => {
+      if (!isMoscaUnlocked()) {
+        const isHeroHash = window.location.hash === '#hero';
+        if (isHeroHash) {
+          appearedRef.current = false;
+        }
+        scheduleNext();
+      }
+    };
+
+    triggerForHeroHash();
+
+    const handleHashChange = () => {
+      if (window.location.hash === '#hero' && !isMoscaUnlocked() && phaseRef.current === 'idle') {
+        appearedRef.current = false;
+        scheduleNext();
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+
     return () => {
+      window.removeEventListener('hashchange', handleHashChange);
       cancelAnimationFrame(rafRef.current);
       clearTimers();
       stopBuzz();
