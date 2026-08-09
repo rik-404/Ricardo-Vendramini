@@ -4,15 +4,16 @@
 [![Vite](https://img.shields.io/badge/Vite-5.4.14-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.17-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-11.18.2-0055FF?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
+[![i18n Ready](https://img.shields.io/badge/i18n-PT--BR%20%7C%20EN-00ff88?style=for-the-badge)](https://github.com/rik-404/Ricardo-Vendramini)
 
-> **Portfólio Interativo, Plataforma Institucional & Sistema Gamificado de Conquistas**  
+> **Portfólio Interativo, Plataforma Institucional, Suporte Bilingue (PT-BR / EN) & Sistema Gamificado de Conquistas**  
 > Desenvolvido por **Ricardo Vendramini** (Líder de Tecnologia & Fundador da Vendramini Informática).
 
 ---
 
 ## 🌟 Visão Geral
 
-Este projeto é mais do que um portfólio profissional tradicional: é uma **experiência digital imersiva** projetada com estética *cyberpunk/glassmorphism*, animações a 60fps em HTML5 Canvas, um **terminal CLI interativo** integrado com minijogo arcade e um **sistema gamificado de segredos e conquistas (Easter Eggs)**.
+Este projeto é mais do que um portfólio profissional tradicional: é uma **experiência digital imersiva** projetada com estética *cyberpunk/glassmorphism*, animações a 60fps em HTML5 Canvas, **internacionalização em tempo real (Português 🇧🇷 / Inglês 🇺🇸)**, um **terminal CLI interativo** integrado com minijogo arcade e um **sistema gamificado de segredos e conquistas (Easter Eggs)**.
 
 - 🔗 **Website Oficial**: [vendraminiinformatica.com.br](https://vendraminiinformatica.com.br/)
 - 👨‍💻 **GitHub**: [@rik-404](https://github.com/rik-404)
@@ -21,21 +22,30 @@ Este projeto é mais do que um portfólio profissional tradicional: é uma **exp
 
 ## ✨ Recursos & Diferenciais
 
-### 1. 🖥️ Terminal CLI Interativo & Minijogo Arcade
+### 1. 🌐 Internacionalização Dinâmica (i18n PT-BR / EN)
+- **Alternador de Idioma em Tempo Real**: Troca instantânea de todo o ecossistema do site (menus, títulos, descrições de projetos, habilidades, biografia e modais) entre **Português 🇧🇷** e **Inglês 🇺🇸**.
+- **Disjuntor Cyberpunk em Desktop & Badge Exclusivo em Mobile**: Seletor com trilho deslizante neon no desktop e badge compacto com LED pulsante otimizado para navegação mobile.
+- **Persistência de Idioma**: Armazenamento automático da preferência do usuário no `localStorage`.
+
+### 2. 🍔 Portfólio de Soluções & Projetos Atualizados
+Inclui showcase de projetos reais em produção e estudos de engenharia de software:
+- **Sabor Express**: Cardápio Digital & Delivery Interativo com suporte híbrido (localStorage + Supabase cloud com RLS), checkout formatado para WhatsApp, dashboard estatístico com Chart.js e alertas sonoros de pedidos.
+- **PetLife**: Página Institucional One Page para clínica veterinária e petshop, com vitrine de serviços médicos, farmácia pet e formulário de agendamento.
+- **Cigana Morgana**: Landing Page mística com rastro de partículas no cursor via Canvas 2D, agendamento online e galeria com lightbox.
+- **C4T4T4U Eletrônicos**: E-Commerce & Gestão de Ordens de Serviço (O.S.) com impressão A4 em 2 vias e Supabase backend.
+- **Elite House Piracicaba**: Plataforma imobiliária & CRM corporativo com controle RBAC + RLS e integração de Webhooks do Facebook Ads.
+- **Vendramini Informática**: Portal institucional oficial com suporte PWA offline e efeito Matrix.
+- **Rei das ROMs & Festa Fácil**: Plataformas abertas de catalogação de retrojogos e orçamentos para eventos.
+
+### 3. 🖥️ Terminal CLI Interativo & Minijogo Arcade
 - **CLI funcional** no próprio site com suporte a diversos comandos de sistema (`help`, `sobre`, `skills`, `projetos`, `livros`, `contato`, `clear`, `reset`).
-- **Space Invaders Arcade (`navinha`)**: Minijogo de nave 2D em HTML5 Canvas renderizado dentro da própria janela do terminal com suporte a teclado e controles mobile.
+- **Space Invaders Arcade (`navinha`)**: Minijogo de nave 2D em HTML5 Canvas renderizado dentro da própria janela do terminal com suporte a teclado e controles touch mobile.
 - **Efeitos de Sistema**: Protocolo Matrix (`matrix`), Efeito de Terremoto 3D (`tilt`), e Acesso Root simulado com recado post-it e Rickroll (`root`).
 
-### 2. 🏆 Sistema Gamificado de Conquistas & Segredos
+### 4. 🏆 Sistema Gamificado de Conquistas & Segredos
 - **7 Conquistas Ocultas**: Segredos espalhados pelo site e terminal (Caçador de Bugs, Tenha Raiva de Mim, Código Konami, Protocolo Matrix, Arcade Space Invaders, Acesso Root, Modo Tilt).
 - **Galeria Modal com Abas**: Filtros por *Todas*, *Liberadas* e *Bloqueadas*, barra de progresso visual, selos de status e notificações com áudio em Web Audio API.
-- **Dicas Ocultas com Revelação**: Botão de olho (`Eye` / `EyeOff`) para revelar/esconder dicas enigmáticas das conquistas bloqueadas.
-- **Reset do Progresso**: Comando `reset` no terminal para zerar e permitir jogar a experiência de novo.
-
-### 3. 🎨 Design System & Estética Cyberpunk
-- Estilização moderna com **Glassmorphism**, gradientes neons adaptativos em HSL/RGB, modo escuro profundo (`#040705`) e partículas interativas.
-- Cursor customizado reativo com animações suaves e interações especiais.
-- Modais completos de detalhes de projetos, catálogo total de tecnologias, biografia de liderança e publicações de livros.
+- **Carrosséis Suaves & Ajustáveis**: Rolagem contínua desacelerada em 65s para leitura confortável de habilidades e projetos, com pausa inteligente ao passar o ponteiro.
 
 ---
 
@@ -64,11 +74,13 @@ sites/ricardo-vendramini/
 │   │   ├── FlyEasterEgg.jsx           # Animação interativa da mosquinha no Hero
 │   │   ├── HeroCanvas.jsx             # Fundo de partículas e efeito chuva Matrix
 │   │   ├── HeroSection.jsx            # Apresentação inicial do portfólio
-│   │   ├── Navbar.jsx                 # Cabeçalho flutuante com suporte a glitching
+│   │   ├── Navbar.jsx                 # Cabeçalho com disjuntor de idioma & badge mobile
 │   │   ├── TerminalSection.jsx        # CLI interativo e jogo Arcade Space Invaders
 │   │   └── ...                        # Demais modais e seções de conteúdo
+│   ├── context/
+│   │   └── LanguageContext.jsx        # Provider de internacionalização (PT/EN)
 │   ├── data/
-│   │   └── portfolioData.js           # Arquivo centralizado de dados do portfólio
+│   │   └── portfolioData.js           # Arquivo centralizado de dados bilingues do portfólio
 │   ├── App.jsx                        # Layout raiz, estados globais e rotas
 │   ├── index.css                      # Estilos base, animações e utilities Tailwind
 │   └── main.jsx                       # Ponto de entrada React
@@ -137,6 +149,6 @@ sites/ricardo-vendramini/
 
 ---
 
-<p center="text-center">
+<p align="center">
   Desenvolvido com 💚 por <b>Ricardo Vendramini</b> — 2026
 </p>
