@@ -13,21 +13,66 @@
 
 ## 🌟 Visão Geral
 
-Este projeto é mais do que um portfólio profissional tradicional: é uma **experiência digital imersiva** projetada com estética *cyberpunk/glassmorphism*, animações a 60fps em HTML5 Canvas, **internacionalização em tempo real (Português 🇧🇷 / Inglês 🇺🇸)**, um **terminal CLI interativo** integrado com minijogo arcade e um **sistema gamificado de segredos e conquistas (Easter Eggs)**.
+Este projeto é mais do que um portfólio profissional tradicional: é uma **experiência digital imersiva** projetada com estética *cyberpunk/glassmorphism*, animações a 60fps em HTML5 Canvas, **internacionalização em tempo real (Português 🇧🇷 / Inglês 🇺🇸)**, um **terminal CLI interativo** integrado com minijogo arcade, um modo **Web 1.0 de 1999 (Timewalker)** com animação de viagem no tempo e um **sistema gamificado de segredos e conquistas (Easter Eggs)**.
 
 - 🔗 **Website Oficial**: [vendraminiinformatica.com.br](https://vendraminiinformatica.com.br/)
 - 👨‍💻 **GitHub**: [@rik-404](https://github.com/rik-404)
 
 ---
 
+## 📸 Demonstração Visual & Screenshots
+
+<p align="center">
+  <img src="arquivos%20README/hero.png" alt="Hero Section" width="100%" />
+</p>
+
+### 📸 Galeria de Telas & Funcionalidades
+
+| 🏠 Apresentação & Sobre | 🛠️ Ecossistema Tecnológico |
+| :---: | :---: |
+| ![Hero & Apresentação](arquivos%20README/hero.png) | ![Skills & Tecnologias](arquivos%20README/skilss.png) |
+
+| 💻 Projetos & Plataformas | 🎓 Certificações & Diplomas |
+| :---: | :---: |
+| ![Projetos em Destaque](arquivos%20README/projects.png) | ![Galeria de Certificados](arquivos%20README/certification.png) |
+
+| 📚 Livros & Obras Publicadas | 🏢 Liderança & Trajetória |
+| :---: | :---: |
+| ![Obras & Publicações](arquivos%20README/book-area.png) | ![Liderança & Equipe](arquivos%20README/experiencia.png) |
+
+| 🏆 Marcos & Conquistas Profissionais | 📜 Currículo & Histórico |
+| :---: | :---: |
+| ![Marcos e Feitos](arquivos%20README/conquistas-profissonal.png) | ![Linha do Tempo](arquivos%20README/curriculo.png) |
+
+| 🖥️ Terminal CLI & Arcade | 🧪 Tech Lab & Experimentos |
+| :---: | :---: |
+| ![Terminal CLI](arquivos%20README/terminal.png) | ![Tech Lab](arquivos%20README/lab.png) |
+
+| 🎯 Galeria de Conquistas Gamificadas | 🏅 Conquistas Desbloqueadas |
+| :---: | :---: |
+| ![Modal de Conquistas](arquivos%20README/achivements.png) | ![Conquistas Concluídas](arquivos%20README/achivements-concluidos.png) |
+
+### ⏳ Modo Timewalker (Web 1.0 de 1999) & Viagem no Tempo
+
+| 🏎️ Animação DeLorean (88 MPH) | 🕹️ Site Web 1.0 (800x600) |
+| :---: | :---: |
+| ![Animação DeLorean](arquivos%20README/Anima%C3%A7%C3%A3o-viagem-tempo.png) | ![Site Web 1999](arquivos%20README/Site-1999.png) |
+
+---
+
 ## ✨ Recursos & Diferenciais
 
-### 1. 🌐 Internacionalização Dinâmica (i18n PT-BR / EN)
+### 1. ⏳ Modo Timewalker (Web 1.0 de 1999) & Animação DeLorean
+- **Viagem no Tempo Cinematográfica (`timewalker`)**: Animação em estilo *De Volta para o Futuro* com o DeLorean DMC-12 acelerando a **88 MPH**, velocímetro digital, relógio temporal e rastro de fogo nas rodas (*Fire Trails*).
+- **Layout Fiel Web 1.0 (800x600)**: Container centralizado de 800px, estética vintage em fundo claro, botões em 3D relevo, fontes *Times New Roman / Comic Sans*, links clássicos (azul/roxo/vermelho), caixa de compatibilidade *"Melhor visualizado em Internet Explorer 5"*, contador de visitantes `001337`, selo *"Em Construção"*, Web Rings e Guestbook interativo.
+- **Restauração da Linha Temporal**: Botão `[ RESTAURAR 2026 🔄 ]` com animação de volta ao presente.
+
+### 2. 🌐 Internacionalização Dinâmica (i18n PT-BR / EN)
 - **Alternador de Idioma em Tempo Real**: Troca instantânea de todo o ecossistema do site (menus, títulos, descrições de projetos, habilidades, biografia e modais) entre **Português 🇧🇷** e **Inglês 🇺🇸**.
 - **Disjuntor Cyberpunk em Desktop & Badge Exclusivo em Mobile**: Seletor com trilho deslizante neon no desktop e badge compacto com LED pulsante otimizado para navegação mobile.
 - **Persistência de Idioma**: Armazenamento automático da preferência do usuário no `localStorage`.
 
-### 2. 🍔 Portfólio de Soluções & Projetos Atualizados
+### 3. 🍔 Portfólio de Soluções & Projetos Atualizados
 Inclui showcase de projetos reais em produção e estudos de engenharia de software:
 - **Sabor Express**: Cardápio Digital & Delivery Interativo com suporte híbrido (localStorage + Supabase cloud com RLS), checkout formatado para WhatsApp, dashboard estatístico com Chart.js e alertas sonoros de pedidos.
 - **PetLife**: Página Institucional One Page para clínica veterinária e petshop, com vitrine de serviços médicos, farmácia pet e formulário de agendamento.
@@ -37,15 +82,14 @@ Inclui showcase de projetos reais em produção e estudos de engenharia de softw
 - **Vendramini Informática**: Portal institucional oficial com suporte PWA offline e efeito Matrix.
 - **Rei das ROMs & Festa Fácil**: Plataformas abertas de catalogação de retrojogos e orçamentos para eventos.
 
-### 3. 🖥️ Terminal CLI Interativo & Minijogo Arcade
+### 4. 🖥️ Terminal CLI Interativo & Minijogo Arcade
 - **CLI funcional** no próprio site com suporte a diversos comandos de sistema (`help`, `sobre`, `skills`, `projetos`, `livros`, `contato`, `clear`, `reset`).
 - **Space Invaders Arcade (`navinha`)**: Minijogo de nave 2D em HTML5 Canvas renderizado dentro da própria janela do terminal com suporte a teclado e controles touch mobile.
-- **Efeitos de Sistema**: Protocolo Matrix (`matrix`), Efeito de Terremoto 3D (`tilt`), e Acesso Root simulado com recado post-it e Rickroll (`root`).
+- **Efeitos de Sistema**: Protocolo Matrix (`matrix`), Modo Timewalker (`timewalker`), Efeito de Terremoto 3D (`tilt`), e Acesso Root simulado com recado post-it e Rickroll (`root`).
 
-### 4. 🏆 Sistema Gamificado de Conquistas & Segredos
-- **7 Conquistas Ocultas**: Segredos espalhados pelo site e terminal (Caçador de Bugs, Tenha Raiva de Mim, Código Konami, Protocolo Matrix, Arcade Space Invaders, Acesso Root, Modo Tilt).
+### 5. 🏆 Sistema Gamificado de Conquistas & Segredos
+- **Conquistas Ocultas**: Segredos espalhados pelo site e terminal (Caçador de Erros, Gosta de Clicar, Código Konami, Protocolo Matrix, Arcade Space Invaders, Acesso Root, Modo Tilt, Mestre do Breakout, Que a Força Esteja Com Você, Limpeza Total, Poliglota Digital e **Visitante do Passado**).
 - **Galeria Modal com Abas**: Filtros por *Todas*, *Liberadas* e *Bloqueadas*, barra de progresso visual, selos de status e notificações com áudio em Web Audio API.
-- **Carrosséis Suaves & Ajustáveis**: Rolagem contínua desacelerada em 65s para leitura confortável de habilidades e projetos, com pausa inteligente ao passar o ponteiro.
 
 ---
 
@@ -75,6 +119,8 @@ sites/ricardo-vendramini/
 │   │   ├── HeroCanvas.jsx             # Fundo de partículas e efeito chuva Matrix
 │   │   ├── HeroSection.jsx            # Apresentação inicial do portfólio
 │   │   ├── Navbar.jsx                 # Cabeçalho com disjuntor de idioma & badge mobile
+│   │   ├── Retro1999Overlay.jsx       # Layout Web 1.0 de 1999 (800x600)
+│   │   ├── TimeTravelAnimation.jsx    # Animação DeLorean DMC-12 De Volta para o Futuro
 │   │   ├── TerminalSection.jsx        # CLI interativo e jogo Arcade Space Invaders
 │   │   └── ...                        # Demais modais e seções de conteúdo
 │   ├── context/
@@ -130,6 +176,7 @@ sites/ricardo-vendramini/
 | `livros` | Apresenta as obras publicadas |
 | `contato` | Exibe os canais oficiais de comunicação |
 | `navinha` | Inicia o jogo **Space Invaders Arcade** no terminal |
+| `timewalker` | **Modo Timewalker**: Ativa a máquina do tempo e viaja para a Web de 1999 ⏳ |
 | `matrix` | Ativa a chuva de caracteres da Matrix por 10s |
 | `tilt` | Faz toda a estrutura do site balançar em 3D |
 | `root` | Solicita credenciais de superusuário e libera o memo post-it |

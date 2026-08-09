@@ -9,6 +9,7 @@ export default function Retro1999Overlay({ isOpen, onClose }) {
   const [guestName, setGuestName] = useState('');
   const [guestMsg, setGuestMsg] = useState('');
   const [guestbook, setGuestbook] = useState([
+    { name: 'Dante', text: 'Se você está lendo isso, eu já estive aqui antes de você.', date: '14/08/1999' },
     { name: 'João (Dev)', text: 'Muito legal o seu site! Lembrou os velhos tempos da internet discada!', date: '08/08/1999' },
     { name: 'Ana', text: 'Como você fez esses botões em 3D? Que incrível!', date: '09/08/1999' },
     { name: 'Ricardo', text: 'Eu não lembro de ter colocado isso aqui... Pelo visto a máquina do tempo funcionou.', date: '14/08/1999' }
