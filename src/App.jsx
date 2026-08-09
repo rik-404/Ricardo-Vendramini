@@ -24,6 +24,8 @@ import TechLabSection from './components/TechLabSection';
 import EasterEggModal from './components/EasterEggModal';
 import BreakoutOverlay from './components/BreakoutOverlay';
 import StarWarsCrawlOverlay from './components/StarWarsCrawlOverlay';
+import Retro1999Overlay from './components/Retro1999Overlay';
+import TimeTravelAnimation from './components/TimeTravelAnimation';
 import AchievementToast, { dispatchAchievementUnlocked } from './components/AchievementToast';
 import { Trash2, RotateCcw } from 'lucide-react';
 import ContactSection from './components/ContactSection';
@@ -34,11 +36,22 @@ export default function App() {
   const { t } = useLanguage();
   const [selectedProject, setSelectedProject] = useState(null);
   const [allProjectsOpen, setAllProjectsOpen] = useState(false);
-  const [allSkillsOpen, setAllSkillsOpen] = useState(false);
   const [allCertificatesOpen, setAllCertificatesOpen] = useState(false);
+  const [allSkillsOpen, setAllSkillsOpen] = useState(false);
   const [breakoutGameOpen, setBreakoutGameOpen] = useState(false);
   const [starWarsOpen, setStarWarsOpen] = useState(false);
+  const [retro1999Open, setRetro1999Open] = useState(false);
   const [siteCleaned, setSiteCleaned] = useState(false);
+  const [timeTravelMode, setTimeTravelMode] = useState(null); // 'TO_PAST' | 'TO_FUTURE' | null
+
+  const handleStartTimewalker = () => {
+    setTimeTravelMode('TO_PAST');
+  };
+
+  const handleReturnFrom1999 = () => {
+    setRetro1999Open(false);
+    setTimeTravelMode('TO_FUTURE');
+  };
   const [achievementsModalOpen, setAchievementsModalOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [easterEggOpen, setEasterEggOpen] = useState(false);
@@ -253,6 +266,9 @@ export default function App() {
         onTriggerStarWars={() => setStarWarsOpen(true)}
         onTriggerClean={() => setSiteCleaned(true)}
         onRestoreClean={() => setSiteCleaned(false)}
+        onTriggerTimewalker={() => {
+          setTimeTravelMode('TO_PAST');
+        }}
       />
 
       <div className={`transition-opacity duration-500 ${siteCleaned ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
@@ -334,6 +350,23 @@ export default function App() {
       <EasterEggModal
         isOpen={easterEggOpen}
         onClose={closeEasterEgg}
+      />
+
+      {/* Retro 1999 Web 1.0 Experience Overlay */}
+      <Retro1999Overlay
+        isOpen={retro1999Open}
+        onClose={handleReturnFrom1999}
+      />
+
+      {/* Back to the Future DeLorean Time Travel Animation */}
+      <TimeTravelAnimation
+        mode={timeTravelMode}
+        onComplete={() => {
+          if (timeTravelMode === 'TO_PAST') {
+            setRetro1999Open(true);
+          }
+          setTimeTravelMode(null);
+        }}
       />
 
       {/* PC-style Achievement Unlock Notification */}

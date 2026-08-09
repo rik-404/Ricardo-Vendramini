@@ -7,7 +7,7 @@ import { dispatchAchievementUnlocked, ACHIEVEMENTS_META } from './AchievementToa
 import AchievementsModal from './AchievementsModal';
 import { useLanguage } from '../context/LanguageContext';
 
-export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements, onTriggerBreakout, onTriggerStarWars, onTriggerClean, onRestoreClean }) {
+export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements, onTriggerBreakout, onTriggerStarWars, onTriggerClean, onRestoreClean, onTriggerTimewalker }) {
   const { lang, t, toggleLang, changeLang } = useLanguage();
   const [inputVal, setInputVal] = useState('');
   const [history, setHistory] = useState(lang === 'en' ? terminalCommandsEn.welcome : terminalCommands.welcome);
@@ -719,6 +719,20 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       setHistory(newHistory);
       setInputVal('');
       if (onTriggerStarWars) onTriggerStarWars();
+      return;
+    }
+
+    if (cmd === 'timewalker' || cmd === 'time-walker' || cmd === 'viagem-no-tempo' || cmd === 'retro' || cmd === '90s') {
+      unlockAchievement('timewalker');
+      newHistory.push(lang === 'en' ? '> ⏳ TIMEWALKER PROTOCOL ACTIVATED! Traveling back to 1999 Web Era...' : '> ⏳ PROTOCOLO TIMEWALKER ATIVADO! Viajando de volta para a Web Retrô de 1999...');
+      setHistory(newHistory);
+      setInputVal('');
+
+      if (onTriggerTimewalker) {
+        onTriggerTimewalker();
+      } else {
+        document.body.classList.add('site-timewalker-active');
+      }
       return;
     }
 

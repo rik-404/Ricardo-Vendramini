@@ -228,6 +228,7 @@ export const translations = {
         starwars: { title: 'Que a Força Esteja Com Você', description: 'Ative o modo Star Wars Crawl e transforme o site na abertura da galáxia.', hint: '🔍 Dica: Digite o nome de uma famosa saga espacial no terminal ou no teclado...' },
         clean: { title: 'Limpeza Total', description: 'Execute o comando "clean" no terminal e deixe a tela totalmente limpa.', hint: '🔍 Dica: Que tal limpar o site?...' },
         polyglot: { title: 'Poliglota Digital', description: 'Alterne o idioma do site entre Português e Inglês.', hint: '🔍 Dica: Tente trocar a linguagem pelo terminal...' },
+        timewalker: { title: 'Visitante do Passado', description: 'Você encontrou uma maneira de navegar pela Internet como ela costumava ser em 1999.', hint: '🔍 Dica: Digite "timewalker" no terminal (nome da saga de livros do Ricardo)...' },
       },
     },
     easterEgg: {
@@ -610,6 +611,7 @@ export const translations = {
         starwars: { title: 'May the Force Be With You', description: 'Activate Star Wars Crawl Mode and transform the site into a galaxy opening.', hint: '🔍 Tip: Type the name of a famous space saga in the terminal or keyboard...' },
         clean: { title: 'Total Clean', description: 'Run "clean" in the terminal and leave the screen completely empty.', hint: '🔍 Tip: How about cleaning the site?...' },
         polyglot: { title: 'Digital Polyglot', description: 'Switch the website language between Portuguese and English.', hint: '🔍 Tip: Try changing the language via the terminal...' },
+        timewalker: { title: 'Visitor from the Past', description: 'You found a way to navigate the Internet as it used to be back in 1999.', hint: '🔍 Tip: Type "timewalker" in the terminal (the title of Ricardo\'s book saga)...' },
       },
     },
     easterEgg: {

@@ -29,6 +29,56 @@
     transform-origin: center center;
   }
 
+  body.site-timewalker-active {
+    font-family: 'Times New Roman', 'Comic Sans MS', 'Courier New', serif !important;
+    background-color: #f4faf6 !important;
+    background-image: linear-gradient(to right, rgba(16, 185, 129, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(16, 185, 129, 0.08) 1px, transparent 1px) !important;
+    background-size: 20px 20px !important;
+    color: #042010 !important;
+  }
+
+  body.site-timewalker-active * {
+    font-family: 'Comic Sans MS', 'Times New Roman', 'Courier New', serif !important;
+    border-style: outset !important;
+    border-width: 3px !important;
+    border-color: #10b981 #044b28 #044b28 #10b981 !important;
+    background-color: #e6f7ee !important;
+    color: #032313 !important;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.25) !important;
+    border-radius: 0px !important;
+    backdrop-filter: none !important;
+    text-shadow: none !important;
+  }
+
+  body.site-timewalker-active h1,
+  body.site-timewalker-active h2,
+  body.site-timewalker-active h3 {
+    color: #ffffff !important;
+    background: linear-gradient(90deg, #059669, #10b981) !important;
+    padding: 6px 14px !important;
+    border: 3px ridge #34d399 !important;
+    text-shadow: 1px 1px 0px #042010 !important;
+  }
+
+  body.site-timewalker-active p,
+  body.site-timewalker-active span,
+  body.site-timewalker-active li {
+    color: #032715 !important;
+  }
+
+  body.site-timewalker-active a,
+  body.site-timewalker-active button {
+    color: #046c4e !important;
+    background-color: #d1fae5 !important;
+    text-decoration: underline !important;
+    font-weight: bold !important;
+  }
+
+  body.site-timewalker-active img {
+    border: 4px ridge #059669 !important;
+    filter: contrast(1.1) !important;
+  }
+
   @keyframes siteTiltShake {
     0% { transform: translate(0, 0) rotate(0deg) scale(1); }
     15% { transform: translate(-12px, -8px) rotate(-3.5deg) scale(1.01); }
