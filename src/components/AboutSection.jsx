@@ -172,7 +172,7 @@ export default function AboutSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="max-w-4xl mx-auto p-6 sm:p-8 rounded-2xl glass-card border border-[#00ff88]/40 shadow-glow-md text-center relative bg-gradient-to-r from-[#040705] via-[#071d12] to-[#040705]"
+          className="quote-card max-w-4xl mx-auto p-6 sm:p-8 rounded-2xl glass-card border border-[#00ff88]/40 shadow-glow-md text-center relative bg-gradient-to-r from-[#040705] via-[#071d12] to-[#040705]"
         >
           <Quote className="w-8 h-8 text-[#00ff88]/40 mx-auto mb-3" />
           <blockquote className="text-lg sm:text-2xl font-bold text-white tracking-wide font-sans leading-snug">

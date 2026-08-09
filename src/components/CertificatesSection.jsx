@@ -102,7 +102,7 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
 
                   {/* Badge Overlay */}
                   <div className="absolute top-3 left-3">
-                    <span className="px-3 py-1 rounded-full bg-[#040705]/90 backdrop-blur-md border border-[#00ff88]/40 text-[#00ff88] text-[11px] font-mono flex items-center gap-1.5 shadow-md">
+                    <span className="cert-official-badge px-3 py-1 rounded-full bg-[#040705]/90 backdrop-blur-md border border-[#00ff88]/40 text-[#00ff88] text-[11px] font-mono flex items-center gap-1.5 shadow-md">
                       <ShieldCheck className="w-3.5 h-3.5 text-[#00ff88]" />
                       {cert.badge}
                     </span>
@@ -177,7 +177,7 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
       {typeof document !== 'undefined' && createPortal(
         <AnimatePresence>
           {selectedCert && (
-            <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 sm:p-6 lg:p-10">
+            <div className="cert-modal fixed inset-0 z-[99999] flex items-center justify-center p-4 sm:p-6 lg:p-10">
               {/* Backdrop */}
               <motion.div
                 initial={{ opacity: 0 }}

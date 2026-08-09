@@ -1,12 +1,23 @@
 import React, { useEffect, useRef } from 'react';
 
-export default function HeroCanvas({ matrixMode = false }) {
+export default function HeroCanvas({ matrixMode = false, theme = 'dark' }) {
   const canvasRef = useRef(null);
+  const isLight = theme === 'light';
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
+
+    // Palette adapted to the active theme
+    const particleColors = isLight
+      ? ['#059669', '#10b981', '#34d399']
+      : ['#10b981', '#34d399', '#00ff88'];
+    const particleAlphaBase = isLight ? 0.16 : 0.08;
+    const particleAlphaRange = isLight ? 0.12 : 0.08;
+    const linkMaxAlpha = isLight ? 0.4 : 0.22;
+    const mouseLineColor = isLight ? '#0891b2' : '#00f2fe';
+    const matrixRgb = isLight ? '245, 250, 247' : '4, 7, 5';
 
     let animationFrameId;
     let width = (canvas.width = window.innerWidth);
@@ -43,9 +54,9 @@ export default function HeroCanvas({ matrixMode = false }) {
         this.size = Math.random() * 1.8 + 0.8;
         this.vx = (Math.random() - 0.5) * 0.4;
         this.vy = (Math.random() - 0.5) * 0.4;
-        this.alpha = Math.random() * 0.08 + 0.08;
+        this.alpha = Math.random() * particleAlphaRange + particleAlphaBase;
         const rand = Math.random();
-        this.color = rand > 0.6 ? '#10b981' : rand > 0.3 ? '#34d399' : '#00ff88';
+        this.color = rand > 0.6 ? particleColors[0] : rand > 0.3 ? particleColors[1] : particleColors[2];
       }
 
       update() {
@@ -97,10 +108,10 @@ export default function HeroCanvas({ matrixMode = false }) {
       mouse.y += (mouse.targetY - mouse.y) * 0.05;
 
       if (matrixMode) {
-        ctx.fillStyle = 'rgba(4, 7, 5, 0.15)';
+        ctx.fillStyle = `rgba(${matrixRgb}, 0.15)`;
         ctx.fillRect(0, 0, width, height);
 
-        ctx.fillStyle = '#00ff88';
+        ctx.fillStyle = isLight ? '#059669' : '#00ff88';
         ctx.font = `${fontSize}px monospace`;
 
         for (let i = 0; i < drops.length; i++) {
@@ -123,7 +134,7 @@ export default function HeroCanvas({ matrixMode = false }) {
             const dist = Math.sqrt(dx * dx + dy * dy);
 
             if (dist < 115) {
-              const opacity = (1 - dist / 115) * 0.22;
+              const opacity = (1 - dist / 115) * linkMaxAlpha;
               const grad = ctx.createLinearGradient(particles[i].x, particles[i].y, particles[j].x, particles[j].y);
               grad.addColorStop(0, particles[i].color);
               grad.addColorStop(1, particles[j].color);
@@ -149,7 +160,7 @@ export default function HeroCanvas({ matrixMode = false }) {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(mouse.x, mouse.y);
-            ctx.strokeStyle = '#00f2fe';
+            ctx.strokeStyle = mouseLineColor;
             ctx.globalAlpha = opacity;
             ctx.lineWidth = 1.1;
             ctx.stroke();
@@ -170,12 +181,12 @@ export default function HeroCanvas({ matrixMode = false }) {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [matrixMode]);
+  }, [matrixMode, theme]);
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 transition-opacity duration-1000 opacity-65"
+      className={`fixed inset-0 pointer-events-none z-0 transition-opacity duration-1000 ${isLight ? 'opacity-90' : 'opacity-65'}`}
     />
   );
 }

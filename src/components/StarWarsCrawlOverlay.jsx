@@ -173,7 +173,7 @@ export default function StarWarsCrawlOverlay({ isOpen, onClose }) {
 
   const overlayContent = (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[100000] bg-[#030604] text-[#00ff88] overflow-hidden font-mono select-none">
+      <div className="chpw-theme-dark fixed inset-0 z-[100000] bg-[#030604] text-[#00ff88] overflow-hidden font-mono select-none">
         
         {/* Canvas Twinkling Starfield */}
         <canvas ref={canvasRef} className="absolute inset-0 w-full h-full block pointer-events-none z-0" />

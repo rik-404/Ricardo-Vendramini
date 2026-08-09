@@ -658,6 +658,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       newHistory.push(t('terminal.cleanActivated'));
       setHistory(newHistory);
       setInputVal('');
+      if (isModal && onClose) onClose();
       if (onTriggerClean) onTriggerClean();
       return;
     }
@@ -1039,7 +1040,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
           >
             {/* Tape strip */}
             <div
-              className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-6 rounded-sm z-10"
+              className="cli-postit-tape absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-6 rounded-sm z-10"
               style={{
                 background: 'linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.15) 100%)',
                 backdropFilter: 'blur(2px)',
@@ -1049,7 +1050,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
             {/* Post-it body */}
             <div
-              className="relative w-64 sm:w-72 p-6 rounded-sm shadow-2xl"
+              className="cli-postit relative w-64 sm:w-72 p-6 rounded-sm shadow-2xl"
               style={{
                 background: 'linear-gradient(135deg, #fef08a 0%, #fde047 50%, #facc15 100%)',
                 transform: 'rotate(-3deg)',
@@ -1058,7 +1059,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
             >
               {/* Folded corner */}
               <div
-                className="absolute bottom-0 right-0 w-8 h-8"
+                className="cli-postit-corner absolute bottom-0 right-0 w-8 h-8"
                 style={{
                   background: 'linear-gradient(135deg, transparent 50%, #eab308 50%)',
                   borderTopLeftRadius: '4px',
@@ -1119,7 +1120,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
       {/* RICKROLL OVERLAY (Rendered via Portal to document.body at top z-index z-[999999]) */}
       {rickrollActive && createPortal(
-        <div className="fixed inset-0 z-[999999] flex flex-col items-center justify-center bg-black/95 backdrop-blur-2xl p-4 overflow-y-auto">
+        <div className="chpw-theme-dark fixed inset-0 z-[999999] flex flex-col items-center justify-center bg-black/95 backdrop-blur-2xl p-4 overflow-y-auto">
           {/* Top bar fake admin */}
           <div className="absolute top-0 left-0 right-0 bg-[#0d1510] border-b border-[#00ff88]/30 px-6 py-4 flex items-center justify-between z-[1000000]">
             <div className="flex items-center gap-3">

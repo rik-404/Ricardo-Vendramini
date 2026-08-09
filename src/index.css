@@ -438,3 +438,408 @@
 .animate-infinite-marquee:hover {
   animation-play-state: paused;
 }
+
+/* =========================================================
+   TEMA BRANCO / LIGHT MODE GLOBAL (html.theme-light)
+   Override layer — converte o site inteiro para o tema claro.
+   keep-dark menções (.chpw-theme-dark) preservam easter eggs
+   e o terminal CLI na estética escura original.
+========================================================= */
+
+html.theme-light {
+  color-scheme: light;
+}
+
+/* ── Fundo global e cores de texto base ──────────────────── */
+html.theme-light body {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+/* ── Superfícies escuras (bg-[#0x...]) → superfícies claras ── */
+html.theme-light [class*="bg-[#040705]"],
+html.theme-light [class*="bg-[#040805]"],
+html.theme-light [class*="bg-[#080d09]"],
+html.theme-light [class*="bg-[#0a0f0c]"],
+html.theme-light [class*="bg-[#060b08]"],
+html.theme-light [class*="bg-[#0c1a10]"],
+html.theme-light [class*="bg-[#071f11]"] {
+  background-color: #f8fafc !important;
+}
+
+/* ── Chips / botões / inputs escuros → translúcidos claros ── */
+html.theme-light [class*="bg-black/60"] {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+}
+html.theme-light [class*="bg-white/5"],
+html.theme-light [class*="bg-white/10"],
+html.theme-light [class*="bg-white/[0.05]"] {
+  background-color: rgba(15, 23, 42, 0.06) !important;
+}
+html.theme-light [class*="bg-slate-800"],
+html.theme-light [class*="bg-slate-900"],
+html.theme-light [class*="bg-slate-950"] {
+  background-color: rgba(15, 23, 42, 0.07) !important;
+}
+html.theme-light [class*="bg-[#071910]"] {
+  background-color: rgba(209, 250, 229, 0.55) !important;
+}
+
+/* ── Bordas brancas → cinza suave ──────────────────────── */
+html.theme-light [class*="border-white/5"],
+html.theme-light [class*="border-white/10"],
+html.theme-light [class*="border-white/15"],
+html.theme-light [class*="border-white/20"] {
+  border-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+/* ── Texto claro → texto escuro ─────────────────────────── */
+html.theme-light .text-white,
+html.theme-light [class*="text-slate-100"],
+html.theme-light [class*="text-slate-200"] {
+  color: #0f172a !important;
+}
+html.theme-light [class*="text-slate-300"] {
+  color: #1e293b !important;
+}
+html.theme-light [class*="text-slate-400"] {
+  color: #475569 !important;
+}
+html.theme-light [class*="text-slate-500"],
+html.theme-light [class*="placeholder:text-slate-500"] {
+  color: #64748b !important;
+}
+html.theme-light [class*="placeholder:text-slate-500"]::placeholder {
+  color: #94a3b8 !important;
+}
+html.theme-light [class*="text-slate-600"] {
+  color: #475569 !important;
+}
+html.theme-light [class*="text-slate-700"] {
+  color: #334155 !important;
+}
+
+/* ── Cyan neon (#00f2fe) → teal escuro legível no claro ── */
+html.theme-light [class*="text-[#00f2fe]"] {
+  color: #0891b2 !important;
+}
+html.theme-light [class*="border-[#00f2fe]"] {
+  border-color: #0891b2 !important;
+}
+
+/* ── Modais devem manter fundo escuro mesmo no Light Mode ── */
+html.theme-light [class*="z-[1000]"] > [class*="glass-card"][class*="bg-[#0"],
+html.theme-light [class*="z-[999]"] > [class*="bg-black/"],
+html.theme-light [class*="z-[9999]"] > [class*="bg-black/"],
+html.theme-light [class*="z-[99999]"] > [class*="bg-black/"],
+html.theme-light [class*="z-[99998]"] > [class*="bg-black/"] {
+  background-color: rgba(0, 0, 0, 0.85) !important;
+}
+
+/* ── Glass panels & cards ───────────────────────────────── */
+html.theme-light .glass-panel {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.08) !important;
+}
+html.theme-light .glass-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f2f7f4 100%) !important;
+  border-color: rgba(15, 23, 42, 0.1) !important;
+  box-shadow: 0 12px 32px -14px rgba(15, 23, 42, 0.16) !important;
+}
+html.theme-light .glass-card:hover {
+  border-color: rgba(16, 185, 129, 0.45) !important;
+  box-shadow: 0 14px 36px -14px rgba(15, 23, 42, 0.2) !important;
+}
+
+/* ── Gradientes de texto neon → tons escuros legíveis ────── */
+html.theme-light .text-gradient-green {
+  background: linear-gradient(135deg, #047857 20%, #059669 60%, #00a06a 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+html.theme-light .text-gradient-cyan-green {
+  background: linear-gradient(135deg, #0369a1 30%, #059669 70%, #0d9488 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+html.theme-light .text-gradient-muted {
+  background: linear-gradient(135deg, #334155 0%, #64748b 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* ── Stops de gradiente escuros → verdes profundos visíveis ── */
+html.theme-light [class*="from-[#040705]"] { --tw-gradient-from: #0e4930 !important; }
+html.theme-light [class*="via-[#040705]"] { --tw-gradient-via: #13603c !important; }
+html.theme-light [class*="to-[#040705]"] { --tw-gradient-to: #0e4930 !important; }
+html.theme-light [class*="from-[#080d09]"] { --tw-gradient-from: #0b3a27 !important; }
+html.theme-light [class*="via-[#080d09]"] { --tw-gradient-via: #105136 !important; }
+html.theme-light [class*="from-[#0c2e17]"],
+html.theme-light [class*="from-[#0c2417]"] { --tw-gradient-from: #059669 !important; }
+html.theme-light [class*="to-[#0c2e17]"],
+html.theme-light [class*="to-[#0c2417]"] { --tw-gradient-to: #0a8f5c !important; }
+html.theme-light [class*="to-[#06200e]"] { --tw-gradient-to: #064e3b !important; }
+html.theme-light [class*="via-[#071f11]"],
+html.theme-light [class*="via-[#040f09]"] { --tw-gradient-via: #04825a !important; }
+html.theme-light [class*="via-[#071d12]"] { --tw-gradient-via: #1a6b45 !important; }
+
+/* ── Brilhos neon → suaves no claro ──────────────────────── */
+html.theme-light .shadow-glow-sm { box-shadow: 0 2px 14px rgba(16, 185, 129, 0.16) !important; }
+html.theme-light .shadow-glow-md { box-shadow: 0 4px 22px rgba(16, 185, 129, 0.2) !important; }
+html.theme-light .shadow-glow-lg { box-shadow: 0 6px 30px rgba(16, 185, 129, 0.24) !important; }
+
+/* ── Banner de citação (About) — gradiente verde-escuro ──── */
+html.theme-light .quote-card {
+  background: linear-gradient(90deg, #0b3a27 0%, #14573a 50%, #0b3a27 100%) !important;
+  border-color: rgba(16, 185, 129, 0.45) !important;
+}
+html.theme-light .quote-card .text-white {
+  color: #f0fdf9 !important;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+html.theme-light ::-webkit-scrollbar-track { background: #e9efec; }
+html.theme-light ::-webkit-scrollbar-thumb { background: #b8c4bf; border-color: rgba(15, 23, 42, 0.08); }
+html.theme-light ::-webkit-scrollbar-thumb:hover { background: #10b981; }
+
+/* =========================================================
+   SCOPES KEEP-DARK — preservam a estética escura de
+   easter eggs e do terminal, mesmo no tema claro.
+========================================================= */
+
+/* ── Terminal CLI (adapta ao tema claro) ────────────────── */
+html.theme-light .terminal-flash-target.glass-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f2f7f4 100%) !important;
+  border-color: rgba(16, 185, 129, 0.45) !important;
+  box-shadow: 0 12px 32px -14px rgba(15, 23, 42, 0.18) !important;
+  color-scheme: light;
+}
+html.theme-light .terminal-flash-target [class*="bg-[#040705]"],
+html.theme-light .terminal-flash-target [class*="bg-[#040805]"],
+html.theme-light .terminal-flash-target [class*="bg-[#050906]"] {
+  background-color: #f1f5f9 !important;
+}
+html.theme-light .terminal-flash-target .text-white,
+html.theme-light .terminal-flash-target [class*="text-slate-100"],
+html.theme-light .terminal-flash-target [class*="text-slate-200"],
+html.theme-light .terminal-flash-target [class*="text-slate-300"] {
+  color: #0f172a !important;
+}
+html.theme-light .terminal-flash-target [class*="text-slate-400"] {
+  color: #475569 !important;
+}
+html.theme-light .terminal-flash-target [class*="text-emerald-400"] {
+  color: #047857 !important;
+}
+html.theme-light .terminal-flash-target [class*="border-white/"] {
+  border-color: rgba(15, 23, 42, 0.12) !important;
+}
+html.theme-light .terminal-flash-target [class*="placeholder-slate-600"]::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* ── Easter eggs fullscreen (BSOD, Rickroll, Star Wars,
+      Breakout, Time Travel) ─────────────────────────────── */
+html.theme-light .chpw-theme-dark {
+  background-color: #040705 !important;
+  color-scheme: dark;
+}
+html.theme-light .chpw-theme-dark [class*="bg-[#0"]:not([class*="bg-[#00"]),
+html.theme-light .chpw-theme-dark [class*="bg-black"] {
+  background-color: #040705 !important;
+}
+html.theme-light .chpw-theme-dark [class*="bg-black/60"] {
+  background-color: rgb(0 0 0 / 0.6) !important;
+}
+html.theme-light .chpw-theme-dark [class*="bg-slate-800"],
+html.theme-light .chpw-theme-dark [class*="bg-slate-900"],
+html.theme-light .chpw-theme-dark [class*="bg-slate-950"] {
+  background-color: #0f172a !important;
+}
+html.theme-light .chpw-theme-dark .glass-card {
+  background: linear-gradient(135deg, rgba(14, 22, 17, 0.9) 0%, rgba(9, 14, 11, 0.95) 100%) !important;
+}
+html.theme-light .chpw-theme-dark .text-white,
+html.theme-light .chpw-theme-dark [class*="text-slate-100"],
+html.theme-light .chpw-theme-dark [class*="text-slate-200"],
+html.theme-light .chpw-theme-dark [class*="text-slate-300"] {
+  color: #e2e8f0 !important;
+}
+html.theme-light .chpw-theme-dark [class*="text-slate-400"] {
+  color: #94a3b8 !important;
+}
+html.theme-light .chpw-theme-dark [class*="border-white/"] {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* =========================================================
+   MODAL DE CONQUISTAS — adapta ao tema claro
+========================================================= */
+html.theme-light .achv-modal {
+  color-scheme: light;
+}
+html.theme-light .achv-modal > [class*="bg-black/"] {
+  background-color: rgba(248, 250, 252, 0.85) !important;
+}
+html.theme-light .achv-modal [class*="bg-[#060b08]"],
+html.theme-light .achv-modal [class*="bg-[#08120b]"],
+html.theme-light .achv-modal [class*="bg-[#050b07]"],
+html.theme-light .achv-modal [class*="bg-[#040805]"] {
+  background-color: #ffffff !important;
+}
+html.theme-light .achv-modal [class*="bg-[#0c2e17]/60"] {
+  background-color: rgba(255, 255, 255, 0.75) !important;
+}
+html.theme-light .achv-modal [class*="bg-black/50"],
+html.theme-light .achv-modal [class*="bg-black/40"],
+html.theme-light .achv-modal [class*="bg-black/60"] {
+  background-color: rgba(248, 250, 252, 0.8) !important;
+}
+html.theme-light .achv-modal .text-white,
+html.theme-light .achv-modal [class*="text-slate-100"],
+html.theme-light .achv-modal [class*="text-slate-200"],
+html.theme-light .achv-modal [class*="text-slate-300"] {
+  color: #0f172a !important;
+}
+html.theme-light .achv-modal [class*="text-slate-400"],
+html.theme-light .achv-modal [class*="text-slate-500"] {
+  color: #475569 !important;
+}
+html.theme-light .achv-modal [class*="text-slate-600"] {
+  color: #64748b !important;
+}
+html.theme-light .achv-modal .text-amber-400,
+html.theme-light .achv-modal [class*="text-amber-400"] {
+  color: #b45309 !important;
+}
+html.theme-light .achv-modal [class*="border-white/"] {
+  border-color: rgba(15, 23, 42, 0.1) !important;
+}
+html.theme-light .achv-modal [class*="border-slate-800"] {
+  border-color: rgba(15, 23, 42, 0.15) !important;
+}
+html.theme-light .achv-modal [class*="bg-slate-800"],
+html.theme-light .achv-modal [class*="bg-slate-900"],
+html.theme-light .achv-modal [class*="bg-slate-950"] {
+  background-color: rgba(15, 23, 42, 0.08) !important;
+}
+html.theme-light .achv-modal [class*="bg-amber-500/"] {
+  background-color: rgba(245, 158, 11, 0.18) !important;
+}
+html.theme-light .achv-modal [class*="border-amber-500/"] {
+  border-color: rgba(245, 158, 11, 0.35) !important;
+}
+html.theme-light .achv-modal [class*="hover:text-white"]:hover {
+  color: #0f172a !important;
+}
+html.theme-light .achv-modal [class*="hover:bg-white/10"]:hover {
+  background-color: rgba(15, 23, 42, 0.07) !important;
+}
+
+/* =========================================================
+   POST-IT DO CLI — verde no tema claro
+========================================================= */
+html.theme-light .cli-postit {
+  background: linear-gradient(135deg, #a7f3d0 0%, #6ee7b7 50%, #34d399 100%) !important;
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.28), inset 0 -3px 6px rgba(0, 0, 0, 0.06) !important;
+}
+html.theme-light .cli-postit .cli-postit-corner {
+  background: linear-gradient(135deg, transparent 50%, #059669 50%) !important;
+}
+html.theme-light .cli-postit-tape {
+  background: linear-gradient(180deg, rgba(253, 230, 138, 0.7) 0%, rgba(250, 204, 21, 0.35) 100%) !important;
+}
+html.theme-light .cli-postit [class*="text-amber-800"] {
+  color: rgba(6, 78, 59, 0.75) !important;
+}
+html.theme-light .cli-postit [class*="text-amber-700"] {
+  color: rgba(6, 78, 59, 0.55) !important;
+}
+html.theme-light .cli-postit [class*="text-amber-950"] {
+  color: #064e3b !important;
+}
+html.theme-light .cli-postit [class*="text-amber-900"] {
+  color: rgba(6, 78, 59, 0.8) !important;
+}
+html.theme-light .cli-postit [class*="border-amber-700"] {
+  border-color: rgba(6, 78, 59, 0.3) !important;
+}
+html.theme-light .cli-postit [class*="border-amber-800"] {
+  border-color: rgba(6, 78, 59, 0.35) !important;
+}
+html.theme-light .cli-postit [class*="bg-amber-900"] {
+  background-color: rgba(6, 78, 59, 0.12) !important;
+}
+
+/* =========================================================
+   MODAL DE LIVRO (BookModal) — adapta ao tema claro
+========================================================= */
+html.theme-light .book-modal {
+  color-scheme: light;
+}
+html.theme-light .book-modal > [class*="bg-black/"] {
+  background-color: rgba(248, 250, 252, 0.9) !important;
+}
+html.theme-light .book-modal [class*="bg-[#071410]"] {
+  background-color: rgba(226, 232, 240, 0.55) !important;
+}
+html.theme-light .book-modal [class*="bg-[#071910]"] {
+  background-color: rgba(209, 250, 229, 0.5) !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+html.theme-light .book-modal [class*="hover:bg-white/20"]:hover {
+  background-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+/* =========================================================
+   MODAL DE CERTIFICADOS (lista + lightbox) — tema claro
+========================================================= */
+html.theme-light .cert-modal {
+  color-scheme: light;
+}
+html.theme-light .cert-modal [class*="bg-black/"] {
+  background-color: rgba(248, 250, 252, 0.9) !important;
+}
+html.theme-light .cert-modal [class*="bg-[#06100a]"],
+html.theme-light .cert-modal [class*="bg-[#071410]"] {
+  background-color: #ffffff !important;
+}
+html.theme-light .cert-modal [class*="bg-[#071910]"] {
+  background-color: rgba(209, 250, 229, 0.5) !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+html.theme-light .cert-modal [class*="bg-[#020503]"] {
+  background-color: #eef2f5 !important;
+}
+html.theme-light .cert-modal [class*="bg-[#0a120c]"] {
+  background-color: #e2e8f0 !important;
+}
+
+/* ── Pontas dos carrosséis: fade suave claro no tema claro ── */
+html.theme-light [class*="bg-gradient-to-r"][class*="from-[#040705]"],
+html.theme-light [class*="bg-gradient-to-l"][class*="from-[#040705]"] {
+  --tw-gradient-from: #dce9e2 !important;
+}
+
+/* ── Tag "Certificado Oficial" — verde-escuro legível no claro ── */
+html.theme-light .cert-official-badge {
+  background-color: rgba(209, 250, 229, 0.85) !important;
+  border-color: rgba(16, 185, 129, 0.5) !important;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.08) !important;
+}
+html.theme-light .cert-official-badge,
+html.theme-light .cert-official-badge [class*="text-[#00ff88]"] {
+  color: #047857 !important;
+}
+
+/* ── Tags de livros — verde-escuro legível no tema claro ── */
+html.theme-light .book-tag {
+  background-color: rgba(209, 250, 229, 0.85) !important;
+  border-color: rgba(16, 185, 129, 0.5) !important;
+}
+html.theme-light .book-tag,
+html.theme-light .book-tag [class*="text-[#00ff88]"],
+html.theme-light .book-tag [class*="text-[#00f2fe]"] {
+  color: #047857 !important;
+}

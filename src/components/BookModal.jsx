@@ -21,7 +21,7 @@ export default function BookModal({ book, onClose }) {
 
   const modalContent = (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+      <div className="book-modal fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -92,7 +92,7 @@ export default function BookModal({ book, onClose }) {
               {/* Tags */}
               <div className="flex flex-wrap gap-1.5 pt-1">
                 {book.tags?.map((tag, tIdx) => (
-                  <span key={tIdx} className="px-2.5 py-0.5 rounded-md bg-[#071910] border border-[#00ff88]/20 text-[#00ff88] text-[11px] font-mono">
+                  <span key={tIdx} className="book-tag px-2.5 py-0.5 rounded-md bg-[#071910] border border-[#00ff88]/20 text-[#00ff88] text-[11px] font-mono">
                     #{tag}
                   </span>
                 ))}

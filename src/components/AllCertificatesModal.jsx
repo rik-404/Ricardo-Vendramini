@@ -55,7 +55,7 @@ export default function AllCertificatesModal({ isOpen, onClose }) {
 
   const modalContent = (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+      <div className="cert-modal fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -169,7 +169,7 @@ export default function AllCertificatesModal({ isOpen, onClose }) {
                         <div className="absolute inset-0 bg-gradient-to-t from-[#040705] via-transparent to-black/30 opacity-70 group-hover:opacity-40 transition-opacity" />
 
                         {/* Top Badge */}
-                        <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full glass-panel border border-[#00ff88]/40 text-[#00ff88] text-[11px] font-mono font-semibold">
+                        <div className="cert-official-badge absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full glass-panel border border-[#00ff88]/40 text-[#00ff88] text-[11px] font-mono font-semibold">
                           <ShieldCheck className="w-3 h-3 text-[#00ff88]" />
                           <span>{cert.badge}</span>
                         </div>
@@ -235,7 +235,7 @@ export default function AllCertificatesModal({ isOpen, onClose }) {
         {/* Nested Lightbox for Selected Certificate Preview */}
         <AnimatePresence>
           {selectedCert && (
-            <div className="fixed inset-0 z-[100000] flex items-center justify-center p-4 sm:p-6 lg:p-10">
+            <div className="cert-modal fixed inset-0 z-[100000] flex items-center justify-center p-4 sm:p-6 lg:p-10">
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

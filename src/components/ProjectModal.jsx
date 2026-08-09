@@ -10,7 +10,7 @@ export default function ProjectModal({ project, onClose }) {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+      <div className="chpw-theme-dark fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}

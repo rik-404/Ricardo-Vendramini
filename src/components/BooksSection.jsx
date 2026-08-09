@@ -67,7 +67,7 @@ export default function BooksSection({ onSelectBook }) {
                 {/* Book Details & Synopsis Column */}
                 <div className="flex-1 text-left space-y-5">
                   <div className="flex flex-wrap items-center gap-3">
-                    <span className="px-3 py-1 rounded-full bg-[#0c2e17] border border-[#00ff88]/40 text-[#00ff88] text-xs font-mono flex items-center gap-1.5 shadow-sm">
+                    <span className="book-tag px-3 py-1 rounded-full bg-[#0c2e17] border border-[#00ff88]/40 text-[#00ff88] text-xs font-mono flex items-center gap-1.5 shadow-sm">
                       <ShieldCheck className="w-3.5 h-3.5 text-[#00ff88]" />
                       {book.status || t('books.published')}
                     </span>
@@ -102,7 +102,7 @@ export default function BooksSection({ onSelectBook }) {
                     {book.tags?.map((tag, tIdx) => (
                       <span
                         key={tIdx}
-                        className="px-3 py-1 rounded-md bg-[#071910] border border-[#00ff88]/20 text-[#00ff88] text-xs font-mono flex items-center gap-1"
+                        className="book-tag px-3 py-1 rounded-md bg-[#071910] border border-[#00ff88]/20 text-[#00ff88] text-xs font-mono flex items-center gap-1"
                       >
                         <Tag className="w-3 h-3" /> #{tag}
                       </span>

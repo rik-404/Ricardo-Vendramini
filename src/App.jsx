@@ -44,6 +44,28 @@ export default function App() {
   const [retro1999Open, setRetro1999Open] = useState(false);
   const [siteCleaned, setSiteCleaned] = useState(false);
   const [timeTravelMode, setTimeTravelMode] = useState(null); // 'TO_PAST' | 'TO_FUTURE' | null
+  const [theme, setTheme] = useState(() => {
+    try {
+      const saved = localStorage.getItem('ricardodev_theme') || 'dark';
+      document.documentElement.classList.toggle('theme-light', saved === 'light');
+      document.documentElement.style.colorScheme = saved === 'light' ? 'light' : 'dark';
+      return saved;
+    } catch {
+      return 'dark';
+    }
+  });
+
+  // Global light/dark theme — applies `theme-light` class on <html>
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle('theme-light', theme === 'light');
+    root.style.colorScheme = theme === 'light' ? 'light' : 'dark';
+    try {
+      localStorage.setItem('ricardodev_theme', theme);
+    } catch {}
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((t) => (t === 'light' ? 'dark' : 'light'));
 
   const handleStartTimewalker = () => {
     setTimeTravelMode('TO_PAST');
@@ -228,18 +250,20 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#040705] text-slate-100 font-sans selection:bg-[#00ff88] selection:text-black">
+    <div className={`relative min-h-screen font-sans selection:bg-[#00ff88] selection:text-black ${theme === 'light' ? 'bg-[#f8fafc] text-slate-900' : 'bg-[#040705] text-slate-100'}`}>
       {/* Interactive Custom Cursor */}
       <CustomCursor />
 
       {/* Dynamic Particle / Matrix Background Canvas */}
-      <HeroCanvas matrixMode={matrixCanvasMode} />
+      <HeroCanvas matrixMode={matrixCanvasMode} theme={theme} />
 
       {/* Floating Header Navbar */}
       <div className={`transition-opacity duration-500 ${siteCleaned ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <Navbar
           onTriggerEasterEgg={triggerEasterEgg}
           onOpenTerminal={() => setTerminalModalOpen(true)}
+          theme={theme}
+          onToggleTheme={toggleTheme}
         />
       </div>
 
@@ -369,7 +393,11 @@ export default function App() {
             setTerminalModalOpen(false);
             setStarWarsOpen(true);
           }}
-          onTriggerClean={() => setSiteCleaned(true)}
+          onTriggerClean={() => {
+            setTerminalModalOpen(false);
+            setSiteCleaned(true);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
           onRestoreClean={() => setSiteCleaned(false)}
           onTriggerTimewalker={() => {
             setTerminalModalOpen(false);

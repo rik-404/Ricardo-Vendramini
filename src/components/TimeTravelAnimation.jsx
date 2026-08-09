@@ -134,7 +134,7 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[9999999] bg-black flex flex-col items-center justify-between p-6 overflow-hidden select-none font-mono text-white"
+        className="chpw-theme-dark fixed inset-0 z-[9999999] bg-black flex flex-col items-center justify-between p-6 overflow-hidden select-none font-mono text-white"
       >
         {/* Chromatic aberration border bleed while accelerating */}
         <div

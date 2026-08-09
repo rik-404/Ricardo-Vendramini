@@ -606,7 +606,7 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
 
   const overlayContent = (
     <AnimatePresence>
-      <div className="breakout-overlay-root fixed inset-0 z-[100000] flex flex-col pointer-events-none font-mono selection:bg-[#00ff88] selection:text-black">
+      <div className="chpw-theme-dark breakout-overlay-root fixed inset-0 z-[100000] flex flex-col pointer-events-none font-mono selection:bg-[#00ff88] selection:text-black">
         
         {/* Top HUD Bar */}
         <div className="relative z-30 px-4 sm:px-8 py-3 bg-[#040705]/95 border-b border-[#00ff88]/40 backdrop-blur-md flex items-center justify-between pointer-events-auto shadow-glow-sm">
