@@ -5,10 +5,13 @@ import { Terminal as TerminalIcon, Play, RefreshCw, Sparkles, X, Gamepad2, Arrow
 import { terminalCommands, terminalCommandsEn } from '../data/portfolioData';
 import { dispatchAchievementUnlocked, ACHIEVEMENTS_META } from './AchievementToast';
 import AchievementsModal from './AchievementsModal';
+import FlyEasterEgg from './FlyEasterEgg';
 import { useLanguage } from '../context/LanguageContext';
 
-export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements, onTriggerBreakout, onTriggerStarWars, onTriggerClean, onRestoreClean, onTriggerTimewalker }) {
+export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements, onTriggerBreakout, onTriggerStarWars, onTriggerClean, onRestoreClean, onTriggerTimewalker, isModal = false, onClose }) {
   const { lang, t, toggleLang, changeLang } = useLanguage();
+  const cliContainerRef = useRef(null);
+  const cliTitleRef = useRef(null);
   const [inputVal, setInputVal] = useState('');
   const [history, setHistory] = useState(lang === 'en' ? terminalCommandsEn.welcome : terminalCommands.welcome);
   const [gameActive, setGameActive] = useState(false);
@@ -18,7 +21,8 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
   const [gameState, setGameState] = useState('PLAYING'); // PLAYING | GAMEOVER | VICTORY
   const [adminMode, setAdminMode] = useState(false); // waiting for password
   const [rickrollActive, setRickrollActive] = useState(false);
-  const [showPostIt, setShowPostIt] = useState(false);
+  const [showPostIt, setShowPostIt] = useState(true);
+  const [localAchievementsOpen, setLocalAchievementsOpen] = useState(false);
   const [achievements, setAchievements] = useState(() => {
     try {
       const saved = localStorage.getItem('ricardodev_achievements');
@@ -690,6 +694,8 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       setHistory(newHistory);
       setInputVal('');
 
+      if (isModal && onClose) onClose();
+
       document.body.classList.add('site-tilt-active');
       setTimeout(() => {
         document.body.classList.remove('site-tilt-active');
@@ -825,43 +831,52 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
     setInputVal('');
   };
 
-  return (
-    <section ref={sectionRef} className="py-24 relative z-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0c140e] border border-[#10b981]/30 mb-4">
-            <TerminalIcon className="w-3.5 h-3.5 text-[#00ff88]" />
-            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">{t('terminal.badge')}</span>
-          </div>
-
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-3">
-            RICARDO.<span className="text-[#00ff88]">DEV</span> {t('terminal.titleTerm')}
-          </h2>
+  const content = (
+    <React.Fragment>
+      <div ref={cliContainerRef} className={isModal ? "relative w-full max-w-5xl mx-auto p-4 sm:p-6 my-auto" : "relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"}>
+      
+      {/* Section Header */}
+      <div className="flex flex-col items-center text-center mb-6 sm:mb-10">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0c140e] border border-[#10b981]/30 mb-3">
+          <TerminalIcon className="w-3.5 h-3.5 text-[#00ff88]" />
+          <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">{t('terminal.badge')}</span>
         </div>
 
-        {/* Terminal Window Mockup */}
-        <div className="terminal-flash-target max-w-4xl mx-auto glass-card rounded-2xl border border-[#00ff88]/30 overflow-hidden shadow-glow-md font-mono text-xs sm:text-sm">
-          
-          {/* Top Bar */}
-          <div className="bg-[#040705] px-4 py-3 border-b border-white/10 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block" />
-              <span className="w-3 h-3 rounded-full bg-yellow-500/80 inline-block" />
-              <span className="w-3 h-3 rounded-full bg-green-500/80 inline-block" />
-              <span className="ml-2 text-slate-400 text-xs">
-                {gameActive ? t('terminal.arcadeMode') : 'bash - 80x24'}
-              </span>
-            </div>
+        <h2 ref={cliTitleRef} className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white mb-2 select-none">
+          RICARDO.<span className="text-[#00ff88]">DEV</span> {t('terminal.titleTerm')}
+        </h2>
+        {isModal && (
+          <p className="text-xs text-slate-400 font-mono">
+            {lang === 'en' ? 'Exclusive CLI Terminal & Arcade Sandbox Area' : 'Área Exclusiva de Terminal CLI & Jogos Retrô'}
+          </p>
+        )}
+      </div>
 
+      {/* Mosca aleatória que pousa no título quando o CLI fica inativo por 12s */}
+      <FlyEasterEgg isActive={true} containerRef={cliContainerRef} titleRef={cliTitleRef} />
+
+      {/* Terminal Window Mockup */}
+      <div className="terminal-flash-target max-w-4xl mx-auto glass-card rounded-2xl border border-[#00ff88]/40 overflow-hidden shadow-[0_0_50px_rgba(0,255,136,0.15)] font-mono text-xs sm:text-sm">
+        
+        {/* Top Bar */}
+        <div className="bg-[#040705] px-4 py-3 border-b border-white/10 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block cursor-pointer" onClick={isModal ? onClose : undefined} title="Fechar" />
+            <span className="w-3 h-3 rounded-full bg-yellow-500/80 inline-block" />
+            <span className="w-3 h-3 rounded-full bg-green-500/80 inline-block" />
+            <span className="ml-2 text-slate-400 text-xs">
+              {gameActive ? t('terminal.arcadeMode') : 'bash - 80x24 (CLI Environment)'}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-3">
             {gameActive ? (
               <div className="flex items-center gap-4 text-xs font-bold text-white">
                 <span className="text-[#00ff88]">{t('terminal.points')} {score}</span>
                 <span className="text-[#00f2fe]">{t('terminal.lives')} {'❤️'.repeat(lives)}</span>
                 <button
                   onClick={() => setGameActive(false)}
-                  className="px-2 py-0.5 rounded bg-red-500/20 text-red-400 hover:bg-red-500/40 text-[11px] flex items-center gap-1 border border-red-500/30"
+                  className="px-2 py-0.5 rounded bg-red-500/20 text-red-400 hover:bg-red-500/40 text-[11px] flex items-center gap-1 border border-red-500/30 cursor-pointer"
                 >
                   <X className="w-3 h-3" /> {t('terminal.exit')}
                 </button>
@@ -872,7 +887,19 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
                 <span>{t('terminal.online')}</span>
               </div>
             )}
+
+            {isModal && (
+              <button
+                onClick={onClose}
+                className="px-2.5 py-1 rounded-lg bg-red-500/20 text-red-300 hover:bg-red-600 hover:text-white border border-red-500/40 text-xs font-mono font-bold flex items-center gap-1 transition-colors cursor-pointer"
+                title={lang === 'en' ? 'Exit CLI & Return to Portfolio' : 'Sair do CLI & Voltar ao Portfólio'}
+              >
+                <X className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">{lang === 'en' ? 'Return to Portfolio' : 'Voltar ao Portfólio'}</span>
+              </button>
+            )}
           </div>
+        </div>
 
           {/* Terminal Screen / Canvas Game Container */}
           {gameActive ? (
@@ -952,7 +979,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
             </div>
           )}
 
-          {/* Terminal Input Form (Only visible when not playing game) */}
+          {/* Terminal Input Form */}
           {!gameActive && (
             <form onSubmit={handleCommandSubmit} className="bg-[#040705] px-4 py-3 border-t border-white/10 flex items-center gap-2">
               <span className={`font-bold shrink-0 ${adminMode ? 'text-yellow-400' : 'text-[#00ff88]'}`}>
@@ -967,7 +994,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
                 className="w-full bg-transparent text-white focus:outline-none font-mono text-xs sm:text-sm placeholder-slate-600"
                 autoFocus
               />
-              <button type="submit" className="p-1.5 rounded bg-[#10b981]/20 text-[#00ff88] hover:bg-[#10b981]/40">
+              <button type="submit" className="p-1.5 rounded bg-[#10b981]/20 text-[#00ff88] hover:bg-[#10b981]/40 cursor-pointer">
                 <Play className="w-3.5 h-3.5" />
               </button>
             </form>
@@ -980,8 +1007,11 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
           <motion.button
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
-            onClick={onOpenAchievements}
-            className="group relative inline-flex items-center gap-3 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-[#0c2e17] via-[#071f11] to-[#0c2e17] border border-[#00ff88]/40 hover:border-[#00ff88] text-white font-bold text-sm shadow-[0_0_25px_rgba(0,255,136,0.15)] hover:shadow-[0_0_35px_rgba(0,255,136,0.35)] transition-all duration-300 overflow-hidden"
+            onClick={() => {
+              if (onOpenAchievements) onOpenAchievements();
+              setLocalAchievementsOpen(true);
+            }}
+            className="group relative inline-flex items-center gap-3 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-[#0c2e17] via-[#071f11] to-[#0c2e17] border border-[#00ff88]/40 hover:border-[#00ff88] text-white font-bold text-sm shadow-[0_0_25px_rgba(0,255,136,0.15)] hover:shadow-[0_0_35px_rgba(0,255,136,0.35)] transition-all duration-300 overflow-hidden cursor-pointer"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-[#00ff88]/15 via-transparent to-[#00f2fe]/15 opacity-0 group-hover:opacity-100 transition-opacity" />
             <Trophy className="w-5 h-5 text-[#00ff88] group-hover:rotate-12 transition-transform duration-300" />
@@ -997,11 +1027,11 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
       </div>
 
-      {/* FALLING POST-IT NOTE */}
+      {/* FALLING POST-IT NOTE (Positioned on the clean right side) */}
       {showPostIt && (
-        <div className="fixed inset-0 z-[9998] pointer-events-none flex items-start justify-center" style={{ perspective: '800px' }}>
+        <div className="fixed inset-0 z-[9999991] pointer-events-none flex items-start justify-end pr-6 sm:pr-12 lg:pr-20" style={{ perspective: '800px' }}>
           <div
-            className="pointer-events-auto mt-32 sm:mt-40 relative cursor-grab active:cursor-grabbing"
+            className="pointer-events-auto mt-24 sm:mt-32 relative cursor-grab active:cursor-grabbing"
             style={{
               animation: 'postItFall 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
               transformOrigin: 'top center',
@@ -1137,7 +1167,29 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
         </div>,
         document.body
       )}
+    </React.Fragment>
+  );
 
+  if (isModal) {
+    return (
+      <div className="fixed inset-0 z-[999999] overflow-y-auto bg-[#040805]/95 backdrop-blur-2xl flex flex-col justify-between select-none">
+        {content}
+        {/* Local Achievements Modal inside CLI */}
+        <AchievementsModal
+          isOpen={localAchievementsOpen}
+          onClose={() => setLocalAchievementsOpen(false)}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <section ref={sectionRef} id="terminal" className="py-24 relative z-10">
+      {content}
+      <AchievementsModal
+        isOpen={localAchievementsOpen}
+        onClose={() => setLocalAchievementsOpen(false)}
+      />
     </section>
   );
 }

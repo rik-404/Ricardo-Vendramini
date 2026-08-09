@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, X, Sparkles, Globe } from 'lucide-react';
+import { Menu, X, Sparkles, Globe, Terminal } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 import { dispatchAchievementUnlocked } from './AchievementToast';
 import { useLanguage } from '../context/LanguageContext';
@@ -75,7 +75,7 @@ const navItems = [
   { label: 'Contato', href: '#contact' },
 ];
 
-export default function Navbar({ onTriggerEasterEgg }) {
+export default function Navbar({ onTriggerEasterEgg, onOpenTerminal }) {
   const { lang, t } = useLanguage();
   const [activeSection, setActiveSection] = useState('hero');
   const [scrolled, setScrolled] = useState(false);
@@ -90,7 +90,6 @@ export default function Navbar({ onTriggerEasterEgg }) {
     { label: t('nav.projects'), href: '#projects' },
     { label: t('nav.certificates'), href: '#certificates' },
     { label: t('nav.books'), href: '#books' },
-    { label: t('nav.achievements'), href: '#achievements' },
     { label: t('nav.contact'), href: '#contact' },
   ];
   const [glitchPhase, setGlitchPhase] = useState(0); // 0=normal, 1=glitching, 2=broken, 3=bsod, 4=recovering
@@ -298,8 +297,25 @@ export default function Navbar({ onTriggerEasterEgg }) {
             })}
           </nav>
 
-          {/* Action Button & Cyberpunk Language Interruptor */}
-          <div className="hidden lg:flex items-center gap-3 shrink-0">
+          {/* Action Button, Quick CLI Terminal & Cyberpunk Language Interruptor */}
+          <div className="hidden lg:flex items-center gap-2.5 shrink-0">
+            {/* Quick CLI Terminal Button */}
+            <button
+              onClick={() => {
+                if (onOpenTerminal) {
+                  onOpenTerminal();
+                } else {
+                  const elem = document.getElementById('terminal');
+                  if (elem) elem.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="px-3 py-1.5 rounded-xl bg-[#0c1911] hover:bg-[#00ff88]/15 border border-[#00ff88]/40 hover:border-[#00ff88] text-[#00ff88] text-xs font-mono font-bold flex items-center gap-1.5 shadow-glow-sm hover:scale-105 transition-all cursor-pointer select-none"
+              title={lang === 'en' ? 'Open Interactive CLI Terminal & Easter Eggs' : 'Abrir Terminal CLI Interativo & Easter Eggs'}
+            >
+              <Terminal className="w-3.5 h-3.5 text-[#00ff88] animate-pulse" />
+              <span>&gt;_ CLI</span>
+            </button>
+
             <LanguageToggleSwitch />
             <a
               href="#contact"
@@ -311,6 +327,23 @@ export default function Navbar({ onTriggerEasterEgg }) {
 
           {/* Mobile Hamburger & Custom Cyberpunk Language Badge */}
           <div className="flex lg:hidden items-center gap-2 shrink-0">
+            {/* Mobile CLI Button */}
+            <button
+              onClick={() => {
+                if (onOpenTerminal) {
+                  onOpenTerminal();
+                } else {
+                  const elem = document.getElementById('terminal');
+                  if (elem) elem.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="px-2.5 py-1 rounded-full bg-[#07130b] border border-[#00ff88]/60 text-[#00ff88] font-mono font-bold text-xs flex items-center gap-1 shadow-glow-sm active:scale-95 transition-all"
+              title="CLI Terminal"
+            >
+              <Terminal className="w-3.5 h-3.5 text-[#00ff88]" />
+              <span>CLI</span>
+            </button>
+
             <MobileLanguageBadge />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

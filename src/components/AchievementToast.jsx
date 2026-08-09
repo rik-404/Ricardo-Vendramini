@@ -109,7 +109,7 @@ export default function AchievementToast() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -20, scale: 0.9 }}
           transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-          className="fixed top-4 right-4 z-[99999] w-80 sm:w-96"
+          className="fixed top-4 right-4 z-[9999999] w-80 sm:w-96"
           role="status"
           aria-live="polite"
         >

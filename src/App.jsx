@@ -37,6 +37,7 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [allProjectsOpen, setAllProjectsOpen] = useState(false);
   const [allCertificatesOpen, setAllCertificatesOpen] = useState(false);
+  const [terminalModalOpen, setTerminalModalOpen] = useState(false);
   const [allSkillsOpen, setAllSkillsOpen] = useState(false);
   const [breakoutGameOpen, setBreakoutGameOpen] = useState(false);
   const [starWarsOpen, setStarWarsOpen] = useState(false);
@@ -52,7 +53,6 @@ export default function App() {
     setRetro1999Open(false);
     setTimeTravelMode('TO_FUTURE');
   };
-  const [achievementsModalOpen, setAchievementsModalOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [easterEggOpen, setEasterEggOpen] = useState(false);
   const [matrixCanvasMode, setMatrixCanvasMode] = useState(false);
@@ -237,7 +237,10 @@ export default function App() {
 
       {/* Floating Header Navbar */}
       <div className={`transition-opacity duration-500 ${siteCleaned ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-        <Navbar onTriggerEasterEgg={triggerEasterEgg} />
+        <Navbar
+          onTriggerEasterEgg={triggerEasterEgg}
+          onOpenTerminal={() => setTerminalModalOpen(true)}
+        />
       </div>
 
       {/* Main Experience Layout */}
@@ -255,21 +258,7 @@ export default function App() {
         <LeadershipSection />
         <CertificatesSection onOpenAllCertificates={() => setAllCertificatesOpen(true)} />
         <BooksSection onSelectBook={setSelectedBook} />
-        <AchievementsSection />
       </main>
-
-      {/* Terminal Section remains interactive so user can type 'restore' */}
-      <TerminalSection
-        onTriggerEasterEgg={triggerMatrixOnly}
-        onOpenAchievements={() => setAchievementsModalOpen(true)}
-        onTriggerBreakout={() => setBreakoutGameOpen(true)}
-        onTriggerStarWars={() => setStarWarsOpen(true)}
-        onTriggerClean={() => setSiteCleaned(true)}
-        onRestoreClean={() => setSiteCleaned(false)}
-        onTriggerTimewalker={() => {
-          setTimeTravelMode('TO_PAST');
-        }}
-      />
 
       <div className={`transition-opacity duration-500 ${siteCleaned ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <TechLabSection />
@@ -328,12 +317,6 @@ export default function App() {
         }}
       />
 
-      {/* Galeria de Conquistas & Segredos (Bloqueadas e Desbloqueadas) */}
-      <AchievementsModal
-        isOpen={achievementsModalOpen}
-        onClose={() => setAchievementsModalOpen(false)}
-      />
-
       {/* Case Study Detail Modal (Renderizado no nível raiz z-[1000]) */}
       <ProjectModal
         project={selectedProject}
@@ -368,6 +351,32 @@ export default function App() {
           setTimeTravelMode(null);
         }}
       />
+
+      {/* Standalone Exclusive Terminal CLI & Easter Eggs Fullscreen Sandbox */}
+      {terminalModalOpen && (
+        <TerminalSection
+          isModal={true}
+          onClose={() => setTerminalModalOpen(false)}
+          onTriggerEasterEgg={() => {
+            setTerminalModalOpen(false);
+            triggerMatrixOnly();
+          }}
+          onTriggerBreakout={() => {
+            setTerminalModalOpen(false);
+            setBreakoutGameOpen(true);
+          }}
+          onTriggerStarWars={() => {
+            setTerminalModalOpen(false);
+            setStarWarsOpen(true);
+          }}
+          onTriggerClean={() => setSiteCleaned(true)}
+          onRestoreClean={() => setSiteCleaned(false)}
+          onTriggerTimewalker={() => {
+            setTerminalModalOpen(false);
+            setTimeTravelMode('TO_PAST');
+          }}
+        />
+      )}
 
       {/* PC-style Achievement Unlock Notification */}
       <AchievementToast />

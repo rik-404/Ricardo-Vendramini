@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Code, Layers, Sparkles, Terminal, ChevronDown, Rocket, Building2 } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
-import FlyEasterEgg from './FlyEasterEgg';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function HeroSection() {
@@ -179,9 +178,6 @@ export default function HeroSection() {
           <ChevronDown className="w-5 h-5 text-[#00ff88]" />
         </motion.div>
       </div>
-
-      {/* Mosca aleatória que pousa no título */}
-      <FlyEasterEgg containerRef={heroRef} titleRef={titleRef} />
     </section>
   );
 }

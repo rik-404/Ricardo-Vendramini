@@ -3,7 +3,7 @@ import { dispatchAchievementUnlocked } from './AchievementToast';
 
 const SWATTER_CURSOR = `url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='48'%20height='48'%20viewBox='0%200%2048%2048'%3E%3Crect%20x='14'%20y='30'%20width='4'%20height='14'%20rx='2'%20fill='%238b5a2b'/%3E%3Crect%20x='7'%20y='5'%20width='34'%20height='27'%20rx='9'%20fill='%23e0b877'%20stroke='%238b5a2b'%20stroke-width='2'/%3E%3Ccircle%20cx='15'%20cy='12'%20r='1.5'%20fill='%238b5a2b'/%3E%3Ccircle%20cx='24'%20cy='12'%20r='1.5'%20fill='%238b5a2b'/%3E%3Ccircle%20cx='33'%20cy='12'%20r='1.5'%20fill='%238b5a2b'/%3E%3Ccircle%20cx='15'%20cy='19'%20r='1.5'%20fill='%238b5a2b'/%3E%3Ccircle%20cx='24'%20cy='19'%20r='1.5'%20fill='%238b5a2b'/%3E%3Ccircle%20cx='33'%20cy='19'%20r='1.5'%20fill='%238b5a2b'/%3E%3Ccircle%20cx='15'%20cy='26'%20r='1.5'%20fill='%238b5a2b'/%3E%3Ccircle%20cx='24'%20cy='26'%20r='1.5'%20fill='%238b5a2b'/%3E%3Ccircle%20cx='33'%20cy='26'%20r='1.5'%20fill='%238b5a2b'/%3E%3C/svg%3E") 24 18, auto`;
 
-export default function FlyEasterEgg({ containerRef, titleRef }) {
+export default function FlyEasterEgg({ isActive = true, containerRef, titleRef }) {
   const [phase, setPhase] = useState('idle');
   const phaseRef = useRef(phase);
   const flyRef = useRef(null);
@@ -11,7 +11,6 @@ export default function FlyEasterEgg({ containerRef, titleRef }) {
   const audioRef = useRef({ ctx: null, osc: null, lfo: null, master: null });
   const rafRef = useRef(null);
   const timersRef = useRef([]);
-  const appearedRef = useRef(false);
 
   const isMoscaUnlocked = () => {
     try {
@@ -93,8 +92,6 @@ export default function FlyEasterEgg({ containerRef, titleRef }) {
   const setSwatMode = (on) => {
     document.body.classList.toggle('fly-swat-mode', on);
     window.dispatchEvent(new CustomEvent('fly-swat', { detail: on }));
-    const hero = document.getElementById('hero');
-    if (hero) hero.style.cursor = on ? SWATTER_CURSOR : '';
   };
 
   function updateFly() {
@@ -108,8 +105,6 @@ export default function FlyEasterEgg({ containerRef, titleRef }) {
       if (p.leaving) {
         stopBuzz();
         setPhase('idle');
-        appearedRef.current = false;
-        scheduleNext();
       } else {
         land();
       }
@@ -127,30 +122,12 @@ export default function FlyEasterEgg({ containerRef, titleRef }) {
     rafRef.current = requestAnimationFrame(updateFly);
   }
 
-  function scheduleNext(customDelay) {
-    if (isMoscaUnlocked()) return;
-    if (appearedRef.current && window.location.hash !== '#hero') return;
-    const delay = customDelay ?? (40000 + Math.random() * 10000); // 40 to 50 seconds delay
-    clearTimers();
-    timersRef.current.push(setTimeout(spawnFly, delay));
-  }
-
   function spawnFly() {
     if (phaseRef.current !== 'idle') return;
     if (isMoscaUnlocked()) return;
     if (!containerRef.current || !titleRef.current) return;
 
-    // Only spawn if user is at the header/hero section (scrollY <= 500 or hash is #hero)
-    const isHeroHash = window.location.hash === '#hero';
-    if (window.scrollY > 500 && !isHeroHash) {
-      timersRef.current.push(setTimeout(spawnFly, 3000));
-      return;
-    }
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return;
-    }
-    appearedRef.current = true;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const container = containerRef.current.getBoundingClientRect();
     const title = titleRef.current.getBoundingClientRect();
@@ -242,39 +219,25 @@ export default function FlyEasterEgg({ containerRef, titleRef }) {
     }, 900));
   }
 
+  // Idle Timer inside CLI Mode: Spawns fly after 12 seconds of inactivity in CLI
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    if (!isActive || isMoscaUnlocked()) return undefined;
 
-    const triggerForHeroHash = () => {
-      if (!isMoscaUnlocked()) {
-        const isHeroHash = window.location.hash === '#hero';
-        if (isHeroHash) {
-          appearedRef.current = false;
-        }
-        scheduleNext();
-      }
-    };
+    clearTimers();
+    const idleTimer = setTimeout(() => {
+      spawnFly();
+    }, 12000); // 12 seconds in CLI idle
 
-    triggerForHeroHash();
-
-    const handleHashChange = () => {
-      if (window.location.hash === '#hero' && !isMoscaUnlocked() && phaseRef.current === 'idle') {
-        appearedRef.current = false;
-        scheduleNext();
-      }
-    };
-
-    window.addEventListener('hashchange', handleHashChange);
+    timersRef.current.push(idleTimer);
 
     return () => {
-      window.removeEventListener('hashchange', handleHashChange);
-      cancelAnimationFrame(rafRef.current);
       clearTimers();
+      cancelAnimationFrame(rafRef.current);
       stopBuzz();
       setSwatMode(false);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isActive]);
 
   if (phase === 'idle') return null;
 

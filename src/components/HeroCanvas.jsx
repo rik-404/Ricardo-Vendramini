@@ -40,12 +40,12 @@ export default function HeroCanvas({ matrixMode = false }) {
       reset() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.size = Math.random() * 2.2 + 1;
-        this.vx = (Math.random() - 0.5) * 0.6;
-        this.vy = (Math.random() - 0.5) * 0.6;
-        this.alpha = Math.random() * 0.5 + 0.3;
+        this.size = Math.random() * 1.8 + 0.8;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.alpha = Math.random() * 0.08 + 0.08;
         const rand = Math.random();
-        this.color = rand > 0.5 ? '#00f2fe' : rand > 0.2 ? '#00ff88' : '#10b981';
+        this.color = rand > 0.6 ? '#10b981' : rand > 0.3 ? '#34d399' : '#00ff88';
       }
 
       update() {

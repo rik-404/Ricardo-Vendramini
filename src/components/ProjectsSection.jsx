@@ -94,7 +94,7 @@ export default function ProjectsSection({ onSelectProject, onOpenAllProjects }) 
 
                 {/* Project Details */}
                 <div className="p-5">
-                  <span className="text-[11px] font-mono text-[#00ff88] uppercase tracking-wider block mb-1">
+                  <span className="text-[11px] font-mono text-[#10b981] font-semibold uppercase tracking-wider block mb-1">
                     {project.category} • {project.date}
                   </span>
 
@@ -102,23 +102,23 @@ export default function ProjectsSection({ onSelectProject, onOpenAllProjects }) 
                     {project.name}
                   </h3>
 
-                  <p className="text-slate-300 text-xs font-light line-clamp-2 leading-relaxed mb-4">
+                  <p className="text-slate-400 text-xs font-light line-clamp-2 leading-relaxed mb-4">
                     {project.shortDescription}
                   </p>
 
-                  {/* Tech Tags */}
+                  {/* 3 Main Tech Tags for Clean Architecture */}
                   <div className="flex flex-wrap gap-1.5 mb-2">
-                    {project.technologies.slice(0, 4).map((tech, tIdx) => (
+                    {project.technologies.slice(0, 3).map((tech, tIdx) => (
                       <span
                         key={tIdx}
-                        className="px-2 py-0.5 rounded bg-white/5 border border-white/5 text-[10px] font-mono text-slate-300"
+                        className="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 text-[10px] font-mono text-slate-300 group-hover:border-[#10b981]/30 transition-colors"
                       >
                         {tech}
                       </span>
                     ))}
-                    {project.technologies.length > 4 && (
-                      <span className="px-2 py-0.5 rounded bg-white/5 text-[10px] font-mono text-slate-400">
-                        +{project.technologies.length - 4}
+                    {project.technologies.length > 3 && (
+                      <span className="px-2 py-1 rounded-md bg-white/[0.03] text-[10px] font-mono text-slate-400">
+                        +{project.technologies.length - 3}
                       </span>
                     )}
                   </div>
