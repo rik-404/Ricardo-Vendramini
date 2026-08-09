@@ -65,9 +65,9 @@ export const statsData = [
 export const timelineData = [
   {
     year: "2017 - 2018",
-    title: "Primeiro Contato & Início na TI — Menor Aprendiz MSB",
-    description: "Entrada no mercado de trabalho como Menor Aprendiz de Assistente Administrativo no departamento de TI da MSB. Primeira imersão prática com suporte operacional, rotinas técnicas e o início da trajetória profissional no universo da tecnologia.",
-    projects: ["Suporte Operacional & Infraestrutura MSB"],
+    title: "Primeiro Contato & Início na TI — Menor Aprendiz MYOUNG SHIN BRASIL",
+    description: "Entrada no mercado de trabalho como Menor Aprendiz de Assistente Administrativo no departamento de TI da Myoung Shin Brasil. Primeira imersão prática com suporte operacional, rotinas técnicas e o início da trajetória profissional no universo da tecnologia.",
+    projects: ["Suporte Operacional & Infraestrutura MYOUNG SHIN BRASIL"],
     technologies: ["Assistência de TI", "Suporte Operacional", "Rotinas Administrativas"],
     achievements: [
       "Primeiro contato profissional com rotinas e gestão de tecnologia",
@@ -94,6 +94,17 @@ export const timelineData = [
     achievements: [
       "Manutenção ativa da carteira de clientes e reputação técnica da Vendramini Informática",
       "Desenvolvimento de alta resiliência, capacidade de conciliação de rotinas e disciplina"
+    ]
+  },
+  {
+    year: "2022 - 2023",
+    title: "Técnico de Apoio ao Usuário de Informática — SRG TELECOM LTDA",
+    description: "Atuação no setor de telecomunicações. Atendimento ao público, operação do sistema de gerência óptica UNM2000, cadastro de produtos e planos de internet, liberação de acessos PPPoE, abertura e gestão analítica de Ordens de Serviço (O.S.).",
+    projects: ["Infraestrutura de Telecom & Provisionamento UNM2000"],
+    technologies: ["Sistema UNM2000", "Autenticação PPPoE", "Redes Ópticas", "Ordens de Serviço (O.S.)", "Atendimento ao Cliente"],
+    achievements: [
+      "Operação avançada do sistema NMS UNM2000 para provisionamento de equipamentos ópticos",
+      "Abertura, acompanhamento e resolução eficiente de Ordens de Serviço operacionais"
     ]
   },
   {
@@ -548,6 +559,28 @@ export const experienceData = [
     ]
   },
   {
+    period: "2022 - 2023",
+    role: "Técnico de Apoio ao Usuário de Informática",
+    company: "SRG TELECOM LTDA",
+    summary: "Atendimento especializado ao cliente corporativo e residencial no setor de telecomunicações. Operação avançada do sistema NMS UNM2000 para provisionamento de equipamentos ópticos, cadastro de planos de internet, autenticação PPPoE, abertura e gestão de Ordens de Serviço (O.S.).",
+    highlights: [
+      "Operação do sistema de gerência óptica UNM2000 para cadastros, liberação e provisionamento de ONUs/OLTs.",
+      "Gerenciamento de autenticação PPPoE, controle de bandas e liberação de acessos a clientes de internet.",
+      "Abertura, triagem e resolução de Ordens de Serviço (O.S.) operacionais com atendimento direto ao público."
+    ]
+  },
+  {
+    period: "2020 - 2021",
+    role: "Aprendiz de Logística",
+    company: "FMM METALMECANICA LTDA",
+    summary: "Atuação direta em Planejamento e Controle de Produção (PCP), coordenação de processos de recebimento, expedição de mercadorias e controle analítico de estoque corporativo.",
+    highlights: [
+      "Responsável pelo PCP (Planejamento e Controle de Produção), otimizando o fluxo produtivo e de suprimentos.",
+      "Gestão de recebimento, triagem de materiais e expedição de produtos em ambiente industrial.",
+      "Controle contínuo de estoque, inventário e comunicação técnica com a linha de produção."
+    ]
+  },
+  {
     period: "2018 - Presente",
     role: "Líder de Tecnologia & Fundador",
     company: "Vendramini Informática",
@@ -561,7 +594,7 @@ export const experienceData = [
   {
     period: "2017 - 2018",
     role: "Menor Aprendiz de Assistente Administrativo em TI",
-    company: "MSB",
+    company: "MYOUNG SHIN BRASIL",
     summary: "Primeira experiência profissional atuando no departamento de TI em assistência administrativa, suporte operacional e rotinas técnicas iniciais de tecnologia.",
     highlights: [
       "Primeiro contato prático com infraestrutura, chamados internos e processos de TI.",
@@ -772,6 +805,9 @@ export const terminalCommands = {
     "  contato  - Informações de contato direto",
     "  navinha  - Jogo Space Invaders Arcade 🎮",
     "  breakout - Jogo Breakout de destruir blocos neon 🧱",
+    "  starwars - Abertura 3D Star Wars Crawl 🌌",
+    "  clean    - Limpeza Total: deixa o site 100% limpo e limpo 🧹",
+    "  restore  - Restaura todos os elementos e seções do site ✨",
     "  reset    - Zera todas as conquistas e easter eggs 🔄",
     "  clear    - Limpa o histórico do terminal",
     "",
@@ -782,6 +818,7 @@ export const terminalCommands = {
     "",
     "★ navinha    - Space Invaders Geometric: destrua aliens com formas geométricas 👾",
     "★ breakout   - Breakout Arcade: controle a raquete e destrua os blocos neon da tela 🧱",
+    "★ starwars   - Star Wars 3D Crawl: texto de abertura galáctico em 3D 🌌",
     "",
     "Digite o nome do jogo para iniciar."
   ]

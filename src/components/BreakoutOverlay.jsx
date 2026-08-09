@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Play, RotateCcw, Volume2, VolumeX, Trophy, Heart, Gamepad2, ArrowLeft, ArrowRight, Zap, Sparkles } from 'lucide-react';
+import { X, Play, RotateCcw, Volume2, VolumeX, Trophy, Heart, Gamepad2, Zap, Sparkles } from 'lucide-react';
 import { dispatchAchievementUnlocked } from './AchievementToast';
 
 export default function BreakoutOverlay({ isOpen, onClose }) {
@@ -12,6 +12,7 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
   const [lives, setLives] = useState(3);
   const [level, setLevel] = useState(1);
   const [soundEnabled, setSoundEnabled] = useState(true);
+  const [remainingBlocks, setRemainingBlocks] = useState(0);
 
   const soundEnabledRef = useRef(soundEnabled);
   useEffect(() => {
@@ -46,7 +47,7 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
         osc.stop(now + 0.08);
       } else if (type === 'brick') {
         osc.type = 'square';
-        osc.frequency.setValueAtTime(440 + Math.random() * 200, now);
+        osc.frequency.setValueAtTime(440 + Math.random() * 300, now);
         osc.frequency.exponentialRampToValueAtTime(880, now + 0.06);
         gain.gain.setValueAtTime(0.25, now);
         gain.gain.exponentialRampToValueAtTime(0.01, now + 0.06);
@@ -69,10 +70,10 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
         osc.stop(now + 0.25);
       } else if (type === 'victory') {
         osc.type = 'triangle';
-        osc.frequency.setValueAtTime(523.25, now); // C5
-        osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
-        osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
-        osc.frequency.setValueAtTime(1046.50, now + 0.3); // C6
+        osc.frequency.setValueAtTime(523.25, now);
+        osc.frequency.setValueAtTime(659.25, now + 0.1);
+        osc.frequency.setValueAtTime(783.99, now + 0.2);
+        osc.frequency.setValueAtTime(1046.50, now + 0.3);
         gain.gain.setValueAtTime(0.3, now);
         gain.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
         osc.start(now);
@@ -83,9 +84,9 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
 
   // Internal mutable game state ref for 60fps loop
   const stateRef = useRef({
-    paddle: { width: 140, height: 16, x: 0, y: 0, speed: 10 },
-    ball: { x: 0, y: 0, radius: 8, dx: 5, dy: -5, speed: 7 },
-    bricks: [],
+    paddle: { width: 150, height: 16, x: 0, y: 0, speed: 12 },
+    ball: { x: 0, y: 0, radius: 9, dx: 6, dy: -6, speed: 8 },
+    bricks: [], // { element, x, y, w, h, status, fill, stroke, points }
     particles: [],
     keys: { left: false, right: false },
     score: 0,
@@ -107,8 +108,130 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
     } catch {}
   };
 
+  // Restore all hidden site DOM elements back to normal
+  const restoreSiteElements = () => {
+    const st = stateRef.current;
+    if (st.bricks && st.bricks.length > 0) {
+      st.bricks.forEach((b) => {
+        if (b.element) {
+          b.element.style.transition = '';
+          b.element.style.visibility = '';
+          b.element.style.opacity = '';
+          b.element.style.transform = '';
+          b.element.style.filter = '';
+          b.element.style.pointerEvents = '';
+        }
+      });
+    }
+    document.querySelectorAll('[data-breakout-target]').forEach((el) => {
+      el.style.transition = '';
+      el.style.visibility = '';
+      el.style.opacity = '';
+      el.style.transform = '';
+      el.style.filter = '';
+      el.style.pointerEvents = '';
+      el.removeAttribute('data-breakout-target');
+    });
+  };
+
+  const scanDomElementsAsBricks = (width, height) => {
+    const selectors = [
+      '.glass-card',
+      'h1', 'h2', 'h3', 'h4',
+      'p', 'button', 'a',
+      'img', 'svg.lucide',
+      '.timeline-card', '.skills-card',
+      'div.rounded-2xl', 'div.rounded-3xl', 'span.inline-flex'
+    ];
+
+    const queriedNodes = document.querySelectorAll(selectors.join(','));
+    const candidateElements = Array.from(queriedNodes);
+
+    const colors = [
+      { fill: '#ff0055', stroke: '#ff5588' },
+      { fill: '#00ff88', stroke: '#55ffaa' },
+      { fill: '#00f2fe', stroke: '#55f8ff' },
+      { fill: '#f59e0b', stroke: '#fbbf24' },
+      { fill: '#a855f7', stroke: '#c084fc' }
+    ];
+
+    const bricks = [];
+    const usedRects = [];
+
+    candidateElements.forEach((el, index) => {
+      if (el.closest('.breakout-overlay-root') || el.closest('.terminal-flash-target')) return;
+
+      const rect = el.getBoundingClientRect();
+
+      if (
+        rect.top >= 60 &&
+        rect.bottom <= height - 60 &&
+        rect.left >= 10 &&
+        rect.right <= width - 10 &&
+        rect.width >= 30 &&
+        rect.height >= 15 &&
+        rect.height <= 350
+      ) {
+        const isExactDuplicate = usedRects.some(
+          (r) => Math.abs(r.left - rect.left) < 5 && Math.abs(r.top - rect.top) < 5 && Math.abs(r.width - rect.width) < 5
+        );
+
+        if (!isExactDuplicate) {
+          usedRects.push(rect);
+          const color = colors[index % colors.length];
+
+          el.setAttribute('data-breakout-target', 'true');
+          el.style.transition = 'all 0.2s ease-out';
+
+          bricks.push({
+            element: el,
+            x: rect.left,
+            y: rect.top,
+            w: rect.width,
+            h: rect.height,
+            status: 1,
+            fill: color.fill,
+            stroke: color.stroke,
+            points: Math.round(100 - rect.top / 10)
+          });
+        }
+      }
+    });
+
+    if (bricks.length < 5) {
+      const rows = 5;
+      const cols = Math.floor(Math.min(12, Math.max(6, width / 100)));
+      const padding = 12;
+      const marginTop = 90;
+      const totalPadding = (cols + 1) * padding;
+      const brickWidth = (width - totalPadding) / cols;
+      const brickHeight = 28;
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const color = colors[r % colors.length];
+          bricks.push({
+            element: null,
+            x: padding + c * (brickWidth + padding),
+            y: marginTop + r * (brickHeight + padding),
+            w: brickWidth,
+            h: brickHeight,
+            status: 1,
+            fill: color.fill,
+            stroke: color.stroke,
+            points: (rows - r) * 20
+          });
+        }
+      }
+    }
+
+    return bricks;
+  };
+
   const initGame = (currentLevel = 1, currentScore = 0, currentLives = 3) => {
     unlockAchievementOnce();
+    restoreSiteElements();
+
     const canvas = canvasRef.current;
     const width = window.innerWidth;
     const height = window.innerHeight;
@@ -118,56 +241,23 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
       canvas.height = height;
     }
 
-    const paddleWidth = Math.max(120, Math.min(180, width * 0.14));
+    const paddleWidth = Math.max(130, Math.min(200, width * 0.16));
     const paddleX = (width - paddleWidth) / 2;
-    const paddleY = height - 60;
+    const paddleY = height - 50;
 
-    const initialSpeed = 6 + currentLevel * 0.8;
+    const initialSpeed = 7 + currentLevel * 0.8;
     const angle = (Math.random() * 0.6 - 0.3) * Math.PI;
 
     const ball = {
       x: width / 2,
-      y: paddleY - 20,
+      y: paddleY - 25,
       radius: 9,
       dx: Math.sin(angle) * initialSpeed,
       dy: -Math.cos(angle) * initialSpeed,
       speed: initialSpeed
     };
 
-    // Brick colors (Cyberpunk Neon Palette)
-    const brickColors = [
-      { fill: '#ff0055', stroke: '#ff5588', name: 'magenta' },
-      { fill: '#00ff88', stroke: '#55ffaa', name: 'green' },
-      { fill: '#00f2fe', stroke: '#55f8ff', name: 'cyan' },
-      { fill: '#f59e0b', stroke: '#fbbf24', name: 'amber' },
-      { fill: '#a855f7', stroke: '#c084fc', name: 'purple' }
-    ];
-
-    // Generate Brick Grid across top
-    const rows = Math.min(6, 4 + currentLevel);
-    const cols = Math.floor(Math.min(14, Math.max(7, width / 90)));
-    const padding = 10;
-    const marginTop = 90;
-    const totalPadding = (cols + 1) * padding;
-    const brickWidth = (width - totalPadding) / cols;
-    const brickHeight = 24;
-
-    const bricks = [];
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < cols; c++) {
-        const color = brickColors[r % brickColors.length];
-        bricks.push({
-          x: padding + c * (brickWidth + padding),
-          y: marginTop + r * (brickHeight + padding),
-          w: brickWidth,
-          h: brickHeight,
-          status: 1, // 1 = active, 0 = destroyed
-          fill: color.fill,
-          stroke: color.stroke,
-          points: (rows - r) * 10
-        });
-      }
-    }
+    const bricks = scanDomElementsAsBricks(width, height);
 
     stateRef.current = {
       paddle: { width: paddleWidth, height: 16, x: paddleX, y: paddleY, speed: 12 },
@@ -186,20 +276,21 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
     setScore(currentScore);
     setLives(currentLives);
     setLevel(currentLevel);
+    setRemainingBlocks(bricks.length);
     setGameState('PLAYING');
   };
 
   const createParticles = (x, y, color) => {
     const particles = stateRef.current.particles;
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 16; i++) {
       const angle = Math.random() * Math.PI * 2;
-      const speed = Math.random() * 5 + 2;
+      const speed = Math.random() * 6 + 2;
       particles.push({
         x,
         y,
         dx: Math.cos(angle) * speed,
         dy: Math.sin(angle) * speed,
-        radius: Math.random() * 3.5 + 1.5,
+        radius: Math.random() * 4 + 2,
         color,
         alpha: 1,
         decay: Math.random() * 0.04 + 0.02
@@ -210,9 +301,14 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
   useEffect(() => {
     if (!isOpen) return;
 
+    document.body.style.overflow = 'hidden';
     initGame(1, 0, 3);
 
     const handleKeyDown = (e) => {
+      if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', ' '].includes(e.key)) {
+        e.preventDefault();
+      }
+
       if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
         stateRef.current.keys.left = true;
       }
@@ -220,7 +316,7 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
         stateRef.current.keys.right = true;
       }
       if (e.key === 'Escape') {
-        onClose();
+        handleClose();
       }
       if (e.key === ' ' || e.key === 'p' || e.key === 'P') {
         togglePause();
@@ -257,18 +353,10 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
       }
     };
 
-    const handleResize = () => {
-      if (canvasRef.current) {
-        canvasRef.current.width = window.innerWidth;
-        canvasRef.current.height = window.innerHeight;
-      }
-    };
-
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('touchmove', handleTouchMove, { passive: true });
-    window.addEventListener('resize', handleResize);
 
     // Main 60FPS Game Loop
     const loop = () => {
@@ -279,8 +367,7 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
 
       if (!st.isPaused && !st.isOver && !st.isVictory) {
         // Clear Canvas with subtle trail fade effect
-        ctx.fillStyle = 'rgba(4, 7, 5, 0.35)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         // Move Paddle via keys
         if (st.keys.left) {
@@ -306,8 +393,8 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
         }
 
         // Wall collision (Top)
-        if (st.ball.y - st.ball.radius < 75) {
-          st.ball.y = 75 + st.ball.radius;
+        if (st.ball.y - st.ball.radius < 65) {
+          st.ball.y = 65 + st.ball.radius;
           st.ball.dy = Math.abs(st.ball.dy);
           playSynthSound('wall');
         }
@@ -323,12 +410,11 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
           playSynthSound('paddle');
           st.ball.y = st.paddle.y - st.ball.radius;
 
-          // Calculate bounce angle depending on hit location on paddle
           const hitPoint = (st.ball.x - (st.paddle.x + st.paddle.width / 2)) / (st.paddle.width / 2);
-          const maxAngle = Math.PI / 3; // 60 deg max angle
+          const maxAngle = Math.PI / 3;
           const bounceAngle = hitPoint * maxAngle;
 
-          const currentSpeed = Math.min(14, Math.hypot(st.ball.dx, st.ball.dy) * 1.02);
+          const currentSpeed = Math.min(15, Math.hypot(st.ball.dx, st.ball.dy) * 1.02);
           st.ball.dx = currentSpeed * Math.sin(bounceAngle);
           st.ball.dy = -currentSpeed * Math.cos(bounceAngle);
         }
@@ -343,22 +429,22 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
             st.isOver = true;
             setGameState('GAMEOVER');
           } else {
-            // Reset ball position on paddle
             st.ball.x = st.paddle.x + st.paddle.width / 2;
-            st.ball.y = st.paddle.y - 20;
-            const speed = 6 + st.level * 0.8;
+            st.ball.y = st.paddle.y - 25;
+            const speed = 7 + st.level * 0.8;
             st.ball.dx = (Math.random() > 0.5 ? 1 : -1) * (speed * 0.7);
             st.ball.dy = -speed;
           }
         }
 
-        // Brick Collisions
-        let activeBricks = 0;
+        // Site Element Bricks Collisions
+        let activeBricksCount = 0;
         for (let i = 0; i < st.bricks.length; i++) {
           const b = st.bricks[i];
           if (b.status === 1) {
-            activeBricks++;
-            // Check collision with brick bounding box
+            activeBricksCount++;
+
+            // Bounding Box Collision
             if (
               st.ball.x + st.ball.radius > b.x &&
               st.ball.x - st.ball.radius < b.x + b.w &&
@@ -369,13 +455,20 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
               playSynthSound('brick');
               createParticles(b.x + b.w / 2, b.y + b.h / 2, b.fill);
 
+              // Destroy actual DOM Element on the page!
+              if (b.element) {
+                b.element.style.visibility = 'hidden';
+                b.element.style.opacity = '0';
+                b.element.style.transform = 'scale(0) rotate(20deg)';
+                b.element.style.filter = 'blur(15px)';
+                b.element.style.pointerEvents = 'none';
+              }
+
               st.score += b.points;
               setScore(st.score);
+              setRemainingBlocks(activeBricksCount - 1);
 
-              // Reverse ball direction based on collision side
               const prevX = st.ball.x - st.ball.dx;
-              const prevY = st.ball.y - st.ball.dy;
-
               if (prevX + st.ball.radius <= b.x || prevX - st.ball.radius >= b.x + b.w) {
                 st.ball.dx = -st.ball.dx;
               } else {
@@ -387,40 +480,39 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
         }
 
         // Victory Check
-        if (activeBricks === 0 && st.bricks.length > 0) {
+        if (activeBricksCount === 0 && st.bricks.length > 0) {
           playSynthSound('victory');
           st.isVictory = true;
           setGameState('VICTORY');
         }
-      } else {
-        // Draw dark background when paused/over/victory
-        ctx.fillStyle = 'rgba(4, 7, 5, 0.9)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
       }
 
-      // Draw Bricks
+      // Draw Glowing Target Borders over site bricks
       for (let i = 0; i < st.bricks.length; i++) {
         const b = st.bricks[i];
         if (b.status === 1) {
           ctx.save();
-          ctx.fillStyle = b.fill;
           ctx.strokeStyle = b.stroke;
-          ctx.lineWidth = 1.5;
+          ctx.fillStyle = b.fill + '22'; // 15% opacity tint overlay
+          ctx.lineWidth = 2;
           ctx.shadowColor = b.fill;
-          ctx.shadowBlur = 10;
+          ctx.shadowBlur = 12;
           ctx.beginPath();
-          ctx.roundRect(b.x, b.y, b.w, b.h, 6);
+          ctx.roundRect(b.x, b.y, b.w, b.h, 12);
           ctx.fill();
           ctx.stroke();
 
-          // Glossy highlight
-          ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
-          ctx.fillRect(b.x + 3, b.y + 3, b.w - 6, b.h / 3);
+          // Draw target corners
+          ctx.fillStyle = b.fill;
+          ctx.fillRect(b.x, b.y, 6, 6);
+          ctx.fillRect(b.x + b.w - 6, b.y, 6, 6);
+          ctx.fillRect(b.x, b.y + b.h - 6, 6, 6);
+          ctx.fillRect(b.x + b.w - 6, b.y + b.h - 6, 6, 6);
           ctx.restore();
         }
       }
 
-      // Draw Particles
+      // Draw Explosion Particles
       for (let i = st.particles.length - 1; i >= 0; i--) {
         const p = st.particles[i];
         p.x += p.dx;
@@ -436,7 +528,7 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
         ctx.globalAlpha = p.alpha;
         ctx.fillStyle = p.color;
         ctx.shadowColor = p.color;
-        ctx.shadowBlur = 6;
+        ctx.shadowBlur = 8;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fill();
@@ -450,23 +542,22 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
       ctx.strokeStyle = '#55ffaa';
       ctx.lineWidth = 2;
       ctx.shadowColor = '#00ff88';
-      ctx.shadowBlur = 18;
+      ctx.shadowBlur = 20;
       ctx.beginPath();
       ctx.roundRect(p.x, p.y, p.width, p.height, 8);
       ctx.fill();
       ctx.stroke();
 
-      // Paddle neon center bar
       ctx.fillStyle = '#ffffff';
-      ctx.fillRect(p.x + p.width * 0.3, p.y + 3, p.width * 0.4, 3);
+      ctx.fillRect(p.x + p.width * 0.35, p.y + 3, p.width * 0.3, 3);
       ctx.restore();
 
-      // Draw Ball
+      // Draw Glowing Ball
       const b = st.ball;
       ctx.save();
       ctx.fillStyle = '#00f2fe';
       ctx.shadowColor = '#00f2fe';
-      ctx.shadowBlur = 16;
+      ctx.shadowBlur = 18;
       ctx.beginPath();
       ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
       ctx.fill();
@@ -483,7 +574,8 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
       window.removeEventListener('keyup', handleKeyUp);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);
-      window.removeEventListener('resize', handleResize);
+      document.body.style.overflow = '';
+      restoreSiteElements();
     };
   }, [isOpen]);
 
@@ -494,50 +586,61 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
     setGameState(st.isPaused ? 'PAUSED' : 'PLAYING');
   };
 
+  const handleClose = () => {
+    document.body.style.overflow = '';
+    restoreSiteElements();
+    onClose();
+  };
+
   const restartGame = () => {
     initGame(1, 0, 3);
   };
 
   const nextLevel = () => {
-    const nextLvl = level + 1;
-    initGame(nextLvl, score, lives);
+    initGame(level + 1, score, lives);
   };
 
   if (!isOpen) return null;
 
   const overlayContent = (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[100000] bg-[#040705] flex flex-col overflow-hidden font-mono selection:bg-[#00ff88] selection:text-black">
+      <div className="breakout-overlay-root fixed inset-0 z-[100000] flex flex-col pointer-events-none font-mono selection:bg-[#00ff88] selection:text-black">
         
-        {/* Top Floating HUD Bar */}
-        <div className="relative z-30 px-4 sm:px-8 py-3 bg-[#071410]/90 border-b border-[#00ff88]/30 backdrop-blur-md flex items-center justify-between shadow-glow-sm">
+        {/* Top HUD Bar */}
+        <div className="relative z-30 px-4 sm:px-8 py-3 bg-[#040705]/95 border-b border-[#00ff88]/40 backdrop-blur-md flex items-center justify-between pointer-events-auto shadow-glow-sm">
           
-          {/* Left Title & Status */}
           <div className="flex items-center gap-3">
             <div className="p-2 rounded-xl bg-[#00ff88]/10 border border-[#00ff88]/30">
               <Gamepad2 className="w-5 h-5 text-[#00ff88] animate-pulse" />
             </div>
             <div>
               <h2 className="text-base sm:text-lg font-extrabold text-white flex items-center gap-2">
-                BREAKOUT ARCADE <span className="text-xs px-2 py-0.5 rounded-full bg-[#00ff88]/20 text-[#00ff88] border border-[#00ff88]/30">NÍVEL {level}</span>
+                ATARI BREAKOUT <span className="text-xs px-2 py-0.5 rounded-full bg-[#00ff88]/20 text-[#00ff88] border border-[#00ff88]/30">DESTRUIDOR DE SITE</span>
               </h2>
               <p className="text-[11px] text-slate-400 hidden sm:block">
-                Use as <strong className="text-[#00ff88]">setinhas (← →)</strong> ou o <strong className="text-[#00ff88]">Mouse</strong> para rebater a bolinha e destruir os blocos!
+                Controle a raquete com as <strong className="text-[#00ff88]">setinhas (← →)</strong> ou o <strong className="text-[#00ff88]">Mouse</strong>. Aperte <kbd className="px-1 py-0.5 rounded bg-black border border-white/20 text-[#00ff88]">ESC</kbd> para restaurar o site!
               </p>
             </div>
           </div>
 
-          {/* Center Stats: Score & Lives */}
           <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2 bg-black/60 px-4 py-1.5 rounded-xl border border-white/10">
+            <div className="flex items-center gap-2 bg-black/70 px-3.5 py-1.5 rounded-xl border border-white/10">
+              <Sparkles className="w-4 h-4 text-[#00ff88]" />
+              <div className="flex flex-col text-left">
+                <span className="text-[9px] text-slate-400 uppercase">Blocos do Site</span>
+                <span className="text-sm font-extrabold text-[#00ff88]">{remainingBlocks}</span>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 bg-black/70 px-3.5 py-1.5 rounded-xl border border-white/10">
               <Trophy className="w-4 h-4 text-amber-400" />
               <div className="flex flex-col text-left">
-                <span className="text-[9px] text-slate-400 uppercase">Pontuação</span>
+                <span className="text-[9px] text-slate-400 uppercase">Pontos</span>
                 <span className="text-sm font-extrabold text-white">{score}</span>
               </div>
             </div>
 
-            <div className="flex items-center gap-1 bg-black/60 px-3 py-1.5 rounded-xl border border-white/10">
+            <div className="flex items-center gap-1 bg-black/70 px-3 py-1.5 rounded-xl border border-white/10">
               {Array.from({ length: 3 }).map((_, i) => (
                 <Heart
                   key={i}
@@ -549,7 +652,6 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
             </div>
           </div>
 
-          {/* Right Action Controls */}
           <div className="flex items-center gap-3">
             <button
               onClick={() => setSoundEnabled(!soundEnabled)}
@@ -568,20 +670,20 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
             </button>
 
             <button
-              onClick={onClose}
-              className="p-2.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 hover:text-red-300 transition-all flex items-center gap-1 text-xs font-bold"
+              onClick={handleClose}
+              className="p-2.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 hover:text-red-300 transition-all flex items-center gap-1.5 text-xs font-bold"
             >
               <X className="w-4 h-4" />
-              <span className="hidden sm:inline">Sair do Jogo</span>
+              <span>Restaurar Site (ESC)</span>
             </button>
           </div>
         </div>
 
-        {/* Game Canvas Area */}
-        <div className="relative flex-1 bg-[#040705]">
+        {/* Game Canvas Overlay */}
+        <div className="relative flex-1 pointer-events-auto">
           <canvas ref={canvasRef} className="absolute inset-0 w-full h-full block cursor-none" />
 
-          {/* Overlay Screens for Pause / GameOver / Victory */}
+          {/* Pause / GameOver / Victory Screens */}
           <AnimatePresence>
             {gameState === 'PAUSED' && (
               <motion.div
@@ -595,12 +697,12 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
                     <Play className="w-8 h-8 text-[#00ff88]" />
                   </div>
                   <h3 className="text-2xl font-extrabold text-white">JOGO PAUSADO</h3>
-                  <p className="text-xs text-slate-400">Pressione Espaço ou clique abaixo para continuar a partida.</p>
+                  <p className="text-xs text-slate-400">Pressione Espaço ou clique abaixo para continuar destruindo os elementos.</p>
                   <button
                     onClick={togglePause}
                     className="w-full py-3 rounded-xl bg-gradient-to-r from-[#059669] to-[#00ff88] text-black font-extrabold text-xs uppercase tracking-wider shadow-glow-sm hover:scale-105 transition-all"
                   >
-                    Continuar Jogo
+                    Continuar Destruindo
                   </button>
                 </div>
               </motion.div>
@@ -618,12 +720,12 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
                     <Zap className="w-8 h-8 text-red-500" />
                   </div>
                   <div>
-                    <h3 className="text-3xl font-extrabold text-white">GAME OVER</h3>
-                    <p className="text-xs text-slate-400 mt-1">A bolinha caiu! Tente novamente para quebrar o recorde.</p>
+                    <h3 className="text-3xl font-extrabold text-white">FIM DE JOGO</h3>
+                    <p className="text-xs text-slate-400 mt-1">A bolinha caiu! Você pode reiniciar ou restaurar o site.</p>
                   </div>
 
                   <div className="p-4 rounded-2xl bg-black/60 border border-white/10 space-y-1">
-                    <span className="text-xs text-slate-400">Pontuação Final</span>
+                    <span className="text-xs text-slate-400">Pontuação Total</span>
                     <p className="text-3xl font-extrabold text-[#00ff88]">{score}</p>
                   </div>
 
@@ -636,10 +738,10 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
                       <span>Tentar Novamente</span>
                     </button>
                     <button
-                      onClick={onClose}
+                      onClick={handleClose}
                       className="py-3 px-5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs"
                     >
-                      Sair
+                      Restaurar Site
                     </button>
                   </div>
                 </div>
@@ -658,8 +760,8 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
                     <Sparkles className="w-8 h-8 text-[#00ff88]" />
                   </div>
                   <div>
-                    <h3 className="text-3xl font-extrabold text-white">FOGOS & VITÓRIA! 🎉</h3>
-                    <p className="text-xs text-slate-400 mt-1">Você destruiu todos os blocos neon da tela!</p>
+                    <h3 className="text-3xl font-extrabold text-white">SITE TOTALMENTE DESTRUÍDO! 🎉</h3>
+                    <p className="text-xs text-slate-400 mt-1">Você desintegrou todos os elementos da tela!</p>
                   </div>
 
                   <div className="p-4 rounded-2xl bg-black/60 border border-white/10 space-y-1">
@@ -669,37 +771,17 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
 
                   <div className="flex gap-3">
                     <button
-                      onClick={nextLevel}
+                      onClick={handleClose}
                       className="flex-1 py-3 rounded-xl bg-gradient-to-r from-[#059669] to-[#00ff88] text-black font-extrabold text-xs uppercase tracking-wider shadow-glow-sm hover:scale-105 transition-all flex items-center justify-center gap-2"
                     >
-                      <Play className="w-4 h-4" />
-                      <span>Ir para o Nível {level + 1}</span>
-                    </button>
-                    <button
-                      onClick={onClose}
-                      className="py-3 px-5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs"
-                    >
-                      Sair
+                      <RotateCcw className="w-4 h-4" />
+                      <span>Restaurar Site Inteiro</span>
                     </button>
                   </div>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
-
-        {/* Bottom Help Controls Bar */}
-        <div className="px-4 py-2 bg-[#06100a] border-t border-white/10 text-center text-xs text-slate-400 flex flex-wrap items-center justify-center gap-6">
-          <span className="flex items-center gap-1">
-            <kbd className="px-2 py-0.5 rounded bg-black border border-white/20 text-[#00ff88] font-bold">←</kbd>
-            <kbd className="px-2 py-0.5 rounded bg-black border border-white/20 text-[#00ff88] font-bold">→</kbd> ou <strong className="text-white">Mouse</strong> : Mover Raquete
-          </span>
-          <span className="flex items-center gap-1">
-            <kbd className="px-2 py-0.5 rounded bg-black border border-white/20 text-[#00ff88] font-bold">Espaço</kbd> : Pausar Jogo
-          </span>
-          <span className="flex items-center gap-1">
-            <kbd className="px-2 py-0.5 rounded bg-black border border-white/20 text-[#00ff88] font-bold">ESC</kbd> : Sair
-          </span>
         </div>
 
       </div>

@@ -6,7 +6,7 @@ import { terminalCommands } from '../data/portfolioData';
 import { dispatchAchievementUnlocked, ACHIEVEMENTS_META } from './AchievementToast';
 import AchievementsModal from './AchievementsModal';
 
-export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements, onTriggerBreakout }) {
+export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements, onTriggerBreakout, onTriggerStarWars, onTriggerClean, onRestoreClean }) {
   const [inputVal, setInputVal] = useState('');
   const [history, setHistory] = useState(terminalCommands.welcome);
   const [gameActive, setGameActive] = useState(false);
@@ -647,6 +647,23 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       return;
     }
 
+    if (cmd === 'clean' || cmd === 'limpar' || cmd === 'clean-site' || cmd === 'purge') {
+      unlockAchievement('clean');
+      newHistory.push('> 🧹 Modo Limpeza Total ativado! Ocultando todos os elementos do site...');
+      setHistory(newHistory);
+      setInputVal('');
+      if (onTriggerClean) onTriggerClean();
+      return;
+    }
+
+    if (cmd === 'restore' || cmd === 'restaurar') {
+      newHistory.push('> ✨ Restaurando a estrutura e todos os elementos do site...');
+      setHistory(newHistory);
+      setInputVal('');
+      if (onRestoreClean) onRestoreClean();
+      return;
+    }
+
     if (cmd === 'matrix') {
       unlockAchievement('matrix');
       newHistory.push('> Executando protocolo Matrix...');
@@ -691,6 +708,15 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       setHistory(newHistory);
       setInputVal('');
       if (onTriggerBreakout) onTriggerBreakout();
+      return;
+    }
+
+    if (cmd === 'starwars' || cmd === 'star-wars' || cmd === 'vader' || cmd === 'jedi' || cmd === 'forcemode') {
+      unlockAchievement('starwars');
+      newHistory.push('> 🌌 Modo STAR WARS ativado! Que a Força esteja com você...');
+      setHistory(newHistory);
+      setInputVal('');
+      if (onTriggerStarWars) onTriggerStarWars();
       return;
     }
 

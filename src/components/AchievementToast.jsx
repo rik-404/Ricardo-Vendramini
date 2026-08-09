@@ -51,6 +51,18 @@ export const ACHIEVEMENTS_META = {
     hint: '🔍 Dica: Digite o nome do jogo famoso de quebrar tijolos...',
     icon: Gamepad2,
   },
+  starwars: {
+    title: 'Que a Força Esteja Com Você',
+    description: 'Ativou o modo Star Wars Crawl e transformou todo o site na abertura da galáxia.',
+    hint: '🔍 Dica: Digite o nome de uma famosa saga espacial no terminal ou no teclado...',
+    icon: Sparkles,
+  },
+  clean: {
+    title: 'Limpeza Total',
+    description: 'Executou o comando "clean" no terminal e deixou a tela totalmente limpa e vazia.',
+    hint: '🔍 Dica: Que tal limpar o site?...',
+    icon: Trash2,
+  },
 };
 
 export function dispatchAchievementUnlocked(id) {

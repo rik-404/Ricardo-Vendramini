@@ -23,7 +23,9 @@ import TerminalSection from './components/TerminalSection';
 import TechLabSection from './components/TechLabSection';
 import EasterEggModal from './components/EasterEggModal';
 import BreakoutOverlay from './components/BreakoutOverlay';
+import StarWarsCrawlOverlay from './components/StarWarsCrawlOverlay';
 import AchievementToast, { dispatchAchievementUnlocked } from './components/AchievementToast';
+import { Trash2, RotateCcw } from 'lucide-react';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 
@@ -33,6 +35,8 @@ export default function App() {
   const [allSkillsOpen, setAllSkillsOpen] = useState(false);
   const [allCertificatesOpen, setAllCertificatesOpen] = useState(false);
   const [breakoutGameOpen, setBreakoutGameOpen] = useState(false);
+  const [starWarsOpen, setStarWarsOpen] = useState(false);
+  const [siteCleaned, setSiteCleaned] = useState(false);
   const [achievementsModalOpen, setAchievementsModalOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [easterEggOpen, setEasterEggOpen] = useState(false);
@@ -132,6 +136,52 @@ export default function App() {
         } else {
           breakoutIndex = 0;
         }
+
+        const starWarsWord = ['s', 't', 'a', 'r', 'w', 'a', 'r', 's'];
+        let starWarsIndex = 0;
+
+        if (e.key.toLowerCase() === starWarsWord[starWarsIndex]) {
+          starWarsIndex++;
+          if (starWarsIndex === starWarsWord.length) {
+            setStarWarsOpen(true);
+            try {
+              const saved = JSON.parse(localStorage.getItem('ricardodev_achievements') || '[]');
+              if (!saved.includes('starwars')) {
+                saved.push('starwars');
+                localStorage.setItem('ricardodev_achievements', JSON.stringify(saved));
+                dispatchAchievementUnlocked('starwars');
+              }
+            } catch {}
+            starWarsIndex = 0;
+          }
+        } else {
+          starWarsIndex = 0;
+        }
+
+        const cleanWord = ['c', 'l', 'e', 'a', 'n'];
+        let cleanIndex = 0;
+
+        if (e.key.toLowerCase() === cleanWord[cleanIndex]) {
+          cleanIndex++;
+          if (cleanIndex === cleanWord.length) {
+            setSiteCleaned(true);
+            try {
+              const saved = JSON.parse(localStorage.getItem('ricardodev_achievements') || '[]');
+              if (!saved.includes('clean')) {
+                saved.push('clean');
+                localStorage.setItem('ricardodev_achievements', JSON.stringify(saved));
+                dispatchAchievementUnlocked('clean');
+              }
+            } catch {}
+            cleanIndex = 0;
+          }
+        } else {
+          cleanIndex = 0;
+        }
+
+        if (e.key === 'Escape') {
+          setSiteCleaned(false);
+        }
       }
     };
 
@@ -171,10 +221,12 @@ export default function App() {
       <HeroCanvas matrixMode={matrixCanvasMode} />
 
       {/* Floating Header Navbar */}
-      <Navbar onTriggerEasterEgg={triggerEasterEgg} />
+      <div className={`transition-opacity duration-500 ${siteCleaned ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+        <Navbar onTriggerEasterEgg={triggerEasterEgg} />
+      </div>
 
       {/* Main Experience Layout */}
-      <main className="relative z-10 space-y-12">
+      <main className={`relative z-10 space-y-12 transition-opacity duration-500 ${siteCleaned ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <HeroSection />
         <AboutSection />
         <StatsSection />
@@ -189,22 +241,51 @@ export default function App() {
         <CertificatesSection onOpenAllCertificates={() => setAllCertificatesOpen(true)} />
         <BooksSection onSelectBook={setSelectedBook} />
         <AchievementsSection />
-        <TerminalSection
-          onTriggerEasterEgg={triggerMatrixOnly}
-          onOpenAchievements={() => setAchievementsModalOpen(true)}
-          onTriggerBreakout={() => setBreakoutGameOpen(true)}
-        />
-        <TechLabSection />
-        <ContactSection />
       </main>
 
-      {/* Footer */}
-      <Footer />
+      {/* Terminal Section remains interactive so user can type 'restore' */}
+      <TerminalSection
+        onTriggerEasterEgg={triggerMatrixOnly}
+        onOpenAchievements={() => setAchievementsModalOpen(true)}
+        onTriggerBreakout={() => setBreakoutGameOpen(true)}
+        onTriggerStarWars={() => setStarWarsOpen(true)}
+        onTriggerClean={() => setSiteCleaned(true)}
+        onRestoreClean={() => setSiteCleaned(false)}
+      />
+
+      <div className={`transition-opacity duration-500 ${siteCleaned ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+        <TechLabSection />
+        <ContactSection />
+        <Footer />
+      </div>
+
+      {/* Floating Clean Mode Active Banner */}
+      {siteCleaned && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[99999] px-6 py-3.5 rounded-2xl bg-[#06140d]/95 border border-[#00ff88]/50 text-white font-mono text-xs shadow-glow-lg flex items-center gap-4 animate-bounce">
+          <span className="flex items-center gap-2 text-[#00ff88]">
+            <Trash2 className="w-4 h-4 text-[#00ff88]" />
+            <span>Modo Limpeza Total Ativo — O site foi limpo!</span>
+          </span>
+          <button
+            onClick={() => setSiteCleaned(false)}
+            className="px-4 py-1.5 rounded-xl bg-gradient-to-r from-[#059669] to-[#00ff88] text-black font-extrabold flex items-center gap-1.5 hover:scale-105 transition-all cursor-pointer shadow-sm"
+          >
+            <RotateCcw className="w-3.5 h-3.5" />
+            <span>Restaurar Site (ESC)</span>
+          </button>
+        </div>
+      )}
 
       {/* Breakout Arcade Fullscreen Game Overlay */}
       <BreakoutOverlay
         isOpen={breakoutGameOpen}
         onClose={() => setBreakoutGameOpen(false)}
+      />
+
+      {/* Star Wars 3D Crawl Easter Egg Overlay */}
+      <StarWarsCrawlOverlay
+        isOpen={starWarsOpen}
+        onClose={() => setStarWarsOpen(false)}
       />
 
       {/* Catálogo Completo de Tecnologias & Conhecimentos (Renderizado no nível raiz z-[999]) */}
