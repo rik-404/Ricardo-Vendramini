@@ -493,6 +493,43 @@ export const projectsData = [
     idea: "Desenvolver uma aplicação SPA robusta desacoplada com checkout de orçamentos via WhatsApp, conversão inteligente de cotações aprovadas para Ordens de Serviço (#OS-xxxx), controle de permissões por vendedor/admin (RBAC) e sincronização cloud no Supabase.",
     construction: "Construído com HTML5 semântico, CSS3 Vanilla (Design System glassmorphism, temas HSL/RGB, @media print para folha A4 em 2 vias), JavaScript ES6+ puro (+140 funções nativas para CRUD, estado e filtros) e Supabase (PostgreSQL cloud com RLS). Hospedado na Vercel com Clean URLs.",
     result: "Mais de 40 telas e modais operacionais, conversão instantânea de orçamentos aprovados em O.S., emissão de ordens de serviço em 2 vias impressas (Loja e Cliente), notificações diretas via WhatsApp e zero dependência de frameworks pesados.",
+    architectureDetails: {
+      title: "Desafios Arquiteturais & Design de Banco de Dados — C4T4T4U",
+      architectureSummary: "Arquitetura SPA desacoplada em JavaScript ES6+ Vanilla de alta performance (+140 funções nativas) conectada diretamente ao Supabase PostgreSQL Cloud. Eliminou a necessidade de dependências pesadas de terceiros e entregou carregamento instantâneo em conexões móveis fracas.",
+      challenges: [
+        {
+          topic: "Conversão Dinâmica de Cotação para Ordem de Serviço (#OS-xxxx)",
+          solution: "Construção de uma máquina de estados atômica no banco de dados. Quando o orçamento é aprovado pelo cliente via WhatsApp ou balcão, uma procedure PostgreSQL clona a cotação transformando-a em uma Ordem de Serviço com numeração sequencial única, disparando snapshots do valor das peças e termo de garantia."
+        },
+        {
+          topic: "Emissão de Comprovante Físico A4 em 2 Vias Sem Plugins Extras",
+          solution: "Desenvolvimento de um motor de renderização de impressão utilizando CSS `@media print` puro. Com um único clique, o sistema formata o documento dividindo a página A4 exatamente ao meio em duas vias idênticas (Via da Loja e Via do Cliente) com código de barras, termos de garantia jurídica e assinatura digital."
+        },
+        {
+          topic: "Arquitetura Zero-Framework & Resiliência de Estado",
+          solution: "Criação de um gerenciador de estado reativo próprio baseado em pub/sub e proxy nativo do JS. Permitiu manter +40 modais operacionais e fluxos de caixa em execução suave com 60fps sem a sobrecarga de manipulação pesada de virtual DOM."
+        }
+      ],
+      databaseDesign: [
+        {
+          entity: "Tabela `work_orders` (Ordens de Serviço)",
+          schemaDetails: "Contém identificador único sequencial `#OS-xxxx`, chaves estrangeiras para clientes (`customers`), técnicos responsáveis (`profiles`), dados do equipamento (marca, modelo, número de série, defeito relatado, laudo técnico) e valores discriminados de peças e mão de obra."
+        },
+        {
+          entity: "Tabela `quotes` & Itens Orçados",
+          schemaDetails: "Estrutura relacional pai-filho (`quote_items`) com cálculo dinâmico de impostos e margem de lucro. Permite aprovação parcial de itens e histórico de revisões de preço antes da conversão final."
+        },
+        {
+          entity: "Políticas de Segurança RLS & Auditoria",
+          schemaDetails: "Permissões configuradas via RLS no Supabase: Clientes externos visualizam apenas o status da sua própria O.S. via token seguro; técnicos acessam a fila de bancada; administradores gerenciam balanço financeiro e estoque de componentes."
+        }
+      ],
+      techDecisions: [
+        "JavaScript ES6+ Vanilla para maximizar a velocidade de execução em computadores antigos da assistência técnica.",
+        "CSS @media print responsivo com tipografia otimizada para impressoras térmicas e jato de tinta A4.",
+        "Integração nativa com a API do WhatsApp para envio automático de notificações de status da O.S."
+      ]
+    },
     technologies: ["HTML5", "CSS3", "JavaScript ES6+", "Supabase", "PostgreSQL", "Vercel", "WhatsApp API"],
     date: "2026",
     link: "https://c4t4t4ueletronicos.vercel.app/",
@@ -511,6 +548,43 @@ export const projectsData = [
     idea: "Desenvolver uma solução completa SPA desacoplada utilizando React 18, TypeScript e Supabase como BaaS (PostgreSQL relacional com Row Level Security), automatizando a captura de leads via Webhooks e fornecendo relatórios gráficos em tempo real.",
     construction: "Construído com React 18, TypeScript, Vite, Tailwind CSS, Shadcn UI / Radix UI, TanStack Query, React Router DOM, Recharts e Supabase (Autenticação RBAC de 5 níveis, PostgreSQL RLS e Storage Buckets público/privado). Geração estática de meta-tags otimizada para SEO e suporte nativo a PWA.",
     result: "Mais de 62.896 linhas de código em produção, 134+ componentes React reutilizáveis, 35 páginas/rotas ativas, 25 migrações SQL no Supabase e distribuição inteligente de leads de anúncios para a equipe comercial.",
+    architectureDetails: {
+      title: "Desafios Arquiteturais & Design de Banco de Dados — Elite House",
+      architectureSummary: "Arquitetura SPA reativa com desacoplamento total entre o Frontend (React 18 + TypeScript + Vite) e o Backend Serverless (Supabase BaaS PostgreSQL). Esta abordagem eliminou custos de servidores tradicionais e garantiu performance de milissegundos para os usuários finais.",
+      challenges: [
+        {
+          topic: "Controle de Acesso Granular (RBAC + RLS) em Multinível",
+          solution: "Implementação de 5 níveis de privilégios (Administrador, Gerente, Coordenador, Corretor e Cliente público). O isolamento de leads e imóveis foi resolvido diretamente no banco via Supabase Row Level Security (RLS), impedindo que um corretor visualize leads e comissões atribuídas a outros profissionais mesmo em casos de chamadas diretas de API."
+        },
+        {
+          topic: "Ingestão de Leads em Tempo Real via Facebook Ads Webhooks",
+          solution: "Construção de uma rota Serverless Edge Function com verificação de assinatura cryptographic HMAC SHA-256 do Meta Webhooks. Os leads capturados em anúncios de imóveis são validados, desduplicados e roteados em formato Round-Robin para os corretores plantonistas com alertas em tempo real."
+        },
+        {
+          topic: "Filtros Imobiliários Multi-Paramétricos de Alta Velocidade",
+          solution: "Combinação de índices GIN/GiST no PostgreSQL para campos de localização e JSONB com TanStack Query no Frontend. Resultados de buscas com +15 filtros combinados (tipo, preço, bairro, suítes, vagas, área) retornam em menos de 45ms com cache inteligente e invalidação seletiva."
+        }
+      ],
+      databaseDesign: [
+        {
+          entity: "Tabela `properties` (Imóveis)",
+          schemaDetails: "Modelagem com chaves primárias UUIDv4, campos numéricos indexados B-Tree para valores/área e campos `jsonb` para comodidades e galerias de fotos de alta resolução. Suporta geolocalização com coordenadas e controle de disponibilidade em tempo real."
+        },
+        {
+          entity: "Tabela `leads` & Histórico de Interações",
+          schemaDetails: "Relacionamento N:1 com a tabela de corretores (`profiles`), rastreamento de utm_source, estágio no funil de vendas (Kanban) e histórico encadeado em `lead_activities` para auditoria e métricas de conversão."
+        },
+        {
+          entity: "Políticas de Segurança (Row Level Security - RLS)",
+          schemaDetails: "Uso da função nativa `auth.uid()` para restringir operações de `SELECT`, `UPDATE` e `DELETE`. Apenas admins e gerentes possuem bypass via `service_role` para relatórios globais de comissões."
+        }
+      ],
+      techDecisions: [
+        "Vite + Code Splitting por rota para manter a carga inicial (Initial JS Bundle) em menos de 180kB.",
+        "TanStack Query (React Query) para eliminação de boilerplate de Redux e gerenciamento de estado de servidor com refetch automático.",
+        "Shadcn UI + Tailwind CSS para garantir acessibilidade nativa WAI-ARIA sem sacrificar a identidade visual cyberpunk/premium."
+      ]
+    },
     technologies: ["React 18", "TypeScript", "Vite", "Tailwind CSS", "Shadcn UI", "Supabase", "PostgreSQL", "TanStack Query", "Node.js", "PWA"],
     date: "2025",
     link: "https://elitehousepiracicaba.com.br",

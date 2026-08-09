@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink, CheckCircle2, Lightbulb, Wrench, Trophy, ArrowDown, Lock } from 'lucide-react';
+import { X, ExternalLink, CheckCircle2, Lightbulb, Wrench, Trophy, ArrowDown, Lock, Cpu, ShieldCheck, Database } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function ProjectModal({ project, onClose }) {
@@ -167,6 +167,84 @@ export default function ProjectModal({ project, onClose }) {
                   {project.result}
                 </p>
               </div>
+
+              {/* 5. Deep Dive Arquitetural & Banco de Dados (Para Projetos Principais como Elite House & C4T4T4U) */}
+              {project.architectureDetails && (
+                <div className="p-6 rounded-2xl bg-[#061009] border-2 border-[#00ff88]/40 space-y-6 shadow-2xl">
+                  <div className="flex items-center gap-3 border-b border-[#00ff88]/20 pb-3">
+                    <div className="p-2 rounded-lg bg-[#00ff88]/20 text-[#00ff88]">
+                      <Cpu className="w-6 h-6 animate-pulse" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-mono text-[#00ff88] uppercase tracking-widest block">
+                        {lang === 'en' ? 'Technical Article & Deep Dive' : 'Artigo Técnico & Arquitetura'}
+                      </span>
+                      <h3 className="text-xl font-extrabold text-white">
+                        {project.architectureDetails.title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <p className="text-slate-300 text-sm italic bg-[#040805] p-3.5 rounded-xl border border-white/5 leading-relaxed">
+                    "{project.architectureDetails.architectureSummary}"
+                  </p>
+
+                  {/* Desafios Arquiteturais Enfrentados */}
+                  <div className="space-y-3">
+                    <h4 className="text-sm font-bold text-[#00ff88] flex items-center gap-2 font-mono">
+                      <ShieldCheck className="w-4 h-4 text-[#00ff88]" />
+                      {lang === 'en' ? 'Architectural Challenges & Solutions' : 'Desafios Arquiteturais Enfrentados & Soluções'}
+                    </h4>
+                    <div className="grid grid-cols-1 gap-3">
+                      {project.architectureDetails.challenges.map((c, i) => (
+                        <div key={i} className="p-4 rounded-xl bg-[#09150d] border border-white/10 space-y-1">
+                          <h5 className="text-xs font-bold text-white flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-full bg-[#00ff88] inline-block shrink-0" />
+                            {c.topic}
+                          </h5>
+                          <p className="text-xs text-slate-300 leading-relaxed pl-3">
+                            {c.solution}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Decisões de Design de Banco de Dados */}
+                  <div className="space-y-3">
+                    <h4 className="text-sm font-bold text-[#00f2fe] flex items-center gap-2 font-mono">
+                      <Database className="w-4 h-4 text-[#00f2fe]" />
+                      {lang === 'en' ? 'Database Design & RLS Security' : 'Design de Banco de Dados & Políticas RLS'}
+                    </h4>
+                    <div className="grid grid-cols-1 gap-3">
+                      {project.architectureDetails.databaseDesign.map((d, i) => (
+                        <div key={i} className="p-3.5 rounded-xl bg-[#071318] border border-[#00f2fe]/20 space-y-1">
+                          <h5 className="text-xs font-bold text-[#00f2fe] font-mono">
+                            {d.entity}
+                          </h5>
+                          <p className="text-xs text-slate-300 leading-relaxed">
+                            {d.schemaDetails}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Trade-offs & Decisões Técnicas */}
+                  {project.architectureDetails.techDecisions && (
+                    <div className="pt-2">
+                      <h4 className="text-xs font-bold text-slate-400 font-mono mb-2 uppercase">
+                        {lang === 'en' ? 'Core Technical Trade-offs' : 'Trade-offs & Decisões de Engenharia'}
+                      </h4>
+                      <ul className="text-xs text-slate-300 space-y-1.5 list-disc pl-5 font-sans">
+                        {project.architectureDetails.techDecisions.map((td, i) => (
+                          <li key={i}>{td}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
 
             </div>
 
