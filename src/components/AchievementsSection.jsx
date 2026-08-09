@@ -1,9 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Star, Trophy } from 'lucide-react';
-import { achievementsData } from '../data/portfolioData';
+import { getAchievementsData } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function AchievementsSection() {
+  const { lang, t } = useLanguage();
+  const achievements = getAchievementsData(lang);
+
   return (
     <section id="achievements" className="py-24 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -12,19 +16,26 @@ export default function AchievementsSection() {
         <div className="flex flex-col items-center text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0c140e] border border-[#10b981]/30 mb-4">
             <Trophy className="w-3.5 h-3.5 text-[#00ff88]" />
-            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">Marcos & Feitos</span>
+            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">
+              {lang === 'en' ? 'Achievements & Impact' : 'Marcos & Feitos'}
+            </span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">
-            Coisas que construí ao <span className="text-gradient-green">longo do caminho.</span>
+            {lang === 'en' ? 'Built along ' : 'Coisas que construí ao '}
+            <span className="text-gradient-green">
+              {lang === 'en' ? 'the journey.' : 'longo do caminho.'}
+            </span>
           </h2>
           <p className="text-slate-400 max-w-2xl font-light text-base">
-            Conquistas consolidadas através de projetos de impacto, liderança e aprendizado técnico.
+            {lang === 'en'
+              ? 'Milestones achieved through impactful projects, leadership, and technical mastery.'
+              : 'Conquistas consolidadas através de projetos de impacto, liderança e aprendizado técnico.'}
           </p>
         </div>
 
         {/* Achievements Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {achievementsData.map((item, index) => (
+          {achievements.map((item, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
@@ -54,7 +65,7 @@ export default function AchievementsSection() {
 
               <div className="mt-6 pt-4 border-t border-white/5 flex items-center gap-1.5 text-[11px] font-mono text-slate-400">
                 <Star className="w-3.5 h-3.5 text-[#00ff88]" />
-                <span>Impacto Consolidado</span>
+                <span>{t('achievements.impactLabel')}</span>
               </div>
             </motion.div>
           ))}

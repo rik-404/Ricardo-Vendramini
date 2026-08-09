@@ -2,13 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
 import { Terminal as TerminalIcon, Play, RefreshCw, Sparkles, X, Gamepad2, ArrowLeft, ArrowRight, Zap, Trophy } from 'lucide-react';
-import { terminalCommands } from '../data/portfolioData';
+import { terminalCommands, terminalCommandsEn } from '../data/portfolioData';
 import { dispatchAchievementUnlocked, ACHIEVEMENTS_META } from './AchievementToast';
 import AchievementsModal from './AchievementsModal';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements, onTriggerBreakout, onTriggerStarWars, onTriggerClean, onRestoreClean }) {
+  const { lang, t, toggleLang, changeLang } = useLanguage();
   const [inputVal, setInputVal] = useState('');
-  const [history, setHistory] = useState(terminalCommands.welcome);
+  const [history, setHistory] = useState(lang === 'en' ? terminalCommandsEn.welcome : terminalCommands.welcome);
   const [gameActive, setGameActive] = useState(false);
   const [score, setScore] = useState(0);
   const [lives, setLives] = useState(3);
@@ -208,7 +210,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
       if (e.code === 'Escape') {
         setGameActive(false);
-        setHistory((prev) => [...prev, '> Jogo encerrado. Digite \'help\' para ver mais comandos.']);
+        setHistory((prev) => [...prev, t('terminal.gameEnded')]);
       }
 
       if ((e.code === 'Space' || e.code === 'Enter') && !g.gameOver && !g.victory) {
@@ -493,12 +495,12 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
         ctx.font = 'bold 22px monospace';
         ctx.fillStyle = '#ef4444';
         ctx.textAlign = 'center';
-        ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 15);
+        ctx.fillText(t('terminal.gameOver'), canvas.width / 2, canvas.height / 2 - 15);
 
         ctx.font = '12px monospace';
         ctx.fillStyle = '#cbd5e1';
-        ctx.fillText(`Pontuação Final: ${g.score}`, canvas.width / 2, canvas.height / 2 + 15);
-        ctx.fillText('Pressione [ESPAÇO] para Reiniciar ou [ESC] para Sair', canvas.width / 2, canvas.height / 2 + 40);
+        ctx.fillText(`${t('terminal.finalScore')} ${g.score}`, canvas.width / 2, canvas.height / 2 + 15);
+        ctx.fillText(t('terminal.pressRestartSpace'), canvas.width / 2, canvas.height / 2 + 40);
       }
 
       if (g.victory) {
@@ -507,12 +509,12 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
         ctx.font = 'bold 22px monospace';
         ctx.fillStyle = '#00ff88';
         ctx.textAlign = 'center';
-        ctx.fillText('VITÓRIA! ALIENS DESTRUÍDOS', canvas.width / 2, canvas.height / 2 - 15);
+        ctx.fillText(t('terminal.victory'), canvas.width / 2, canvas.height / 2 - 15);
 
         ctx.font = '12px monospace';
         ctx.fillStyle = '#cbd5e1';
-        ctx.fillText(`Pontuação Final: ${g.score}`, canvas.width / 2, canvas.height / 2 + 15);
-        ctx.fillText('Pressione [ESPAÇO] para Jogar Novamente', canvas.width / 2, canvas.height / 2 + 40);
+        ctx.fillText(`${t('terminal.finalScore')} ${g.score}`, canvas.width / 2, canvas.height / 2 + 15);
+        ctx.fillText(t('terminal.pressPlayAgainSpace'), canvas.width / 2, canvas.height / 2 + 40);
       }
     };
 
@@ -564,40 +566,40 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
     // Admin mode: waiting for password
     if (adminMode) {
-      const maskedHistory = [...history, `senha: ${'*'.repeat(inputVal.trim().length)}`];
+      const maskedHistory = [...history, `${t('terminal.passwordPrompt').slice(1)} ${'*'.repeat(inputVal.trim().length)}`];
       setInputVal('');
 
       if (cmd === 'admin admin' || cmd === 'admin' || cmd === 'root') {
         setAdminMode(false);
         setShowPostIt(false);
-        setHistory([...maskedHistory, '', '[OK] Senha aceita. Autenticando...']);
+        setHistory([...maskedHistory, '', t('terminal.passOk')]);
 
         setTimeout(() => {
-          setHistory((prev) => [...prev, '> Carregando painel administrativo...']);
+          setHistory((prev) => [...prev, t('terminal.loadingPanel')]);
         }, 600);
 
         setTimeout(() => {
-          setHistory((prev) => [...prev, '[░░░░░░░░░░░░░░░] 0% - Conectando ao servidor...']);
+          setHistory((prev) => [...prev, t('terminal.connectingServer')]);
         }, 1200);
 
         setTimeout(() => {
-          setHistory((prev) => [...prev, '[████░░░░░░░░░░░] 28% - Carregando módulos...']);
+          setHistory((prev) => [...prev, t('terminal.loadingModules')]);
         }, 2000);
 
         setTimeout(() => {
-          setHistory((prev) => [...prev, '[████████░░░░░░░] 55% - Verificando permissões...']);
+          setHistory((prev) => [...prev, t('terminal.checkingPerms')]);
         }, 2800);
 
         setTimeout(() => {
-          setHistory((prev) => [...prev, '[████████████░░░] 82% - Inicializando dashboard...']);
+          setHistory((prev) => [...prev, t('terminal.initDashboard')]);
         }, 3500);
 
         setTimeout(() => {
-          setHistory((prev) => [...prev, '[███████████████] 100% - Pronto!']);
+          setHistory((prev) => [...prev, t('terminal.ready100')]);
         }, 4200);
 
         setTimeout(() => {
-          setHistory((prev) => [...prev, '', '> Abrindo painel admin...']);
+          setHistory((prev) => [...prev, '', t('terminal.openingPanel')]);
         }, 4800);
 
         setTimeout(() => {
@@ -608,7 +610,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
         return;
       } else {
-        setHistory([...maskedHistory, '', '❌ Senha incorreta. Acesso negado.', '> Tente novamente com o comando \'root\'.']);
+        setHistory([...maskedHistory, '', t('terminal.wrongPassword'), `> ${t('terminal.tryAgain')} 'root'.`]);
         setAdminMode(false);
         setShowPostIt(false);
         return;
@@ -625,12 +627,12 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       setHistory([
         ...newHistory,
         '',
-        '🔐 ACESSO RESTRITO — Painel Root Ricardo.DEV',
+        t('terminal.rootAccess'),
         '',
-        '> Autenticação necessária.',
-        '> Digite a senha de root para continuar...',
+        t('terminal.authNeeded'),
+        t('terminal.rootPasswordPrompt'),
         '',
-        'senha:'
+        t('terminal.passwordPrompt')
       ]);
       setAdminMode(true);
 
@@ -649,7 +651,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
     if (cmd === 'clean' || cmd === 'limpar' || cmd === 'clean-site' || cmd === 'purge') {
       unlockAchievement('clean');
-      newHistory.push('> 🧹 Modo Limpeza Total ativado! Ocultando todos os elementos do site...');
+      newHistory.push(t('terminal.cleanActivated'));
       setHistory(newHistory);
       setInputVal('');
       if (onTriggerClean) onTriggerClean();
@@ -657,7 +659,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
     }
 
     if (cmd === 'restore' || cmd === 'restaurar') {
-      newHistory.push('> ✨ Restaurando a estrutura e todos os elementos do site...');
+      newHistory.push(t('terminal.restoreActivated'));
       setHistory(newHistory);
       setInputVal('');
       if (onRestoreClean) onRestoreClean();
@@ -666,7 +668,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
     if (cmd === 'matrix') {
       unlockAchievement('matrix');
-      newHistory.push('> Executando protocolo Matrix...');
+      newHistory.push(t('terminal.matrixRunning'));
       setHistory(newHistory);
       setInputVal('');
       if (onTriggerEasterEgg) onTriggerEasterEgg();
@@ -675,7 +677,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
     if (cmd === 'konami') {
       unlockAchievement('konami');
-      newHistory.push('> 🎮 Código Konami ativado! Abrindo modo místico...');
+      newHistory.push(t('terminal.konamiActivated'));
       setHistory(newHistory);
       setInputVal('');
       if (onTriggerEasterEgg) onTriggerEasterEgg();
@@ -684,7 +686,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
     if (cmd === 'tilt' || cmd === 'balancar' || cmd === 'terremoto') {
       unlockAchievement('tilt');
-      newHistory.push('> ⚡ ALERTA DE SISMO: Modo TILT ativado! Balançando toda a estrutura do site...');
+      newHistory.push(t('terminal.tiltActivated'));
       setHistory(newHistory);
       setInputVal('');
 
@@ -704,7 +706,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
     if (cmd === 'breakout' || cmd === 'bloquinhos' || cmd === 'tijolos' || cmd === 'arcanoid' || cmd === 'arkanoid') {
       unlockAchievement('breakout');
-      newHistory.push('> 🧱 Modo BREAKOUT ativado! Transformando o site no jogo de destruir blocos...');
+      newHistory.push(t('terminal.breakoutActivated'));
       setHistory(newHistory);
       setInputVal('');
       if (onTriggerBreakout) onTriggerBreakout();
@@ -713,10 +715,39 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
     if (cmd === 'starwars' || cmd === 'star-wars' || cmd === 'vader' || cmd === 'jedi' || cmd === 'forcemode') {
       unlockAchievement('starwars');
-      newHistory.push('> 🌌 Modo STAR WARS ativado! Que a Força esteja com você...');
+      newHistory.push(t('terminal.starwarsActivated'));
       setHistory(newHistory);
       setInputVal('');
       if (onTriggerStarWars) onTriggerStarWars();
+      return;
+    }
+
+    if (cmd === 'english' || cmd === 'ingles' || cmd === 'inglês' || cmd === 'en') {
+      unlockAchievement('polyglot');
+      if (changeLang) changeLang('en');
+      else toggleLang();
+      newHistory.push('> 🌐 Switched site language to English!');
+      setHistory(newHistory);
+      setInputVal('');
+      return;
+    }
+
+    if (cmd === 'portugues' || cmd === 'português' || cmd === 'portuguese' || cmd === 'pt') {
+      unlockAchievement('polyglot');
+      if (changeLang) changeLang('pt');
+      else toggleLang();
+      newHistory.push('> 🌐 Idioma do site alterado para Português!');
+      setHistory(newHistory);
+      setInputVal('');
+      return;
+    }
+
+    if (cmd === 'lang' || cmd === 'idioma' || cmd === 'language' || cmd === 'polyglot') {
+      unlockAchievement('polyglot');
+      toggleLang();
+      newHistory.push('> 🌐 Idioma alterado com sucesso / Language switched successfully!');
+      setHistory(newHistory);
+      setInputVal('');
       return;
     }
 
@@ -738,10 +769,10 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       setHistory([
         ...newHistory,
         '',
-        '🔄 CONQUISTAS REINICIADAS!',
+        t('terminal.achievementsReset'),
         '────────────────────────────────────────────────',
-        '> Todos os segredos, mosca e post-it foram resetados com sucesso.',
-        '> Explore novamente o site e o terminal para redescobrir os easter eggs! 🎮',
+        t('terminal.achievementsResetDesc1'),
+        t('terminal.achievementsResetDesc2'),
         ''
       ]);
       setInputVal('');
@@ -752,9 +783,9 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       setHistory([
         ...newHistory,
         '',
-        '🏆 GALERIA DE CONQUISTAS:',
-        '> Para visualizar todas as conquistas e segredos (bloqueadas e desbloqueadas), use o botão "Ver Galeria de Conquistas" localizado abaixo deste terminal.',
-        '> Para reiniciar todo o progresso de conquistas, digite "reset".',
+        t('terminal.achievementsGallery'),
+        t('terminal.achievementsGalleryDesc1'),
+        t('terminal.achievementsGalleryDesc2'),
         ''
       ]);
       setInputVal('');
@@ -762,19 +793,19 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
     }
 
     if (cmd === 'help') {
-      setHistory([...newHistory, ...terminalCommands.help]);
+      setHistory([...newHistory, ...(lang === 'en' ? terminalCommandsEn.help : terminalCommands.help)]);
     } else if (cmd === 'sobre') {
-      setHistory([...newHistory, 'RICARDO VENDRAMINI: Desenvolvedor, Líder & Criador de Soluções Digitais com foco em produtos de alta performance.']);
+      setHistory([...newHistory, t('terminal.aboutResp')]);
     } else if (cmd === 'skills') {
-      setHistory([...newHistory, 'SKILLS: React, TypeScript, Node.js, Next.js, Supabase, SQL, Linux, Git, Tailwind CSS, Liderança de Equipes.']);
+      setHistory([...newHistory, t('terminal.skillsResp')]);
     } else if (cmd === 'projetos') {
-      setHistory([...newHistory, 'PROJETOS: C4T4T4U Eletrônicos, Elite House Piracicaba, Vendramini Informática, Cigana Morgana, Rei das Roms, Festa Fácil.']);
+      setHistory([...newHistory, t('terminal.projectsResp')]);
     } else if (cmd === 'livros') {
-      setHistory([...newHistory, 'LIVROS: Código, Processos & Pessoas | Da Ideia à Produção']);
+      setHistory([...newHistory, t('terminal.booksResp')]);
     } else if (cmd === 'contato') {
-      setHistory([...newHistory, 'CONTATO: contato@ricardovendramini.dev | LinkedIn & GitHub: Ricardo Vendramini']);
+      setHistory([...newHistory, t('terminal.contactResp')]);
     } else {
-      setHistory([...newHistory, `Comando não reconhecido: '${cmd}'. Digite 'help' para ver os comandos.`]);
+      setHistory([...newHistory, t('terminal.cmdUnknown').replace('{cmd}', cmd)]);
     }
 
     setInputVal('');
@@ -788,11 +819,11 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
         <div className="flex flex-col items-center text-center mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0c140e] border border-[#10b981]/30 mb-4">
             <TerminalIcon className="w-3.5 h-3.5 text-[#00ff88]" />
-            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">CLI Interativo & Arcade</span>
+            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">{t('terminal.badge')}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-3">
-            RICARDO.<span className="text-[#00ff88]">DEV</span> Terminal
+            RICARDO.<span className="text-[#00ff88]">DEV</span> {t('terminal.titleTerm')}
           </h2>
         </div>
 
@@ -806,25 +837,25 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
               <span className="w-3 h-3 rounded-full bg-yellow-500/80 inline-block" />
               <span className="w-3 h-3 rounded-full bg-green-500/80 inline-block" />
               <span className="ml-2 text-slate-400 text-xs">
-                {gameActive ? 'RICARDO.DEV Arcade Mode - Space Invaders' : 'bash - 80x24'}
+                {gameActive ? t('terminal.arcadeMode') : 'bash - 80x24'}
               </span>
             </div>
 
             {gameActive ? (
               <div className="flex items-center gap-4 text-xs font-bold text-white">
-                <span className="text-[#00ff88]">PONTOS: {score}</span>
-                <span className="text-[#00f2fe]">VIDAS: {'❤️'.repeat(lives)}</span>
+                <span className="text-[#00ff88]">{t('terminal.points')} {score}</span>
+                <span className="text-[#00f2fe]">{t('terminal.lives')} {'❤️'.repeat(lives)}</span>
                 <button
                   onClick={() => setGameActive(false)}
                   className="px-2 py-0.5 rounded bg-red-500/20 text-red-400 hover:bg-red-500/40 text-[11px] flex items-center gap-1 border border-red-500/30"
                 >
-                  <X className="w-3 h-3" /> SAIR (ESC)
+                  <X className="w-3 h-3" /> {t('terminal.exit')}
                 </button>
               </div>
             ) : (
               <div className="flex items-center gap-2 text-[#00ff88] text-xs">
                 <span className="w-2 h-2 rounded-full bg-[#00ff88] animate-pulse" />
-                <span>ONLINE</span>
+                <span>{t('terminal.online')}</span>
               </div>
             )}
           </div>
@@ -845,14 +876,14 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
                   <button
                     onClick={() => handleTouchMove('left')}
                     className="p-3 rounded-xl bg-white/10 text-white hover:bg-[#00ff88]/20 hover:text-[#00ff88] border border-white/10"
-                    title="Mover para Esquerda"
+                    title={t('terminal.moveLeft')}
                   >
                     <ArrowLeft className="w-5 h-5" />
                   </button>
                   <button
                     onClick={() => handleTouchMove('right')}
                     className="p-3 rounded-xl bg-white/10 text-white hover:bg-[#00ff88]/20 hover:text-[#00ff88] border border-white/10"
-                    title="Mover para Direita"
+                    title={t('terminal.moveRight')}
                   >
                     <ArrowRight className="w-5 h-5" />
                   </button>
@@ -862,7 +893,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
                   onClick={handleTouchShoot}
                   className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#00f2fe] to-[#00ff88] text-black font-extrabold text-xs flex items-center gap-2 shadow-glow-sm"
                 >
-                  <Zap className="w-4 h-4" /> ATIRAR (ESPAÇO)
+                  <Zap className="w-4 h-4" /> {t('terminal.shoot')}
                 </button>
               </div>
             </div>
@@ -911,14 +942,14 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
           {!gameActive && (
             <form onSubmit={handleCommandSubmit} className="bg-[#040705] px-4 py-3 border-t border-white/10 flex items-center gap-2">
               <span className={`font-bold shrink-0 ${adminMode ? 'text-yellow-400' : 'text-[#00ff88]'}`}>
-                {adminMode ? '🔐 senha:' : 'ricardo@dev:~$'}
+                {adminMode ? t('terminal.passwordPrompt') : t('terminal.prompt')}
               </span>
               <input
                 ref={inputRef}
                 type={adminMode ? 'password' : 'text'}
                 value={inputVal}
                 onChange={(e) => setInputVal(e.target.value)}
-                placeholder={adminMode ? 'digite a senha...' : "digite 'help' para ver os comandos..."}
+                placeholder={adminMode ? t('terminal.passwordPlaceholder') : t('terminal.helpPlaceholder')}
                 className="w-full bg-transparent text-white focus:outline-none font-mono text-xs sm:text-sm placeholder-slate-600"
                 autoFocus
               />
@@ -940,13 +971,13 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
           >
             <div className="absolute inset-0 bg-gradient-to-r from-[#00ff88]/15 via-transparent to-[#00f2fe]/15 opacity-0 group-hover:opacity-100 transition-opacity" />
             <Trophy className="w-5 h-5 text-[#00ff88] group-hover:rotate-12 transition-transform duration-300" />
-            <span className="relative z-10">Ver Galeria de Conquistas (Bloqueadas & Desbloqueadas)</span>
+            <span className="relative z-10">{t('terminal.viewAchievements')}</span>
             <span className="relative z-10 ml-1 px-2.5 py-0.5 rounded-full bg-[#00ff88]/20 text-[#00ff88] text-xs font-mono border border-[#00ff88]/40">
               {achievements.size}/{Object.keys(ACHIEVEMENTS_META).length}
             </span>
           </motion.button>
           <p className="text-xs font-mono text-slate-400 mt-2.5">
-            Digite <code className="text-[#00ff88] bg-black/40 px-1.5 py-0.5 rounded border border-[#00ff88]/30">help</code> no terminal para ver todos os comandos 🎮
+            Digite <code className="text-[#00ff88] bg-black/40 px-1.5 py-0.5 rounded border border-[#00ff88]/30">help</code> {t('terminal.helpHint')}
           </p>
         </div>
 
@@ -992,7 +1023,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
               {/* Content */}
               <p className="text-[10px] text-amber-800/70 font-mono uppercase tracking-widest mb-1.5 font-bold flex items-center justify-between">
-                <span>📌 MEMO // DEV</span>
+                <span>{t('terminal.memoDev')}</span>
                 <span className="text-[9px] text-amber-700/50">v4.2</span>
               </p>
 
@@ -1006,7 +1037,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
               <div className="border-b border-dashed border-amber-700/30 my-2.5" />
 
               <p className="text-[9.5px] text-amber-900/75 font-mono italic leading-tight">
-                ⚠️ Lembrete: trocar credenciais padrão antes do deploy em produção!
+                {t('terminal.reminder')}
               </p>
             </div>
 
@@ -1014,7 +1045,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
             <button
               onClick={closePostIt}
               className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-red-500 text-white text-xs font-bold flex items-center justify-center shadow-lg hover:bg-red-600 transition-colors pointer-events-auto z-20"
-              title="Tirar post-it"
+              title={t('terminal.removePostIt')}
             >
               ×
             </button>
@@ -1051,15 +1082,15 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
               <span className="w-3 h-3 rounded-full bg-red-500" />
               <span className="w-3 h-3 rounded-full bg-yellow-500" />
               <span className="w-3 h-3 rounded-full bg-green-500" />
-              <span className="ml-3 text-white/90 text-xs sm:text-sm font-mono font-bold">RICARDO.DEV — Painel Administrativo v4.2.0</span>
+              <span className="ml-3 text-white/90 text-xs sm:text-sm font-mono font-bold">{t('terminal.adminPanel')}</span>
             </div>
             <button
               onClick={() => setRickrollActive(false)}
               className="px-3 py-1.5 rounded-xl bg-red-500/20 hover:bg-red-600 text-red-300 hover:text-white border border-red-500/40 transition-all font-mono text-xs flex items-center gap-1.5 cursor-pointer shadow-lg"
-              title="Fechar Painel"
+              title={t('terminal.closePanelTitle')}
             >
               <X className="w-4 h-4" />
-              <span>FECHAR PAINEL (ESC)</span>
+              <span>{t('terminal.closePanel')}</span>
             </button>
           </div>
 
@@ -1083,10 +1114,10 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
               🎵 Never Gonna Give You Up!
             </p>
             <p className="text-slate-300 text-sm font-mono">
-              Achou que tinha um painel admin de verdade? 😂
+              {t('terminal.trollMessage')}
             </p>
             <p className="text-[#00ff88] text-xs font-mono mt-2 font-bold">
-              Você foi Rickrolled pelo Ricardo.DEV 🎤
+              {t('terminal.rickrolled')}
             </p>
           </div>
         </div>,

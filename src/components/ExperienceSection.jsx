@@ -1,9 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Briefcase, Building, CheckCircle2, TrendingUp, Users } from 'lucide-react';
-import { experienceData } from '../data/portfolioData';
+import { getExperienceData } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function ExperienceSection() {
+  const { lang, t } = useLanguage();
+  const experiences = getExperienceData(lang);
+
   return (
     <section className="py-24 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -12,19 +16,26 @@ export default function ExperienceSection() {
         <div className="flex flex-col items-center text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0c140e] border border-[#10b981]/30 mb-4">
             <Briefcase className="w-3.5 h-3.5 text-[#00ff88]" />
-            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">Atuação Profissional</span>
+            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">
+              {lang === 'en' ? 'Professional Experience' : 'Atuação Profissional'}
+            </span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">
-            Experiência que vai <span className="text-gradient-green">além do código.</span>
+            {lang === 'en' ? 'Experience beyond ' : 'Experiência que vai '}
+            <span className="text-gradient-green">
+              {lang === 'en' ? 'code.' : 'além do código.'}
+            </span>
           </h2>
           <p className="text-slate-400 max-w-2xl font-light text-base">
-            Liderança, gestão de processos, visão de negócios e excelência na entrega de soluções.
+            {lang === 'en'
+              ? 'Leadership, process management, business vision, and technical excellence.'
+              : 'Liderança, gestão de processos, visão de negócios e excelência na entrega de soluções.'}
           </p>
         </div>
 
         {/* Experience Cards */}
         <div className="space-y-8 max-w-4xl mx-auto">
-          {experienceData.map((exp, index) => (
+          {experiences.map((exp, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, x: -30 }}
@@ -53,14 +64,16 @@ export default function ExperienceSection() {
 
               <div className="space-y-3">
                 <span className="text-xs font-mono text-[#00ff88] uppercase tracking-wider block">
-                  Destaques & Entregas de Impacto:
+                  {lang === 'en' ? 'Key Contributions & Impact:' : 'Principais Contribuições & Impacto:'}
                 </span>
-                {exp.highlights.map((highlight, hIdx) => (
-                  <div key={hIdx} className="flex items-start gap-3 text-sm text-slate-300">
-                    <CheckCircle2 className="w-4 h-4 text-[#00ff88] shrink-0 mt-1" />
-                    <span>{highlight}</span>
-                  </div>
-                ))}
+                <ul className="space-y-2">
+                  {exp.highlights.map((h, i) => (
+                    <li key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300 font-light">
+                      <CheckCircle2 className="w-4 h-4 text-[#00ff88] shrink-0 mt-0.5" />
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </motion.div>
           ))}

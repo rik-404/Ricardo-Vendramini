@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Search, Sparkles, Cpu, CheckCircle2, Info } from 'lucide-react';
-import { skillsCategories, skillsData } from '../data/portfolioData';
+import { skillsCategories, getSkillsData } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function AllSkillsModal({ isOpen, onClose }) {
+  const { lang, t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSkillDetail, setSelectedSkillDetail] = useState(null);
 
   if (!isOpen) return null;
+
+  const skillsData = getSkillsData(lang);
 
   const filteredSkills = skillsData.filter((skill) => {
     const matchesCategory =
@@ -48,21 +52,28 @@ export default function AllSkillsModal({ isOpen, onClose }) {
           <div className="p-6 sm:p-8 border-b border-white/10 shrink-0 bg-[#06100a]/90 relative">
             <button
               onClick={onClose}
-              className="absolute top-6 right-6 p-2.5 rounded-full bg-black/60 border border-white/20 text-white hover:text-[#00ff88] hover:border-[#00ff88] transition-all"
+              className="absolute top-6 right-6 p-2.5 rounded-full bg-black/60 border border-white/20 text-white hover:text-[#00ff88] hover:border-[#00ff88] transition-all cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="flex items-center gap-2 mb-2">
               <Cpu className="w-4 h-4 text-[#00ff88]" />
-              <span className="text-xs font-mono text-[#00ff88] uppercase tracking-widest">Catálogo de Conhecimentos</span>
+              <span className="text-xs font-mono text-[#00ff88] uppercase tracking-widest">
+                {lang === 'en' ? 'Knowledge Catalog' : 'Catálogo de Conhecimentos'}
+              </span>
             </div>
 
             <h2 className="text-2xl sm:text-4xl font-extrabold text-white">
-              Todas as Tecnologias & <span className="text-gradient-green">Conhecimentos</span>
+              {lang === 'en' ? 'All Technologies & ' : 'Todas as Tecnologias & '}
+              <span className="text-gradient-green">
+                {lang === 'en' ? 'Skills' : 'Conhecimentos'}
+              </span>
             </h2>
             <p className="text-slate-300 text-sm font-light mt-1 max-w-2xl">
-              Explore o ecossistema completo de linguagens, frameworks, bancos de dados, cloud e ferramentas utilizadas em produção.
+              {lang === 'en'
+                ? 'Explore the full stack ecosystem of languages, frameworks, databases, cloud platforms, and production tools.'
+                : 'Explore o ecossistema completo de linguagens, frameworks, bancos de dados, cloud e ferramentas utilizadas em produção.'}
             </p>
 
             {/* Controls Bar: Search & Category Filter Pills */}
@@ -73,7 +84,7 @@ export default function AllSkillsModal({ isOpen, onClose }) {
                 <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
-                  placeholder="Pesquisar tecnologia, ferramenta ou projeto..."
+                  placeholder={lang === 'en' ? 'Search technology, tool, or project...' : 'Pesquisar tecnologia, ferramenta ou projeto...'}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-black/60 border border-white/15 text-white text-xs placeholder:text-slate-500 focus:outline-none focus:border-[#00ff88] transition-all"
@@ -83,7 +94,7 @@ export default function AllSkillsModal({ isOpen, onClose }) {
                     onClick={() => setSearchQuery('')}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs"
                   >
-                    Limpar
+                    {lang === 'en' ? 'Clear' : 'Limpar'}
                   </button>
                 )}
               </div>
@@ -94,13 +105,15 @@ export default function AllSkillsModal({ isOpen, onClose }) {
                   <button
                     key={cat.id}
                     onClick={() => setActiveCategory(cat.id)}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-all ${
+                    className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-all cursor-pointer ${
                       activeCategory === cat.id
                         ? 'bg-[#00ff88] text-black font-bold shadow-glow-sm'
                         : 'glass-panel text-slate-300 hover:text-white hover:border-[#00ff88]/40'
                     }`}
                   >
-                    {cat.label}
+                    {lang === 'en'
+                      ? (cat.id === 'all' ? t('skills.categories.all') : t(`skills.categories.${cat.id}`))
+                      : t(`skills.categories.${cat.id}`)}
                   </button>
                 ))}
               </div>
@@ -132,7 +145,7 @@ export default function AllSkillsModal({ isOpen, onClose }) {
                     <p className="text-xs text-slate-300 max-w-xl">{selectedSkillDetail.description}</p>
                   </div>
                   <div className="shrink-0 bg-[#040705] p-3 rounded-xl border border-white/10">
-                    <span className="text-[11px] font-mono text-slate-400 block mb-1.5 uppercase">Projetos Relacionados:</span>
+                    <span className="text-[11px] font-mono text-slate-400 block mb-1.5 uppercase">{t('skills.relatedProjects')}</span>
                     <div className="flex flex-wrap gap-1.5">
                       {selectedSkillDetail.relatedProjects.map((p, idx) => (
                         <span key={idx} className="px-2.5 py-0.5 rounded bg-[#10b981]/20 text-[#00ff88] text-[11px] font-semibold">
@@ -150,8 +163,8 @@ export default function AllSkillsModal({ isOpen, onClose }) {
           <div className="p-6 sm:p-8 overflow-y-auto flex-1">
             {filteredSkills.length === 0 ? (
               <div className="text-center py-16 text-slate-400">
-                <p className="text-lg font-semibold mb-2">Nenhuma tecnologia encontrada</p>
-                <p className="text-xs text-slate-500">Tente ajustar a busca ou a categoria selecionada.</p>
+                <p className="text-lg font-semibold mb-2">{t('skills.noResultsTitle')}</p>
+                <p className="text-xs text-slate-500">{t('skills.noResultsDesc')}</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -202,14 +215,14 @@ export default function AllSkillsModal({ isOpen, onClose }) {
           {/* Modal Footer */}
           <div className="p-4 sm:p-6 border-t border-white/10 shrink-0 bg-[#06100a]/90 flex items-center justify-between">
             <span className="text-xs font-mono text-slate-400">
-              Exibindo <strong className="text-white">{filteredSkills.length}</strong> de {skillsData.length} tecnologias
+              {t('skills.showingOf')} <strong className="text-white">{filteredSkills.length}</strong> {t('skills.of')} {skillsData.length} {t('skills.technologies')}
             </span>
 
             <button
               onClick={onClose}
               className="px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-all"
             >
-              Fechar Catálogo
+              {t('skills.closeCatalog')}
             </button>
           </div>
 

@@ -1,68 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Award, Bug, Gamepad2, KeyRound, Terminal, Trash2, Trophy, Sparkles, Zap, Activity } from 'lucide-react';
+import { Award, Bug, Gamepad2, KeyRound, Terminal, Trash2, Trophy, Sparkles, Zap, Activity, Languages } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+
+export const ACHIEVEMENT_IDS = ['mosca', 'titulo', 'konami', 'matrix', 'navinha', 'root', 'tilt', 'breakout', 'starwars', 'clean', 'polyglot'];
 
 export const ACHIEVEMENTS_META = {
-  mosca: {
-    title: 'Caçador de Bugs',
-    description: 'Elimine a mosquinha que pousou no hero do portfólio.',
-    hint: '🔍 Dica: Título parado atrai inseto...',
-    icon: Bug,
-  },
-  titulo: {
-    title: 'Tenha raiva de mim',
-    description: 'Clique repetidamente no título para forçar uma falha crítica no sistema.',
-    hint: '🔍 Dica: Tenha raiva de logos...',
-    icon: Zap,
-  },
-  konami: {
-    title: 'Código Konami Clássico',
-    description: 'Digite a sequência secreta ↑ ↑ ↓ ↓ ← → ← → B A para ativar o modo místico.',
-    hint: '🔍 Dica: Use as setas do teclado para inserir a combinação secreta clássica de videogame...',
-    icon: Trophy,
-  },
-  matrix: {
-    title: 'Protocolo Matrix',
-    description: 'Digite "matrix" no terminal e veja a chuva de caracteres cair.',
-    hint: '🔍 Dica: Acesse o terminal e digite o nome de uma famosa franquia de ficção mística...',
-    icon: Sparkles,
-  },
-  navinha: {
-    title: 'Arcade Space Invaders',
-    description: 'Inicie "navinha" e defenda o mundo de formas geométricas.',
-    hint: '🔍 Dica: Que tal dar um "play"?',
-    icon: Gamepad2,
-  },
-  root: {
-    title: 'Acesso Root & Post-it',
-    description: 'Obtenha as credenciais de root no terminal.',
-    hint: '🔍 Dica: Tente solicitar acesso de superusuário digitando "root" no terminal...',
-    icon: KeyRound,
-  },
-  tilt: {
-    title: 'Modo Tilt & Terremoto',
-    description: 'Executou o comando "tilt" no terminal e fez toda a estrutura do site balançar.',
-    hint: '🔍 Dica: Faça as coisas balançarem no terminal...',
-    icon: Activity,
-  },
-  breakout: {
-    title: 'Mestre do Breakout',
-    description: 'Ativou o modo Breakout e destruiu os blocos do site com a raquete e a bolinha.',
-    hint: '🔍 Dica: Digite o nome do jogo famoso de quebrar tijolos...',
-    icon: Gamepad2,
-  },
-  starwars: {
-    title: 'Que a Força Esteja Com Você',
-    description: 'Ativou o modo Star Wars Crawl e transformou todo o site na abertura da galáxia.',
-    hint: '🔍 Dica: Digite o nome de uma famosa saga espacial no terminal ou no teclado...',
-    icon: Sparkles,
-  },
-  clean: {
-    title: 'Limpeza Total',
-    description: 'Executou o comando "clean" no terminal e deixou a tela totalmente limpa e vazia.',
-    hint: '🔍 Dica: Que tal limpar o site?...',
-    icon: Trash2,
-  },
+  mosca: { icon: Bug },
+  titulo: { icon: Zap },
+  konami: { icon: Trophy },
+  matrix: { icon: Sparkles },
+  navinha: { icon: Gamepad2 },
+  root: { icon: KeyRound },
+  tilt: { icon: Activity },
+  breakout: { icon: Gamepad2 },
+  starwars: { icon: Sparkles },
+  clean: { icon: Trash2 },
+  polyglot: { icon: Languages },
 };
 
 export function dispatchAchievementUnlocked(id) {
@@ -95,6 +49,7 @@ function playUnlockSound() {
 }
 
 export default function AchievementToast() {
+  const { t } = useLanguage();
   const [current, setCurrent] = useState(null);
   const queueRef = useRef([]);
   const showingRef = useRef(false);
@@ -125,8 +80,8 @@ export default function AchievementToast() {
       if (!meta) return;
       queueRef.current.push({
         id: e.detail.id,
-        title: meta.title,
-        description: meta.description,
+        title: t(`achievements.meta.${e.detail.id}.title`),
+        description: t(`achievements.meta.${e.detail.id}.description`),
         Icon: meta.icon,
       });
       if (!showingRef.current) showNext();
@@ -138,7 +93,7 @@ export default function AchievementToast() {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [t]);
 
   return (
     <AnimatePresence>
@@ -176,7 +131,7 @@ export default function AchievementToast() {
               <div className="min-w-0 flex-1">
                 <p className="flex items-center gap-1.5 text-[10px] font-mono tracking-[0.2em] text-[#00ff88]/80 uppercase mb-0.5">
                   <Award className="w-3 h-3" />
-                  Conquista desbloqueada
+                  {t('achievements.toastLabel')}
                 </p>
                 <h4 className="text-sm font-bold text-white truncate leading-tight">
                   {current.title}

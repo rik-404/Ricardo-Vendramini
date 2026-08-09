@@ -1,29 +1,39 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Search, Sparkles, ExternalLink, ChevronRight, Filter, FolderCode } from 'lucide-react';
-import { projectsData } from '../data/portfolioData';
+import { getProjectsData, projectsData } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function AllProjectsModal({ isOpen, onClose, onSelectProject }) {
-  const [activeFilter, setActiveFilter] = useState('Todas');
+  const { lang, t } = useLanguage();
+  const projects = getProjectsData(lang);
+  const [activeFilter, setActiveFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
   if (!isOpen) return null;
 
-  const categories = ['Todas', 'Plataforma / SaaS', 'Portal Institucional', 'Open Source', 'E-Commerce'];
+  const categories = ['all', 'saas', 'portal', 'openSource', 'ecommerce'];
+  const categoryLabel = (id) => t(`projects.categories.${id}`);
+  const filterKeywords = {
+    saas: ['plataforma', 'python', 'saas'],
+    portal: ['portal', 'institucional', 'landing'],
+    openSource: ['open source', 'web app'],
+    ecommerce: ['e-commerce', 'ecommerce'],
+  };
 
-  const filteredProjects = projectsData.filter((project) => {
+  const filteredProjects = projects.filter((project) => {
     const matchesCategory =
-      activeFilter === 'Todas' ||
-      project.category.toLowerCase().includes(activeFilter.toLowerCase()) ||
-      project.badge.toLowerCase().includes(activeFilter.toLowerCase());
+      activeFilter === 'all' ||
+      filterKeywords[activeFilter].some(
+        (kw) =>
+          project.category.toLowerCase().includes(kw) ||
+          project.badge.toLowerCase().includes(kw)
+      );
 
     const query = searchQuery.toLowerCase().trim();
-    const matchesSearch =
-      query === '' ||
-      project.name.toLowerCase().includes(query) ||
-      project.subtitle.toLowerCase().includes(query) ||
-      project.shortDescription.toLowerCase().includes(query) ||
-      project.technologies.some((tech) => tech.toLowerCase().includes(query));
+    const searchText =
+      `${project.name} ${project.subtitle} ${project.shortDescription} ${project.technologies.join(' ')}`.toLowerCase();
+    const matchesSearch = query === '' || searchText.includes(query);
 
     return matchesCategory && matchesSearch;
   });
@@ -58,14 +68,14 @@ export default function AllProjectsModal({ isOpen, onClose, onSelectProject }) {
 
             <div className="flex items-center gap-2 mb-2">
               <FolderCode className="w-4 h-4 text-[#00ff88]" />
-              <span className="text-xs font-mono text-[#00ff88] uppercase tracking-widest">Galeria Completa de Soluções</span>
+              <span className="text-xs font-mono text-[#00ff88] uppercase tracking-widest">{t('projects.allGallery')}</span>
             </div>
 
             <h2 className="text-2xl sm:text-4xl font-extrabold text-white">
-              Todos os Projetos & <span className="text-gradient-green">Aplicações</span>
+              {t('projects.allTitle')}<span className="text-gradient-green">{t('projects.allAccent')}</span>
             </h2>
             <p className="text-slate-300 text-sm font-light mt-1 max-w-2xl">
-              Explore o ecossistema completo de sistemas em produção, portais institucionais e projetos open source.
+              {t('projects.allSubtitle')}
             </p>
 
             {/* Controls Bar: Search & Category Filter Tags */}
@@ -76,7 +86,7 @@ export default function AllProjectsModal({ isOpen, onClose, onSelectProject }) {
                 <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
-                  placeholder="Pesquisar por nome, tecnologia ou palavra-chave..."
+                  placeholder={t('projects.searchPlaceholder')}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-black/60 border border-white/15 text-white text-xs placeholder:text-slate-500 focus:outline-none focus:border-[#00ff88] transition-all"
@@ -86,7 +96,7 @@ export default function AllProjectsModal({ isOpen, onClose, onSelectProject }) {
                     onClick={() => setSearchQuery('')}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs"
                   >
-                    Limpar
+                    {t('projects.clear')}
                   </button>
                 )}
               </div>
@@ -103,7 +113,7 @@ export default function AllProjectsModal({ isOpen, onClose, onSelectProject }) {
                         : 'glass-panel text-slate-300 hover:text-white hover:border-[#00ff88]/40'
                     }`}
                   >
-                    {cat}
+                    {categoryLabel(cat)}
                   </button>
                 ))}
               </div>
@@ -115,8 +125,8 @@ export default function AllProjectsModal({ isOpen, onClose, onSelectProject }) {
           <div className="p-6 sm:p-8 overflow-y-auto flex-1">
             {filteredProjects.length === 0 ? (
               <div className="text-center py-16 text-slate-400">
-                <p className="text-lg font-semibold mb-2">Nenhum projeto encontrado</p>
-                <p className="text-xs text-slate-500">Tente ajustar a busca ou o filtro de categoria selecionado.</p>
+                <p className="text-lg font-semibold mb-2">{t('projects.noResults')}</p>
+                <p className="text-xs text-slate-500">{t('projects.noResultsDesc')}</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -207,14 +217,14 @@ export default function AllProjectsModal({ isOpen, onClose, onSelectProject }) {
           {/* Modal Footer */}
           <div className="p-4 sm:p-6 border-t border-white/10 shrink-0 bg-[#06100a]/90 flex items-center justify-between">
             <span className="text-xs font-mono text-slate-400">
-              Exibindo <strong className="text-white">{filteredProjects.length}</strong> de {projectsData.length} projetos
+              {t('projects.showingOf')} <strong className="text-white">{filteredProjects.length}</strong> {t('projects.of')} {projectsData.length} {t('projects.projectsCount')}
             </span>
 
             <button
               onClick={onClose}
               className="px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-all"
             >
-              Fechar Galeria
+              {t('projects.closeGallery')}
             </button>
           </div>
 

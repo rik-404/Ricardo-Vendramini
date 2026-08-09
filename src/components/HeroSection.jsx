@@ -3,15 +3,22 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Code, Layers, Sparkles, Terminal, ChevronDown, Rocket, Building2 } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 import FlyEasterEgg from './FlyEasterEgg';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function HeroSection() {
+  const { lang, t } = useLanguage();
   const heroRef = useRef(null);
   const titleRef = useRef(null);
-  const prefixText = "Eu transformo ideias em ";
-  const gradientText = "experiências digitais.";
+
+  const prefixText = t('hero.prefix');
+  const gradientText = t('hero.gradient');
   const fullText = prefixText + gradientText;
 
   const [charIndex, setCharIndex] = useState(0);
+
+  useEffect(() => {
+    setCharIndex(0);
+  }, [lang]);
 
   useEffect(() => {
     if (charIndex < fullText.length) {
@@ -63,7 +70,7 @@ export default function HeroSection() {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00ff88]"></span>
           </span>
           <span className="text-xs font-mono text-[#00ff88] tracking-wider uppercase flex items-center gap-1">
-            Acessar Empresa ↗
+            {t('hero.access')} ↗
           </span>
         </motion.a>
 
@@ -92,7 +99,7 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-lg sm:text-xl text-slate-300 max-w-3xl font-light leading-relaxed mb-10"
         >
-          Desenvolvedor, líder e criador de soluções digitais. Da primeira linha de código ao produto colocado em produção.
+          {t('hero.description')}
         </motion.p>
 
         {/* CTA Buttons */}
@@ -106,7 +113,7 @@ export default function HeroSection() {
             href="#about"
             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-[#00f2fe] via-[#10b981] to-[#00ff88] text-black font-bold text-base shadow-glow-md hover:shadow-glow-lg transition-all transform hover:-translate-y-1 flex items-center justify-center gap-3 group"
           >
-            <span>Conhecer minha história</span>
+            <span>{t('hero.learnStory')}</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </a>
 
@@ -114,7 +121,7 @@ export default function HeroSection() {
             href="#projects"
             className="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel border border-[#00f2fe]/40 text-slate-100 hover:text-[#00ff88] hover:border-[#00ff88] font-semibold text-base transition-all transform hover:-translate-y-1 flex items-center justify-center gap-3 group"
           >
-            <span>Ver meus projetos</span>
+            <span>{t('hero.ctaProjects')}</span>
             <Rocket className="w-5 h-5 text-[#00f2fe] group-hover:rotate-12 transition-transform" />
           </a>
         </motion.div>
@@ -137,25 +144,25 @@ export default function HeroSection() {
             </div>
             <div className="flex items-center gap-2 text-[#00f2fe]">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Full Stack & Leadership</span>
+              <span>{t('hero.stackLabel')}</span>
             </div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-left">
             <div className="p-3 rounded-lg bg-[#040705]/60 border border-white/5 hover:border-[#00f2fe]/40 transition-colors">
-              <span className="text-[10px] font-mono uppercase text-[#00f2fe] block mb-1">Architecture</span>
+              <span className="text-[10px] font-mono uppercase text-[#00f2fe] block mb-1">{t('hero.stackArchitecture')}</span>
               <span className="text-xs font-semibold text-slate-200 block">React & Next.js</span>
             </div>
             <div className="p-3 rounded-lg bg-[#040705]/60 border border-white/5 hover:border-[#00ff88]/40 transition-colors">
-              <span className="text-[10px] font-mono uppercase text-[#00ff88] block mb-1">Services</span>
+              <span className="text-[10px] font-mono uppercase text-[#00ff88] block mb-1">{t('hero.stackServices')}</span>
               <span className="text-xs font-semibold text-slate-200 block">Node.js & Supabase</span>
             </div>
             <div className="p-3 rounded-lg bg-[#040705]/60 border border-white/5 hover:border-[#00f2fe]/40 transition-colors">
-              <span className="text-[10px] font-mono uppercase text-[#00f2fe] block mb-1">Infrastructure</span>
+              <span className="text-[10px] font-mono uppercase text-[#00f2fe] block mb-1">{t('hero.stackInfrastructure')}</span>
               <span className="text-xs font-semibold text-slate-200 block">Linux & Cloud Deploy</span>
             </div>
             <div className="p-3 rounded-lg bg-[#040705]/60 border border-white/5 hover:border-[#00ff88]/40 transition-colors">
-              <span className="text-[10px] font-mono uppercase text-[#00ff88] block mb-1">Governance</span>
+              <span className="text-[10px] font-mono uppercase text-[#00ff88] block mb-1">{t('hero.stackGovernance')}</span>
               <span className="text-xs font-semibold text-slate-200 block">Leadership & Operations</span>
             </div>
           </div>
@@ -168,7 +175,7 @@ export default function HeroSection() {
           className="mt-12 text-slate-400 flex flex-col items-center gap-2 cursor-pointer"
           onClick={() => document.getElementById('about')?.scrollIntoView()}
         >
-          <span className="text-[11px] font-mono tracking-widest uppercase text-[#00f2fe]/80">Role para explorar</span>
+          <span className="text-[11px] font-mono tracking-widest uppercase text-[#00f2fe]/80">{t('hero.scrollHint')}</span>
           <ChevronDown className="w-5 h-5 text-[#00ff88]" />
         </motion.div>
       </div>

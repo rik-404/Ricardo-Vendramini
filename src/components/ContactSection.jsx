@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { MessageSquare, Mail, Github, Linkedin, Send, Copy, Check, Sparkles, PhoneCall, Globe } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function ContactSection() {
+  const { lang, t } = useLanguage();
   const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = () => {
@@ -23,15 +25,18 @@ export default function ContactSection() {
 
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0c2e17] border border-[#00ff88]/40 text-[#00ff88] text-xs font-mono mb-6">
             <MessageSquare className="w-3.5 h-3.5" />
-            <span>Vamos Conectar</span>
+            <span>{lang === 'en' ? "Let's Connect" : "Vamos Conectar"}</span>
           </div>
 
           <h2 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mb-4 max-w-3xl">
-            Tem uma <span className="text-gradient-green">ideia?</span>
+            {lang === 'en' ? "Have an " : "Tem uma "}
+            <span className="text-gradient-green">
+              {lang === 'en' ? "idea?" : "ideia?"}
+            </span>
           </h2>
 
           <p className="text-xl sm:text-2xl text-slate-300 font-light max-w-2xl mb-10">
-            Talvez eu consiga transformá-la em realidade.
+            {lang === 'en' ? "Maybe I can turn it into reality." : "Talvez eu consiga transformá-la em realidade."}
           </p>
 
           {/* Action CTAs */}
@@ -43,15 +48,15 @@ export default function ContactSection() {
               className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-[#00f2fe] via-[#10b981] to-[#00ff88] text-black font-extrabold text-base shadow-glow-md hover:scale-105 transition-transform flex items-center justify-center gap-3"
             >
               <Send className="w-5 h-5" />
-              <span>Vamos conversar no WhatsApp</span>
+              <span>{lang === 'en' ? "Chat on WhatsApp" : "Vamos conversar no WhatsApp"}</span>
             </a>
 
             <button
               onClick={handleCopyEmail}
-              className="w-full sm:w-auto px-6 py-4 rounded-xl glass-panel border border-[#10b981]/40 text-white hover:text-[#00ff88] font-mono text-sm flex items-center justify-center gap-2 transition-all"
+              className="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel border border-[#00ff88]/40 text-slate-200 hover:text-[#00ff88] font-bold text-base hover:border-[#00ff88] transition-all flex items-center justify-center gap-3 cursor-pointer"
             >
-              {copied ? <Check className="w-4 h-4 text-[#00ff88]" /> : <Copy className="w-4 h-4 text-[#00ff88]" />}
-              <span>{copied ? 'E-mail Copiado!' : personalInfo.socialLinks.email}</span>
+              {copied ? <Check className="w-5 h-5 text-[#00ff88]" /> : <Copy className="w-5 h-5" />}
+              <span>{copied ? (lang === 'en' ? "Email Copied!" : "E-mail Copiado!") : (lang === 'en' ? "Copy Email Address" : "Copiar Endereço de E-mail")}</span>
             </button>
           </div>
 
@@ -64,7 +69,7 @@ export default function ContactSection() {
               className="p-4 rounded-xl glass-panel border border-[#00f2fe]/30 hover:border-[#00ff88] flex flex-col items-center gap-2 group transition-colors shadow-glow-sm col-span-2 sm:col-span-1"
             >
               <Globe className="w-6 h-6 text-[#00f2fe] group-hover:text-[#00ff88] transition-colors" />
-              <span className="text-xs font-mono text-[#00f2fe] font-bold">Empresa ↗</span>
+              <span className="text-xs font-mono text-[#00f2fe] font-bold">{t('contact.company')} ↗</span>
             </a>
 
             <a
@@ -102,7 +107,7 @@ export default function ContactSection() {
               className="p-4 rounded-xl glass-panel border border-white/5 hover:border-[#00ff88]/40 flex flex-col items-center gap-2 group transition-colors"
             >
               <Mail className="w-6 h-6 text-slate-400 group-hover:text-[#00ff88] transition-colors" />
-              <span className="text-xs font-mono text-slate-300">E-mail</span>
+              <span className="text-xs font-mono text-slate-300">{t('misc.emailLabel')}</span>
             </a>
           </div>
 

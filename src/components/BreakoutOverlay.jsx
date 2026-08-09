@@ -3,8 +3,10 @@ import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Play, RotateCcw, Volume2, VolumeX, Trophy, Heart, Gamepad2, Zap, Sparkles } from 'lucide-react';
 import { dispatchAchievementUnlocked } from './AchievementToast';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function BreakoutOverlay({ isOpen, onClose }) {
+  const { t } = useLanguage();
   const canvasRef = useRef(null);
   const rafRef = useRef(null);
   const [gameState, setGameState] = useState('PLAYING'); // PLAYING | PAUSED | GAMEOVER | VICTORY
@@ -615,10 +617,10 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
             </div>
             <div>
               <h2 className="text-base sm:text-lg font-extrabold text-white flex items-center gap-2">
-                ATARI BREAKOUT <span className="text-xs px-2 py-0.5 rounded-full bg-[#00ff88]/20 text-[#00ff88] border border-[#00ff88]/30">DESTRUIDOR DE SITE</span>
+                {t('breakout.title')}<span className="text-xs px-2 py-0.5 rounded-full bg-[#00ff88]/20 text-[#00ff88] border border-[#00ff88]/30">{t('breakout.gameLabel')}</span>
               </h2>
               <p className="text-[11px] text-slate-400 hidden sm:block">
-                Controle a raquete com as <strong className="text-[#00ff88]">setinhas (← →)</strong> ou o <strong className="text-[#00ff88]">Mouse</strong>. Aperte <kbd className="px-1 py-0.5 rounded bg-black border border-white/20 text-[#00ff88]">ESC</kbd> para restaurar o site!
+                {t('breakout.instructions')} <strong className="text-[#00ff88]">{t('breakout.arrows')}</strong> {t('breakout.orMouse')}. <kbd className="px-1 py-0.5 rounded bg-black border border-white/20 text-[#00ff88]">ESC</kbd> {t('breakout.restartSiteEsc')}
               </p>
             </div>
           </div>
@@ -627,7 +629,7 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
             <div className="flex items-center gap-2 bg-black/70 px-3.5 py-1.5 rounded-xl border border-white/10">
               <Sparkles className="w-4 h-4 text-[#00ff88]" />
               <div className="flex flex-col text-left">
-                <span className="text-[9px] text-slate-400 uppercase">Blocos do Site</span>
+                <span className="text-[9px] text-slate-400 uppercase">{t('breakout.blocksLabel')}</span>
                 <span className="text-sm font-extrabold text-[#00ff88]">{remainingBlocks}</span>
               </div>
             </div>
@@ -635,7 +637,7 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
             <div className="flex items-center gap-2 bg-black/70 px-3.5 py-1.5 rounded-xl border border-white/10">
               <Trophy className="w-4 h-4 text-amber-400" />
               <div className="flex flex-col text-left">
-                <span className="text-[9px] text-slate-400 uppercase">Pontos</span>
+                <span className="text-[9px] text-slate-400 uppercase">{t('breakout.points')}</span>
                 <span className="text-sm font-extrabold text-white">{score}</span>
               </div>
             </div>
@@ -656,7 +658,7 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
             <button
               onClick={() => setSoundEnabled(!soundEnabled)}
               className="p-2.5 rounded-xl bg-black/60 border border-white/15 text-slate-300 hover:text-[#00ff88] transition-all"
-              title={soundEnabled ? 'Desativar Som' : 'Ativar Som'}
+              title={soundEnabled ? t('breakout.desactivateSound') : t('breakout.activateSound')}
             >
               {soundEnabled ? <Volume2 className="w-4 h-4 text-[#00ff88]" /> : <VolumeX className="w-4 h-4 text-slate-500" />}
             </button>
@@ -664,7 +666,7 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
             <button
               onClick={restartGame}
               className="p-2.5 rounded-xl bg-black/60 border border-white/15 text-slate-300 hover:text-[#00ff88] transition-all"
-              title="Reiniciar Jogo"
+              title={t('breakout.restartGame')}
             >
               <RotateCcw className="w-4 h-4" />
             </button>
@@ -674,7 +676,7 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
               className="p-2.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 hover:text-red-300 transition-all flex items-center gap-1.5 text-xs font-bold"
             >
               <X className="w-4 h-4" />
-              <span>Restaurar Site (ESC)</span>
+              <span>{t('breakout.restoreSiteEsc')}</span>
             </button>
           </div>
         </div>
@@ -696,13 +698,13 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
                   <div className="p-4 rounded-2xl bg-[#00ff88]/10 border border-[#00ff88]/30 inline-block">
                     <Play className="w-8 h-8 text-[#00ff88]" />
                   </div>
-                  <h3 className="text-2xl font-extrabold text-white">JOGO PAUSADO</h3>
-                  <p className="text-xs text-slate-400">Pressione Espaço ou clique abaixo para continuar destruindo os elementos.</p>
+                  <h3 className="text-2xl font-extrabold text-white">{t('breakout.pausedTitle')}</h3>
+                  <p className="text-xs text-slate-400">{t('breakout.pausedDesc')}</p>
                   <button
                     onClick={togglePause}
                     className="w-full py-3 rounded-xl bg-gradient-to-r from-[#059669] to-[#00ff88] text-black font-extrabold text-xs uppercase tracking-wider shadow-glow-sm hover:scale-105 transition-all"
                   >
-                    Continuar Destruindo
+                    {t('breakout.continueDestroying')}
                   </button>
                 </div>
               </motion.div>
@@ -720,12 +722,12 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
                     <Zap className="w-8 h-8 text-red-500" />
                   </div>
                   <div>
-                    <h3 className="text-3xl font-extrabold text-white">FIM DE JOGO</h3>
-                    <p className="text-xs text-slate-400 mt-1">A bolinha caiu! Você pode reiniciar ou restaurar o site.</p>
+                    <h3 className="text-3xl font-extrabold text-white">{t('breakout.gameOverTitle')}</h3>
+                    <p className="text-xs text-slate-400 mt-1">{t('breakout.gameOverDesc')}</p>
                   </div>
 
                   <div className="p-4 rounded-2xl bg-black/60 border border-white/10 space-y-1">
-                    <span className="text-xs text-slate-400">Pontuação Total</span>
+                    <span className="text-xs text-slate-400">{t('breakout.totalScore')}</span>
                     <p className="text-3xl font-extrabold text-[#00ff88]">{score}</p>
                   </div>
 
@@ -735,13 +737,13 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
                       className="flex-1 py-3 rounded-xl bg-gradient-to-r from-[#059669] to-[#00ff88] text-black font-extrabold text-xs uppercase tracking-wider shadow-glow-sm hover:scale-105 transition-all flex items-center justify-center gap-2"
                     >
                       <RotateCcw className="w-4 h-4" />
-                      <span>Tentar Novamente</span>
+                      <span>{t('breakout.tryAgain')}</span>
                     </button>
                     <button
                       onClick={handleClose}
                       className="py-3 px-5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs"
                     >
-                      Restaurar Site
+                      {t('breakout.restoreSite')}
                     </button>
                   </div>
                 </div>
@@ -760,12 +762,12 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
                     <Sparkles className="w-8 h-8 text-[#00ff88]" />
                   </div>
                   <div>
-                    <h3 className="text-3xl font-extrabold text-white">SITE TOTALMENTE DESTRUÍDO! 🎉</h3>
-                    <p className="text-xs text-slate-400 mt-1">Você desintegrou todos os elementos da tela!</p>
+                    <h3 className="text-3xl font-extrabold text-white">{t('breakout.victoryTitle')}</h3>
+                    <p className="text-xs text-slate-400 mt-1">{t('breakout.victoryDesc')}</p>
                   </div>
 
                   <div className="p-4 rounded-2xl bg-black/60 border border-white/10 space-y-1">
-                    <span className="text-xs text-slate-400">Pontuação Total</span>
+                    <span className="text-xs text-slate-400">{t('breakout.totalScore')}</span>
                     <p className="text-3xl font-extrabold text-[#00ff88]">{score}</p>
                   </div>
 
@@ -775,7 +777,7 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
                       className="flex-1 py-3 rounded-xl bg-gradient-to-r from-[#059669] to-[#00ff88] text-black font-extrabold text-xs uppercase tracking-wider shadow-glow-sm hover:scale-105 transition-all flex items-center justify-center gap-2"
                     >
                       <RotateCcw className="w-4 h-4" />
-                      <span>Restaurar Site Inteiro</span>
+                      <span>{t('breakout.restoreEntireSite')}</span>
                     </button>
                   </div>
                 </div>

@@ -808,6 +808,8 @@ export const terminalCommands = {
     "  starwars - Abertura 3D Star Wars Crawl 🌌",
     "  clean    - Limpeza Total: deixa o site 100% limpo e limpo 🧹",
     "  restore  - Restaura todos os elementos e seções do site ✨",
+    "  english  - Alterne o idioma do site para Inglês (English) 🌐",
+    "  portugues- Alterne o idioma do site para Português 🇧🇷",
     "  reset    - Zera todas as conquistas e easter eggs 🔄",
     "  clear    - Limpa o histórico do terminal",
     "",
@@ -824,9 +826,526 @@ export const terminalCommands = {
   ]
 };
 
+export const terminalCommandsEn = {
+  welcome: [
+    "RICARDO.DEV Terminal [Version 4.2.0]",
+    "(c) 2026 Ricardo Vendramini - Vendramini Informática.",
+    "",
+    "> Loading portfolio modules...",
+    "[OK] Frontend Engine ....... 100%",
+    "[OK] Backend Microservices . 100%",
+    "[OK] Database Connector .... 100%",
+    "[OK] Linux Infrastructure .. 100%",
+    "[OK] Security Protocols .... 100%",
+    "",
+    "STATUS: SYSTEM ONLINE & OPERATIONAL",
+    "",
+    "Type 'help' or choose one of the shortcuts to explore."
+  ],
+  help: [
+    "Available commands:",
+    "",
+    "  about    - Summary about Ricardo Vendramini & Vendramini Informática",
+    "  skills   - List of main technical competencies",
+    "  projects - List of featured projects",
+    "  books    - Books and publications",
+    "  contact  - Direct contact information",
+    "  navinha  - Space Invaders Arcade Game 🎮",
+    "  breakout - Breakout Game: destroy the neon blocks 🧱",
+    "  starwars - 3D Star Wars Crawl opening 🌌",
+    "  clean    - Total Clean: leaves the site 100% clean 🧹",
+    "  restore  - Restores all site elements and sections ✨",
+    "  english  - Switch site language to English 🌐",
+    "  portugues- Switch site language to Portuguese 🇧🇷",
+    "  reset    - Resets all achievements and easter eggs 🔄",
+    "  clear    - Clears the terminal history",
+    "",
+    "Type any command to run it."
+  ],
+  games: [
+    "⚡ ARCADE CENTER — Available Games:",
+    "",
+    "★ navinhab - Space Invaders Geometric: destroy aliens with geometric shapes 👾",
+    "★ breakout - Breakout Arcade: control the paddle and destroy the neon blocks on screen 🧱",
+    "★ starwars - Star Wars 3D Crawl: galactic opening text in 3D 🌌",
+    "",
+    "Type the game name to start."
+  ]
+};
+
 export const easterEggInfo = {
   triggerHint: "Dica: Digite 'matrix' no terminal ou aperte a sequência secreta para ativar o modo desenvolvedor místico.",
   title: "⚡ MODO MATRIX ATIVADO",
   message: "Parabéns por explorar além da superfície! Como desenvolvedores, vivemos curiosos para entender o que há por trás das cortinas do código.",
   quote: "“Existem 10 tipos de pessoas no mundo: as que entendem binário e as que não entendem.” — Ricardo Vendramini"
 };
+
+export const easterEggInfoEn = {
+  triggerHint: "Tip: Type 'matrix' in the terminal or press the secret sequence to activate the mystic developer mode.",
+  title: "⚡ MATRIX MODE ACTIVATED",
+  message: "Congratulations for exploring beyond the surface! As developers, we stay curious to understand what lies behind the curtains of code.",
+  quote: "“There are 10 types of people in the world: those who understand binary and those who don't.” — Ricardo Vendramini"
+};
+
+// ==================== I18N DATA HELPERS ====================
+
+export function getStatsData(lang = 'pt') {
+  if (lang === 'en') {
+    return [
+      { id: 1, label: "Repositories Created", value: 32, prefix: "+", suffix: "" },
+      { id: 2, label: "Production Systems", value: 6, prefix: "", suffix: "" },
+      { id: 3, label: "Published Platforms & Sites", value: 30, prefix: "+", suffix: "" },
+      { id: 4, label: "Tech Stack Tools", value: 18, prefix: "", suffix: "" },
+      { id: 5, label: "Years of Experience", value: 9, prefix: "+", suffix: "" },
+      { id: 6, label: "Active Commercial Solutions", value: 6, prefix: "", suffix: "" }
+    ];
+  }
+  return statsData;
+}
+
+export function getTimelineData(lang = 'pt') {
+  if (lang === 'en') {
+    return [
+      {
+        year: "2017 - 2018",
+        title: "First IT Experience — Junior Administrative Apprentice at MYOUNG SHIN BRASIL",
+        description: "Entered the job market as an IT administrative apprentice at Myoung Shin Brasil. First hands-on immersion with tech support, operating routines, and IT infrastructure.",
+        projects: ["IT Support & Infrastructure at MYOUNG SHIN BRASIL"],
+        technologies: ["IT Assistance", "Technical Support", "Admin Routines"],
+        achievements: [
+          "First professional experience in IT operations and technology management",
+          "Developing key discipline in technical support, organization, and IT processes"
+        ]
+      },
+      {
+        year: "2018 - Present",
+        title: "Founding & Launch of Vendramini Informática",
+        description: "Creation of Vendramini Informática. Initially operated from home focusing on hardware maintenance, system diagnostics, and specialized tech support, steadily evolving into web software engineering.",
+        projects: ["Vendramini Informática", "Tech Support & Hardware Repair"],
+        technologies: ["Hardware Maintenance", "System Diagnostics", "Networking", "Client Support"],
+        achievements: [
+          "Company founding and launch of hardware assistance operations",
+          "Building a solid client base and gradual transition to web software engineering"
+        ]
+      },
+      {
+        year: "2019 - 2023",
+        title: "Multidisciplinary Roles & Parallel Company Operations",
+        description: "Professional experience across corporate sectors while maintaining continuous technical operations, client support, and IT services at Vendramini Informática.",
+        projects: ["Vendramini Informática", "Parallel Client Management"],
+        technologies: ["Time Management", "Customer Service", "Hardware Support", "Autodidactic IT"],
+        achievements: [
+          "Active maintenance of client portfolio and technical reputation",
+          "Developing high resilience, routine organization, and operational discipline"
+        ]
+      },
+      {
+        year: "2022 - 2023",
+        title: "IT User Support Technician — SRG TELECOM LTDA",
+        description: "Operations in the telecommunications sector. Customer service, UNM2000 NMS optical network system management, internet plan setup, PPPoE access provisioning, and Service Order (S.O.) management.",
+        projects: ["Telecom Infrastructure & UNM2000 Provisioning"],
+        technologies: ["UNM2000 System", "PPPoE Authentication", "Optical Networks", "Service Orders (S.O.)", "Customer Support"],
+        achievements: [
+          "Advanced operation of NMS UNM2000 system for optical device provisioning",
+          "Efficient creation, tracking, and resolution of operational Service Orders"
+        ]
+      },
+      {
+        year: "2023",
+        title: "Junior IT Technician — ORION SOFTWARES E EQUIPAMENTOS LTDA",
+        description: "Junior IT technician at ORION Softwares. Specialized technical support focused on hardware and proprietary software troubleshooting, combining user assistance with immersion into software development.",
+        projects: ["Orion Proprietary Software", "HW/SW Diagnostics"],
+        technologies: ["Proprietary Software", "Level 2/3 Tech Support", "HW/SW Diagnostics", "Dev Environments"],
+        achievements: [
+          "Deep technical experience resolving incidents in proprietary software systems",
+          "Close technical alignment with software development lifecycles"
+        ]
+      },
+      {
+        year: "2023 - Present",
+        title: "Customer Service Supervisor — Conexão Marketing",
+        description: "Customer Service Supervisor at Conexão Marketing. Team leadership, corporate process organization, project control, SLA/KPI tracking, analytical conflict resolution, and operational excellence.",
+        projects: ["Operations & Service Supervision", "Project & People Management"],
+        technologies: ["People Leadership", "Project Management", "Conflict Resolution", "KPI Control", "Operations"],
+        achievements: [
+          "Strategic team leadership focused on process organization and human mediation",
+          "Constant tracking of project timelines and service level agreements (SLAs)"
+        ]
+      }
+    ];
+  }
+  return timelineData;
+}
+
+export function getExperienceData(lang = 'pt') {
+  if (lang === 'en') {
+    return [
+      {
+        period: "2023 - Present",
+        role: "Customer Service Supervisor",
+        company: "Conexão Marketing",
+        summary: "Strategic leadership of customer service teams, corporate process organization, operational project management, KPI/SLA tracking, and analytical conflict resolution.",
+        highlights: [
+          "Team leadership, continuous employee development, and interpersonal conflict resolution.",
+          "Structuring operational workflows with strict schedule and SLA tracking.",
+          "Direct stakeholder communication and customer service optimization."
+        ]
+      },
+      {
+        period: "2023",
+        role: "Junior IT Technician",
+        company: "ORION SOFTWARES E EQUIPAMENTOS LTDA",
+        summary: "Specialized technical support focused on hardware and proprietary software troubleshooting, combining user assistance with immersion into the software engineering ecosystem.",
+        highlights: [
+          "Technical support focused on analytical incident resolution for proprietary software.",
+          "Specialized hardware, peripheral, and diagnostic system maintenance.",
+          "Technical liaison between end-users and product engineering teams."
+        ]
+      },
+      {
+        period: "2022 - 2023",
+        role: "IT User Support Technician",
+        company: "SRG TELECOM LTDA",
+        summary: "Specialized customer service for corporate and residential telecom clients. Advanced operation of the UNM2000 NMS optical management system for device provisioning, internet plan setup, PPPoE authentication, and Service Order management.",
+        highlights: [
+          "Optical network management (UNM2000 NMS) for ONU/OLT provisioning and subscriber setup.",
+          "PPPoE authentication management, bandwidth control, and broadband provisioning.",
+          "Service Order creation, triage, and resolution with direct public interaction."
+        ]
+      },
+      {
+        period: "2020 - 2021",
+        role: "Logistics Apprentice",
+        company: "FMM METALMECANICA LTDA",
+        summary: "Production Planning and Control (PCP), coordination of receiving processes, goods dispatching, and industrial inventory control.",
+        highlights: [
+          "Responsible for PCP (Production Planning & Control), optimizing production flow and supply chain.",
+          "Material receiving, sorting, and product dispatching in an industrial setting.",
+          "Continuous inventory control, auditing, and technical communication with the assembly line."
+        ]
+      },
+      {
+        period: "2018 - Present",
+        role: "Tech Lead & Founder",
+        company: "Vendramini Informática",
+        summary: "Founded the company, initially operated from home focusing on hardware maintenance and tech support, evolving into web software architecture, production system development, and tech leadership.",
+        highlights: [
+          "Building and publishing complete web applications (React, TypeScript, Supabase, Tailwind).",
+          "Continuous company evolution from hardware support into software engineering.",
+          "Active maintenance of corporate client portfolio and active solutions."
+        ]
+      },
+      {
+        period: "2017 - 2018",
+        role: "Junior IT Administrative Apprentice",
+        company: "MYOUNG SHIN BRASIL",
+        summary: "First professional experience in the IT department providing administrative assistance, operational support, and initial technology routines.",
+        highlights: [
+          "Initial hands-on experience with IT infrastructure, internal ticketing, and tech processes.",
+          "Developing discipline, user support, and technical routine organization."
+        ]
+      }
+    ];
+  }
+  return experienceData;
+}
+
+export function getLeadershipPillars(lang = 'pt') {
+  if (lang === 'en') {
+    return [
+      {
+        icon: "Users",
+        title: "People-Oriented Leadership",
+        description: "I believe the best software stems from empowered, heard, and inspired teams. Focus on human and technical growth."
+      },
+      {
+        icon: "MessageSquare",
+        title: "Clear & Transparent Communication",
+        description: "Translating complex technical concepts into business language, keeping all stakeholders aligned with project goals."
+      },
+      {
+        icon: "Workflow",
+        title: "Organization & Efficient Processes",
+        description: "Eliminating operational bottlenecks through clear documentation, process clarity, and metrics tracking."
+      },
+      {
+        icon: "ShieldAlert",
+        title: "Pragmatic Problem Solving",
+        description: "Focus on searching for simple, effective, and lasting solutions under high-pressure technical scenarios."
+      },
+      {
+        icon: "Target",
+        title: "Strategic Decision Making",
+        description: "Balancing delivery speed with code sustainability, prioritizing real value delivery at every development stage."
+      },
+      {
+        icon: "Compass",
+        title: "Holistic Product Vision",
+        description: "Looking beyond code: understanding end-user pain points, business models, and how tech drives business results."
+      }
+    ];
+  }
+  return leadershipPillars;
+}
+
+export function getBooksData(lang = 'pt') {
+  if (lang === 'en') {
+    return booksData.map(b => ({
+      ...b,
+      title: "Timewalker: Dante's Paradox",
+      subtitle: "Dante's Paradox",
+      synopsis: "After the brutal death of Lívian, Dante refuses to accept the silence that remains. Consumed by grief and guilt, he constructs a device capable of breaking time—not out of ambition, but to understand where everything went wrong.\n\nEvery journey brings him to the same place in different eras, revealing fragments of a reality that insists on repeating itself. What begins as a search for answers turns into a psychological labyrinth where the past becomes unstable, the future loses definition, and Dante's own identity starts to dissolve.\n\nAs versions of himself emerge from temporal rifts, Dante is forced to confront a disturbing truth: time does not merely obey physical laws—it reacts to obsession, to the gaze, to the insistence of one who refuses to move on.\n\nBetween science and delusion, love and guilt, Timewalker: Dante's Paradox is a novel about how far a man will go to deny the end, and the price of attempting to fix what was never a mistake of time, but of human nature itself.\n\nBecause not every hell is a place.\nSome are built inside those who insist on looking back.",
+      creationProcess: "Sci-fi and psychological suspense exploring time travel, grief, obsession, and the limits of the human mind.",
+      status: "Published / Available",
+      tags: ["Temporal Paradox", "Sci-Fi", "Grief & Suspense"]
+    }));
+  }
+  return booksData;
+}
+
+export function getAchievementsData(lang = 'pt') {
+  if (lang === 'en') {
+    return [
+      {
+        number: "01",
+        title: "Multiple Production Applications",
+        category: "Projects",
+        description: "Successful launch of complex web ecosystems serving active users daily with high uptime."
+      },
+      {
+        number: "02",
+        title: "Operational Transformation",
+        category: "Processes",
+        description: "Redesign of technical workflows resulting in 30% faster deliveries and lower production error rates."
+      },
+      {
+        number: "03",
+        title: "Book & Content Publication",
+        category: "Knowledge",
+        description: "Structuring technical experiences and leadership concepts into published literature and reference material."
+      },
+      {
+        number: "04",
+        title: "Comprehensive Tech Ecosystem",
+        category: "Technical Mastery",
+        description: "Fluency across Frontend, Backend, Relational Databases, Linux Infrastructure, and IT Governance."
+      }
+    ];
+  }
+  return achievementsData;
+}
+
+export function getSkillsData(lang = 'pt') {
+  if (lang === 'en') {
+    const ex = (index, overrides) => ({ ...skillsData[index], ...overrides });
+    return [
+      ex(0, { level: 'Expert', description: 'Development of complex logic, async manipulation, Web APIs, and reactive software architecture.', relatedProjects: ['Vendramini Informática', 'Elite House Piracicaba'] }),
+      ex(1, { level: 'Advanced', description: 'Strict static typing, generic interfaces, and error-proof scalable code.', relatedProjects: ['Elite House Piracicaba'] }),
+      ex(2, { level: 'Advanced', description: 'Development of algorithmic routines, advanced data manipulation, automation, scripts, and structured logic.', relatedProjects: ['Python 3 Fundamentals Certification', 'Automation'] }),
+      ex(3, { level: 'Expert', description: 'Advanced web semantics, accessibility (a11y), technical SEO, and modern, certification-validated structures.', relatedProjects: ['Vendramini Informática', 'HTML5 & CSS3 Certification'] }),
+      ex(4, { level: 'Expert', description: 'Advanced responsive design, CSS variables (HSL), glassmorphism, Flexbox, Grid, and cyberpunk themes.', relatedProjects: ['Vendramini Informática', 'HTML5 & CSS3 Certification'] }),
+      ex(5, { level: 'Expert', description: 'Aesthetic-visual composition, typographic hierarchy, information architecture, conversion, and perceived value.', relatedProjects: ['Designer 5k Certification', 'Cigana Morgana'] }),
+      ex(6, { level: 'Advanced', description: 'Optimized relational queries, data modeling, SQL migrations, and database functions.', relatedProjects: ['Elite House Piracicaba'] }),
+      ex(7, { level: 'Advanced', description: 'Building reactive Single Page Applications (SPAs), custom Hooks, and global state control.', relatedProjects: ['Elite House Piracicaba'] }),
+      ex(8, { level: 'Advanced', description: 'Development of corporate sites, portfolios, blogs, and high-performance professional pages with custom themes and plugins.', relatedProjects: ['Designer 5k Certification'] }),
+      ex(9, { level: 'Expert', description: 'Creation of high-conversion landing pages, dynamic layouts, reusable components, and form integration.', relatedProjects: ['Designer 5k Certification'] }),
+      ex(10, { level: 'Advanced', description: 'Next-generation build tool for ultra-fast bundling and real-time development server.', relatedProjects: ['Elite House Piracicaba'] }),
+      ex(11, { level: 'Expert', description: 'High-speed utility styling with consistent design systems and native dark mode.', relatedProjects: ['Elite House Piracicaba', 'Vendramini Informática'] }),
+      ex(12, { level: 'Advanced', description: 'Accessible and customizable UI components for real estate management and CRM modules.', relatedProjects: ['Elite House Piracicaba'] }),
+      ex(13, { level: 'Advanced', description: 'Server state management, remote data caching, and background data invalidation.', relatedProjects: ['Elite House Piracicaba'] }),
+      ex(14, { level: 'Advanced', description: 'Real-time 2D rendering, 60fps Matrix rain effect, and graphic manipulation via canvas elements.', relatedProjects: ['Vendramini Informática'] }),
+      ex(15, { level: 'Advanced', description: 'Installable applications with offline access, strategic caching, and Service Workers.', relatedProjects: ['Vendramini Informática', 'Elite House Piracicaba'] }),
+      ex(16, { level: 'Advanced', description: 'Backend-as-a-Service with real-time Postgres, JWT/RBAC authentication, Row Level Security (RLS), and Storage Buckets.', relatedProjects: ['Elite House Piracicaba'] }),
+      ex(17, { level: 'Advanced', description: 'Total isolation of sensitive data with strict row-level security policies (RLS).', relatedProjects: ['Elite House Piracicaba'] }),
+      ex(18, { level: 'Advanced', description: 'Build script execution, static generators for real estate/SEO, and service integration.', relatedProjects: ['Elite House Piracicaba'] }),
+      ex(19, { level: 'Expert', description: 'Webhook integration for automatic lead capture (Facebook Ads) and WhatsApp automation.', relatedProjects: ['Elite House Piracicaba'] }),
+      ex(20, { level: 'Advanced', description: 'Screen prototyping, design systems creation, interactive wireframes, and navigable prototypes.', relatedProjects: ['Designer 5k Certification', 'Vendramini Informática'] }),
+      ex(21, { level: 'Advanced', description: 'Linux environments (Debian, Ubuntu, servers) for shell terminal, CLI commands, and process management.', relatedProjects: ['Vendramini Informática', 'Development Environment'] }),
+      ex(22, { level: 'Expert', description: 'Code versioning, branch management, commit auditing, and remote deployment.', relatedProjects: ['Elite House Piracicaba', 'Vendramini Informática'] }),
+      ex(23, { level: 'Expert', description: 'Emotional self-management, empathy, active listening, assertive communication, resilience, and interpersonal intelligence under pressure.', relatedProjects: ['Emotional Intelligence Certification', 'Conexão Marketing'] }),
+      ex(24, { level: 'Expert', description: 'Continuous team development, strategic conflict mediation, climate management, and high operational performance.', relatedProjects: ['Conexão Marketing', 'Emotional Intelligence Certification'] }),
+      ex(25, { level: 'Expert', description: 'Executive presence, interpersonal magnetism, public speaking, body language, active listening, and high-value partnerships.', relatedProjects: ['Charisma & Communication Certification', 'Conexão Marketing'] }),
+      ex(26, { level: 'Advanced', description: 'Corporate data modeling, Pivot Tables, advanced functions (VLOOKUP, INDEX/MATCH), dashboards, and Macro automation.', relatedProjects: ['Advanced Excel Certification', 'Conexão Marketing'] }),
+      ex(27, { level: 'Advanced', description: 'Software engineering acceleration with generative AI tools (Lovable AI), full-stack product prototyping, and prompt engineering.', relatedProjects: ['Lovable AI Workshop Certification', 'Personal Projects'] }),
+      ex(28, { level: 'Expert', description: 'Main IDE configured with linters, formatters, and extended environment for TypeScript and React.', relatedProjects: ['All projects'] }),
+      ex(29, { level: 'Advanced', description: 'Computer network architecture, OSI model, TCP/IP, IPv4/IPv6, subnetting, and routing.', relatedProjects: ['Network Analyst Certification', 'Vendramini Informática'] }),
+      ex(30, { level: 'Advanced', description: 'DNS zone management, DHCP configuration, HTTP/HTTPS web servers, and infrastructure security.', relatedProjects: ['Network Analyst Certification', 'Vendramini Informática'] }),
+      ex(31, { level: 'Advanced', description: 'Hosting, domains, DNS zone management, and SSL certificates applied to production projects.', relatedProjects: ['Elite House Piracicaba'] }),
+      ex(32, { level: 'Expert', description: 'Automated deployment, high-performance serverless hosting, and domain integration.', relatedProjects: ['Vendramini Informática', 'C4T4T4U Electronics', 'Cigana Morgana'] }),
+      ex(33, { level: 'Expert', description: 'Code versioning and hosting of static applications and open source projects.', relatedProjects: ['King of ROMs', 'Festa Fácil Custom'] }),
+    ];
+  }
+  return skillsData;
+}
+
+export function getCertificatesData(lang = 'pt') {
+  if (lang === 'en') {
+    return [
+      {
+        ...certificatesData[0],
+        title: "Designer 5k",
+        subtitle: "Professional Certification in Web Design & WordPress",
+        description: "Professional certification focused on building high-converting websites and landing pages. Mastery of advanced Web Design techniques, UI/UX architecture, Figma prototyping, and enterprise WordPress development with Elementor.",
+        category: "Web Design / UI UX",
+        skills: ["WordPress", "Elementor", "Web Design", "UI/UX", "Figma", "Responsive Design", "Conversion & UX"],
+        badge: "Official Certificate"
+      },
+      {
+        ...certificatesData[1],
+        title: "HTML5 & CSS3",
+        subtitle: "Certification in Front-End Development & Semantic Styling",
+        description: "Comprehensive certification in modern web development with semantic HTML5 and advanced CSS3. Mastery of page structuring, responsive layouts with Flexbox and CSS Grid, CSS variables, web accessibility (a11y), and Front-End best practices.",
+        category: "Front-End / Web Development",
+        skills: ["HTML5", "CSS3", "Flexbox", "CSS Grid", "Responsive Design", "Technical SEO", "Accessibility"],
+        badge: "Official Certificate"
+      },
+      {
+        ...certificatesData[2],
+        title: "Network Analyst",
+        subtitle: "Certification in Network Infrastructure, Architecture & Security",
+        description: "Specialized certification in computer network architecture and analysis. Covers advanced concepts of OSI/TCP-IP models, IPv4/IPv6 addressing, subnetting, routing, switching, network security, DNS/DHCP/HTTP protocols, and IT infrastructure.",
+        category: "Infrastructure / Networks & Security",
+        skills: ["Computer Networks", "TCP/IP", "IPv4 / IPv6", "Routing & Switching", "DNS & DHCP", "Network Security", "IT Infrastructure"],
+        badge: "Official Certificate"
+      },
+      {
+        ...certificatesData[3],
+        title: "Emotional Intelligence",
+        subtitle: "Professional Certification in Emotional Intelligence & Soft Skills",
+        description: "Certification focused on emotional intelligence, self-management, empathy, interpersonal intelligence, conflict resolution, resilience, and high-performance leadership in corporate environments.",
+        category: "Soft Skills / Leadership",
+        skills: ["Emotional Intelligence", "Soft Skills", "People Leadership", "Self-Management", "Assertive Communication", "Conflict Resolution"],
+        badge: "Official Certificate"
+      },
+      {
+        ...certificatesData[4],
+        title: "Charisma & Communication",
+        subtitle: "Certification in Charisma, Persuasive Communication & Executive Presence",
+        description: "Certification focused on developing charisma, executive presence, persuasive communication, body language, active listening, and building high-impact professional relationships.",
+        category: "Soft Skills / Communication",
+        skills: ["Charisma", "Persuasive Communication", "Body Language", "Executive Presence", "Public Speaking", "Networking"],
+        badge: "Official Certificate"
+      },
+      {
+        ...certificatesData[5],
+        title: "Advanced Excel",
+        subtitle: "Professional Certification in Advanced Excel, Data Analysis & Automation",
+        description: "Certification in advanced Microsoft Excel spreadsheet techniques, complex formulas (VLOOKUP, INDEX/MATCH), Pivot Tables, dynamic charts, data auditing, financial dashboards, and process automation.",
+        category: "Data Analysis / Productivity",
+        skills: ["Advanced Excel", "Pivot Tables", "Advanced Functions", "Data Analysis", "Macros & Automation", "Corporate Dashboards"],
+        badge: "Official Certificate"
+      },
+      {
+        ...certificatesData[6],
+        title: "Lovable AI Workshop",
+        subtitle: "Certification in AI-Driven Development & Full-Stack Prototyping",
+        description: "Hands-on workshop certification focused on full-stack application development accelerated by Artificial Intelligence (Lovable.dev). Rapid UI prototyping, prompt engineering, database integration, and cloud deployment.",
+        category: "Artificial Intelligence / Low-Code & Prototyping",
+        skills: ["Lovable AI", "AI-Driven Development", "Prompt Engineering", "Product Prototyping", "Full-Stack AI", "AI Productivity"],
+        badge: "Official Certificate"
+      },
+      {
+        ...certificatesData[7],
+        title: "Python 3 Fundamentals",
+        subtitle: "Certification in Programming Logic, Data Structures & Python 3",
+        description: "Certification in Python 3 programming fundamentals. Covers modern syntax, primitive data types, arithmetic/logical operators, data handling, modules, string manipulation, control structures, and algorithmic problem solving.",
+        category: "Languages & Backend / Python",
+        skills: ["Python 3", "Programming Logic", "Algorithms", "Data Handling", "String Manipulation", "Conditional Structures"],
+        badge: "Official Certificate"
+      }
+    ];
+  }
+  return certificatesData;
+}
+
+export function getProjectsData(lang = 'pt') {
+  if (lang === 'en') {
+    return [
+      {
+        ...projectsData[0],
+        title: "Cigana Morgana",
+        subtitle: "Holistic Portal, Consultations & E-Commerce",
+        category: "Corporate Portal / Landing Page",
+        badge: "In Production • Vercel",
+        name: "Cigana Morgana",
+        shortDescription: "Institutional and consultation scheduling portal for holistic services. Features appointment bookings, service packages showcase, direct WhatsApp checkout, and dark mystic UI design.",
+        problem: "Need to digitize holistic consultation bookings, service showcases, and direct customer service.",
+        idea: "Develop an elegant SPA with mystic dark design, direct WhatsApp booking integration, and instant service catalog.",
+        construction: "Built with HTML5, CSS3 Vanilla glassmorphism, ES6+ JavaScript, and responsive layouts. Deployed on Vercel.",
+        result: "Increased direct consultation inquiries, instant appointment booking via WhatsApp, and Lighthouse score of 95+.",
+        status: "In Production"
+      },
+      {
+        ...projectsData[1],
+        title: "C4T4T4U Electronics",
+        subtitle: "E-Commerce, Quotes & Service Order Management (S.O.)",
+        category: "E-Commerce / SaaS",
+        badge: "v1.0.2 • In Production",
+        name: "C4T4T4U Electronics",
+        shortDescription: "Complete e-commerce and corporate management platform for electronics and technical service shop. Integrates virtual store, WhatsApp checkout, Quotes module with auto-conversion to Service Orders (#OS-xxxx), 2-way A4 printing, and Supabase cloud backend.",
+        problem: "The electronics and repair shop needed an integrated platform to simultaneously manage virtual product showcases, quote requests, and technical service orders with printed warranty receipts.",
+        idea: "Develop a robust decoupled SPA with WhatsApp quote checkout, smart conversion of approved quotes to Service Orders (#OS-xxxx), RBAC permission control, and Supabase cloud sync.",
+        construction: "Built with semantic HTML5, Vanilla CSS3 (Design System glassmorphism, HSL themes, @media print for 2-way A4 receipts), pure ES6+ JavaScript (+140 native functions), and Supabase (PostgreSQL cloud with RLS).",
+        result: "Over 40 operational screens and modals, instant quote-to-SO conversion, 2-way printed service receipts (Store and Customer), direct WhatsApp notifications, and zero heavy framework dependencies.",
+        status: "In Production"
+      },
+      {
+        ...projectsData[2],
+        title: "Elite House Piracicaba",
+        subtitle: "EliteHouseHub — Real Estate & CRM Platform",
+        name: "Elite House Piracicaba",
+        badge: "CRECI 049210-J • In Production",
+        category: "Platform / SaaS",
+        shortDescription: "High-performance real estate platform for property management, customer CRM, broker controls (RBAC + RLS), scheduling, automatic Facebook Ads lead capture via Webhooks, and commission financial tracking.",
+        problem: "Need to centralize real estate operations into a single high-performance system, reducing manual tasks and isolating sensitive broker data with RLS security.",
+        idea: "Develop a full decoupled SPA using React 18, TypeScript, and Supabase BaaS (PostgreSQL RLS), automating lead capture via Webhooks and providing real-time chart reports.",
+        construction: "Built with React 18, TypeScript, Vite, Tailwind CSS, Shadcn UI / Radix UI, TanStack Query, React Router DOM, Recharts, and Supabase (5-level RBAC, PostgreSQL RLS).",
+        result: "Over 62,896 lines of production code, 134+ reusable React components, 35 active routes, and smart lead distribution for the sales team.",
+        status: "In Production"
+      },
+      {
+        ...projectsData[3],
+        title: "Vendramini Informática",
+        subtitle: "Official Website & Digital Institutional Showcase",
+        name: "Vendramini Informática",
+        badge: "Official • Active",
+        category: "Corporate Portal",
+        shortDescription: "Official portal for Vendramini Informática built with semantic HTML5, cyberpunk glassmorphism CSS3, offline PWA support with Service Worker, 60fps Canvas Matrix effect, and dynamic i18n.",
+        problem: "Create an official high-performance portal acting as a high-impact digital business card displaying corporate services, interactive FAQ, and project portfolio with instant internationalization.",
+        idea: "Develop a lightweight static architecture with dynamic internationalization (PT / EN), 60fps Canvas Matrix effect, neon cursor, and Lighthouse 95+ score.",
+        construction: "Built with semantic HTML5, advanced CSS3 (HSL variables, glassmorphism, responsive design), modular ES6+ JavaScript, Canvas API, and Service Worker for PWA offline cache.",
+        result: "Lighthouse Score 95+ (Performance, Accessibility, SEO), initial page load under 1.5s, instant neon language switcher, and real-time searchable portfolio page.",
+        status: "Active"
+      },
+      {
+        ...projectsData[4],
+        title: "King of ROMs",
+        subtitle: "Digital Catalog & Gaming Media Preservation",
+        category: "Web App / Open Source",
+        badge: "Open Source • Study",
+        name: "King of ROMs",
+        shortDescription: "Web platform dedicated to preserving retro video game history and digital media. Features clean categorizations, instant search, and smooth responsive design.",
+        problem: "Catalog and organize retro gaming information into a fast, accessible, and structured digital platform.",
+        idea: "Create a modern retro showcase with dark theme, responsive grid cards, and real-time category filtering.",
+        construction: "Built with semantic HTML5, CSS3 Grid/Flexbox, JavaScript ES6+, and Vercel hosting.",
+        result: "Fast catalog access, structured retro gaming data, and seamless mobile experience.",
+        status: "Active"
+      },
+      {
+        ...projectsData[5],
+        title: "Festa Fácil",
+        subtitle: "Event Budgeting & Celebration Management",
+        name: "Festa Fácil",
+        badge: "In Production • Open Source",
+        category: "Platform / E-Commerce",
+        shortDescription: "Smart web calculator and planner for parties and events. Estimates food, drinks, and supply quantities based on guest counts, outputting instant budgets and shopping lists.",
+        problem: "Planning event supplies manually often leads to overbuying or food shortages during celebrations.",
+        idea: "Build an intuitive web calculator that takes guest counts (adults, children) and calculates exact food, beverage, and disposable supply quantities.",
+        construction: "Built with HTML5, CSS3, JavaScript ES6+ algorithms, and GitHub Pages hosting.",
+        result: "Instant party supply calculations, budget PDF export, and reduced event planning waste.",
+        status: "In Production"
+      }
+    ];
+  }
+  return projectsData;
+}

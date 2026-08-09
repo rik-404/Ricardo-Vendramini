@@ -1,9 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { GitCommit, Calendar, Layers, Award, Rocket } from 'lucide-react';
-import { timelineData } from '../data/portfolioData';
+import { getTimelineData } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function TimelineSection() {
+  const { lang, t } = useLanguage();
+  const timelineItems = getTimelineData(lang);
+
   return (
     <section id="experience" className="py-24 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -12,13 +16,20 @@ export default function TimelineSection() {
         <div className="flex flex-col items-center text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0c140e] border border-[#10b981]/30 mb-4">
             <GitCommit className="w-3.5 h-3.5 text-[#00ff88]" />
-            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">Evolução & Trajetória</span>
+            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">
+              {lang === 'en' ? 'Evolution & Milestones' : 'Evolução & Trajetória'}
+            </span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">
-            A jornada através do <span className="text-gradient-green">tempo.</span>
+            {lang === 'en' ? 'Journey through ' : 'A jornada através do '}
+            <span className="text-gradient-green">
+              {lang === 'en' ? 'time.' : 'tempo.'}
+            </span>
           </h2>
           <p className="text-slate-400 max-w-2xl font-light text-base">
-            Marcos da evolução técnica e profissional de Ricardo Vendramini ao longo dos anos.
+            {lang === 'en'
+              ? 'Key milestones of technical and professional evolution over the years.'
+              : 'Marcos da evolução técnica e profissional de Ricardo Vendramini ao longo dos anos.'}
           </p>
         </div>
 
@@ -28,7 +39,7 @@ export default function TimelineSection() {
           <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#00ff88] via-[#10b981]/40 to-transparent -translate-x-1/2" />
 
           <div className="space-y-12">
-            {timelineData.map((item, index) => {
+            {timelineItems.map((item, index) => {
               const isEven = index % 2 === 0;
               return (
                 <motion.div
@@ -65,7 +76,7 @@ export default function TimelineSection() {
                       {item.projects && item.projects.length > 0 && (
                         <div className="mb-3">
                           <span className="text-[11px] font-mono text-slate-400 block mb-1 uppercase tracking-wider">
-                            Projetos Principais:
+                            {t('timeline.projectsLabel')}
                           </span>
                           <div className="flex flex-wrap gap-1.5">
                             {item.projects.map((proj, pIdx) => (
@@ -83,7 +94,7 @@ export default function TimelineSection() {
                       {/* Tech Pills */}
                       <div className="mb-4">
                         <span className="text-[11px] font-mono text-slate-400 block mb-1 uppercase tracking-wider">
-                          Tecnologias Utilizadas:
+                          {t('timeline.technologiesLabel')}
                         </span>
                         <div className="flex flex-wrap gap-1">
                           {item.technologies.map((tech, tIdx) => (
@@ -101,7 +112,7 @@ export default function TimelineSection() {
                       {item.achievements && item.achievements.length > 0 && (
                         <div className="pt-3 border-t border-white/10">
                           <span className="text-[11px] font-mono text-[#00ff88] flex items-center gap-1 mb-1.5 uppercase">
-                            <Award className="w-3.5 h-3.5" /> Conquistas
+                            <Award className="w-3.5 h-3.5" /> {t('timeline.achievementsLabel')}
                           </span>
                           <ul className="space-y-1">
                             {item.achievements.map((ach, aIdx) => (

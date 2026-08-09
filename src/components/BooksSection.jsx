@@ -1,33 +1,44 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, Sparkles, ExternalLink, Eye, ShoppingCart, Calendar, ShieldCheck, Tag } from 'lucide-react';
-import { booksData, personalInfo } from '../data/portfolioData';
+import { getBooksData, personalInfo } from '../data/portfolioData';
 import Book3D from './Book3D';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function BooksSection({ onSelectBook }) {
+  const { lang, t } = useLanguage();
+  const books = getBooksData(lang);
+
   return (
     <section id="books" className="py-24 relative z-10 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header - Perfectly matching site design system */}
+        {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#071410] border border-[#00ff88]/30 mb-4">
             <BookOpen className="w-3.5 h-3.5 text-[#00ff88]" />
-            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">Literatura & Publicações</span>
+            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">
+              {lang === 'en' ? 'Literature & Publications' : 'Literatura & Publicações'}
+            </span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">
-            Além do <span className="text-gradient-green">código.</span>
+            {lang === 'en' ? 'Beyond ' : 'Além do '}
+            <span className="text-gradient-green">
+              {lang === 'en' ? 'the code.' : 'código.'}
+            </span>
           </h2>
 
           <p className="text-slate-400 max-w-2xl font-light text-base">
-            Escrever é outra forma de criar. Obras autorais publicadas que unem ficção científica, suspense psicológico e reflexão sobre a natureza humana.
+            {lang === 'en'
+              ? 'Writing is another way of creating. Published novels exploring sci-fi, psychological suspense, and human nature.'
+              : 'Escrever é outra forma de criar. Obras autorais publicadas que unem ficção científica, suspense psicológico e reflexão sobre a natureza humana.'}
           </p>
         </div>
 
         {/* Books Showcase Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {booksData.map((book, index) => (
+          {books.map((book, index) => (
             <motion.div
               key={book.id || index}
               initial={{ opacity: 0, y: 30 }}
@@ -47,7 +58,7 @@ export default function BooksSection({ onSelectBook }) {
                     <Book3D book={book} onClick={onSelectBook} />
                     <div className="mt-4 text-center">
                       <span className="text-[11px] font-mono text-[#00ff88] flex items-center justify-center gap-1">
-                        <Sparkles className="w-3 h-3" /> Passe o mouse para interagir 3D
+                        <Sparkles className="w-3 h-3" /> {t('books.interact3d')}
                       </span>
                     </div>
                   </div>
@@ -58,11 +69,11 @@ export default function BooksSection({ onSelectBook }) {
                   <div className="flex flex-wrap items-center gap-3">
                     <span className="px-3 py-1 rounded-full bg-[#0c2e17] border border-[#00ff88]/40 text-[#00ff88] text-xs font-mono flex items-center gap-1.5 shadow-sm">
                       <ShieldCheck className="w-3.5 h-3.5 text-[#00ff88]" />
-                      {book.status || 'Publicado'}
+                      {book.status || t('books.published')}
                     </span>
                     <span className="px-3 py-1 rounded-full bg-black/60 border border-white/10 text-slate-300 text-xs font-mono flex items-center gap-1.5">
                       <Calendar className="w-3.5 h-3.5 text-[#00f2fe]" />
-                      Lançamento: {book.year}
+                      {t('books.release')} {book.year}
                     </span>
                   </div>
 
@@ -79,7 +90,7 @@ export default function BooksSection({ onSelectBook }) {
                   {/* Synopsis Teaser */}
                   <div className="space-y-2">
                     <h4 className="text-xs font-mono text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                      <BookOpen className="w-3.5 h-3.5 text-[#00ff88]" /> Sinopse Oficial:
+                      <BookOpen className="w-3.5 h-3.5 text-[#00ff88]" /> {t('books.synopsis')}
                     </h4>
                     <p className="text-slate-300 text-sm font-light leading-relaxed line-clamp-4">
                       {book.synopsis}
@@ -105,7 +116,7 @@ export default function BooksSection({ onSelectBook }) {
                       className="px-6 py-3 rounded-xl bg-[#092415] hover:bg-[#00ff88] text-[#00ff88] hover:text-black font-mono text-xs font-bold tracking-wider uppercase transition-all duration-300 border border-[#00ff88]/40 flex items-center gap-2 shadow-glow-sm"
                     >
                       <Eye className="w-4 h-4" />
-                      <span>Ler Sinopse Completa</span>
+                      <span>{t('books.readFull')}</span>
                     </button>
 
                     <div className="flex flex-wrap items-center gap-3">
@@ -117,7 +128,7 @@ export default function BooksSection({ onSelectBook }) {
                           className="px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs font-mono uppercase tracking-wider flex items-center gap-2 transition-transform hover:scale-105 shadow-md"
                         >
                           <ShoppingCart className="w-4 h-4" />
-                          <span>Comprar na Amazon</span>
+                          <span>{t('books.buyAmazon')}</span>
                           <ExternalLink className="w-3.5 h-3.5" />
                         </a>
                       )}
@@ -129,7 +140,7 @@ export default function BooksSection({ onSelectBook }) {
                           className="px-5 py-3 rounded-xl bg-gradient-to-r from-[#059669] via-[#10b981] to-[#00ff88] text-black font-extrabold text-xs font-mono uppercase tracking-wider flex items-center gap-2 transition-transform hover:scale-105 shadow-glow-sm"
                         >
                           <ShoppingCart className="w-4 h-4" />
-                          <span>Comprar na UICLAP</span>
+                          <span>{t('books.buyUiclap')}</span>
                           <ExternalLink className="w-3.5 h-3.5" />
                         </a>
                       )}

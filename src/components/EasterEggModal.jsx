@@ -2,9 +2,12 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { X, Sparkles, Terminal, Code } from 'lucide-react';
-import { easterEggInfo } from '../data/portfolioData';
+import { easterEggInfo, easterEggInfoEn } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function EasterEggModal({ isOpen, onClose }) {
+  const { lang, t } = useLanguage();
+  const info = lang === 'en' ? easterEggInfoEn : easterEggInfo;
   useEffect(() => {
     if (isOpen) {
       // Trigger green matrix celebratory confetti
@@ -43,22 +46,22 @@ export default function EasterEggModal({ isOpen, onClose }) {
         </div>
 
         <h3 className="text-2xl font-extrabold text-[#00ff88] font-mono tracking-tight">
-          {easterEggInfo.title}
+          {info.title}
         </h3>
 
         <p className="text-slate-200 text-sm font-light leading-relaxed">
-          {easterEggInfo.message}
+          {info.message}
         </p>
 
         <div className="p-4 rounded-xl bg-[#0c2e17]/60 border border-[#00ff88]/40 font-mono text-xs text-[#00ff88]">
-          {easterEggInfo.quote}
+          {info.quote}
         </div>
 
         <button
           onClick={onClose}
           className="w-full py-3.5 rounded-xl bg-[#00ff88] text-black font-extrabold text-sm hover:scale-105 transition-transform shadow-glow-md"
         >
-          Continuar Explorando o Portfólio 🚀
+          {t('easterEgg.continue')} 🚀
         </button>
       </motion.div>
     </div>

@@ -1,7 +1,47 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, X, Sparkles } from 'lucide-react';
+import { Menu, X, Sparkles, Globe } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 import { dispatchAchievementUnlocked } from './AchievementToast';
+import { useLanguage } from '../context/LanguageContext';
+
+function LanguageToggleSwitch() {
+  const { lang, toggleLang, t } = useLanguage();
+  const isPt = lang === 'pt';
+
+  return (
+    <button
+      onClick={toggleLang}
+      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#050f09]/95 border border-[#00ff88]/60 shadow-glow-sm cursor-pointer select-none hover:border-[#00ff88] transition-all group shrink-0"
+      title={t('nav.langTitle')}
+      aria-label={t('nav.langAria')}
+    >
+      {/* Left side: Brazil Flag + PT */}
+      <div className={`flex items-center gap-1.5 text-xs font-mono font-black tracking-tight transition-all duration-200 ${
+        isPt ? 'text-[#00ff88] drop-shadow-[0_0_8px_rgba(0,255,136,0.8)]' : 'text-slate-500 opacity-60'
+      }`}>
+        <span className="text-sm">🇧🇷</span>
+        <span>PT</span>
+      </div>
+
+      {/* Center Toggle Track with Glowing Green Circle */}
+      <div className="relative w-9 h-4.5 rounded-full bg-[#0b1a11] border border-[#00ff88]/40 p-0.5 flex items-center shadow-inner">
+        <div
+          className={`w-3.5 h-3.5 rounded-full bg-[#00ff88] shadow-[0_0_10px_#00ff88] transition-transform duration-300 ease-out transform ${
+            isPt ? 'translate-x-0 bg-[#00ff88]' : 'translate-x-[16px] bg-[#00f2fe] shadow-[0_0_10px_#00f2fe]'
+          }`}
+        />
+      </div>
+
+      {/* Right side: EN + USA Flag */}
+      <div className={`flex items-center gap-1.5 text-xs font-mono font-black tracking-tight transition-all duration-200 ${
+        !isPt ? 'text-[#00f2fe] drop-shadow-[0_0_8px_rgba(0,242,254,0.8)]' : 'text-slate-500 opacity-60'
+      }`}>
+        <span>EN</span>
+        <span className="text-sm">🇺🇸</span>
+      </div>
+    </button>
+  );
+}
 
 const navItems = [
   { label: 'Início', href: '#hero' },
@@ -16,10 +56,23 @@ const navItems = [
 ];
 
 export default function Navbar({ onTriggerEasterEgg }) {
+  const { lang, t } = useLanguage();
   const [activeSection, setActiveSection] = useState('hero');
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [logoClicks, setLogoClicks] = useState(0);
+
+  const dynamicNavItems = [
+    { label: t('nav.home'), href: '#hero' },
+    { label: t('nav.about'), href: '#about' },
+    { label: t('nav.experience'), href: '#experience' },
+    { label: t('nav.skills'), href: '#skills' },
+    { label: t('nav.projects'), href: '#projects' },
+    { label: t('nav.certificates'), href: '#certificates' },
+    { label: t('nav.books'), href: '#books' },
+    { label: t('nav.achievements'), href: '#achievements' },
+    { label: t('nav.contact'), href: '#contact' },
+  ];
   const [glitchPhase, setGlitchPhase] = useState(0); // 0=normal, 1=glitching, 2=broken, 3=bsod, 4=recovering
   const [titleUnlocked, setTitleUnlocked] = useState(() => {
     try {
@@ -138,7 +191,7 @@ export default function Navbar({ onTriggerEasterEgg }) {
     if (glitchPhase >= 3) {
       return (
         <span className="font-sans text-base tracking-wider flex items-center gap-1.5 font-extrabold text-red-500">
-          [ERRO FATAL]
+          {t('nav.bsod.fatal')}
           <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
         </span>
       );
@@ -168,7 +221,7 @@ export default function Navbar({ onTriggerEasterEgg }) {
             className={`group flex items-center gap-3 text-lg font-extrabold tracking-tight text-white interactive-hover select-none ${
               glitchPhase === 1 ? 'animate-glitch-shake' : ''
             }`}
-            title="Vendramini Informática"
+            title={t('nav.brand')}
           >
             <div className={`w-10 h-10 rounded-xl bg-[#040705] border p-1 flex items-center justify-center shadow-glow-sm transition-all ${
               glitchPhase > 0 && glitchPhase < 4
@@ -191,10 +244,10 @@ export default function Navbar({ onTriggerEasterEgg }) {
                 glitchPhase > 0 && glitchPhase < 4 ? 'text-red-400' : 'text-slate-400'
               }`}>
                 {glitchPhase > 0 && glitchPhase < 4 ? (
-                  <span className="text-red-400">SYSTEM MALFUNCTION</span>
+                  <span className="text-red-400">{t('nav.brandGlitch')}</span>
                 ) : (
                   <>
-                    <span className="text-[#00f2fe]">Vendramini</span> Informática
+                    <span className="text-[#00f2fe]">Vendramini</span> {lang === 'en' ? 'Computer' : 'Informática'}
                   </>
                 )}
               </span>
@@ -202,45 +255,47 @@ export default function Navbar({ onTriggerEasterEgg }) {
           </a>
 
           {/* Desktop Nav Items */}
-          <nav className="hidden md:flex items-center gap-1 bg-[#080d09]/80 px-4 py-1.5 rounded-full border border-white/10 backdrop-blur-md shadow-glow-sm">
-            {navItems.map((item) => {
+          <nav className="hidden lg:flex items-center gap-0.5 bg-[#080d09]/85 px-3 py-1 rounded-full border border-white/10 backdrop-blur-md shadow-glow-sm">
+            {dynamicNavItems.map((item) => {
               const sectionId = item.href.substring(1);
               const isActive = activeSection === sectionId;
               return (
                 <a
                   key={item.href}
                   href={item.href}
-                  className={`relative px-3.5 py-1.5 text-xs font-medium tracking-wide transition-colors duration-200 rounded-full ${
+                  className={`relative px-2.5 py-1 text-[11px] font-medium tracking-wide transition-colors duration-200 rounded-full ${
                     isActive
-                      ? 'text-[#00ff88] font-semibold'
+                      ? 'text-[#00ff88] font-bold bg-white/5'
                       : 'text-slate-300 hover:text-white hover:bg-white/5'
                   }`}
                 >
                   {item.label}
                   {isActive && (
-                    <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-gradient-to-r from-[#00f2fe] via-[#10b981] to-[#00ff88] rounded-full shadow-glow-sm" />
+                    <span className="absolute bottom-0 left-2 right-2 h-[2px] bg-gradient-to-r from-[#00f2fe] via-[#10b981] to-[#00ff88] rounded-full shadow-glow-sm" />
                   )}
                 </a>
               );
             })}
           </nav>
 
-          {/* Action Button */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* Action Button & Cyberpunk Language Interruptor */}
+          <div className="hidden lg:flex items-center gap-3 shrink-0">
+            <LanguageToggleSwitch />
             <a
               href="#contact"
-              className="px-5 py-2.5 text-xs font-bold rounded-xl bg-gradient-to-r from-[#00f2fe] via-[#10b981] to-[#00ff88] text-black shadow-glow-sm hover:shadow-glow-md transition-all transform hover:-translate-y-0.5"
+              className="px-4 py-2 text-xs font-bold rounded-xl bg-gradient-to-r from-[#00f2fe] via-[#10b981] to-[#00ff88] text-black shadow-glow-sm hover:shadow-glow-md transition-all transform hover:-translate-y-0.5 whitespace-nowrap"
             >
-              Falar Comigo
+              {t('nav.contactBtn')}
             </a>
           </div>
 
-          {/* Mobile Hamburger Button */}
-          <div className="flex md:hidden items-center gap-2">
+          {/* Mobile Hamburger & Interruptor Button */}
+          <div className="flex lg:hidden items-center gap-2">
+            <LanguageToggleSwitch />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 rounded-lg bg-[#0c140e] border border-[#00f2fe]/30 text-slate-300 hover:text-white"
-              aria-label="Abrir Menu"
+              aria-label={t('nav.menuAria')}
             >
               {mobileMenuOpen ? <X className="w-6 h-6 text-[#00ff88]" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -249,9 +304,9 @@ export default function Navbar({ onTriggerEasterEgg }) {
 
         {/* Mobile Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden glass-panel border-b border-[#00f2fe]/30 px-6 py-6 animate-in slide-in-from-top duration-300">
+          <div className="lg:hidden glass-panel border-b border-[#00f2fe]/30 px-6 py-6 animate-in slide-in-from-top duration-300">
             <div className="flex flex-col gap-3">
-              {navItems.map((item) => (
+              {dynamicNavItems.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
@@ -267,7 +322,7 @@ export default function Navbar({ onTriggerEasterEgg }) {
                   onClick={() => setMobileMenuOpen(false)}
                   className="w-full text-center py-3 rounded-xl bg-gradient-to-r from-[#00f2fe] to-[#00ff88] text-black font-bold text-sm"
                 >
-                  Vamos Conversar
+                  {t('nav.contactBtn')}
                 </a>
               </div>
             </div>
@@ -298,10 +353,10 @@ export default function Navbar({ onTriggerEasterEgg }) {
             </div>
 
             <p className="text-slate-100 text-sm sm:text-base mb-3 leading-relaxed font-bold">
-              OCORREU UMA FALHA CRÍTICA NO SISTEMA RICARDO.DEV
+              {t('nav.bsod.title')}
             </p>
             <p className="text-slate-400 text-xs sm:text-sm mb-6 font-light leading-relaxed">
-              O núcleo do portfólio sofreu uma sobrecarga de cliques no logo. Coletando dados do dump de memória...
+              {t('nav.bsod.subtitle')}
             </p>
 
             {/* Glowing neon progress bar */}
@@ -313,24 +368,24 @@ export default function Navbar({ onTriggerEasterEgg }) {
             </div>
 
             <p className="text-[#00ff88] text-xs mb-6 font-mono font-bold">
-              [████████████████] 100% CONCLUÍDO
+              {t('nav.bsod.progress')}
             </p>
 
             <div className="text-left bg-black/60 p-4 rounded-xl border border-white/10 text-[11px] sm:text-xs space-y-1 mb-6 font-mono">
-              <p className="text-red-400"><span className="text-slate-500">STOP_CODE:</span> CLIQUE_EXCESSIVO_NO_LOGO</p>
-              <p className="text-cyan-400"><span className="text-slate-500">MODULE:</span> Ricardo.DEV.exe (0x00000DEV)</p>
-              <p className="text-emerald-400"><span className="text-slate-500">STATUS:</span> REBOOT_AUTOMATICO_INICIADO</p>
+              <p className="text-red-400"><span className="text-slate-500">{t('nav.bsod.stopLabel')}</span> {t('nav.bsod.stopValue')}</p>
+              <p className="text-cyan-400"><span className="text-slate-500">{t('nav.bsod.moduleLabel')}</span> {t('nav.bsod.moduleValue')}</p>
+              <p className="text-emerald-400"><span className="text-slate-500">{t('nav.bsod.statusLabel')}</span> {t('nav.bsod.statusValue')}</p>
             </div>
 
             <div className="bg-[#0c2e17]/80 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-[#00ff88]/40 shadow-inner">
               <p className="text-[#00ff88] text-sm font-bold mb-1 flex items-center justify-center gap-1.5">
-                <span>😎 Brincadeira! O sistema está intacto.</span>
+                <span>{t('nav.bsod.joke')}</span>
               </p>
               <p className="text-slate-300 text-xs">
-                Achou que iria derrubar meu site clicando no logo? Sou dev, o sistema é auto-regenerativo.
+                {t('nav.bsod.jokeDesc')}
               </p>
               <p className="text-[#00f2fe] text-[10px] font-mono mt-2 animate-pulse">
-                Restaurando interface em alguns instantes...
+                {t('nav.bsod.restoring')}
               </p>
             </div>
           </div>

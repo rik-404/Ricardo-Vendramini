@@ -1,7 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Book3D({ book, onClick }) {
+  const { t } = useLanguage();
   if (!book) return null;
 
   return (
@@ -23,7 +25,7 @@ export default function Book3D({ book, onClick }) {
           stiffness: 220,
           damping: 18,
         }}
-        aria-label={`Abrir detalhes do livro ${book.title}`}
+        aria-label={`${t('books.openDetailsAria')} ${book.title}`}
       >
         {/* Contracapa */}
         <div className="book-back" />
@@ -40,7 +42,7 @@ export default function Book3D({ book, onClick }) {
         <div className="book-cover">
           <img
             src={book.coverImage}
-            alt={`Capa do livro ${book.title}`}
+            alt={`${t('books.coverAria')} ${book.title}`}
           />
 
           <div className="cover-overlay" />

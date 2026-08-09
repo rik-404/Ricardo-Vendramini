@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Search, Award, Eye, ShieldCheck, Sparkles, ExternalLink, CheckCircle2 } from 'lucide-react';
-import { certificatesData } from '../data/portfolioData';
+import { getCertificatesData } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function AllCertificatesModal({ isOpen, onClose }) {
-  const [activeFilter, setActiveFilter] = useState('Todas');
+  const { lang, t } = useLanguage();
+  const certificates = getCertificatesData(lang);
+  const [activeFilter, setActiveFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCert, setSelectedCert] = useState(null);
 
@@ -27,29 +30,25 @@ export default function AllCertificatesModal({ isOpen, onClose }) {
 
   if (!isOpen) return null;
 
-  const categories = [
-    'Todas',
-    'Web Design / UI/UX',
-    'Front-End',
-    'Redes & Segurança',
-    'Soft Skills',
-    'Análise de Dados',
-    'Inteligência Artificial'
-  ];
+  const categories = ['all', 'web', 'frontend', 'networks', 'soft', 'data', 'ai'];
+  const categoryLabel = (id) => t(`certificates.categories.${id}`);
+  const filterKeywords = {
+    web: ['web design', 'ui/ux'],
+    frontend: ['front-end'],
+    networks: ['redes', 'network', 'infraestrutura'],
+    soft: ['soft skills', 'liderança', 'comunicação'],
+    data: ['dados', 'excel', 'data analysis'],
+    ai: ['inteligência artificial', 'ai'],
+  };
 
-  const filteredCertificates = certificatesData.filter((cert) => {
+  const filteredCertificates = certificates.filter((cert) => {
+    const searchText =
+      `${cert.title} ${cert.subtitle} ${cert.category} ${cert.description} ${cert.skills.join(' ')}`.toLowerCase();
     const matchesCategory =
-      activeFilter === 'Todas' ||
-      cert.category.toLowerCase().includes(activeFilter.toLowerCase()) ||
-      cert.subtitle.toLowerCase().includes(activeFilter.toLowerCase());
+      activeFilter === 'all' || filterKeywords[activeFilter].some((kw) => searchText.includes(kw));
 
     const query = searchQuery.toLowerCase().trim();
-    const matchesSearch =
-      query === '' ||
-      cert.title.toLowerCase().includes(query) ||
-      cert.subtitle.toLowerCase().includes(query) ||
-      cert.description.toLowerCase().includes(query) ||
-      cert.skills.some((sk) => sk.toLowerCase().includes(query));
+    const matchesSearch = query === '' || searchText.includes(query);
 
     return matchesCategory && matchesSearch;
   });
@@ -84,14 +83,14 @@ export default function AllCertificatesModal({ isOpen, onClose }) {
 
             <div className="flex items-center gap-2 mb-2">
               <Award className="w-4 h-4 text-[#00ff88]" />
-              <span className="text-xs font-mono text-[#00ff88] uppercase tracking-widest">Galeria Completa de Certificações</span>
+              <span className="text-xs font-mono text-[#00ff88] uppercase tracking-widest">{t('certificates.allGallery')}</span>
             </div>
 
             <h2 className="text-2xl sm:text-4xl font-extrabold text-white">
-              Todas as Certificações & <span className="text-gradient-green">Credenciais</span>
+              {t('certificates.allTitle')}<span className="text-gradient-green">{t('certificates.allAccent')}</span>
             </h2>
             <p className="text-slate-300 text-sm font-light mt-1 max-w-2xl">
-              Qualificações profissionais validadas em engenharia de software, design de interfaces, redes e desenvolvimento pessoal.
+              {t('certificates.allSubtitle')}
             </p>
 
             {/* Controls Bar: Search & Category Filter Tags */}
@@ -102,7 +101,7 @@ export default function AllCertificatesModal({ isOpen, onClose }) {
                 <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
-                  placeholder="Pesquisar por título, tecnologia ou competência..."
+                  placeholder={t('certificates.searchPlaceholder')}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-black/60 border border-white/15 text-white text-xs placeholder:text-slate-500 focus:outline-none focus:border-[#00ff88] transition-all"
@@ -112,7 +111,7 @@ export default function AllCertificatesModal({ isOpen, onClose }) {
                     onClick={() => setSearchQuery('')}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs"
                   >
-                    Limpar
+                    {t('certificates.clear')}
                   </button>
                 )}
               </div>
@@ -129,7 +128,7 @@ export default function AllCertificatesModal({ isOpen, onClose }) {
                         : 'bg-black/60 text-slate-300 hover:text-white border border-white/10 hover:border-[#00ff88]/50'
                     }`}
                   >
-                    {cat}
+                    {categoryLabel(cat)}
                   </button>
                 ))}
               </div>
@@ -140,15 +139,15 @@ export default function AllCertificatesModal({ isOpen, onClose }) {
           <div className="p-6 sm:p-8 overflow-y-auto flex-1">
             {filteredCertificates.length === 0 ? (
               <div className="text-center py-16">
-                <p className="text-slate-400 font-mono text-sm">Nenhuma certificação encontrada para os filtros aplicados.</p>
+                <p className="text-slate-400 font-mono text-sm">{t('certificates.noResults')}</p>
                 <button
                   onClick={() => {
-                    setActiveFilter('Todas');
+                    setActiveFilter('all');
                     setSearchQuery('');
                   }}
                   className="mt-4 px-4 py-2 rounded-xl bg-[#00ff88]/20 border border-[#00ff88]/40 text-[#00ff88] text-xs font-mono hover:bg-[#00ff88] hover:text-black transition-all"
                 >
-                  Resetar Filtros
+                  {t('certificates.resetFilters')}
                 </button>
               </div>
             ) : (
@@ -223,7 +222,7 @@ export default function AllCertificatesModal({ isOpen, onClose }) {
                         className="w-full py-2 px-3 rounded-xl bg-[#092415] hover:bg-[#00ff88] text-[#00ff88] hover:text-black font-mono text-xs font-semibold tracking-wider uppercase transition-all border border-[#00ff88]/30 flex items-center justify-center gap-2"
                       >
                         <Eye className="w-4 h-4" />
-                        <span>Visualizar Certificado</span>
+                        <span>{t('certificates.view')}</span>
                       </button>
                     </div>
                   </div>
@@ -273,7 +272,7 @@ export default function AllCertificatesModal({ isOpen, onClose }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-2.5 rounded-full bg-white/5 hover:bg-[#00ff88]/20 border border-white/10 hover:border-[#00ff88]/40 text-slate-300 hover:text-[#00ff88] transition-all"
-                      title="Abrir em tamanho original"
+                      title={t('certificates.openOriginal')}
                     >
                       <ExternalLink className="w-4 h-4" />
                     </a>
@@ -297,7 +296,7 @@ export default function AllCertificatesModal({ isOpen, onClose }) {
                 <div className="p-4 sm:p-5 border-t border-[#00ff88]/20 bg-[#071410]/90 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-slate-400">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#00ff88]" />
-                    <span>Emissor: {selectedCert.issuer} ({selectedCert.date})</span>
+                    <span>{t('certificates.issuer')} {selectedCert.issuer} ({selectedCert.date})</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {selectedCert.skills?.map((sk, idx) => (

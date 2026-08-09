@@ -1,8 +1,10 @@
 import React from 'react';
 import { Github, Linkedin, Instagram, Facebook, Globe, Mail } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Footer() {
+  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
 
   const socialButtons = [
@@ -31,7 +33,7 @@ export default function Footer() {
       color: 'hover:text-cyan-400 hover:border-cyan-500/50 hover:bg-cyan-500/10',
     },
     {
-      name: 'Empresa',
+      name: t('footer.company'),
       url: personalInfo.companyWebsite,
       icon: Globe,
       color: 'hover:text-[#00ff88] hover:border-[#00ff88]/50 hover:bg-[#00ff88]/10',
@@ -88,7 +90,7 @@ export default function Footer() {
         {/* Right Rights */}
         <div className="flex flex-col items-center md:items-end gap-1 text-xs font-mono text-slate-500 text-center md:text-right">
           <span>© {currentYear} Ricardo.DEV.</span>
-          <span className="text-[11px] text-slate-600">Todos os direitos reservados.</span>
+          <span className="text-[11px] text-slate-600">{t('footer.rights')}</span>
         </div>
 
       </div>

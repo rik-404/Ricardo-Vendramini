@@ -3,8 +3,11 @@ import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Calendar, Sparkles, BookOpen, ExternalLink, ShoppingCart, Tag } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function BookModal({ book, onClose }) {
+  const { lang, t } = useLanguage();
+
   useEffect(() => {
     if (!book) return;
     const handleKeyDown = (e) => {
@@ -51,7 +54,7 @@ export default function BookModal({ book, onClose }) {
                 className="w-48 sm:w-56 lg:w-64 h-[310px] sm:h-[370px] object-cover rounded-2xl shadow-glow-md border border-[#10b981]/50 filter contrast-105"
               />
               <span className="mt-3 text-[11px] font-mono text-slate-400">
-                Autor: <strong className="text-white">{personalInfo.name}</strong>
+                {lang === 'en' ? 'Author:' : 'Autor:'} <strong className="text-white">{personalInfo.name}</strong>
               </span>
             </div>
 
@@ -59,7 +62,7 @@ export default function BookModal({ book, onClose }) {
               <div className="flex flex-wrap items-center gap-2">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0c2e17] border border-[#00ff88]/40 text-[#00ff88] text-xs font-mono">
                   <Calendar className="w-3.5 h-3.5 text-[#00ff88]" />
-                  Ano: {book.year} • {book.status}
+                  {lang === 'en' ? 'Year:' : 'Ano:'} {book.year} • {book.status}
                 </span>
               </div>
 
@@ -70,7 +73,7 @@ export default function BookModal({ book, onClose }) {
 
               <div className="space-y-1.5">
                 <h4 className="text-xs font-mono text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <BookOpen className="w-3.5 h-3.5 text-[#00ff88]" /> Sinopse Oficial:
+                  <BookOpen className="w-3.5 h-3.5 text-[#00ff88]" /> {lang === 'en' ? 'Official Synopsis:' : 'Sinopse Oficial:'}
                 </h4>
                 <p className="text-slate-300 text-xs sm:text-sm font-light leading-relaxed whitespace-pre-line bg-[#071410]/50 p-4 rounded-xl border border-white/5">
                   {book.synopsis}
@@ -79,7 +82,7 @@ export default function BookModal({ book, onClose }) {
 
               <div className="space-y-1.5">
                 <h4 className="text-xs font-mono text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[#00ff88]" /> Gênero & Temas:
+                  <Sparkles className="w-3.5 h-3.5 text-[#00ff88]" /> {lang === 'en' ? 'Genre & Themes:' : 'Gênero & Temas:'}
                 </h4>
                 <p className="text-slate-300 text-xs sm:text-sm font-light leading-relaxed">
                   {book.creationProcess}
@@ -105,7 +108,7 @@ export default function BookModal({ book, onClose }) {
                       className="px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs font-mono uppercase flex items-center gap-2 transition-transform hover:scale-105 shadow-glow-sm"
                     >
                       <ShoppingCart className="w-4 h-4" />
-                      <span>Comprar na Amazon</span>
+                      <span>{lang === 'en' ? 'Buy on Amazon' : 'Comprar na Amazon'}</span>
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   )}
@@ -117,7 +120,7 @@ export default function BookModal({ book, onClose }) {
                       className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#059669] via-[#10b981] to-[#00ff88] text-black font-extrabold text-xs font-mono uppercase flex items-center gap-2 transition-transform hover:scale-105 shadow-glow-sm"
                     >
                       <ShoppingCart className="w-4 h-4" />
-                      <span>Comprar na UICLAP</span>
+                      <span>{lang === 'en' ? 'Buy on UICLAP' : 'Comprar na UICLAP'}</span>
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   )}
@@ -125,9 +128,9 @@ export default function BookModal({ book, onClose }) {
 
                 <button
                   onClick={onClose}
-                  className="px-5 py-2.5 rounded-xl bg-white/10 border border-white/20 text-white font-bold text-xs font-mono hover:bg-white/20 transition-all"
+                  className="px-5 py-2.5 rounded-xl bg-white/10 border border-white/20 text-white font-bold text-xs font-mono hover:bg-white/20 transition-all cursor-pointer"
                 >
-                  Fechar
+                  {lang === 'en' ? 'Close' : 'Fechar'}
                 </button>
               </div>
             </div>

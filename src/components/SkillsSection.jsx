@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Cpu, Sparkles, Info, X, CheckCircle2 } from 'lucide-react';
-import { skillsData } from '../data/portfolioData';
+import { getSkillsData } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function SkillsSection({ onOpenAllSkills }) {
+  const { lang, t } = useLanguage();
   const [activeSkill, setActiveSkill] = useState(null);
+  const skillsData = getSkillsData(lang);
 
   // Duplicar a lista de tecnologias para garantir um loop infinito contínuo e perfeito
   const marqueeSkills = [
@@ -22,23 +25,32 @@ export default function SkillsSection({ onOpenAllSkills }) {
         <div className="flex flex-col items-center text-center">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0c140e] border border-[#00ff88]/30 mb-4">
             <Cpu className="w-3.5 h-3.5 text-[#00ff88]" />
-            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">Conhecimentos & Ferramentas</span>
+            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">
+              {lang === 'en' ? 'Skills & Toolkit' : 'Conhecimentos & Ferramentas'}
+            </span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">
-            Ecossistema <span className="text-gradient-green">Tecnológico.</span>
+            {lang === 'en' ? 'Technological ' : 'Ecossistema '}
+            <span className="text-gradient-green">
+              {lang === 'en' ? 'Ecosystem.' : 'Tecnológico.'}
+            </span>
           </h2>
 
           <p className="text-slate-400 max-w-2xl font-light text-base mb-8">
-            Passe o mouse sobre qualquer tecnologia para pausar o carrossel e visualizar os detalhes completos.
+            {lang === 'en'
+              ? 'Hover over any skill card to pause the carousel and explore details.'
+              : 'Passe o mouse sobre qualquer tecnologia para pausar o carrossel e visualizar os detalhes completos.'}
           </p>
 
           {/* Button to open All Skills Modal */}
           <button
             onClick={onOpenAllSkills}
-            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#08180e] border border-[#00ff88]/40 text-[#00ff88] hover:bg-[#00ff88] hover:text-black font-extrabold text-xs tracking-wider uppercase transition-all duration-300 shadow-glow-sm hover:scale-105"
+            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#08180e] border border-[#00ff88]/40 text-[#00ff88] hover:bg-[#00ff88] hover:text-black font-extrabold text-xs tracking-wider uppercase transition-all duration-300 shadow-glow-sm hover:scale-105 cursor-pointer"
           >
-            <span>Ver Todas as Tecnologias ({skillsData.length})</span>
+            <span>
+              {t('skills.viewAll')} ({skillsData.length})
+            </span>
             <Sparkles className="w-4 h-4" />
           </button>
         </div>
@@ -122,14 +134,14 @@ export default function SkillsSection({ onOpenAllSkills }) {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
                   <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-[#00ff88]/10 text-[#00ff88] text-xs font-mono uppercase mb-2">
-                    <Info className="w-3.5 h-3.5" /> Detalhes da Tecnologia
+                    <Info className="w-3.5 h-3.5" /> {t('skills.detailsTitle')}
                   </div>
                   <h4 className="text-2xl font-bold text-white mb-2">{activeSkill.name}</h4>
                   <p className="text-slate-300 text-sm max-w-2xl">{activeSkill.description}</p>
                 </div>
 
                 <div className="shrink-0 bg-[#040705] p-4 rounded-xl border border-white/10">
-                  <span className="text-xs font-mono text-slate-400 block mb-2 uppercase">Projetos Relacionados:</span>
+                  <span className="text-xs font-mono text-slate-400 block mb-2 uppercase">{t('skills.relatedProjects')}</span>
                   <div className="flex flex-wrap gap-2">
                     {activeSkill.relatedProjects.map((proj, pIdx) => (
                       <span key={pIdx} className="px-3 py-1 rounded-lg bg-[#10b981]/20 border border-[#00ff88]/30 text-[#00ff88] text-xs font-semibold">

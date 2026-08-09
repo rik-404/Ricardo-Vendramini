@@ -1,8 +1,12 @@
 import React from 'react';
 import { ExternalLink, ChevronRight, Sparkles, FolderCode, Layers } from 'lucide-react';
-import { projectsData } from '../data/portfolioData';
+import { getProjectsData } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function ProjectsSection({ onSelectProject, onOpenAllProjects }) {
+  const { lang, t } = useLanguage();
+  const projectsData = getProjectsData(lang);
+
   // Duplicar a lista de projetos para garantir um loop infinito contínuo e perfeito
   const marqueeProjects = [
     ...projectsData,
@@ -19,24 +23,33 @@ export default function ProjectsSection({ onSelectProject, onOpenAllProjects }) 
         <div className="flex flex-col items-center text-center">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0c140e] border border-[#00ff88]/30 mb-4">
             <FolderCode className="w-3.5 h-3.5 text-[#00ff88]" />
-            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">Portfólio de Soluções</span>
+            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">
+              {lang === 'en' ? 'Solutions Portfolio' : 'Portfólio de Soluções'}
+            </span>
           </div>
           
           <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">
-            Coisas que eu <span className="text-gradient-green">construí.</span>
+            {lang === 'en' ? 'Things I have ' : 'Coisas que eu '}
+            <span className="text-gradient-green">
+              {lang === 'en' ? 'built.' : 'construí.'}
+            </span>
           </h2>
 
           <p className="text-slate-400 max-w-2xl font-light text-base mb-6">
-            Passe o mouse sobre qualquer projeto para pausar o carrossel ou clique no botão abaixo para explorar a galeria completa.
+            {lang === 'en'
+              ? 'Hover over any project card to pause the marquee, or click below to view the full gallery.'
+              : 'Passe o mouse sobre qualquer projeto para pausar o carrossel ou clique no botão abaixo para explorar a galeria completa.'}
           </p>
 
           {/* Button Ver Todos os Projetos */}
           <button
             onClick={onOpenAllProjects}
-            className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#059669] via-[#10b981] to-[#00ff88] text-black font-extrabold text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-glow-sm hover:scale-105 transition-all group"
+            className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#059669] via-[#10b981] to-[#00ff88] text-black font-extrabold text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-glow-sm hover:scale-105 transition-all group cursor-pointer"
           >
             <Layers className="w-4 h-4 text-black group-hover:rotate-12 transition-transform" />
-            <span>Ver Todos os Projetos ({projectsData.length})</span>
+            <span>
+              {t('projects.viewAll')} ({projectsData.length})
+            </span>
             <ChevronRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
@@ -115,7 +128,7 @@ export default function ProjectsSection({ onSelectProject, onOpenAllProjects }) 
               {/* Card Footer CTA */}
               <div className="px-5 pb-5 pt-2 border-t border-white/5 flex items-center justify-between">
                 <span className="text-xs font-semibold text-[#00ff88] group-hover:translate-x-1 transition-transform flex items-center gap-1">
-                  Ver Case Completo <ChevronRight className="w-4 h-4" />
+                  {t('projects.viewCase')} <ChevronRight className="w-4 h-4" />
                 </span>
 
                 <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
@@ -125,7 +138,7 @@ export default function ProjectsSection({ onSelectProject, onOpenAllProjects }) 
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-1.5 rounded-lg bg-[#00ff88]/10 text-[#00ff88] hover:bg-[#00ff88]/20 transition-colors"
-                      title="Abrir Projeto"
+                      title={t('projects.openProject')}
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>

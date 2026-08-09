@@ -4,8 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Volume2, VolumeX } from 'lucide-react';
 import { personalInfo, projectsData, skillsData } from '../data/portfolioData';
 import { dispatchAchievementUnlocked } from './AchievementToast';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function StarWarsCrawlOverlay({ isOpen, onClose }) {
+  const { t } = useLanguage();
   const [phase, setPhase] = useState('INTRO'); // INTRO | LOGO | CRAWL
   const [soundEnabled, setSoundEnabled] = useState(true);
   const soundEnabledRef = useRef(soundEnabled);
@@ -184,7 +186,7 @@ export default function StarWarsCrawlOverlay({ isOpen, onClose }) {
           <button
             onClick={() => setSoundEnabled(!soundEnabled)}
             className="p-2.5 rounded-full bg-[#06140d]/90 border border-[#00ff88]/50 text-[#00ff88] hover:bg-[#00ff88] hover:text-black transition-all shadow-glow-sm cursor-pointer"
-            title={soundEnabled ? 'Desativar Áudio' : 'Ativar Áudio'}
+            title={soundEnabled ? t('starwars.soundOff') : t('starwars.soundOn')}
           >
             {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4 text-slate-500" />}
           </button>
@@ -194,7 +196,7 @@ export default function StarWarsCrawlOverlay({ isOpen, onClose }) {
             className="px-4 py-2 rounded-full bg-[#06140d]/90 border border-[#00ff88]/50 text-[#00ff88] hover:bg-[#00ff88] hover:text-black transition-all flex items-center gap-2 text-xs font-bold shadow-glow-sm cursor-pointer"
           >
             <X className="w-4 h-4" />
-            <span>Restaurar Galáxia (ESC)</span>
+            <span>{t('starwars.restoreGalaxy')}</span>
           </button>
         </div>
 
@@ -208,7 +210,7 @@ export default function StarWarsCrawlOverlay({ isOpen, onClose }) {
             className="absolute inset-0 flex items-center justify-center p-6 text-center z-10"
           >
             <h3 className="text-xl sm:text-3xl font-bold text-[#00f2fe] tracking-widest leading-relaxed max-w-2xl drop-shadow-[0_0_25px_rgba(0,242,254,0.7)] font-mono">
-              Há muito tempo em um console, muito distante...
+              {t('starwars.intro')}
             </h3>
           </motion.div>
         )}
@@ -225,7 +227,7 @@ export default function StarWarsCrawlOverlay({ isOpen, onClose }) {
               RICARDO.DEV
             </h1>
             <h2 className="text-2xl sm:text-4xl font-extrabold tracking-widest text-[#00ff88] mt-2">
-              PORTFÓLIO GALÁCTICO
+              {t('starwars.galacticTitle')}
             </h2>
           </motion.div>
         )}
@@ -240,21 +242,21 @@ export default function StarWarsCrawlOverlay({ isOpen, onClose }) {
               className="w-full max-w-2xl text-center space-y-12 tracking-wider font-sans font-extrabold px-6 text-[#ffe81f] drop-shadow-[0_0_12px_rgba(255,232,31,0.7)] [transform-origin:50%_100%]"
             >
               <div className="space-y-3 uppercase font-mono">
-                <p className="text-2xl sm:text-3xl font-black tracking-widest text-[#00f2fe]">EPISÓDIO IV</p>
-                <h2 className="text-3xl sm:text-5xl font-black text-[#00ff88] tracking-widest">O CÓDIGO DA GALÁXIA</h2>
+                <p className="text-2xl sm:text-3xl font-black tracking-widest text-[#00f2fe]">{t('starwars.episode')}</p>
+                <h2 className="text-3xl sm:text-5xl font-black text-[#00ff88] tracking-widest">{t('starwars.crawlTitle')}</h2>
               </div>
 
               <p className="text-lg sm:text-2xl leading-relaxed font-light text-justify">
-                É um período de revolução digital. Desenvolvedores rebeldes travam uma batalha épica contra sistemas lentos, designs ultrapassados e a falta de inovação na web.
+                {t('starwars.crawlP1')}
               </p>
 
               <p className="text-lg sm:text-2xl leading-relaxed font-light text-justify">
-                Do coração de Piracicaba, o engenheiro <strong className="text-[#00ff88] font-bold">{personalInfo.name}</strong> ergueu a <strong className="text-[#00f2fe] font-bold">{personalInfo.companyName}</strong>, fundindo tecnologia de ponta, design cyberpunk e inteligência artificial para trazer ordem ao ecossistema digital.
+                {t('starwars.crawlP2').replace('{name}', personalInfo.name).replace('{company}', personalInfo.companyName)}
               </p>
 
               {/* Skills Section Crawl */}
               <div className="space-y-4 pt-6 border-t border-[#00ff88]/30">
-                <h3 className="text-2xl sm:text-3xl font-black uppercase text-[#00ff88]">AS HABILIDADES DOS JEDI:</h3>
+                <h3 className="text-2xl sm:text-3xl font-black uppercase text-[#00ff88]">{t('starwars.jediSkills')}</h3>
                 <div className="grid grid-cols-2 gap-4 text-sm sm:text-lg font-mono">
                   {skillsData.slice(0, 8).map((skill, idx) => (
                     <div key={idx} className="p-3 bg-[#06140d]/80 border border-[#00ff88]/40 rounded-xl text-center text-[#00ff88]">
@@ -266,7 +268,7 @@ export default function StarWarsCrawlOverlay({ isOpen, onClose }) {
 
               {/* Projects Crawl */}
               <div className="space-y-4 pt-6 border-t border-[#00ff88]/30">
-                <h3 className="text-2xl sm:text-3xl font-black uppercase text-[#00f2fe]">PROJETOS EMBLEMÁTICOS:</h3>
+                <h3 className="text-2xl sm:text-3xl font-black uppercase text-[#00f2fe]">{t('starwars.iconicProjects')}</h3>
                 {projectsData.slice(0, 4).map((proj, idx) => (
                   <div key={idx} className="p-4 bg-[#06140d]/80 border border-[#00f2fe]/40 rounded-2xl text-left space-y-1">
                     <h4 className="text-xl font-bold text-[#00ff88]">{proj.title}</h4>
@@ -277,13 +279,13 @@ export default function StarWarsCrawlOverlay({ isOpen, onClose }) {
 
               <div className="pt-12 text-center space-y-6">
                 <p className="text-2xl sm:text-3xl font-black text-white tracking-widest">
-                  QUE A FORÇA DO CÓDIGO ESTEJA COM VOCÊ!
+                  {t('starwars.finalLine')}
                 </p>
                 <button
                   onClick={handleClose}
                   className="px-8 py-4 rounded-full bg-gradient-to-r from-[#059669] via-[#10b981] to-[#00ff88] text-black font-extrabold text-sm uppercase tracking-widest hover:scale-105 transition-all shadow-glow-md cursor-pointer"
                 >
-                  Restaurar a Galáxia (ESC)
+                  {t('starwars.forceButton')}
                 </button>
               </div>
             </motion.div>

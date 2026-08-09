@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Award, CheckCircle2, ExternalLink, Eye, X, ShieldCheck, Sparkles, ChevronRight, Layers } from 'lucide-react';
-import { certificatesData } from '../data/portfolioData';
+import { getCertificatesData } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function CertificatesSection({ onOpenAllCertificates }) {
+  const { lang, t } = useLanguage();
   const [selectedCert, setSelectedCert] = useState(null);
+  const certificatesData = getCertificatesData(lang);
 
   // Duplicar a lista de certificados para garantir um loop infinito contínuo e perfeito no carrossel
   const marqueeCertificates = [
@@ -33,15 +36,22 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
         <div className="flex flex-col items-center text-center">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#071410] border border-[#00ff88]/30 mb-4">
             <Award className="w-3.5 h-3.5 text-[#00ff88]" />
-            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">Especializações & Qualificações</span>
+            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">
+              {lang === 'en' ? 'Certifications & Credentials' : 'Especializações & Qualificações'}
+            </span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">
-            Certificações <span className="text-gradient-green">& Credenciais</span>
+            {lang === 'en' ? 'Certifications ' : 'Certificações '}
+            <span className="text-gradient-green">
+              {lang === 'en' ? '& Credentials' : '& Credenciais'}
+            </span>
           </h2>
 
           <p className="text-slate-400 max-w-2xl font-light text-base mb-6">
-            Passe o mouse sobre qualquer certificado para pausar o carrossel ou clique para abrir a visualização em alta resolução.
+            {lang === 'en'
+              ? 'Continuous education, diplomas, and official certifications.'
+              : 'Formação continuada, diplomas e credenciais profissionais reconhecidas.'}
           </p>
 
           {/* Button to open All Certificates Modal */}
@@ -50,7 +60,9 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
             className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#059669] via-[#10b981] to-[#00ff88] text-black font-extrabold text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-glow-sm hover:scale-105 transition-all group"
           >
             <Layers className="w-4 h-4 text-black group-hover:rotate-12 transition-transform" />
-            <span>Ver Todas as Certificações ({certificatesData.length})</span>
+            <span>
+              {t('certificates.viewAll')} ({certificatesData.length})
+            </span>
             <ChevronRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
@@ -84,7 +96,7 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
                   {/* Hover Action Overlay */}
                   <div className="absolute inset-0 bg-[#00ff88]/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
                     <span className="px-4 py-2 rounded-full bg-[#040705]/90 border border-[#00ff88] text-[#00ff88] text-xs font-mono font-semibold flex items-center gap-2 shadow-lg">
-                      <Eye className="w-4 h-4" /> Ampliar Certificado
+                      <Eye className="w-4 h-4" /> {t('certificates.zoom')}
                     </span>
                   </div>
 
@@ -150,7 +162,7 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
                       className="w-full py-2.5 px-4 rounded-xl bg-[#092415] hover:bg-[#00ff88] text-[#00ff88] hover:text-black font-mono text-xs font-semibold tracking-wider uppercase transition-all duration-300 border border-[#00ff88]/30 flex items-center justify-center gap-2 group/btn shadow-glow-sm"
                     >
                       <Eye className="w-4 h-4 group-hover/btn:scale-110 transition-transform" />
-                      <span>Visualizar Certificado</span>
+                      <span>{t('certificates.view')}</span>
                     </button>
                   </div>
                 </div>
@@ -205,7 +217,7 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-2.5 rounded-full bg-white/5 hover:bg-[#00ff88]/20 border border-white/10 hover:border-[#00ff88]/40 text-slate-300 hover:text-[#00ff88] transition-all"
-                      title="Abrir em tamanho original"
+                      title={t('certificates.openOriginal')}
                     >
                       <ExternalLink className="w-4 h-4" />
                     </a>
@@ -231,7 +243,7 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
                 <div className="p-4 sm:p-5 border-t border-[#00ff88]/20 bg-[#071410]/90 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-slate-400">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#00ff88]" />
-                    <span>Emissor: {selectedCert.issuer} ({selectedCert.date})</span>
+                    <span>{t('certificates.issuer')} {selectedCert.issuer} ({selectedCert.date})</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {selectedCert.skills?.map((sk, idx) => (

@@ -2,38 +2,41 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { User, ShieldCheck, Cog, Target, Users, Rocket, Quote } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function AboutSection() {
+  const { lang, t } = useLanguage();
+
   const personalPillars = [
     {
       icon: Cog,
       emoji: '⚙️',
-      title: 'Construir para funcionar',
-      description: 'Não basta parecer bonito. Gosto de criar soluções que sejam úteis, estáveis e fáceis de evoluir.',
+      title: t('about.buildToWork'),
+      description: t('about.buildToWorkDesc'),
       borderColor: 'hover:border-[#00ff88]/50 hover:bg-[#061c10]/40',
       iconColor: 'text-[#00ff88]'
     },
     {
       icon: Target,
       emoji: '🎯',
-      title: 'Resolver problemas reais',
-      description: 'Tecnologia tem valor quando resolve um problema de verdade e facilita a vida de quem está do outro lado.',
+      title: t('about.solveProblems'),
+      description: t('about.solveProblemsDesc'),
       borderColor: 'hover:border-[#00f2fe]/50 hover:bg-[#051824]/40',
       iconColor: 'text-[#00f2fe]'
     },
     {
       icon: Users,
       emoji: '👥',
-      title: 'Pessoas antes da tecnologia',
-      description: 'Experiência, comunicação e colaboração são tão importantes quanto código e ferramentas.',
+      title: t('about.peopleFirst'),
+      description: t('about.peopleFirstDesc'),
       borderColor: 'hover:border-[#10b981]/50 hover:bg-[#061a12]/40',
       iconColor: 'text-[#10b981]'
     },
     {
       icon: Rocket,
       emoji: '🚀',
-      title: 'Sempre evoluindo',
-      description: 'Cada projeto é uma oportunidade de aprender algo novo, testar ideias e melhorar o que já existe.',
+      title: t('about.alwaysEvolving'),
+      description: t('about.alwaysEvolvingDesc'),
       borderColor: 'hover:border-[#00ff88]/50 hover:bg-[#061c10]/40',
       iconColor: 'text-[#00ff88]'
     }
@@ -47,7 +50,7 @@ export default function AboutSection() {
         <div className="flex flex-col items-center text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#071410] border border-[#00ff88]/30 mb-3">
             <User className="w-3.5 h-3.5 text-[#00ff88]" />
-            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">Sobre Mim</span>
+            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">{t('about.badge')}</span>
           </div>
         </div>
 
@@ -109,13 +112,29 @@ export default function AboutSection() {
           >
             <div>
               <h2 className="text-2xl sm:text-4xl font-extrabold text-white mb-6 tracking-tight leading-tight">
-                {personalInfo.aboutTitle || "Minha trajetória, minha visão e o que me move"}
+                {lang === 'en'
+                  ? 'My journey, my vision, and what drives me'
+                  : 'Minha trajetória, minha visão e o que me move'}
               </h2>
 
               <div className="space-y-4 text-slate-300 font-light text-sm sm:text-base leading-relaxed mb-8">
-                {personalInfo.aboutStory.map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
-                ))}
+                {lang === 'en' ? (
+                  <>
+                    <p>
+                      My relationship with technology began with a curiosity to understand how things work. What started with experiments and lines of code transformed into a constant quest to build solutions that truly make a difference.
+                    </p>
+                    <p>
+                      Throughout this journey, I came to view software development from a broader perspective. For me, creating software isn't just about writing code: it's about understanding a problem, designing the user experience, and finding an efficient way to turn an idea into reality.
+                    </p>
+                    <p>
+                      Today, I combine software engineering, tech, management, and leadership to build projects that go far beyond technical execution. I enjoy participating in the entire lifecycle—from concept and planning to implementation, deployment, and product evolution.
+                    </p>
+                  </>
+                ) : (
+                  personalInfo.aboutStory.map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))
+                )}
               </div>
             </div>
 
@@ -157,7 +176,7 @@ export default function AboutSection() {
         >
           <Quote className="w-8 h-8 text-[#00ff88]/40 mx-auto mb-3" />
           <blockquote className="text-lg sm:text-2xl font-bold text-white tracking-wide font-sans leading-snug">
-            "{personalInfo.aboutQuote || 'Não quero apenas escrever código. Quero construir coisas que façam sentido.'}"
+            "{lang === 'en' ? "I don't just want to write code. I want to build things that matter." : personalInfo.aboutQuote}"
           </blockquote>
         </motion.div>
 

@@ -28,8 +28,10 @@ import AchievementToast, { dispatchAchievementUnlocked } from './components/Achi
 import { Trash2, RotateCcw } from 'lucide-react';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
+import { useLanguage } from './context/LanguageContext';
 
 export default function App() {
+  const { t } = useLanguage();
   const [selectedProject, setSelectedProject] = useState(null);
   const [allProjectsOpen, setAllProjectsOpen] = useState(false);
   const [allSkillsOpen, setAllSkillsOpen] = useState(false);
@@ -264,14 +266,14 @@ export default function App() {
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[99999] px-6 py-3.5 rounded-2xl bg-[#06140d]/95 border border-[#00ff88]/50 text-white font-mono text-xs shadow-glow-lg flex items-center gap-4 animate-bounce">
           <span className="flex items-center gap-2 text-[#00ff88]">
             <Trash2 className="w-4 h-4 text-[#00ff88]" />
-            <span>Modo Limpeza Total Ativo — O site foi limpo!</span>
+            <span>{t('cleanBanner.active')}</span>
           </span>
           <button
             onClick={() => setSiteCleaned(false)}
             className="px-4 py-1.5 rounded-xl bg-gradient-to-r from-[#059669] to-[#00ff88] text-black font-extrabold flex items-center gap-1.5 hover:scale-105 transition-all cursor-pointer shadow-sm"
           >
             <RotateCcw className="w-3.5 h-3.5" />
-            <span>Restaurar Site (ESC)</span>
+            <span>{t('cleanBanner.restore')} (ESC)</span>
           </button>
         </div>
       )}
