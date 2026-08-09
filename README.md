@@ -136,7 +136,7 @@ sites/ricardo-vendramini/
 
 ---
 
-## 🚀 Como Executar o Projeto Localmente
+## 🚀 Walkthrough: Como Rodar o Projeto Localmente
 
 ### Pré-requisitos
 - **Node.js** (v18.0.0 ou superior)
@@ -144,28 +144,40 @@ sites/ricardo-vendramini/
 
 ### Passo a Passo
 
-1. **Clonar o repositório:**
-   ```bash
-   git clone https://github.com/rik-404/Ricardo-Vendramini.git
-   cd Ricardo-Vendramini
-   ```
+**1. Clonar o repositório e entrar na pasta:**
+```bash
+git clone https://github.com/rik-404/Ricardo-Vendramini.git
+cd Ricardo-Vendramini
+```
 
-2. **Instalar as dependências:**
-   ```bash
-   npm install
-   ```
+**2. Instalar as dependências:**
+```bash
+npm install
+```
 
-3. **Iniciar o servidor de desenvolvimento:**
-   ```bash
-   npm run dev
-   ```
+**3. Rodar o servidor de desenvolvimento (com hot reload):**
+```bash
+npm run dev
+```
+Isso inicia o Vite em **http://localhost:3003** (porta fixa definida no `vite.config.js`). No terminal, o Vite ainda exibe o endereço correto da sua rede (via `--host`) caso acesse de outro dispositivo. É a opção ideal durante o desenvolvimento: edite os arquivos em `src/` e o browser atualiza sozinho.
 
-4. **Acessar no navegador:**
-   Abra [http://localhost:3000](http://localhost:3000) (ou a porta exibida no terminal).
+**4. Gerar a build de produção (para deploy):**
+```bash
+npm run build
+```
+Compila e minifica tudo em `dist/`, com **code splitting em chunks separados** (`vendor-react`, `vendor-framer`, `vendor-lucide`) para cache mais eficiente em produção.
+
+**5. Visualizar a build de produção localmente:**
+```bash
+npm run preview
+```
+Sobe um servidor estático servindo exatamente o que foi gerado em `dist/` (útil para validar a build antes do deploy).
 
 ---
 
-## 🎮 Comandos do Terminal CLI & Segredos
+## 🎮 Walkthrough: Terminal CLI & Comandos do Site
+
+O terminal interativo fica na seção **Terminal** do site. Digite os comandos abaixo e pressione Enter:
 
 | Comando | Descrição |
 | :--- | :--- |
