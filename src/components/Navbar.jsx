@@ -9,6 +9,7 @@ const navItems = [
   { label: 'Experiência', href: '#experience' },
   { label: 'Habilidades', href: '#skills' },
   { label: 'Projetos', href: '#projects' },
+  { label: 'Certificações', href: '#certificates' },
   { label: 'Livros', href: '#books' },
   { label: 'Conquistas', href: '#achievements' },
   { label: 'Contato', href: '#contact' },

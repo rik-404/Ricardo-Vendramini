@@ -11,8 +11,10 @@ import ProjectsSection from './components/ProjectsSection';
 import ProjectModal from './components/ProjectModal';
 import AllProjectsModal from './components/AllProjectsModal';
 import AllSkillsModal from './components/AllSkillsModal';
+import AllCertificatesModal from './components/AllCertificatesModal';
 import ExperienceSection from './components/ExperienceSection';
 import LeadershipSection from './components/LeadershipSection';
+import CertificatesSection from './components/CertificatesSection';
 import BooksSection from './components/BooksSection';
 import BookModal from './components/BookModal';
 import AchievementsSection from './components/AchievementsSection';
@@ -28,6 +30,7 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [allProjectsOpen, setAllProjectsOpen] = useState(false);
   const [allSkillsOpen, setAllSkillsOpen] = useState(false);
+  const [allCertificatesOpen, setAllCertificatesOpen] = useState(false);
   const [achievementsModalOpen, setAchievementsModalOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [easterEggOpen, setEasterEggOpen] = useState(false);
@@ -160,6 +163,7 @@ export default function App() {
         />
         <ExperienceSection />
         <LeadershipSection />
+        <CertificatesSection onOpenAllCertificates={() => setAllCertificatesOpen(true)} />
         <BooksSection onSelectBook={setSelectedBook} />
         <AchievementsSection />
         <TerminalSection
@@ -177,6 +181,12 @@ export default function App() {
       <AllSkillsModal
         isOpen={allSkillsOpen}
         onClose={() => setAllSkillsOpen(false)}
+      />
+
+      {/* Galeria Completa de Certificações (Renderizada no nível raiz z-[999]) */}
+      <AllCertificatesModal
+        isOpen={allCertificatesOpen}
+        onClose={() => setAllCertificatesOpen(false)}
       />
 
       {/* Galeria Completa de Projetos (Renderizada no nível raiz z-[999]) */}

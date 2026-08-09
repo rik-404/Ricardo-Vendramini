@@ -15,6 +15,14 @@ import reiDasRomsImg from '../images/books/portifolio/Rei-das-Roms.png';
 import festaFacilImg from '../images/books/portifolio/Festa-Facil.png';
 import c4t4t4uImg from '../images/books/portifolio/C4t4t4u-Eletronicos.png';
 import ciganaMorganaImg from '../images/books/portifolio/Cigana-Morgana.png';
+import designer5kImg from '../images/certificados/web/designer5k.png';
+import htmlCssCertImg from '../images/certificados/HTML-CSS.png';
+import analistaRedesCertImg from '../images/certificados/Analista-Redes.png';
+import inteligenciaEmocionalCertImg from '../images/certificados/Itelegigencia emocional.png.png';
+import carismaCertImg from '../images/certificados/Carisma.png';
+import excelAvançadoCertImg from '../images/certificados/Excle2010-Avançado.png';
+import lovableCertImg from '../images/certificados/Lovable-Workshop.png.png';
+import pythonCertImg from '../images/certificados/python-fundamental1.png';
 
 export const personalInfo = {
   name: "Ricardo Vendramini",
@@ -115,10 +123,10 @@ export const timelineData = [
 export const skillsCategories = [
   { id: "all", label: "Todas" },
   { id: "core", label: "Linguagens & Core" },
-  { id: "frameworks", label: "Frameworks & UI" },
+  { id: "frameworks", label: "Frameworks & CMS" },
   { id: "backend", label: "Backend & Cloud" },
-  { id: "tools", label: "Ferramentas & OS" },
-  { id: "deploy", label: "Deploy & Infraestrutura" }
+  { id: "tools", label: "Ferramentas & Design" },
+  { id: "deploy", label: "Redes, Deploy & Infra" }
 ];
 
 export const skillsData = [
@@ -140,12 +148,20 @@ export const skillsData = [
     relatedProjects: ["Elite House Piracicaba"]
   },
   {
+    name: "Python 3",
+    category: "core",
+    level: "Avançado",
+    percentage: 88,
+    description: "Desenvolvimento de rotinas algorítmicas, manipulação avançada de dados, automações, scripts e lógica estruturada.",
+    relatedProjects: ["Certificação Python 3 Fundamentos", "Automações"]
+  },
+  {
     name: "HTML5",
     category: "core",
     level: "Especialista",
     percentage: 96,
-    description: "Semântica web avançada, acessibilidade (a11y), SEO técnico e estruturas modernas.",
-    relatedProjects: ["Vendramini Informática", "Elite House Piracicaba"]
+    description: "Semântica web avançada, acessibilidade (a11y), SEO técnico e estruturas modernas validadas em certificação.",
+    relatedProjects: ["Vendramini Informática", "Certificação HTML5 & CSS3"]
   },
   {
     name: "CSS3",
@@ -153,7 +169,15 @@ export const skillsData = [
     level: "Especialista",
     percentage: 94,
     description: "Design responsivo avançado, variáveis CSS (HSL), glassmorphism, Flexbox, Grid e temas cyberpunk.",
-    relatedProjects: ["Vendramini Informática", "Elite House Piracicaba"]
+    relatedProjects: ["Vendramini Informática", "Certificação HTML5 & CSS3"]
+  },
+  {
+    name: "Web Design & UI/UX",
+    category: "core",
+    level: "Especialista",
+    percentage: 94,
+    description: "Composição estético-visual, hierarquia tipográfica, arquitetura de informação, conversão e percepção de valor.",
+    relatedProjects: ["Certificação Designer 5k", "Cigana Morgana"]
   },
   {
     name: "SQL / PostgreSQL",
@@ -164,7 +188,7 @@ export const skillsData = [
     relatedProjects: ["Elite House Piracicaba"]
   },
 
-  // Frameworks, UI & Web APIs
+  // Frameworks, CMS & Web APIs
   {
     name: "React 18",
     category: "frameworks",
@@ -172,6 +196,22 @@ export const skillsData = [
     percentage: 92,
     description: "Criação de Single Page Applications (SPAs) reativas, Hooks customizados e controle global de estado.",
     relatedProjects: ["Elite House Piracicaba"]
+  },
+  {
+    name: "WordPress",
+    category: "frameworks",
+    level: "Avançado",
+    percentage: 92,
+    description: "Desenvolvimento de sites corporativos, portfólios, blogs e páginas profissionais de alta performance com temas e plugins customizados.",
+    relatedProjects: ["Certificação Designer 5k"]
+  },
+  {
+    name: "Elementor Pro",
+    category: "frameworks",
+    level: "Especialista",
+    percentage: 90,
+    description: "Criação de landing pages de alta conversão, layouts dinâmicos, componentes reutilizáveis e integração de formulários.",
+    relatedProjects: ["Certificação Designer 5k"]
   },
   {
     name: "Vite",
@@ -256,7 +296,15 @@ export const skillsData = [
     relatedProjects: ["Elite House Piracicaba"]
   },
 
-  // Ferramentas & OS
+  // Ferramentas & Design
+  {
+    name: "Figma",
+    category: "tools",
+    level: "Avançado",
+    percentage: 88,
+    description: "Prototipagem de telas, criação de design systems, wireframes interativos e protótipos navegáveis.",
+    relatedProjects: ["Certificação Designer 5k", "Vendramini Informática"]
+  },
   {
     name: "Linux",
     category: "tools",
@@ -274,6 +322,46 @@ export const skillsData = [
     relatedProjects: ["Elite House Piracicaba", "Vendramini Informática"]
   },
   {
+    name: "Inteligência Emocional & Soft Skills",
+    category: "tools",
+    level: "Especialista",
+    percentage: 95,
+    description: "Autogestão emocional, empatia, escuta ativa, comunicação assertiva, resiliência e inteligência interpessoal em ambientes sob pressão.",
+    relatedProjects: ["Certificação Inteligência Emocional", "Conexão Marketing"]
+  },
+  {
+    name: "Liderança & Gestão de Pessoas",
+    category: "tools",
+    level: "Especialista",
+    percentage: 95,
+    description: "Desenvolvimento contínuo de equipes, mediação estratégica de conflitos, gestão de clima e promoção de alta performance operacional.",
+    relatedProjects: ["Conexão Marketing", "Certificação Inteligência Emocional"]
+  },
+  {
+    name: "Carisma & Comunicação Persuasiva",
+    category: "tools",
+    level: "Especialista",
+    percentage: 94,
+    description: "Presença executiva, magnetismo interpessoal, oratória, linguagem corporal, escuta ativa e construção de parcerias de alto valor.",
+    relatedProjects: ["Certificação Carisma & Comunicação", "Conexão Marketing"]
+  },
+  {
+    name: "Microsoft Excel Avançado & Análise de Dados",
+    category: "tools",
+    level: "Avançado",
+    percentage: 92,
+    description: "Modelagem de dados corporativos, tabelas dinâmicas (Pivot), funções avançadas (PROCV, ÍNDICE/CORRESP), dashboards e automação com Macros.",
+    relatedProjects: ["Certificação Excel Avançado", "Conexão Marketing"]
+  },
+  {
+    name: "Desenvolvimento Assistido por IA (Lovable / Agentic)",
+    category: "tools",
+    level: "Avançado",
+    percentage: 94,
+    description: "Aceleração de engenharia de software com ferramentas de IA generativa (Lovable AI), prototipagem de produtos full-stack e engenharia de prompts.",
+    relatedProjects: ["Certificação Lovable AI Workshop", "Projetos Pessoais"]
+  },
+  {
     name: "VSCode",
     category: "tools",
     level: "Especialista",
@@ -282,7 +370,23 @@ export const skillsData = [
     relatedProjects: ["Todos os projetos"]
   },
 
-  // Deploy & Infraestrutura
+  // Redes, Deploy & Infraestrutura
+  {
+    name: "Redes & TCP/IP",
+    category: "deploy",
+    level: "Avançado",
+    percentage: 90,
+    description: "Arquitetura de redes de computadores, modelo OSI, protocolo TCP/IP, endereçamento IPv4/IPv6, sub-redes e roteamento.",
+    relatedProjects: ["Certificação Analista de Redes", "Vendramini Informática"]
+  },
+  {
+    name: "Serviços de Rede (DNS / DHCP)",
+    category: "deploy",
+    level: "Avançado",
+    percentage: 88,
+    description: "Gerenciamento de zonas DNS, configuração DHCP, servidores web HTTP/HTTPS e segurança de infraestrutura.",
+    relatedProjects: ["Certificação Analista de Redes", "Vendramini Informática"]
+  },
   {
     name: "Hostinger",
     category: "deploy",
@@ -296,7 +400,7 @@ export const skillsData = [
     category: "deploy",
     level: "Especialista",
     percentage: 95,
-    description: "Deploy automatizado, hospedagem serverless de alta performance e integração de domínios em projetos como Vendramini Informática, C4T4T4U Eletrônicos e Cigana Morgana.",
+    description: "Deploy automatizado, hospedagem serverless de alta performance e integração de domínios.",
     relatedProjects: ["Vendramini Informática", "C4T4T4U Eletrônicos", "Cigana Morgana"]
   },
   {
@@ -304,7 +408,7 @@ export const skillsData = [
     category: "deploy",
     level: "Especialista",
     percentage: 96,
-    description: "Versionamento de código e hospedagem de aplicações estáticas e projetos open source (Rei das Roms, Festa Fácil).",
+    description: "Versionamento de código e hospedagem de aplicações estáticas e projetos open source.",
     relatedProjects: ["Rei das Roms", "Festa Fácil Personalizados"]
   }
 ];
@@ -540,6 +644,105 @@ export const achievementsData = [
     title: "Ecossistema Tecnológico Completo",
     category: "Domínio Técnico",
     description: "Capacidade de transitar com fluidez por Frontend, Backend, Banco de Dados, Infraestrutura Linux e Governança de TI."
+  }
+];
+
+export const certificatesData = [
+  {
+    id: "designer-5k",
+    title: "Designer 5k",
+    subtitle: "Certificação Profissional em Web Design & WordPress",
+    issuer: "Designer 5k",
+    category: "Web Design / WordPress / UI/UX",
+    date: "2026",
+    image: designer5kImg,
+    description: "Certificação profissional focada em criação de sites e landing pages de alta conversão. Domínio de técnicas avançadas de Web Design, arquitetura UI/UX, prototipagem no Figma e desenvolvimento corporativo com WordPress, Elementor e estratégias de design de alto valor percebido.",
+    skills: ["WordPress", "Elementor", "Web Design", "UI/UX", "Figma", "Design Responsivo", "Conversão & UX"],
+    badge: "Certificado Oficial"
+  },
+  {
+    id: "html5-css3",
+    title: "HTML5 & CSS3",
+    subtitle: "Certificação em Desenvolvimento Front-End & Estilização Semântica",
+    issuer: "Curso em Vídeo / Gustavo Guanabara",
+    category: "Front-End / Web Development",
+    date: "2025",
+    image: htmlCssCertImg,
+    description: "Certificação completa em desenvolvimento web moderno com HTML5 semântico e CSS3 avançado. Domínio de estruturação de páginas, layouts responsivos com Flexbox e CSS Grid, variáveis CSS, acessibilidade web (a11y), animações e boas práticas de Front-End.",
+    skills: ["HTML5", "CSS3", "Flexbox", "CSS Grid", "Design Responsivo", "SEO Técnico", "Acessibilidade"],
+    badge: "Certificado Oficial"
+  },
+  {
+    id: "analista-redes",
+    title: "Analista de Redes",
+    subtitle: "Certificação em Infraestrutura de Redes, Arquitetura & Segurança",
+    issuer: "Curso em Vídeo / Gustavo Guanabara",
+    category: "Infraestrutura / Redes & Segurança",
+    date: "2023",
+    image: analistaRedesCertImg,
+    description: "Certificação especializada em arquitetura e análise de redes de computadores. Aborda conceitos avançados de modelo OSI/TCP-IP, endereçamento IPv4/IPv6, sub-redes, roteamento, comutação (Switching), segurança de redes, protocolos DNS/DHCP/HTTP e infraestrutura corporativa.",
+    skills: ["Redes de Computadores", "TCP/IP", "IPv4 / IPv6", "Roteamento & Switch", "DNS & DHCP", "Segurança de Redes", "Infraestrutura IT"],
+    badge: "Certificado Oficial"
+  },
+  {
+    id: "inteligencia-emocional",
+    title: "Inteligência Emocional",
+    subtitle: "Certificação Profissional em Inteligência Emocional & Soft Skills",
+    issuer: "Certificação Profissional em Liderança & Desenvolvimento",
+    category: "Soft Skills / Liderança",
+    date: "2025",
+    image: inteligenciaEmocionalCertImg,
+    description: "Certificação focada no desenvolvimento de inteligência emocional, autogestão, empatia, inteligência interpessoal, mediação de conflitos, resiliência e liderança de alta performance no ambiente corporativo e gestão de pessoas.",
+    skills: ["Inteligência Emocional", "Soft Skills", "Liderança de Pessoas", "Autogestão", "Comunicação Assertiva", "Resolução de Conflitos"],
+    badge: "Certificado Oficial"
+  },
+  {
+    id: "carisma",
+    title: "Carisma & Comunicação",
+    subtitle: "Certificação em Carisma, Comunicação Persuasiva & Presença Executiva",
+    issuer: "Certificação Profissional em Desenvolvimento Pessoal & Soft Skills",
+    category: "Soft Skills / Comunicação",
+    date: "2025",
+    image: carismaCertImg,
+    description: "Certificação focada no desenvolvimento de carisma, presença executiva, comunicação persuasiva, magnetismo interpessoal, linguagem corporal, escuta ativa e construção de relacionamentos profissionais de alto impacto.",
+    skills: ["Carisma", "Comunicação Persuasiva", "Linguagem Corporal", "Presença Executiva", "Oratória & Influência", "Networking"],
+    badge: "Certificado Oficial"
+  },
+  {
+    id: "excel-avancado",
+    title: "Excel Avançado",
+    subtitle: "Certificação Profissional em Excel Avançado, Análise de Dados & Automação",
+    issuer: "Certificação Profissional em Informática & Análise de Dados",
+    category: "Análise de Dados / Produtividade",
+    date: "2020",
+    image: excelAvançadoCertImg,
+    description: "Certificação avançada em Microsoft Excel. Domínio de funções lógicas avançadas (PROCV, ÍNDICE/CORRESP), tabelas dinâmicas (Pivot Tables), gráficos dinâmicos, validação de dados, relatórios corporativos, automação com Macros e análise financeira.",
+    skills: ["Excel Avançado", "Tabelas Dinâmicas", "Funções Avançadas", "Análise de Dados", "Macros & Automação", "Dashboards Corporativos"],
+    badge: "Certificado Oficial"
+  },
+  {
+    id: "lovable-workshop",
+    title: "Lovable AI Workshop",
+    subtitle: "Certificação em Desenvolvimento Assistido por IA, Prototipagem & Lovable",
+    issuer: "Lovable Workshop",
+    category: "Inteligência Artificial / Low-Code & Prototipagem",
+    date: "2025",
+    image: lovableCertImg,
+    description: "Certificação em desenvolvimento de produtos digitais com ferramentas assistidas por Inteligência Artificial (Lovable AI). Aborda criação acelerada de SPAs, engenharia de prompts avançada, prototipagem full-stack de alta velocidade e integração de IAs generativas no fluxo de engenharia de software.",
+    skills: ["Lovable AI", "AI-Driven Development", "Engenharia de Prompts", "Prototipagem de Produtos", "Full-Stack AI", "Produtividade com IA"],
+    badge: "Certificado Oficial"
+  },
+  {
+    id: "python-fundamentos",
+    title: "Python 3 — Fundamentos",
+    subtitle: "Certificação em Lógica de Programação, Estruturas de Dados & Python 3",
+    issuer: "Curso em Vídeo / Gustavo Guanabara",
+    category: "Linguagens & Backend / Python",
+    date: "2026",
+    image: pythonCertImg,
+    description: "Certificação nos fundamentos da linguagem Python 3. Aborda sintaxe moderna, tipos primitivos, operadores aritméticos/lógicos, tratamento de dados, módulos, manipulação de texto, estruturas condicionais e resolução algorítmica de problemas.",
+    skills: ["Python 3", "Lógica de Programação", "Algoritmos", "Manipulação de Dados", "Tratamento de Strings", "Estruturas Condicionais"],
+    badge: "Certificado Oficial"
   }
 ];
 
