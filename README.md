@@ -15,6 +15,7 @@
 
 Este projeto é mais do que um portfólio profissional tradicional: é uma **experiência digital imersiva** projetada com estética *cyberpunk/glassmorphism*, animações a 60fps em HTML5 Canvas, **internacionalização em tempo real (Português 🇧🇷 / Inglês 🇺🇸)**, um **terminal CLI interativo** integrado com minijogo arcade, um modo **Web 1.0 de 1999 (Timewalker)** com animação de viagem no tempo e um **sistema gamificado de segredos e conquistas (Easter Eggs)**.
 
+- 🔗 **Portfólio (Demo Vercel)**: [ricardovendramini.vercel.app](https://ricardovendramini.vercel.app/)
 - 🔗 **Website Oficial**: [vendraminiinformatica.com.br](https://vendraminiinformatica.com.br/)
 - 👨‍💻 **GitHub**: [@rik-404](https://github.com/rik-404)
 
