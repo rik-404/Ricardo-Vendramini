@@ -43,6 +43,26 @@ function LanguageToggleSwitch() {
   );
 }
 
+function MobileLanguageBadge() {
+  const { lang, toggleLang, t } = useLanguage();
+  const isPt = lang === 'pt';
+
+  return (
+    <button
+      onClick={toggleLang}
+      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#07130b] border ${
+        isPt ? 'border-[#00ff88]/60 text-[#00ff88]' : 'border-[#00f2fe]/60 text-[#00f2fe]'
+      } shadow-glow-sm cursor-pointer select-none active:scale-95 transition-all shrink-0 font-mono font-bold text-xs`}
+      title={t('nav.langTitle')}
+      aria-label={t('nav.langAria')}
+    >
+      <span className="text-sm">{isPt ? '🇧🇷' : '🇺🇸'}</span>
+      <span>{isPt ? 'PT' : 'EN'}</span>
+      <div className={`w-1.5 h-1.5 rounded-full ${isPt ? 'bg-[#00ff88] shadow-[0_0_6px_#00ff88]' : 'bg-[#00f2fe] shadow-[0_0_6px_#00f2fe]'}`} />
+    </button>
+  );
+}
+
 const navItems = [
   { label: 'Início', href: '#hero' },
   { label: 'Sobre', href: '#about' },
@@ -218,12 +238,12 @@ export default function Navbar({ onTriggerEasterEgg }) {
               }
             }}
             onMouseLeave={() => window.dispatchEvent(new CustomEvent('glove-cursor', { detail: false }))}
-            className={`group flex items-center gap-3 text-lg font-extrabold tracking-tight text-white interactive-hover select-none ${
+            className={`group flex items-center gap-2 sm:gap-3 text-base sm:text-lg font-extrabold tracking-tight text-white interactive-hover select-none shrink truncate ${
               glitchPhase === 1 ? 'animate-glitch-shake' : ''
             }`}
             title={t('nav.brand')}
           >
-            <div className={`w-10 h-10 rounded-xl bg-[#040705] border p-1 flex items-center justify-center shadow-glow-sm transition-all ${
+            <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-[#040705] border p-1 flex items-center justify-center shadow-glow-sm transition-all shrink-0 ${
               glitchPhase > 0 && glitchPhase < 4
                 ? 'border-red-500/60 rotate-12 scale-110'
                 : 'border-[#00f2fe]/40 group-hover:scale-105 group-hover:border-[#00ff88]'
@@ -238,16 +258,16 @@ export default function Navbar({ onTriggerEasterEgg }) {
                 }`}
               />
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col min-w-0">
               {renderBrandText()}
-              <span className={`text-[10px] font-mono font-normal tracking-widest uppercase flex items-center gap-1 ${
+              <span className={`text-[9px] sm:text-[10px] font-mono font-normal tracking-wider sm:tracking-widest uppercase flex items-center gap-1 truncate ${
                 glitchPhase > 0 && glitchPhase < 4 ? 'text-red-400' : 'text-slate-400'
               }`}>
                 {glitchPhase > 0 && glitchPhase < 4 ? (
                   <span className="text-red-400">{t('nav.brandGlitch')}</span>
                 ) : (
                   <>
-                    <span className="text-[#00f2fe]">Vendramini</span> {lang === 'en' ? 'Computer' : 'Informática'}
+                    <span className="text-[#00f2fe]">Vendramini</span> <span className="hidden xs:inline">{lang === 'en' ? 'Computer' : 'Informática'}</span>
                   </>
                 )}
               </span>
@@ -289,15 +309,15 @@ export default function Navbar({ onTriggerEasterEgg }) {
             </a>
           </div>
 
-          {/* Mobile Hamburger & Interruptor Button */}
-          <div className="flex lg:hidden items-center gap-2">
-            <LanguageToggleSwitch />
+          {/* Mobile Hamburger & Custom Cyberpunk Language Badge */}
+          <div className="flex lg:hidden items-center gap-2 shrink-0">
+            <MobileLanguageBadge />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg bg-[#0c140e] border border-[#00f2fe]/30 text-slate-300 hover:text-white"
+              className="p-1.5 sm:p-2 rounded-lg bg-[#0c140e] border border-[#00f2fe]/30 text-slate-300 hover:text-white"
               aria-label={t('nav.menuAria')}
             >
-              {mobileMenuOpen ? <X className="w-6 h-6 text-[#00ff88]" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6 text-[#00ff88]" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
             </button>
           </div>
         </div>

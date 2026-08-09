@@ -382,7 +382,7 @@
 .animate-infinite-marquee {
   display: flex;
   width: max-content;
-  animation: infinite-scroll 28s linear infinite;
+  animation: infinite-scroll 65s linear infinite;
 }
 
 .animate-infinite-marquee:hover {

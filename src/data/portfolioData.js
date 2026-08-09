@@ -15,6 +15,8 @@ import reiDasRomsImg from '../images/books/portifolio/Rei-das-Roms.png';
 import festaFacilImg from '../images/books/portifolio/Festa-Facil.png';
 import c4t4t4uImg from '../images/books/portifolio/C4t4t4u-Eletronicos.png';
 import ciganaMorganaImg from '../images/books/portifolio/Cigana-Morgana.png';
+import menuDeliveryImg from '../images/books/portifolio/Menu delivery.png';
+import petLifeImg from '../images/books/portifolio/Pet-Life.png';
 import designer5kImg from '../images/certificados/web/designer5k.png';
 import htmlCssCertImg from '../images/certificados/HTML-CSS.png';
 import analistaRedesCertImg from '../images/certificados/Analista-Redes.png';
@@ -425,6 +427,42 @@ export const skillsData = [
 ];
 
 export const projectsData = [
+  {
+    id: "pet-life",
+    name: "PetLife",
+    subtitle: "Página Institucional para Clínica Veterinária & Petshop",
+    category: "Landing Page / One Page",
+    image: petLifeImg,
+    badge: "Estudo • OneBitCode",
+    shortDescription: "Página web responsiva no estilo One Page projetada para clínicas veterinárias e petshops. Oferece apresentação detalhada dos serviços de saúde animal, vitrine de produtos e medicamentos da farmácia veterinária, seção de dúvidas frequentes (FAQ) e formulário direto de agendamento de consultas.",
+    problem: "Clínicas veterinárias e petshops necessitam de uma presença digital acolhedora e informativa que centralize serviços médicos, farmácia e agendamentos para tutores de pets em uma navegação fluida.",
+    idea: "Desenvolver uma landing page moderna em conceito One Page com design suave e amigável, seções estruturadas para clínica e farmácia, chamada clara para ação (CTA) para marcação de consultas e formulário de contato integrado.",
+    construction: "Desenvolvido como projeto de consolidação do curso Start na Programação da OneBitCode utilizando HTML5 semântico, CSS3 (layout responsivo com Flexbox, estilização personalizada e media queries) e JavaScript ES6+ para interatividade e navegação.",
+    result: "Interface amigável de alta clareza para tutores de animais, apresentação completa dos serviços veterinários e facilidade na marcação de consultas online com excelente adaptação para telas mobile.",
+    technologies: ["HTML5", "CSS3", "JavaScript ES6+", "Design Responsivo", "One Page Architecture"],
+    date: "2025",
+    link: "https://rik-404.github.io/petlife/",
+    github: "https://github.com/rik-404/petlife",
+    status: "Estudo"
+  },
+  {
+    id: "sabor-express",
+    name: "Sabor Express",
+    subtitle: "Cardápio Digital & Delivery Interativo",
+    category: "Plataforma / E-Commerce / Delivery",
+    image: menuDeliveryImg,
+    badge: "Ativo • Supabase",
+    shortDescription: "Plataforma completa de cardápio digital e delivery interativo projetada para restaurantes, lanchonetes e hamburguerias. Possui suporte híbrido de persistência (localStorage + Supabase cloud com RLS), checkout via WhatsApp, Painel Administrativo em tempo real com gestão CRUD, notificações sonoras e dashboard de métricas com Chart.js.",
+    problem: "Estabelecimentos gastronômicos necessitavam de um cardápio digital moderno, ágil e responsivo para exibição de produtos por categoria, captação direta de pedidos via WhatsApp sem taxas abusivas de aplicativos e gerenciamento administrativo de estoque e vendas em tempo real.",
+    idea: "Desenvolver uma plataforma de delivery com experiência híbrida (modo local offline e nuvem via Supabase), carrinho de compras dinâmico com cálculo de taxa de entrega, checkout instantâneo formatado para WhatsApp e Painel Admin com Dashboard estatístico Chart.js, notificação sonora de novos pedidos e autenticação segura.",
+    construction: "Desenvolvido com HTML5 semântico, CSS3 Vanilla (Flexbox, CSS Grid, variáveis de design system, micro-animações responsivas Mobile-First), JavaScript ES6+ nativo e Supabase (PostgreSQL relacional cloud com RLS e WebSockets Real-time Engine). Hospedado com Clean URLs e suporte a Chart.js para analytics no painel admin.",
+    result: "Autonomia total para o estabelecimento gerenciar produtos e pedidos, redução do tempo de atendimento com mensagens padronizadas no WhatsApp, métricas financeiras em tempo real e operabilidade imediata mesmo sem backend via localStorage.",
+    technologies: ["HTML5", "CSS3", "JavaScript ES6+", "Supabase", "PostgreSQL", "RLS", "WhatsApp API", "Chart.js", "LocalStorage"],
+    date: "2025",
+    link: "https://menu-de-delivery.vercel.app/",
+    github: "https://github.com/rik-404/menu-de-delivery",
+    status: "Ativo"
+  },
   {
     id: "cigana-morgana",
     name: "Cigana Morgana",
@@ -1263,6 +1301,34 @@ export function getProjectsData(lang = 'pt') {
     return [
       {
         ...projectsData[0],
+        title: "PetLife",
+        subtitle: "Veterinary Clinic & Pet Shop Landing Page",
+        category: "Landing Page / One Page",
+        badge: "Study • OneBitCode",
+        name: "PetLife",
+        shortDescription: "Responsive One Page website designed for veterinary clinics and pet shops. Features detailed animal health services, products showcase, veterinary pharmacy, FAQ section, and direct consultation booking form.",
+        problem: "Veterinary clinics and pet shops need a warm and informative digital presence centralizing medical services, pharmacy, and appointments in a fluid navigation.",
+        idea: "Develop a modern One Page landing page with a friendly design, structured sections for clinic and pharmacy, clear CTA for appointment bookings, and an integrated contact form.",
+        construction: "Built during the OneBitCode Start na Programação course using semantic HTML5, CSS3 (responsive Flexbox layout, custom styling, media queries), and ES6+ JavaScript for interactivity.",
+        result: "User-friendly interface for pet owners, comprehensive presentation of veterinary services, and seamless mobile responsiveness.",
+        status: "Study"
+      },
+      {
+        ...projectsData[1],
+        title: "Sabor Express",
+        subtitle: "Digital Menu & Interactive Delivery",
+        category: "Platform / E-Commerce / Delivery",
+        badge: "Active • Supabase",
+        name: "Sabor Express",
+        shortDescription: "Complete digital menu and interactive delivery platform designed for restaurants, diners, and burger shops. Features hybrid persistence support (localStorage + Supabase cloud with RLS), WhatsApp checkout, real-time Admin Panel with CRUD management, audio notifications, and Chart.js metrics dashboard.",
+        problem: "Food establishments needed a modern, agile, and responsive digital menu to display products by category, capture orders directly via WhatsApp without app fees, and manage inventory and sales in real time.",
+        idea: "Develop a delivery platform with hybrid operational experience (local offline mode and Supabase cloud), dynamic shopping cart with delivery fee calculations, formatted WhatsApp checkout, and Admin Panel with Chart.js analytics dashboard and audio alerts.",
+        construction: "Built with semantic HTML5, Vanilla CSS3 (Flexbox, CSS Grid, Mobile-First responsive design system), native ES6+ JavaScript, and Supabase (PostgreSQL relacional cloud with RLS and WebSockets Real-time Engine). Clean URLs hosting and Chart.js analytics.",
+        result: "Complete autonomy for the establishment to manage products and orders, faster customer response times with formatted WhatsApp messages, real-time financial metrics, and instant operability even without backend via localStorage.",
+        status: "Active"
+      },
+      {
+        ...projectsData[2],
         title: "Cigana Morgana",
         subtitle: "Holistic Portal, Consultations & E-Commerce",
         category: "Corporate Portal / Landing Page",
@@ -1276,7 +1342,7 @@ export function getProjectsData(lang = 'pt') {
         status: "In Production"
       },
       {
-        ...projectsData[1],
+        ...projectsData[3],
         title: "C4T4T4U Electronics",
         subtitle: "E-Commerce, Quotes & Service Order Management (S.O.)",
         category: "E-Commerce / SaaS",
@@ -1290,7 +1356,7 @@ export function getProjectsData(lang = 'pt') {
         status: "In Production"
       },
       {
-        ...projectsData[2],
+        ...projectsData[4],
         title: "Elite House Piracicaba",
         subtitle: "EliteHouseHub — Real Estate & CRM Platform",
         name: "Elite House Piracicaba",
@@ -1304,7 +1370,7 @@ export function getProjectsData(lang = 'pt') {
         status: "In Production"
       },
       {
-        ...projectsData[3],
+        ...projectsData[5],
         title: "Vendramini Informática",
         subtitle: "Official Website & Digital Institutional Showcase",
         name: "Vendramini Informática",
@@ -1318,7 +1384,7 @@ export function getProjectsData(lang = 'pt') {
         status: "Active"
       },
       {
-        ...projectsData[4],
+        ...projectsData[6],
         title: "King of ROMs",
         subtitle: "Digital Catalog & Gaming Media Preservation",
         category: "Web App / Open Source",
@@ -1332,7 +1398,7 @@ export function getProjectsData(lang = 'pt') {
         status: "Active"
       },
       {
-        ...projectsData[5],
+        ...projectsData[7],
         title: "Festa Fácil",
         subtitle: "Event Budgeting & Celebration Management",
         name: "Festa Fácil",
