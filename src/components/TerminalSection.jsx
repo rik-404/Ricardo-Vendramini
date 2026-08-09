@@ -3,10 +3,10 @@ import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
 import { Terminal as TerminalIcon, Play, RefreshCw, Sparkles, X, Gamepad2, ArrowLeft, ArrowRight, Zap, Trophy } from 'lucide-react';
 import { terminalCommands } from '../data/portfolioData';
-import { dispatchAchievementUnlocked } from './AchievementToast';
+import { dispatchAchievementUnlocked, ACHIEVEMENTS_META } from './AchievementToast';
 import AchievementsModal from './AchievementsModal';
 
-export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements }) {
+export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements, onTriggerBreakout }) {
   const [inputVal, setInputVal] = useState('');
   const [history, setHistory] = useState(terminalCommands.welcome);
   const [gameActive, setGameActive] = useState(false);
@@ -685,6 +685,15 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       return;
     }
 
+    if (cmd === 'breakout' || cmd === 'bloquinhos' || cmd === 'tijolos' || cmd === 'arcanoid' || cmd === 'arkanoid') {
+      unlockAchievement('breakout');
+      newHistory.push('> 🧱 Modo BREAKOUT ativado! Transformando o site no jogo de destruir blocos...');
+      setHistory(newHistory);
+      setInputVal('');
+      if (onTriggerBreakout) onTriggerBreakout();
+      return;
+    }
+
     if (cmd === 'game' || cmd === 'games' || cmd === 'arcade') {
       setHistory([...newHistory, ...terminalCommands.games]);
       setInputVal('');
@@ -907,7 +916,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
             <Trophy className="w-5 h-5 text-[#00ff88] group-hover:rotate-12 transition-transform duration-300" />
             <span className="relative z-10">Ver Galeria de Conquistas (Bloqueadas & Desbloqueadas)</span>
             <span className="relative z-10 ml-1 px-2.5 py-0.5 rounded-full bg-[#00ff88]/20 text-[#00ff88] text-xs font-mono border border-[#00ff88]/40">
-              {achievements.size}/7
+              {achievements.size}/{Object.keys(ACHIEVEMENTS_META).length}
             </span>
           </motion.button>
           <p className="text-xs font-mono text-slate-400 mt-2.5">

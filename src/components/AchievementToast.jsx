@@ -45,6 +45,12 @@ export const ACHIEVEMENTS_META = {
     hint: '🔍 Dica: Faça as coisas balançarem no terminal...',
     icon: Activity,
   },
+  breakout: {
+    title: 'Mestre do Breakout',
+    description: 'Ativou o modo Breakout e destruiu os blocos do site com a raquete e a bolinha.',
+    hint: '🔍 Dica: Digite o nome do jogo famoso de quebrar tijolos...',
+    icon: Gamepad2,
+  },
 };
 
 export function dispatchAchievementUnlocked(id) {

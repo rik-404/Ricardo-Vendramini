@@ -770,6 +770,8 @@ export const terminalCommands = {
     "  projetos - Lista dos projetos em destaque",
     "  livros   - Livros e publicações",
     "  contato  - Informações de contato direto",
+    "  navinha  - Jogo Space Invaders Arcade 🎮",
+    "  breakout - Jogo Breakout de destruir blocos neon 🧱",
     "  reset    - Zera todas as conquistas e easter eggs 🔄",
     "  clear    - Limpa o histórico do terminal",
     "",
@@ -778,7 +780,8 @@ export const terminalCommands = {
   games: [
     "⚡ ARCADE CENTER — Jogos Disponíveis:",
     "",
-    "★ navinha    - Space Invaders Geometric: destrua aliens com formas geométricas",
+    "★ navinha    - Space Invaders Geometric: destrua aliens com formas geométricas 👾",
+    "★ breakout   - Breakout Arcade: controle a raquete e destrua os blocos neon da tela 🧱",
     "",
     "Digite o nome do jogo para iniciar."
   ]

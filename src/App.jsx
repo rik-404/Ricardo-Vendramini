@@ -22,6 +22,7 @@ import AchievementsModal from './components/AchievementsModal';
 import TerminalSection from './components/TerminalSection';
 import TechLabSection from './components/TechLabSection';
 import EasterEggModal from './components/EasterEggModal';
+import BreakoutOverlay from './components/BreakoutOverlay';
 import AchievementToast, { dispatchAchievementUnlocked } from './components/AchievementToast';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
@@ -31,6 +32,7 @@ export default function App() {
   const [allProjectsOpen, setAllProjectsOpen] = useState(false);
   const [allSkillsOpen, setAllSkillsOpen] = useState(false);
   const [allCertificatesOpen, setAllCertificatesOpen] = useState(false);
+  const [breakoutGameOpen, setBreakoutGameOpen] = useState(false);
   const [achievementsModalOpen, setAchievementsModalOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [easterEggOpen, setEasterEggOpen] = useState(false);
@@ -77,6 +79,9 @@ export default function App() {
     const matrixWord = ['m', 'a', 't', 'r', 'i', 'x'];
     let matrixIndex = 0;
 
+    const breakoutWord = ['b', 'r', 'e', 'a', 'k', 'o', 'u', 't'];
+    let breakoutIndex = 0;
+
     const handleKeyDown = (e) => {
       const targetTag = e.target?.tagName?.toLowerCase();
       const isInput = targetTag === 'input' || targetTag === 'textarea' || e.target?.isContentEditable;
@@ -108,6 +113,24 @@ export default function App() {
           }
         } else {
           matrixIndex = 0;
+        }
+
+        if (e.key.toLowerCase() === breakoutWord[breakoutIndex]) {
+          breakoutIndex++;
+          if (breakoutIndex === breakoutWord.length) {
+            setBreakoutGameOpen(true);
+            try {
+              const saved = JSON.parse(localStorage.getItem('ricardodev_achievements') || '[]');
+              if (!saved.includes('breakout')) {
+                saved.push('breakout');
+                localStorage.setItem('ricardodev_achievements', JSON.stringify(saved));
+                dispatchAchievementUnlocked('breakout');
+              }
+            } catch {}
+            breakoutIndex = 0;
+          }
+        } else {
+          breakoutIndex = 0;
         }
       }
     };
@@ -169,6 +192,7 @@ export default function App() {
         <TerminalSection
           onTriggerEasterEgg={triggerMatrixOnly}
           onOpenAchievements={() => setAchievementsModalOpen(true)}
+          onTriggerBreakout={() => setBreakoutGameOpen(true)}
         />
         <TechLabSection />
         <ContactSection />
@@ -176,6 +200,12 @@ export default function App() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Breakout Arcade Fullscreen Game Overlay */}
+      <BreakoutOverlay
+        isOpen={breakoutGameOpen}
+        onClose={() => setBreakoutGameOpen(false)}
+      />
 
       {/* Catálogo Completo de Tecnologias & Conhecimentos (Renderizado no nível raiz z-[999]) */}
       <AllSkillsModal
