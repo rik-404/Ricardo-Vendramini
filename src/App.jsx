@@ -386,6 +386,8 @@ export default function App() {
         <TerminalSection
           isModal={true}
           onClose={() => setTerminalModalOpen(false)}
+          theme={theme}
+          onToggleTheme={toggleTheme}
           onTriggerEasterEgg={() => {
             setTerminalModalOpen(false);
             triggerMatrixOnly();

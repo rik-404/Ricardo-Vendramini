@@ -917,6 +917,8 @@ export const terminalCommands = {
     "  contato  - Informações de contato direto",
     "  english  - Alterne o idioma do site para Inglês (English) 🌐",
     "  portugues- Alterne o idioma do site para Português 🇧🇷",
+    "  dark     - Ativa o tema escuro 🌙",
+    "  light    - Ativa o tema claro ☀️",
     "  clear    - Limpa o histórico do terminal",
     "",
     "Digite qualquer comando para executar."
@@ -958,6 +960,8 @@ export const terminalCommandsEn = {
     "  contact  - Direct contact information",
     "  english  - Switch site language to English 🌐",
     "  portugues- Switch site language to Portuguese 🇧🇷",
+    "  dark     - Switch to dark theme 🌙",
+    "  light    - Switch to light theme ☀️",
     "  clear    - Clears the terminal history",
     "",
     "Type any command to run it."

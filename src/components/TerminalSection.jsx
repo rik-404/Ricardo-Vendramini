@@ -8,7 +8,7 @@ import AchievementsModal from './AchievementsModal';
 import FlyEasterEgg from './FlyEasterEgg';
 import { useLanguage } from '../context/LanguageContext';
 
-export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements, onTriggerBreakout, onTriggerStarWars, onTriggerClean, onRestoreClean, onTriggerTimewalker, isModal = false, onClose }) {
+export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements, onTriggerBreakout, onTriggerStarWars, onTriggerClean, onRestoreClean, onTriggerTimewalker, isModal = false, onClose, theme, onToggleTheme }) {
   const { lang, t, toggleLang, changeLang } = useLanguage();
   const cliContainerRef = useRef(null);
   const cliTitleRef = useRef(null);
@@ -772,6 +772,22 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       return;
     }
 
+    if (cmd === 'dark' || cmd === 'escuro') {
+      if (theme !== 'dark' && onToggleTheme) onToggleTheme();
+      newHistory.push('> 🌙 Tema escuro ativado!');
+      setHistory(newHistory);
+      setInputVal('');
+      return;
+    }
+
+    if (cmd === 'light' || cmd === 'claro') {
+      if (theme !== 'light' && onToggleTheme) onToggleTheme();
+      newHistory.push('> ☀️ Tema claro ativado!');
+      setHistory(newHistory);
+      setInputVal('');
+      return;
+    }
+
     if (cmd === 'game' || cmd === 'games' || cmd === 'arcade') {
       setHistory([...newHistory, ...terminalCommands.games]);
       setInputVal('');
@@ -1120,7 +1136,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
       {/* RICKROLL OVERLAY (Rendered via Portal to document.body at top z-index z-[999999]) */}
       {rickrollActive && createPortal(
-        <div className="chpw-theme-dark fixed inset-0 z-[999999] flex flex-col items-center justify-center bg-black/95 backdrop-blur-2xl p-4 overflow-y-auto">
+        <div className="rickroll-scope fixed inset-0 z-[999999] flex flex-col items-center justify-center bg-black/95 backdrop-blur-2xl p-4 overflow-y-auto">
           {/* Top bar fake admin */}
           <div className="absolute top-0 left-0 right-0 bg-[#0d1510] border-b border-[#00ff88]/30 px-6 py-4 flex items-center justify-between z-[1000000]">
             <div className="flex items-center gap-3">

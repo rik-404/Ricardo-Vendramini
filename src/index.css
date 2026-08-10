@@ -827,6 +827,115 @@ html.theme-light .easter-egg-scope [class*="border-[#00ff88]"] {
 }
 
 /* =========================================================
+   RICKROLL OVERLAY — adapta ao tema claro
+========================================================= */
+html.theme-light .rickroll-scope {
+  background-color: rgba(248, 250, 252, 0.95) !important;
+  color-scheme: light;
+}
+html.theme-light .rickroll-scope [class*="bg-[#0d1510]"],
+html.theme-light .rickroll-scope [class*="bg-black"] {
+  background-color: #ffffff !important;
+}
+html.theme-light .rickroll-scope [class*="border-[#00ff88]"] {
+  border-color: rgba(16, 185, 129, 0.4) !important;
+}
+html.theme-light .rickroll-scope .text-white,
+html.theme-light .rickroll-scope [class*="text-white/"] {
+  color: #0f172a !important;
+}
+html.theme-light .rickroll-scope [class*="text-slate-300"] {
+  color: #475569 !important;
+}
+html.theme-light .rickroll-scope [class*="text-[#00ff88]"] {
+  color: #047857 !important;
+}
+html.theme-light .rickroll-scope [class*="text-red-300"] {
+  color: #dc2626 !important;
+}
+html.theme-light .rickroll-scope [class*="bg-red-500/"] {
+  background-color: rgba(239, 68, 68, 0.15) !important;
+}
+html.theme-light .rickroll-scope [class*="border-red-500/"] {
+  border-color: rgba(239, 68, 68, 0.35) !important;
+}
+html.theme-light .rickroll-scope [class*="hover:text-white"]:hover {
+  color: #0f172a !important;
+}
+html.theme-light .rickroll-scope [class*="shadow-[0_0_80px"] {
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.15) !important;
+}
+
+/* =========================================================
+   BREAKOUT OVERLAY — adapta ao tema claro
+========================================================= */
+html.theme-light .breakout-scope {
+  color-scheme: light;
+}
+html.theme-light .breakout-scope [class*="bg-[#040705]"],
+html.theme-light .breakout-scope [class*="bg-[#040805]"] {
+  background-color: #f8fafc !important;
+}
+html.theme-light .breakout-scope [class*="bg-black/"] {
+  background-color: rgba(248, 250, 252, 0.9) !important;
+}
+html.theme-light .breakout-scope [class*="bg-black/80"] {
+  background-color: rgba(248, 250, 252, 0.85) !important;
+}
+html.theme-light .breakout-scope [class*="border-[#00ff88]"] {
+  border-color: rgba(16, 185, 129, 0.4) !important;
+}
+html.theme-light .breakout-scope [class*="border-white/"] {
+  border-color: rgba(15, 23, 42, 0.12) !important;
+}
+html.theme-light .breakout-scope .text-white,
+html.theme-light .breakout-scope [class*="text-white"] {
+  color: #0f172a !important;
+}
+html.theme-light .breakout-scope [class*="text-slate-300"],
+html.theme-light .breakout-scope [class*="text-slate-400"] {
+  color: #475569 !important;
+}
+html.theme-light .breakout-scope [class*="text-slate-700"] {
+  color: #94a3b8 !important;
+}
+html.theme-light .breakout-scope [class*="text-[#00ff88]"] {
+  color: #047857 !important;
+}
+html.theme-light .breakout-scope [class*="text-amber-400"] {
+  color: #b45309 !important;
+}
+html.theme-light .breakout-scope [class*="text-red-400"],
+html.theme-light .breakout-scope [class*="text-red-300"] {
+  color: #dc2626 !important;
+}
+html.theme-light .breakout-scope [class*="bg-[#00ff88]/"] {
+  background-color: rgba(16, 185, 129, 0.15) !important;
+}
+html.theme-light .breakout-scope [class*="bg-red-500/"] {
+  background-color: rgba(239, 68, 68, 0.12) !important;
+}
+html.theme-light .breakout-scope [class*="border-red-500/"] {
+  border-color: rgba(239, 68, 68, 0.35) !important;
+}
+html.theme-light .breakout-scope .glass-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f2f7f4 100%) !important;
+  border-color: rgba(15, 23, 42, 0.1) !important;
+}
+html.theme-light .breakout-scope .shadow-glow-sm { box-shadow: 0 2px 14px rgba(16, 185, 129, 0.12) !important; }
+html.theme-light .breakout-scope .shadow-glow-lg { box-shadow: 0 6px 30px rgba(16, 185, 129, 0.18) !important; }
+html.theme-light .breakout-scope [class*="hover:text-[#00ff88]"]:hover {
+  color: #047857 !important;
+}
+html.theme-light .breakout-scope [class*="hover:text-red-"]:hover {
+  color: #dc2626 !important;
+}
+html.theme-light .breakout-scope [class*="bg-gradient-to-r"][class*="from-[#059669]"][class*="to-[#00ff88]"] {
+  background: linear-gradient(to right, #059669, #10b981) !important;
+  color: #ffffff !important;
+}
+
+/* =========================================================
    MODAL DE CONQUISTAS — adapta ao tema claro
 ========================================================= */
 html.theme-light .achv-modal {
@@ -883,11 +992,88 @@ html.theme-light .achv-modal [class*="bg-amber-500/"] {
 html.theme-light .achv-modal [class*="border-amber-500/"] {
   border-color: rgba(245, 158, 11, 0.35) !important;
 }
+html.theme-light .achv-modal [class*="text-[#00ff88]"],
+html.theme-light .achv-modal [class*="text-[#10b981]"] {
+  color: #047857 !important;
+}
+html.theme-light .achv-modal [class*="from-[#0c2e17]"][class*="text-[#00ff88]"] {
+  color: #ffffff !important;
+}
+html.theme-light .achv-modal [class*="bg-[#00ff88]/10"],
+html.theme-light .achv-modal [class*="bg-[#00ff88]/20"] {
+  background-color: rgba(16, 185, 129, 0.15) !important;
+}
+html.theme-light .achv-modal [class*="border-[#00ff88]"] {
+  border-color: rgba(16, 185, 129, 0.4) !important;
+}
+html.theme-light .achv-modal [class*="border-[#10b981]"] {
+  border-color: rgba(16, 185, 129, 0.35) !important;
+}
+html.theme-light .achv-modal [class*="shadow-[0_0"] {
+  box-shadow: none !important;
+}
+html.theme-light .achv-modal [class*="text-amber-300"],
+html.theme-light .achv-modal [class*="text-amber-300/"] {
+  color: #92400e !important;
+}
 html.theme-light .achv-modal [class*="hover:text-white"]:hover {
   color: #0f172a !important;
 }
 html.theme-light .achv-modal [class*="hover:bg-white/10"]:hover {
   background-color: rgba(15, 23, 42, 0.07) !important;
+}
+
+/* =========================================================
+   TOAST DE CONQUISTAS (AchievementToast) — tema claro
+========================================================= */
+html.theme-light .achv-toast {
+  color-scheme: light;
+}
+html.theme-light .achv-toast [class*="bg-[#050d08]"],
+html.theme-light .achv-toast [class*="bg-[#040705]"] {
+  background-color: #ffffff !important;
+}
+html.theme-light .achv-toast [class*="border-[#00ff88]"] {
+  border-color: rgba(16, 185, 129, 0.5) !important;
+}
+html.theme-light .achv-toast [class*="shadow-[0_0_35px"] {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.15), 0 10px 30px rgba(15, 23, 42, 0.1) !important;
+}
+html.theme-light .achv-toast .text-white,
+html.theme-light .achv-toast [class*="text-white"] {
+  color: #0f172a !important;
+}
+html.theme-light .achv-toast [class*="text-slate-400"] {
+  color: #475569 !important;
+}
+html.theme-light .achv-toast [class*="text-[#00ff88]"] {
+  color: #047857 !important;
+}
+html.theme-light .achv-toast [class*="from-[#0c2e17]"][class*="text-[#00ff88]"] {
+  color: #ffffff !important;
+}
+html.theme-light .achv-toast [class*="bg-[#0c2e17]"],
+html.theme-light .achv-toast [class*="bg-[#06200e]"],
+html.theme-light .achv-toast [class*="from-[#0c2e17]"] {
+  background-color: #047857 !important;
+}
+html.theme-light .achv-toast [class*="bg-[#00ff88]/30"] {
+  background-color: rgba(16, 185, 129, 0.15) !important;
+}
+html.theme-light .achv-toast [class*="bg-[#00ff88]/40"] {
+  background-color: rgba(16, 185, 129, 0.3) !important;
+}
+html.theme-light .achv-toast [class*="border-[#00ff88]/50"] {
+  border-color: rgba(16, 185, 129, 0.4) !important;
+}
+html.theme-light .achv-toast [class*="hover:bg-white/10"]:hover {
+  background-color: rgba(15, 23, 42, 0.08) !important;
+}
+html.theme-light .achv-toast [class*="hover:text-white"]:hover {
+  color: #0f172a !important;
+}
+html.theme-light .achv-toast [class*="text-[#00ff88]/80"] {
+  color: #065f46 !important;
 }
 
 /* =========================================================

@@ -433,7 +433,7 @@ export default function Navbar({ onTriggerEasterEgg, onOpenTerminal, theme, onTo
                 <span>{t('nav.bsod.joke')}</span>
               </p>
               <p className="text-slate-300 text-xs">{t('nav.bsod.jokeDesc')}</p>
-              <p className="text-[#00f2fe] text-[10px] font-mono mt-2 animate-pulse">{t('nav.bsod.restoring')}</p>
+              <p className="text-[#00f2fe] text-[10px] font-mono mt-2">{t('nav.bsod.restoring')}</p>
             </div>
           </div>
         </div>
