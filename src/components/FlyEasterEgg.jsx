@@ -5,7 +5,6 @@ const SWATTER_CURSOR = `url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.or
 
 export default function FlyEasterEgg({ isActive = true, containerRef, titleRef }) {
   const [phase, setPhase] = useState('idle');
-  const [soundPermission, setSoundPermission] = useState(false);
   const phaseRef = useRef(phase);
   const flyRef = useRef(null);
   const posRef = useRef({ x: 0, y: 0, tx: 0, ty: 0, leaving: false });
@@ -21,6 +20,21 @@ export default function FlyEasterEgg({ isActive = true, containerRef, titleRef }
       return false;
     }
   };
+
+  // Initialize audio context on first user interaction
+  useEffect(() => {
+    const initAudio = () => {
+      ensureCtx();
+      document.removeEventListener('click', initAudio);
+      document.removeEventListener('keydown', initAudio);
+    };
+    document.addEventListener('click', initAudio);
+    document.addEventListener('keydown', initAudio);
+    return () => {
+      document.removeEventListener('click', initAudio);
+      document.removeEventListener('keydown', initAudio);
+    };
+  }, []);
 
   useEffect(() => {
     phaseRef.current = phase;
@@ -41,38 +55,38 @@ export default function FlyEasterEgg({ isActive = true, containerRef, titleRef }
     return a.ctx;
   };
 
-  const enableSound = () => {
-    ensureCtx();
-    setSoundPermission(true);
-  };
-
   const startBuzz = () => {
     const a = audioRef.current;
     const ctx = ensureCtx();
     if (!ctx || a.osc) return;
+    // Ensure context is running
+    if (ctx.state === 'suspended') {
+      ctx.resume();
+    }
     a.master = ctx.createGain();
-    a.master.gain.value = 0.09;
+    a.master.gain.value = 0.12;
     a.master.connect(ctx.destination);
     a.osc = ctx.createOscillator();
     a.osc.type = 'sawtooth';
-    a.osc.frequency.value = 160 + Math.random() * 60;
+    a.osc.frequency.value = 180 + Math.random() * 60;
     a.lfo = ctx.createOscillator();
     a.lfo.type = 'square';
-    a.lfo.frequency.value = 120 + Math.random() * 40;
+    a.lfo.frequency.value = 140 + Math.random() * 40;
     const lfoGain = ctx.createGain();
-    lfoGain.gain.value = 85;
+    lfoGain.gain.value = 90;
     a.lfo.connect(lfoGain);
     lfoGain.connect(a.osc.frequency);
     a.osc.connect(a.master);
+    a.lfo.connect(a.master);
     a.osc.start();
     a.lfo.start();
   };
 
   const stopBuzz = () => {
     const a = audioRef.current;
-    try { if (a.osc) a.osc.stop(); } catch (e) {}
-    try { if (a.lfo) a.lfo.stop(); } catch (e) {}
-    try { if (a.master) a.master.disconnect(); } catch (e) {}
+    try { if (a.osc) { a.osc.stop(); a.osc.disconnect(); } } catch (e) {}
+    try { if (a.lfo) { a.lfo.stop(); a.lfo.disconnect(); } } catch (e) {}
+    try { if (a.master) { a.master.disconnect(); } } catch (e) {}
     a.osc = null;
     a.lfo = null;
     a.master = null;
@@ -111,16 +125,20 @@ export default function FlyEasterEgg({ isActive = true, containerRef, titleRef }
       if (p.leaving) {
         stopBuzz();
         setPhase('idle');
+        // Respawn fly after a delay
+        timersRef.current.push(setTimeout(() => {
+          if (isActive && !isMoscaUnlocked()) spawnFly();
+        }, 5000));
       } else {
         land();
       }
       return;
     }
 
-    const speed = p.leaving ? 8 : 5;
-    const wobble = Math.sin(performance.now() / 35) * 2.2;
-    p.x += (dx / dist) * speed + (Math.random() - 0.5) * 3.5;
-    p.y += (dy / dist) * speed + (Math.random() - 0.5) * 3.5 + wobble;
+    const speed = p.leaving ? 6 : 3.5;
+    const wobble = Math.sin(performance.now() / 45) * 1.8;
+    p.x += (dx / dist) * speed + (Math.random() - 0.5) * 2.5;
+    p.y += (dy / dist) * speed + (Math.random() - 0.5) * 2.5 + wobble;
 
     if (flyRef.current) {
       flyRef.current.style.transform = `translate3d(${p.x}px, ${p.y}px, 0)`;
@@ -161,7 +179,7 @@ export default function FlyEasterEgg({ isActive = true, containerRef, titleRef }
       flyRef.current.style.transform = `translate3d(${p.x}px, ${p.y}px, 0)`;
     }
     setPhase('flying');
-    if (soundPermission) startBuzz();
+    startBuzz();
     rafRef.current = requestAnimationFrame(updateFly);
   }
 
@@ -169,7 +187,7 @@ export default function FlyEasterEgg({ isActive = true, containerRef, titleRef }
     setPhase('landed');
     stopBuzz();
     setSwatMode(true);
-    timersRef.current.push(setTimeout(flyAway, 10000));
+    timersRef.current.push(setTimeout(flyAway, 15000));
   }
 
   function flyAway() {
@@ -200,7 +218,7 @@ export default function FlyEasterEgg({ isActive = true, containerRef, titleRef }
 
     setSwatMode(false);
     setPhase('leaving');
-    if (soundPermission) startBuzz();
+    startBuzz();
     rafRef.current = requestAnimationFrame(updateFly);
   }
 
@@ -225,14 +243,14 @@ export default function FlyEasterEgg({ isActive = true, containerRef, titleRef }
     }, 900));
   }
 
-  // Idle Timer inside CLI Mode: Spawns fly after 12 seconds of inactivity in CLI
+  // Idle Timer inside CLI Mode: Spawns fly after 10 seconds of inactivity in CLI
   useEffect(() => {
     if (!isActive || isMoscaUnlocked()) return undefined;
 
     clearTimers();
     const idleTimer = setTimeout(() => {
       spawnFly();
-    }, 12000); // 12 seconds in CLI idle
+    }, 10000); // 10 seconds in CLI idle
 
     timersRef.current.push(idleTimer);
 
@@ -251,33 +269,26 @@ export default function FlyEasterEgg({ isActive = true, containerRef, titleRef }
 
   return (
     <div className="absolute inset-0 z-20 pointer-events-none" aria-hidden="true">
-      {!soundPermission && (
-        <button
-          onClick={enableSound}
-          className="absolute top-2 right-2 z-30 pointer-events-auto px-2 py-1 rounded-lg bg-amber-500/90 text-black text-[10px] font-mono font-bold shadow-lg animate-pulse cursor-pointer"
-        >
-          🔊 Clique para ativar som
-        </button>
-      )}
       <div
         ref={flyRef}
         onClick={phase === 'landed' ? killFly : undefined}
-        className="absolute top-0 left-0 w-9 h-9 will-change-transform"
+        className="absolute top-0 left-0 will-change-transform"
         style={{
           transform: 'translate3d(-100px, -100px, 0)',
           pointerEvents: phase === 'landed' ? 'auto' : 'none',
           cursor: phase === 'landed' ? SWATTER_CURSOR : 'default',
+          filter: phase === 'landed' ? 'drop-shadow(0 0 10px rgba(255,0,0,0.8))' : 'none',
         }}
       >
         {phase === 'splat' ? (
-          <svg viewBox="0 0 44 44" className="w-10 h-10">
+          <svg viewBox="0 0 44 44" className="w-16 h-16">
             <path d="M16 15 L7 10 M18 17 L26 8 M28 18 L37 11" stroke="#0a0a0a" strokeWidth="2" strokeLinecap="round" />
             <path d="M15 22 L6 24 M29 22 L38 24 M16 29 L9 34 M28 28 L35 33" stroke="#0a0a0a" strokeWidth="2" strokeLinecap="round" />
             <circle cx="22" cy="22" r="7" fill="#0d0d0d" />
             <circle cx="22" cy="22" r="10" fill="#0d0d0d" opacity="0.35" />
           </svg>
         ) : (
-          <svg viewBox="0 0 20 20" className="w-9 h-9">
+          <svg viewBox="0 0 20 20" className="w-16 h-16">
             <ellipse className="fly-wing" cx="7.5" cy="10" rx="3.5" ry="6" fill="rgba(220,235,255,0.5)" style={wingsPaused ? { animationPlayState: 'paused' } : undefined} />
             <ellipse className="fly-wing" cx="12.5" cy="10" rx="3.5" ry="6" fill="rgba(220,235,255,0.5)" style={wingsPaused ? { animationPlayState: 'paused' } : undefined} />
             <ellipse cx="10" cy="11.5" rx="3" ry="6" fill="#141414" />
