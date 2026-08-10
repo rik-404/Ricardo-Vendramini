@@ -5,6 +5,7 @@ const SWATTER_CURSOR = `url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.or
 
 export default function FlyEasterEgg({ isActive = true, containerRef, titleRef }) {
   const [phase, setPhase] = useState('idle');
+  const [soundPermission, setSoundPermission] = useState(false);
   const phaseRef = useRef(phase);
   const flyRef = useRef(null);
   const posRef = useRef({ x: 0, y: 0, tx: 0, ty: 0, leaving: false });
@@ -38,6 +39,11 @@ export default function FlyEasterEgg({ isActive = true, containerRef, titleRef }
     }
     if (a.ctx && a.ctx.state === 'suspended') a.ctx.resume();
     return a.ctx;
+  };
+
+  const enableSound = () => {
+    ensureCtx();
+    setSoundPermission(true);
   };
 
   const startBuzz = () => {
@@ -155,7 +161,7 @@ export default function FlyEasterEgg({ isActive = true, containerRef, titleRef }
       flyRef.current.style.transform = `translate3d(${p.x}px, ${p.y}px, 0)`;
     }
     setPhase('flying');
-    startBuzz();
+    if (soundPermission) startBuzz();
     rafRef.current = requestAnimationFrame(updateFly);
   }
 
@@ -194,7 +200,7 @@ export default function FlyEasterEgg({ isActive = true, containerRef, titleRef }
 
     setSwatMode(false);
     setPhase('leaving');
-    startBuzz();
+    if (soundPermission) startBuzz();
     rafRef.current = requestAnimationFrame(updateFly);
   }
 
@@ -245,6 +251,14 @@ export default function FlyEasterEgg({ isActive = true, containerRef, titleRef }
 
   return (
     <div className="absolute inset-0 z-20 pointer-events-none" aria-hidden="true">
+      {!soundPermission && (
+        <button
+          onClick={enableSound}
+          className="absolute top-2 right-2 z-30 pointer-events-auto px-2 py-1 rounded-lg bg-amber-500/90 text-black text-[10px] font-mono font-bold shadow-lg animate-pulse cursor-pointer"
+        >
+          🔊 Clique para ativar som
+        </button>
+      )}
       <div
         ref={flyRef}
         onClick={phase === 'landed' ? killFly : undefined}
