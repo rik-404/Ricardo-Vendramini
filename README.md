@@ -83,10 +83,11 @@ Inclui showcase de projetos reais em produção e estudos de engenharia de softw
 - **Vendramini Informática**: Portal institucional oficial com suporte PWA offline e efeito Matrix.
 - **Rei das ROMs & Festa Fácil**: Plataformas abertas de catalogação de retrojogos e orçamentos para eventos.
 
-### 4. 🖥️ Terminal CLI Interativo & Minijogo Arcade
+### 4. 🖥️ Terminal CLI Interativo & Minijogo Arcade (v1.0.0.2)
 - **CLI funcional** no próprio site com suporte a diversos comandos de sistema (`help`, `sobre`, `skills`, `projetos`, `livros`, `contato`, `clear`, `reset`).
 - **Space Invaders Arcade (`navinha`)**: Minijogo de nave 2D em HTML5 Canvas renderizado dentro da própria janela do terminal com suporte a teclado e controles touch mobile.
-- **Efeitos de Sistema**: Protocolo Matrix (`matrix`), Modo Timewalker (`timewalker`), Efeito de Terremoto 3D (`tilt`), e Acesso Root simulado com recado post-it e Rickroll (`root`).
+- **Breakout 8-bit (`breakout`)**: Jogo de quebrar tijolos estilo Gameboy com gráficos em 4 tons de verde.
+- **Easter Eggs**: Protocolo Matrix (`matrix`), Modo Timewalker (`timewalker`), Doctor Who (`doctor`), Efeito de Terremoto 3D (`tilt`), e Acesso Root simulado com recado post-it e Rickroll (`root`).
 
 ### 5. 🏆 Sistema Gamificado de Conquistas & Segredos
 - **Conquistas Ocultas**: Segredos espalhados pelo site e terminal (Caçador de Erros, Gosta de Clicar, Código Konami, Protocolo Matrix, Arcade Space Invaders, Acesso Root, Modo Tilt, Mestre do Breakout, Que a Força Esteja Com Você, Limpeza Total, Poliglota Digital e **Visitante do Passado**).
@@ -222,6 +223,8 @@ O terminal interativo fica na seção **Terminal** do site. Digite os comandos a
 | `root` | Solicita credenciais de superusuário e libera o memo post-it |
 | `reset` | Zera todas as conquistas e easter eggs salvos |
 | `clear` | Limpa o histórico de telas do terminal |
+| `breakout` | Inicia o jogo **Breakout 8-bit** estilo Gameboy |
+| `doctor` | Easter egg: "Doctor Who?" |
 
 ---
 

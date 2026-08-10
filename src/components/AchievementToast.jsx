@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Award, Gamepad2, KeyRound, Terminal, Trash2, Trophy, Sparkles, Zap, Activity, Languages, Clock, Skull, X } from 'lucide-react';
+import { Award, Gamepad2, KeyRound, Terminal, Trash2, Trophy, Sparkles, Zap, Activity, Languages, Clock, Skull, X, RotateCw, RefreshCw } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
-export const ACHIEVEMENT_IDS = ['titulo', 'konami', 'matrix', 'navinha', 'root', 'tilt', 'breakout', 'starwars', 'clean', 'polyglot', 'timewalker'];
+export const ACHIEVEMENT_IDS = ['titulo', 'konami', 'matrix', 'navinha', 'root', 'tilt', 'breakout', 'starwars', 'clean', 'polyglot', 'timewalker', 'tardis', 'doctorwho'];
 export const ALL_OTHER_IDS = [...ACHIEVEMENT_IDS];
 
 export const ACHIEVEMENTS_META = {
@@ -18,6 +18,8 @@ export const ACHIEVEMENTS_META = {
   clean: { icon: Trash2 },
   polyglot: { icon: Languages },
   timewalker: { icon: Clock },
+  tardis: { icon: RotateCw },
+  doctorwho: { icon: RefreshCw },
   sacrificio: { icon: Skull, isSpecial: true },
 };
 
@@ -88,6 +90,7 @@ export default function AchievementToast() {
         keyId: `${e.detail.id}-${Date.now()}`,
         title: t(`achievements.meta.${e.detail.id}.title`),
         description: t(`achievements.meta.${e.detail.id}.description`),
+        postUnlockHint: t(`achievements.meta.${e.detail.id}.postUnlockHint`),
         Icon: meta.icon,
       });
       if (!showingRef.current) showNext();
@@ -145,6 +148,11 @@ export default function AchievementToast() {
                 <p className="text-[11px] text-slate-400 font-light leading-snug mt-0.5 line-clamp-2">
                   {current.description}
                 </p>
+                {current.postUnlockHint && (
+                  <p className="text-[10px] text-[#00ff88]/70 font-mono mt-1 italic">
+                    {current.postUnlockHint}
+                  </p>
+                )}
               </div>
 
               {/* Close button */}

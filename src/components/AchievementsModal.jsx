@@ -221,9 +221,16 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
                         </div>
 
                         {unlocked ? (
-                          <p className="text-xs text-slate-300 font-light leading-relaxed mt-1">
-                            {t(`achievements.meta.${id}.description`)}
-                          </p>
+                          <>
+                            <p className="text-xs text-slate-300 font-light leading-relaxed mt-1">
+                              {t(`achievements.meta.${id}.description`)}
+                            </p>
+                            {t(`achievements.meta.${id}.postUnlockHint`) !== `achievements.meta.${id}.postUnlockHint` && (
+                              <p className="text-[10px] text-[#00ff88]/70 font-mono mt-1 italic">
+                                {t(`achievements.meta.${id}.postUnlockHint`)}
+                              </p>
+                            )}
+                          </>
                         ) : id === 'sacrificio' && !allOthersUnlocked ? (
                           <div className="mt-2 p-2.5 rounded-xl bg-black/40 border border-white/5">
                             <p className="text-[11px] font-mono text-slate-500 italic">
@@ -239,8 +246,13 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
                         ) : isHintRevealed ? (
                           <div className="mt-2 p-2.5 rounded-xl bg-black/60 border border-amber-500/30 flex items-start justify-between gap-2 animate-fadeIn">
                             <p className="text-[11px] font-mono text-amber-300/90 leading-relaxed italic">
-                              {t(`achievements.meta.${id}.hint`)}
-                            </p>
+                           {t(`achievements.meta.${id}.hint`)}
+                             </p>
+                            {t(`achievements.meta.${id}.tag`) !== `achievements.meta.${id}.tag` && (
+                              <span className="mt-1 text-[9px] font-mono text-[#00ff88]/60 bg-[#00ff88]/10 px-1.5 py-0.5 rounded border border-[#00ff88]/20">
+                                {t(`achievements.meta.${id}.tag`)}
+                              </span>
+                            )}
                             <button
                               onClick={() => toggleHint(id)}
                               className="p-1 rounded bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white shrink-0 transition-colors"

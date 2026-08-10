@@ -771,6 +771,26 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       return;
     }
 
+    if (cmd === 'doctor' || cmd === 'dr') {
+      unlockAchievement('doctorwho');
+      newHistory.push('> Sistema: Procurando...');
+      setHistory(newHistory);
+      setInputVal('');
+
+      setTimeout(() => {
+        setHistory(prev => [...prev, '> Sistema: Processando...', '>', '> Doctor Who?']);
+      }, 1000);
+      return;
+    }
+
+    if (cmd === 'tardis' || cmd === 'tardis_box' || cmd === 'caixa_azul') {
+      unlockAchievement('tardis');
+      newHistory.push('> 🟦 ABERTURA DE PORTA QUÂNTICA...', '> TARDIS: A caixa azul que é maior por dentro foi ativada!');
+      setHistory(newHistory);
+      setInputVal('');
+      return;
+    }
+
     if (cmd === 'dark' || cmd === 'escuro') {
       if (theme !== 'dark' && onToggleTheme) onToggleTheme();
       newHistory.push('> 🌙 Tema escuro ativado!');
@@ -794,7 +814,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
     }
 
     if (cmd === 'reset' || cmd === 'achievements reset' || cmd === 'reset achievements') {
-      const ALL_OTHER = ['titulo', 'konami', 'matrix', 'navinha', 'root', 'tilt', 'breakout', 'starwars', 'clean', 'polyglot', 'timewalker'];
+      const ALL_OTHER = ['titulo', 'konami', 'matrix', 'navinha', 'root', 'tilt', 'breakout', 'starwars', 'clean', 'polyglot', 'timewalker', 'tardis', 'doctorwho'];
       const allUnlocked = ALL_OTHER.every(id => achievements.has(id));
       let resetMsg;
       try {

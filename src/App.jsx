@@ -45,7 +45,11 @@ export default function App() {
   const [allSkillsOpen, setAllSkillsOpen] = useState(false);
   const [breakoutGameOpen, setBreakoutGameOpen] = useState(false);
   const [starWarsOpen, setStarWarsOpen] = useState(false);
-  const [retro1999Open, setRetro1999Open] = useState(false);
+  const [retro1999Open, setRetro1999Open] = useState(() => {
+    try {
+      return localStorage.getItem('ricardodev_retro1999') === 'true';
+    } catch { return false; }
+  });
   const [siteCleaned, setSiteCleaned] = useState(false);
   const [timeTravelMode, setTimeTravelMode] = useState(null); // 'TO_PAST' | 'TO_FUTURE' | null
   const [swUpdated, setSwUpdated] = useState(false);
@@ -105,6 +109,7 @@ export default function App() {
   const handleReturnFrom1999 = () => {
     setRetro1999Open(false);
     setTimeTravelMode('TO_FUTURE');
+    try { localStorage.setItem('ricardodev_retro1999', 'false'); } catch {}
   };
   const [selectedBook, setSelectedBook] = useState(null);
   const [easterEggOpen, setEasterEggOpen] = useState(false);
@@ -402,6 +407,7 @@ export default function App() {
         onComplete={() => {
           if (timeTravelMode === 'TO_PAST') {
             setRetro1999Open(true);
+            try { localStorage.setItem('ricardodev_retro1999', 'true'); } catch {}
           }
           setTimeTravelMode(null);
         }}
