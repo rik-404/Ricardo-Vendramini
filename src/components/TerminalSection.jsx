@@ -832,6 +832,20 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       return;
     }
 
+    if (cmd === 'version' || cmd === 'versao' || cmd === 'versão') {
+      setHistory([
+        ...newHistory,
+        '',
+        'RICARDO.DEV Terminal',
+        'Versão: 1.0.0.0',
+        'Build: ' + new Date().toISOString().split('T')[0],
+        'Plataforma: Web (React + Vite)',
+        ''
+      ]);
+      setInputVal('');
+      return;
+    }
+
     if (cmd === 'help') {
       setHistory([...newHistory, ...(lang === 'en' ? terminalCommandsEn.help : terminalCommands.help)]);
     } else if (cmd === 'sobre') {

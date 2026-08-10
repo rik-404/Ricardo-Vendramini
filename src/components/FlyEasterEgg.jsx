@@ -27,12 +27,18 @@ export default function FlyEasterEgg({ isActive = true, containerRef, titleRef }
       ensureCtx();
       document.removeEventListener('click', initAudio);
       document.removeEventListener('keydown', initAudio);
+      document.removeEventListener('mousemove', initAudio);
+      document.removeEventListener('touchstart', initAudio);
     };
     document.addEventListener('click', initAudio);
     document.addEventListener('keydown', initAudio);
+    document.addEventListener('mousemove', initAudio);
+    document.addEventListener('touchstart', initAudio);
     return () => {
       document.removeEventListener('click', initAudio);
       document.removeEventListener('keydown', initAudio);
+      document.removeEventListener('mousemove', initAudio);
+      document.removeEventListener('touchstart', initAudio);
     };
   }, []);
 
@@ -49,9 +55,13 @@ export default function FlyEasterEgg({ isActive = true, containerRef, titleRef }
     const a = audioRef.current;
     if (!a.ctx) {
       const Ctx = window.AudioContext || window.webkitAudioContext;
-      if (Ctx) a.ctx = new Ctx();
+      if (Ctx) {
+        a.ctx = new Ctx();
+      }
     }
-    if (a.ctx && a.ctx.state === 'suspended') a.ctx.resume();
+    if (a.ctx && a.ctx.state === 'suspended') {
+      a.ctx.resume().catch(() => {});
+    }
     return a.ctx;
   };
 
@@ -59,27 +69,50 @@ export default function FlyEasterEgg({ isActive = true, containerRef, titleRef }
     const a = audioRef.current;
     const ctx = ensureCtx();
     if (!ctx || a.osc) return;
-    // Ensure context is running
+    // Ensure context is running before starting oscillators
     if (ctx.state === 'suspended') {
-      ctx.resume();
+      ctx.resume().then(() => {
+        try {
+          a.master = ctx.createGain();
+          a.master.gain.value = 0.12;
+          a.master.connect(ctx.destination);
+          a.osc = ctx.createOscillator();
+          a.osc.type = 'sawtooth';
+          a.osc.frequency.value = 180 + Math.random() * 60;
+          a.lfo = ctx.createOscillator();
+          a.lfo.type = 'square';
+          a.lfo.frequency.value = 140 + Math.random() * 40;
+          const lfoGain = ctx.createGain();
+          lfoGain.gain.value = 90;
+          a.lfo.connect(lfoGain);
+          lfoGain.connect(a.osc.frequency);
+          a.osc.connect(a.master);
+          a.lfo.connect(a.master);
+          a.osc.start();
+          a.lfo.start();
+        } catch (e) {}
+      }).catch(() => {});
+      return;
     }
-    a.master = ctx.createGain();
-    a.master.gain.value = 0.12;
-    a.master.connect(ctx.destination);
-    a.osc = ctx.createOscillator();
-    a.osc.type = 'sawtooth';
-    a.osc.frequency.value = 180 + Math.random() * 60;
-    a.lfo = ctx.createOscillator();
-    a.lfo.type = 'square';
-    a.lfo.frequency.value = 140 + Math.random() * 40;
-    const lfoGain = ctx.createGain();
-    lfoGain.gain.value = 90;
-    a.lfo.connect(lfoGain);
-    lfoGain.connect(a.osc.frequency);
-    a.osc.connect(a.master);
-    a.lfo.connect(a.master);
-    a.osc.start();
-    a.lfo.start();
+    try {
+      a.master = ctx.createGain();
+      a.master.gain.value = 0.12;
+      a.master.connect(ctx.destination);
+      a.osc = ctx.createOscillator();
+      a.osc.type = 'sawtooth';
+      a.osc.frequency.value = 180 + Math.random() * 60;
+      a.lfo = ctx.createOscillator();
+      a.lfo.type = 'square';
+      a.lfo.frequency.value = 140 + Math.random() * 40;
+      const lfoGain = ctx.createGain();
+      lfoGain.gain.value = 90;
+      a.lfo.connect(lfoGain);
+      lfoGain.connect(a.osc.frequency);
+      a.osc.connect(a.master);
+      a.lfo.connect(a.master);
+      a.osc.start();
+      a.lfo.start();
+    } catch (e) {}
   };
 
   const stopBuzz = () => {

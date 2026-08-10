@@ -48,6 +48,7 @@ export default function App() {
   const [retro1999Open, setRetro1999Open] = useState(false);
   const [siteCleaned, setSiteCleaned] = useState(false);
   const [timeTravelMode, setTimeTravelMode] = useState(null); // 'TO_PAST' | 'TO_FUTURE' | null
+  const [swUpdated, setSwUpdated] = useState(false);
   // Global light/dark theme — applies `theme-light` class on <html>.
   // Defaults: theme salvo pelo usuário > sistema (claro se for dia ou o SO
   // for claro), com o botão do header sempre disponível para trocar.
@@ -80,6 +81,20 @@ export default function App() {
       localStorage.setItem('ricardodev_terminal_open', terminalModalOpen.toString());
     } catch {}
   }, [terminalModalOpen]);
+
+  // Listen for service worker updates
+  useEffect(() => {
+    const handleSwUpdated = () => setSwUpdated(true);
+    window.addEventListener('sw-updated', handleSwUpdated);
+    return () => window.removeEventListener('sw-updated', handleSwUpdated);
+  }, []);
+
+  const handleApplyUpdate = () => {
+    if (navigator.serviceWorker?.controller) {
+      navigator.serviceWorker.controller.postMessage({ type: 'SKIP_WAITING' });
+    }
+    window.location.reload();
+  };
 
   const toggleTheme = () => setTheme((t) => (t === 'light' ? 'dark' : 'light'));
 
@@ -422,6 +437,25 @@ export default function App() {
             setTimeTravelMode('TO_PAST');
           }}
         />
+      )}
+
+      {/* Update Notification */}
+      {swUpdated && (
+        <div className="fixed bottom-6 right-6 z-[99999] px-5 py-3 rounded-2xl bg-[#06140d]/95 border border-[#00ff88]/50 text-white font-mono text-xs shadow-glow-lg flex items-center gap-4 animate-bounce">
+          <span className="text-[#00ff88]">🔄 Nova atualização disponível!</span>
+          <button
+            onClick={handleApplyUpdate}
+            className="px-3 py-1.5 rounded-xl bg-[#00ff88] text-black font-bold hover:scale-105 transition-all"
+          >
+            Atualizar
+          </button>
+          <button
+            onClick={() => setSwUpdated(false)}
+            className="text-slate-400 hover:text-white transition-colors"
+          >
+            ✕
+          </button>
+        </div>
       )}
 
       {/* PC-style Achievement Unlock Notification */}

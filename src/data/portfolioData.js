@@ -893,7 +893,7 @@ export const certificatesData = [
 
 export const terminalCommands = {
   welcome: [
-    "RICARDO.DEV Terminal [Versão 4.2.0]",
+    "RICARDO.DEV Terminal [Versão 1.0.0.0]",
     "(c) 2026 Ricardo Vendramini - Vendramini Informática.",
     "",
     "> Inicializando módulos do portfólio...",
@@ -915,6 +915,7 @@ export const terminalCommands = {
     "  projetos - Lista dos projetos em destaque",
     "  livros   - Livros e publicações de autoria de Ricardo",
     "  contato  - Informações de contato direto",
+    "  version  - Mostra a versão do sistema",
     "  english  - Alterne o idioma do site para Inglês (English) 🌐",
     "  portugues- Alterne o idioma do site para Português 🇧🇷",
     "  dark     - Ativa o tema escuro 🌙",
@@ -936,7 +937,7 @@ export const terminalCommands = {
 
 export const terminalCommandsEn = {
   welcome: [
-    "RICARDO.DEV Terminal [Version 4.2.0]",
+    "RICARDO.DEV Terminal [Version 1.0.0.0]",
     "(c) 2026 Ricardo Vendramini - Vendramini Informática.",
     "",
     "> Loading portfolio modules...",
@@ -958,6 +959,7 @@ export const terminalCommandsEn = {
     "  projects - List of featured projects",
     "  books    - Books and publications authored by Ricardo",
     "  contact  - Direct contact information",
+    "  version  - Shows system version",
     "  english  - Switch site language to English 🌐",
     "  portugues- Switch site language to Portuguese 🇧🇷",
     "  dark     - Switch to dark theme 🌙",
