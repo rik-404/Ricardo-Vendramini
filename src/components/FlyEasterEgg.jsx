@@ -122,20 +122,11 @@ export default function FlyEasterEgg({ isActive = true, containerRef, titleRef }
 
     if (dist < 10) {
       cancelAnimationFrame(rafRef.current);
-      if (p.leaving) {
-        stopBuzz();
-        setPhase('idle');
-        // Respawn fly after a delay
-        timersRef.current.push(setTimeout(() => {
-          if (isActive && !isMoscaUnlocked()) spawnFly();
-        }, 5000));
-      } else {
-        land();
-      }
+      land();
       return;
     }
 
-    const speed = p.leaving ? 6 : 3.5;
+    const speed = 3.5;
     const wobble = Math.sin(performance.now() / 45) * 1.8;
     p.x += (dx / dist) * speed + (Math.random() - 0.5) * 2.5;
     p.y += (dy / dist) * speed + (Math.random() - 0.5) * 2.5 + wobble;
@@ -149,38 +140,26 @@ export default function FlyEasterEgg({ isActive = true, containerRef, titleRef }
   function spawnFly() {
     if (phaseRef.current !== 'idle') return;
     if (isMoscaUnlocked()) return;
-    if (!containerRef.current || !titleRef.current) return;
+    if (!containerRef.current) return;
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const container = containerRef.current.getBoundingClientRect();
-    const title = titleRef.current.getBoundingClientRect();
     const p = posRef.current;
-    p.tx = title.left + title.width / 2 - container.left;
-    p.ty = title.top + title.height / 2 - container.top;
-
-    const edge = Math.floor(Math.random() * 4);
-    if (edge === 0) {
-      p.x = -30;
-      p.y = Math.random() * container.height;
-    } else if (edge === 1) {
-      p.x = container.width + 30;
-      p.y = Math.random() * container.height;
-    } else if (edge === 2) {
-      p.x = Math.random() * container.width;
-      p.y = -30;
-    } else {
-      p.x = Math.random() * container.width;
-      p.y = container.height + 30;
-    }
+    
+    // Appear already landed in a random position
+    p.x = 60 + Math.random() * (container.width - 120);
+    p.y = 60 + Math.random() * (container.height - 120);
     p.leaving = false;
 
     if (flyRef.current) {
       flyRef.current.style.transform = `translate3d(${p.x}px, ${p.y}px, 0)`;
     }
-    setPhase('flying');
+    setPhase('landed');
+    setSwatMode(true);
     startBuzz();
-    rafRef.current = requestAnimationFrame(updateFly);
+    // Fly away after 20 seconds if not clicked
+    timersRef.current.push(setTimeout(flyAway, 20000));
   }
 
   function land() {
@@ -192,34 +171,9 @@ export default function FlyEasterEgg({ isActive = true, containerRef, titleRef }
 
   function flyAway() {
     if (phaseRef.current !== 'landed') return;
-    if (!containerRef.current) {
-      setPhase('idle');
-      setSwatMode(false);
-      return;
-    }
-
-    const container = containerRef.current.getBoundingClientRect();
-    const p = posRef.current;
-    const edge = Math.floor(Math.random() * 4);
-    if (edge === 0) {
-      p.tx = -40;
-      p.ty = p.y;
-    } else if (edge === 1) {
-      p.tx = container.width + 40;
-      p.ty = p.y;
-    } else if (edge === 2) {
-      p.tx = p.x;
-      p.ty = -40;
-    } else {
-      p.tx = p.x;
-      p.ty = container.height + 40;
-    }
-    p.leaving = true;
-
     setSwatMode(false);
-    setPhase('leaving');
-    startBuzz();
-    rafRef.current = requestAnimationFrame(updateFly);
+    stopBuzz();
+    setPhase('idle');
   }
 
   function killFly() {
@@ -243,16 +197,16 @@ export default function FlyEasterEgg({ isActive = true, containerRef, titleRef }
     }, 900));
   }
 
-  // Idle Timer inside CLI Mode: Spawns fly after 10 seconds of inactivity in CLI
+  // Spawn fly immediately when terminal opens
   useEffect(() => {
     if (!isActive || isMoscaUnlocked()) return undefined;
 
     clearTimers();
-    const idleTimer = setTimeout(() => {
+    const spawnTimer = setTimeout(() => {
       spawnFly();
-    }, 10000); // 10 seconds in CLI idle
+    }, 1500); // 1.5 seconds after terminal opens
 
-    timersRef.current.push(idleTimer);
+    timersRef.current.push(spawnTimer);
 
     return () => {
       clearTimers();
