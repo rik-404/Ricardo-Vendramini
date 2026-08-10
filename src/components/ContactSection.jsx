@@ -36,7 +36,7 @@ export default function ContactSection() {
           </h2>
 
           <p className="text-xl sm:text-2xl text-slate-300 font-light max-w-2xl mb-10">
-            {lang === 'en' ? "Maybe I can turn it into reality." : "Talvez eu consiga transformá-la em realidade."}
+            {lang === 'en' ? "Maybe I can turn it into reality." : "Vamos transformar em realidade."}
           </p>
 
           {/* Action CTAs */}
