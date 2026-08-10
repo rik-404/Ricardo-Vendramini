@@ -795,23 +795,26 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
     }
 
     if (cmd === 'reset' || cmd === 'achievements reset' || cmd === 'reset achievements') {
+      const ALL_OTHER = ['mosca', 'titulo', 'konami', 'matrix', 'navinha', 'root', 'tilt', 'breakout', 'starwars', 'clean', 'polyglot', 'timewalker'];
+      const allUnlocked = ALL_OTHER.every(id => achievements.has(id));
+      let resetMsg;
       try {
-        localStorage.removeItem('ricardodev_achievements');
+        if (allUnlocked) {
+          localStorage.setItem('ricardodev_achievements', JSON.stringify(['sacrificio']));
+          setAchievements(new Set(['sacrificio']));
+          window.dispatchEvent(new CustomEvent('ricardodev-achievement-unlocked', { detail: { id: 'sacrificio' } }));
+          resetMsg = ['', '💀 SACRIFÍCIO REALIZADO!', '────────────────────────────────────────────────', '> Todas as conquistas foram sacrificadas...', '> Mas uma permanece para sempre.', '> Apenas quem completa tudo pode fazer esse sacrifício.', ''];
+        } else {
+          localStorage.removeItem('ricardodev_achievements');
+          setAchievements(new Set());
+          window.dispatchEvent(new CustomEvent('ricardodev-achievement-unlocked'));
+          resetMsg = ['', t('terminal.achievementsReset'), '────────────────────────────────────────────────', t('terminal.achievementsResetDesc1'), t('terminal.achievementsResetDesc2'), ''];
+        }
         localStorage.removeItem('ricardodev_fly_shown');
         localStorage.removeItem('ricardodev_root_used');
         localStorage.removeItem('ricardodev_postit_shown');
       } catch (e) {}
-      setAchievements(new Set());
-      window.dispatchEvent(new CustomEvent('ricardodev-achievement-unlocked'));
-      setHistory([
-        ...newHistory,
-        '',
-        t('terminal.achievementsReset'),
-        '────────────────────────────────────────────────',
-        t('terminal.achievementsResetDesc1'),
-        t('terminal.achievementsResetDesc2'),
-        ''
-      ]);
+      setHistory([...newHistory, ...resetMsg]);
       setInputVal('');
       return;
     }

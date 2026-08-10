@@ -4,6 +4,8 @@ import { X, Lock, Check, Trophy, Sparkles, HelpCircle, Eye, EyeOff } from 'lucid
 import { ACHIEVEMENTS_META, ACHIEVEMENT_IDS } from './AchievementToast';
 import { useLanguage } from '../context/LanguageContext';
 
+const DISPLAY_IDS = [...ACHIEVEMENT_IDS, 'sacrificio'];
+
 export default function AchievementsModal({ isOpen, onClose, achievements: externalAchievements }) {
   const { lang, t } = useLanguage();
   const [activeTab, setActiveTab] = useState('all'); // 'all' | 'unlocked' | 'locked'
@@ -46,10 +48,11 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
   };
 
   const activeAchievements = externalAchievements || achievements;
-  const unlockedCount = ACHIEVEMENT_IDS.filter((id) => activeAchievements.has(id)).length;
-  const lockedCount = ACHIEVEMENT_IDS.length - unlockedCount;
+  const unlockedCount = DISPLAY_IDS.filter((id) => activeAchievements.has(id)).length;
+  const lockedCount = DISPLAY_IDS.length - unlockedCount;
+  const allOthersUnlocked = ACHIEVEMENT_IDS.every(id => activeAchievements.has(id));
 
-  const filteredIds = ACHIEVEMENT_IDS.filter((id) => {
+  const filteredIds = DISPLAY_IDS.filter((id) => {
     const isUnlocked = activeAchievements.has(id);
     if (activeTab === 'unlocked') return isUnlocked;
     if (activeTab === 'locked') return !isUnlocked;
@@ -89,8 +92,8 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
                   </h3>
                   <p className="text-[11px] font-mono text-[#00ff88]">
                     {lang === 'en'
-                      ? `${unlockedCount} of ${ACHIEVEMENT_IDS.length} achievements unlocked`
-                      : `${unlockedCount} de ${ACHIEVEMENT_IDS.length} conquistas desbloqueadas`}
+                      ? `${unlockedCount} of ${DISPLAY_IDS.length} achievements unlocked`
+                      : `${unlockedCount} de ${DISPLAY_IDS.length} conquistas desbloqueadas`}
                   </p>
                 </div>
               </div>
@@ -117,7 +120,7 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>{lang === 'en' ? 'All' : 'Todas'}</span>
                 <span className="px-1.5 py-0.2 rounded-full bg-white/10 text-[10px]">
-                  {ACHIEVEMENT_IDS.length}
+                  {DISPLAY_IDS.length}
                 </span>
               </button>
 
@@ -179,7 +182,7 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
                   const meta = ACHIEVEMENTS_META[id];
                   const unlocked = activeAchievements.has(id);
                   const Icon = meta.icon;
-                  const globalIndex = ACHIEVEMENT_IDS.indexOf(id) + 1;
+                  const globalIndex = DISPLAY_IDS.indexOf(id) + 1;
                   const isHintRevealed = !!revealedHints[id];
 
                   return (
@@ -221,6 +224,12 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
                           <p className="text-xs text-slate-300 font-light leading-relaxed mt-1">
                             {t(`achievements.meta.${id}.description`)}
                           </p>
+                        ) : id === 'sacrificio' && !allOthersUnlocked ? (
+                          <div className="mt-2 p-2.5 rounded-xl bg-black/40 border border-white/5">
+                            <p className="text-[11px] font-mono text-slate-500 italic">
+                              {lang === 'en' ? '🔒 Complete all other achievements first...' : '🔒 Desbloqueie todas as outras conquistas primeiro...'}
+                            </p>
+                          </div>
                         ) : isHintRevealed ? (
                           <div className="mt-2 p-2.5 rounded-xl bg-black/60 border border-amber-500/30 flex items-start justify-between gap-2 animate-fadeIn">
                             <p className="text-[11px] font-mono text-amber-300/90 leading-relaxed italic">
@@ -259,7 +268,7 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
             {/* Footer */}
             <div className="px-6 py-4 border-t border-white/10 bg-[#040805] text-center shrink-0">
               <p className="text-[11px] font-mono text-slate-400">
-                {unlockedCount === ACHIEVEMENT_IDS.length ? (
+                {unlockedCount === DISPLAY_IDS.length ? (
                   <span className="text-[#00ff88]">
                     {t('achievements.allDoneHint').replace('{cmd}', 'achievements reset')}
                   </span>

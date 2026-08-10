@@ -239,6 +239,7 @@ export const translations = {
         clean: { title: 'Limpeza Total', description: 'Execute o comando "clean" no terminal e deixe a tela totalmente limpa.', hint: '🔍 Dica: Que tal limpar o site?...' },
         polyglot: { title: 'Poliglota Digital', description: 'Alterne o idioma do site entre Português e Inglês.', hint: '🔍 Dica: Tente trocar a linguagem pelo terminal...' },
         timewalker: { title: 'Visitante do Passado', description: 'Você encontrou uma maneira de navegar pela Internet como ela costumava ser em 1999.', hint: '🔍 Dica: Digite "timewalker" no terminal (nome da saga de livros do Ricardo)...' },
+        sacrificio: { title: 'Sacrifício', description: 'Desbloqueou todas as outras conquistas e depois usou "achievements reset" para sacrificar seu progresso.', hint: '🔍 Dica: Desbloqueie todas as outras conquistas primeiro...' },
       },
     },
     easterEgg: {
@@ -632,6 +633,7 @@ export const translations = {
         clean: { title: 'Total Clean', description: 'Run "clean" in the terminal and leave the screen completely empty.', hint: '🔍 Tip: How about cleaning the site?...' },
         polyglot: { title: 'Digital Polyglot', description: 'Switch the website language between Portuguese and English.', hint: '🔍 Tip: Try changing the language via the terminal...' },
         timewalker: { title: 'Visitor from the Past', description: 'You found a way to navigate the Internet as it used to be back in 1999.', hint: '🔍 Tip: Type "timewalker" in the terminal (the title of Ricardo\'s book saga)...' },
+        sacrificio: { title: 'Sacrifice', description: 'Unlocked all other achievements and then used "achievements reset" to sacrifice your progress.', hint: '🔍 Tip: Unlock all other achievements first...' },
       },
     },
     easterEgg: {
