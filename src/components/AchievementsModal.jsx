@@ -230,6 +230,12 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
                               {lang === 'en' ? '🔒 Complete all other achievements first...' : '🔒 Desbloqueie todas as outras conquistas primeiro...'}
                             </p>
                           </div>
+                        ) : id === 'sacrificio' && allOthersUnlocked ? (
+                          <div className="mt-2 p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30">
+                            <p className="text-[11px] font-mono text-amber-400 leading-relaxed italic">
+                              {lang === 'en' ? '🎯 Now type "achievements reset" in the terminal!' : '🎯 Agora digite "achievements reset" no terminal!'}
+                            </p>
+                          </div>
                         ) : isHintRevealed ? (
                           <div className="mt-2 p-2.5 rounded-xl bg-black/60 border border-amber-500/30 flex items-start justify-between gap-2 animate-fadeIn">
                             <p className="text-[11px] font-mono text-amber-300/90 leading-relaxed italic">

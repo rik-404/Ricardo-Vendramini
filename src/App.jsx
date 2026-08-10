@@ -37,7 +37,11 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [allProjectsOpen, setAllProjectsOpen] = useState(false);
   const [allCertificatesOpen, setAllCertificatesOpen] = useState(false);
-  const [terminalModalOpen, setTerminalModalOpen] = useState(false);
+  const [terminalModalOpen, setTerminalModalOpen] = useState(() => {
+    try {
+      return localStorage.getItem('ricardodev_terminal_open') === 'true';
+    } catch { return false; }
+  });
   const [allSkillsOpen, setAllSkillsOpen] = useState(false);
   const [breakoutGameOpen, setBreakoutGameOpen] = useState(false);
   const [starWarsOpen, setStarWarsOpen] = useState(false);
@@ -69,6 +73,13 @@ export default function App() {
       localStorage.setItem('ricardodev_theme', theme);
     } catch {}
   }, [theme]);
+
+  // Persist terminal open state
+  useEffect(() => {
+    try {
+      localStorage.setItem('ricardodev_terminal_open', terminalModalOpen.toString());
+    } catch {}
+  }, [terminalModalOpen]);
 
   const toggleTheme = () => setTheme((t) => (t === 'light' ? 'dark' : 'light'));
 
