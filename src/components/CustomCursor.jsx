@@ -6,14 +6,7 @@ export default function CustomCursor() {
   const [isHovered, setIsHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isTouch, setIsTouch] = useState(false);
-  const [swatMode, setSwatMode] = useState(false);
   const [gloveMode, setGloveMode] = useState(false);
-
-  useEffect(() => {
-    const handleSwat = (e) => setSwatMode(e.detail);
-    window.addEventListener('fly-swat', handleSwat);
-    return () => window.removeEventListener('fly-swat', handleSwat);
-  }, []);
 
   useEffect(() => {
     const handleGlove = (e) => setGloveMode(e.detail);
@@ -92,7 +85,7 @@ export default function CustomCursor() {
     );
   }
 
-  if (!isVisible || swatMode) return null;
+  if (!isVisible) return null;
 
   return (
     <>

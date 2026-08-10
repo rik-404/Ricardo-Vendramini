@@ -893,7 +893,7 @@ export const certificatesData = [
 
 export const terminalCommands = {
   welcome: [
-    "RICARDO.DEV Terminal [Versão 1.0.0.0]",
+    "RICARDO.DEV Terminal [Versão 1.0.0.1]",
     "(c) 2026 Ricardo Vendramini - Vendramini Informática.",
     "",
     "> Inicializando módulos do portfólio...",
@@ -937,7 +937,7 @@ export const terminalCommands = {
 
 export const terminalCommandsEn = {
   welcome: [
-    "RICARDO.DEV Terminal [Version 1.0.0.0]",
+    "RICARDO.DEV Terminal [Version 1.0.0.1]",
     "(c) 2026 Ricardo Vendramini - Vendramini Informática.",
     "",
     "> Loading portfolio modules...",

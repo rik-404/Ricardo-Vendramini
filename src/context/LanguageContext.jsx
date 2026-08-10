@@ -227,7 +227,6 @@ export const translations = {
       footerHint: '🎮 Clique no ícone do olho para revelar a dica de cada segredo bloqueado!',
       toastLabel: 'Conquista desbloqueada',
       meta: {
-        mosca: { title: 'Caçador de Bugs', description: 'Elimine o inseto voador que pousa no terminal CLI ao ficar inativo.', hint: '🔍 Dica: Mate o inseto que brilha vermelho...' },
         titulo: { title: 'Gosta de clicar, não?', description: 'Clique repetidamente no título para forçar uma falha crítica no sistema.', hint: '🔍 Dica: Tenha raiva de logos...' },
         konami: { title: 'Vai cheatar é?', description: 'Digite a sequência secreta ↑ ↑ ↓ ↓ ← → ← → B A para ativar o modo místico.', hint: '🔍 Dica: Va na tela inicial do site e digite o famoso codigo das franquias de jogos...' },
         matrix: { title: 'Vermelho ou azul?', description: 'Digite "matrix" no terminal e veja a chuva de caracteres caindo.', hint: '🔍 Dica: Acesse o terminal e digite o nome de uma famosa franquia de ficção científica...' },
@@ -288,7 +287,7 @@ export const translations = {
       breakoutActivated: '> 🧱 Modo BREAKOUT ativado! Transformando o site no jogo de destruir blocos...',
       starwarsActivated: '> 🌌 Modo STAR WARS ativado! Que a Força esteja com você...',
       achievementsReset: '🔄 CONQUISTAS REINICIADAS!',
-      achievementsResetDesc1: '> Todos os segredos, mosca e post-it foram resetados com sucesso.',
+      achievementsResetDesc1: '> Todos os segredos e post-it foram resetados com sucesso.',
       achievementsResetDesc2: '> Explore novamente o site e o terminal para redescobrir os easter eggs! 🎮',
       achievementsGallery: '🏆 GALERIA DE CONQUISTAS:',
       achievementsGalleryDesc1: '> Para visualizar todas as conquistas e segredos (bloqueadas e desbloqueadas), use o botão "Ver Galeria de Conquistas" localizado abaixo deste terminal.',
@@ -621,7 +620,6 @@ export const translations = {
       footerHint: '🎮 Click the eye icon to reveal a hint for each locked secret!',
       toastLabel: 'Achievement unlocked',
       meta: {
-        mosca: { title: 'Bug Catcher', description: 'Eliminate the flying bug landing on the CLI title after staying idle.', hint: '🔍 Tip: Kill the insect that glows red...' },
         titulo: { title: 'Clickaholic', description: 'Click repeatedly on the title to force a critical system failure.', hint: '🔍 Tip: Get angry at logos...' },
         konami: { title: 'Cheating, are we?', description: 'Type the secret sequence ↑ ↑ ↓ ↓ ← → ← → B A to unlock the mystic mode.', hint: '🔍 Tip: Go to the homepage and type the famous video game franchise code...' },
         matrix: { title: 'Red or blue?', description: 'Type "matrix" in the terminal and watch the digital rain fall.', hint: '🔍 Tip: Open the terminal and type the name of a famous sci-fi franchise...' },

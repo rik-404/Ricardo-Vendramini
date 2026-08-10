@@ -5,7 +5,6 @@ import { Terminal as TerminalIcon, Play, RefreshCw, Sparkles, X, Gamepad2, Arrow
 import { terminalCommands, terminalCommandsEn } from '../data/portfolioData';
 import { dispatchAchievementUnlocked, ACHIEVEMENTS_META } from './AchievementToast';
 import AchievementsModal from './AchievementsModal';
-import FlyEasterEgg from './FlyEasterEgg';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements, onTriggerBreakout, onTriggerStarWars, onTriggerClean, onRestoreClean, onTriggerTimewalker, isModal = false, onClose, theme, onToggleTheme }) {
@@ -795,7 +794,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
     }
 
     if (cmd === 'reset' || cmd === 'achievements reset' || cmd === 'reset achievements') {
-      const ALL_OTHER = ['mosca', 'titulo', 'konami', 'matrix', 'navinha', 'root', 'tilt', 'breakout', 'starwars', 'clean', 'polyglot', 'timewalker'];
+      const ALL_OTHER = ['titulo', 'konami', 'matrix', 'navinha', 'root', 'tilt', 'breakout', 'starwars', 'clean', 'polyglot', 'timewalker'];
       const allUnlocked = ALL_OTHER.every(id => achievements.has(id));
       let resetMsg;
       try {
@@ -810,7 +809,6 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
           window.dispatchEvent(new CustomEvent('ricardodev-achievement-unlocked'));
           resetMsg = ['', t('terminal.achievementsReset'), '────────────────────────────────────────────────', t('terminal.achievementsResetDesc1'), t('terminal.achievementsResetDesc2'), ''];
         }
-        localStorage.removeItem('ricardodev_fly_shown');
         localStorage.removeItem('ricardodev_root_used');
         localStorage.removeItem('ricardodev_postit_shown');
       } catch (e) {}
@@ -837,7 +835,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
         ...newHistory,
         '',
         'RICARDO.DEV Terminal',
-        'Versão: 1.0.0.0',
+        'Versão: 1.0.0.1',
         'Build: ' + new Date().toISOString().split('T')[0],
         'Plataforma: Web (React + Vite)',
         ''
@@ -885,9 +883,6 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
           </p>
         )}
       </div>
-
-      {/* Mosca aleatória que pousa no título quando o CLI fica inativo por 12s */}
-      <FlyEasterEgg isActive={true} containerRef={cliContainerRef} titleRef={cliTitleRef} />
 
       {/* Terminal Window Mockup */}
       <div className="terminal-flash-target max-w-4xl mx-auto glass-card rounded-2xl border border-[#00ff88]/40 overflow-hidden shadow-[0_0_50px_rgba(0,255,136,0.15)] font-mono text-xs sm:text-sm">

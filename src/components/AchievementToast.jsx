@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Award, Bug, Gamepad2, KeyRound, Terminal, Trash2, Trophy, Sparkles, Zap, Activity, Languages, Clock, Skull, X } from 'lucide-react';
+import { Award, Gamepad2, KeyRound, Terminal, Trash2, Trophy, Sparkles, Zap, Activity, Languages, Clock, Skull, X } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
-export const ACHIEVEMENT_IDS = ['mosca', 'titulo', 'konami', 'matrix', 'navinha', 'root', 'tilt', 'breakout', 'starwars', 'clean', 'polyglot', 'timewalker'];
+export const ACHIEVEMENT_IDS = ['titulo', 'konami', 'matrix', 'navinha', 'root', 'tilt', 'breakout', 'starwars', 'clean', 'polyglot', 'timewalker'];
 export const ALL_OTHER_IDS = [...ACHIEVEMENT_IDS];
 
 export const ACHIEVEMENTS_META = {
-  mosca: { icon: Bug },
   titulo: { icon: Zap },
   konami: { icon: Trophy },
   matrix: { icon: Sparkles },
