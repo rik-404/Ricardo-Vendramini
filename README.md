@@ -235,7 +235,7 @@ O terminal interativo fica na seção **Terminal** do site. Digite os comandos a
 - 🏢 **Empresa**: Vendramini Informática
 - 📧 **E-mail**: [ricardovendramini.contato@gmail.com](mailto:ricardovendramini.contato@gmail.com)
 - 💼 **LinkedIn**: [Ricardo Vendramini Cassimiro](https://www.linkedin.com/in/ricardovendraminicassimiro/)
-- 📷 **Instagram**: [@404_rik](https://www.instagram.com/404_rik)
+- 📷 **Instagram**: [@ricardovendramini.dev](https://www.instagram.com/ricardovendramini.dev)
 
 ---
 

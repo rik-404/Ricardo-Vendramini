@@ -788,8 +788,56 @@ export const translations = {
         os: { name: 'Tools & OS', desc: 'Linux, Git, VSCode, PyTorch' },
         deploy: { name: 'Deploy & Infra', desc: 'Vercel, Hostinger, Git / GitHub' },
       },
+  },
+  seo: {
+    defaultTitle: 'Ricardo Vendramini | Desenvolvedor Full Stack & Arquiteto de Sistemas em Piracicaba',
+    defaultDescription: 'Portfólio de Ricardo Vendramini: Engenheiro de software, desenvolvedor full stack e arquiteto de sistemas em Piracicaba-SP. Soluções web escaláveis, aplicações em produção e liderança técnica.',
+    title: {
+      hero: 'Ricardo Vendramini | Desenvolvedor Full Stack & Arquiteto de Sistemas em Piracicaba',
+      about: 'Sobre | Ricardo Vendramini — Engenheiro de Software & Líder Técnico',
+      experience: 'Experiência & Trajetória | Ricardo Vendramini — Líder Técnico',
+      skills: 'Habilidades & Tecnologias | Ricardo Vendramini — Full Stack Developer',
+      projects: 'Projetos & Portfólio | Ricardo Vendramini — Soluções Web em Produção',
+      certificates: 'Certificações | Ricardo Vendramini — Especializações & Credenciais',
+      books: 'Livros Autorais | Ricardo Vendramini — Literário & Publicações',
+      contact: 'Contato | Ricardo Vendramini — Desenvolvedor em Piracicaba, SP',
     },
-  }
+    description: {
+      hero: 'Engenheiro de software, desenvolvedor full stack e arquiteto de sistemas em Piracicaba-SP. Soluções web escaláveis, aplicações em produção e liderança técnica.',
+      about: 'Conheça a trajetória, visão e princípios de Ricardo Vendramini: engenharia de software, arquitetura de sistemas, resolução de problemas reais e desenvolvimento orientado a pessoas.',
+      experience: 'Experiência profissional de Ricardo Vendramini: gestão de processos, liderança técnica, visão de negócios e excelência na entrega de soluções de tecnologia.',
+      skills: 'Ecossistema tecnológico de Ricardo Vendramini: linguagens, frameworks, backend, cloud, ferramentas e infraestrutura para aplicações web escaláveis.',
+      projects: 'Portfólio de sistemas em produção, plataformas SaaS, portais institucionais e projetos open source desenvolvidos por Ricardo Vendramini.',
+      certificates: 'Certificações e credenciais de Ricardo Vendramini em engenharia de software, UI/UX, redes, segurança, IA e análise de dados.',
+      books: 'Livros autorais de Ricardo Vendramini: ficção científica, suspense psicológico e reflexões sobre a natureza humana.',
+      contact: 'Entre em contato com Ricardo Vendramini, desenvolvedor full stack em Piracicaba-SP, para novos projetos, parcerias e oportunidades.',
+},
+    },
+  },
+  seo: {
+    defaultTitle: 'Ricardo Vendramini | Full Stack Developer & Systems Architect in Piracicaba, Brazil',
+    defaultDescription: 'Ricardo Vendramini portfolio: Software engineer, full stack developer and systems architect in Piracicaba-SP. Scalable web solutions, production applications and technical leadership.',
+    title: {
+      hero: 'Ricardo Vendramini | Full Stack Developer & Systems Architect in Piracicaba, Brazil',
+      about: 'About | Ricardo Vendramini — Software Engineer & Technical Leader',
+      experience: 'Experience & Journey | Ricardo Vendramini — Technical Leader',
+      skills: 'Skills & Technologies | Ricardo Vendramini — Full Stack Developer',
+      projects: 'Projects & Portfolio | Ricardo Vendramini — Production Web Solutions',
+      certificates: 'Certifications | Ricardo Vendramini — Qualifications & Credentials',
+      books: 'Author Books | Ricardo Vendramini — Literature & Publications',
+      contact: 'Contact | Ricardo Vendramini — Developer in Piracicaba, SP',
+    },
+    description: {
+      hero: 'Software engineer, full stack developer and systems architect in Piracicaba-SP. Scalable web solutions, production applications and technical leadership.',
+      about: 'Discover Ricardo Vendramini\'s journey, vision and principles: software engineering, systems architecture, solving real problems and people-first development.',
+      experience: 'Ricardo Vendramini\'s professional experience: process management, technical leadership, business vision and excellence in delivering technology solutions.',
+      skills: 'Ricardo Vendramini\'s technology ecosystem: languages, frameworks, backend, cloud, tools and infrastructure for scalable web applications.',
+      projects: 'Portfolio of production systems, SaaS platforms, institutional portals and open source projects built by Ricardo Vendramini.',
+      certificates: 'Ricardo Vendramini\'s certifications and credentials in software engineering, UI/UX, networking, security, AI and data analysis.',
+      books: 'Ricardo Vendramini\'s authored books: science fiction, psychological suspense and reflections on human nature.',
+      contact: 'Contact Ricardo Vendramini, full stack developer in Piracicaba-SP, for new projects, partnerships and opportunities.',
+    },
+  },
 };
 
 

@@ -30,6 +30,7 @@ import AchievementToast, { dispatchAchievementUnlocked } from './components/Achi
 import { Trash2, RotateCcw } from 'lucide-react';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
+import SeoManager from './components/SeoManager';
 import { useLanguage } from './context/LanguageContext';
 
 export default function App() {
@@ -287,6 +288,9 @@ export default function App() {
 
   return (
     <div className={`relative min-h-screen font-sans selection:bg-[#00ff88] selection:text-black ${theme === 'light' ? 'bg-[#f8fafc] text-slate-900' : 'bg-[#040705] text-slate-100'}`}>
+      {/* Dynamic SEO: section-scoped <title>, meta description & Open Graph tags */}
+      <SeoManager />
+
       {/* Interactive Custom Cursor */}
       <CustomCursor />
 

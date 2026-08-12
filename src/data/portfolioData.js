@@ -46,7 +46,7 @@ export const personalInfo = {
   companyLogoUrl: companyLogo,
   availableForWork: true,
   socialLinks: {
-    instagram: "https://www.instagram.com/404_rik",
+    instagram: "https://www.instagram.com/ricardovendramini.dev",
     github: "https://github.com/rik-404",
     facebook: "http://facebook.com/ricardo.cassimiro",
     linkedin: "https://www.linkedin.com/in/ricardovendraminicassimiro/",
