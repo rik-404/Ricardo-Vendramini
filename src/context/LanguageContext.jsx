@@ -367,6 +367,12 @@ export const translations = {
     footer: {
       company: 'Empresa',
       rights: 'Todos os direitos reservados.',
+      mission: 'Minha missão é transformar ideias em soluções digitais de alta performance através de engenharia de software, inteligência artificial e design intuitivo, entregando valor real a cada projeto.',
+      about: 'Sobre',
+      experience: 'Experiência',
+      skills: 'Habilidades',
+      projects: 'Projetos',
+      contact: 'Contato',
     },
     misc: {
       all: 'Todas',
@@ -762,6 +768,12 @@ export const translations = {
     footer: {
       company: 'Company',
       rights: 'All rights reserved.',
+      mission: 'My mission is to transform ideas into high-performance digital solutions through software engineering, artificial intelligence, and intuitive design, delivering real value in every project.',
+      about: 'About',
+      experience: 'Experience',
+      skills: 'Skills',
+      projects: 'Projects',
+      contact: 'Contact',
     },
     misc: {
       all: 'All',
