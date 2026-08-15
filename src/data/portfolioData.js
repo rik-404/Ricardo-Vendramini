@@ -141,6 +141,7 @@ export const skillsCategories = [
   { id: "all", label: "Todas" },
   { id: "core", label: "Linguagens & Core" },
   { id: "frameworks", label: "Frameworks & CMS" },
+  { id: "ai", label: "IA & Agentic Coding" },
   { id: "backend", label: "Backend & Cloud" },
   { id: "tools", label: "Ferramentas & Design" },
   { id: "deploy", label: "Redes, Deploy & Infra" }
@@ -372,7 +373,7 @@ export const skillsData = [
   },
   {
     name: "Desenvolvimento Assistido por IA (Lovable / Agentic)",
-    category: "tools",
+    category: "ai",
     level: "Avançado",
     percentage: 94,
     description: "Aceleração de engenharia de software com ferramentas de IA generativa (Lovable AI), prototipagem de produtos full-stack e engenharia de prompts.",
@@ -427,6 +428,32 @@ export const skillsData = [
     percentage: 96,
     description: "Versionamento de código e hospedagem de aplicações estáticas e projetos open source.",
     relatedProjects: ["Rei das Roms", "Festa Fácil Personalizados"]
+  },
+
+  // IA & Agentic Coding
+  {
+    name: "Claude Code & Agentic Coding",
+    category: "ai",
+    level: "Especialista",
+    percentage: 96,
+    description: "Desenvolvimento autônomo e refatoração de código com o agente CLI Claude Code da Anthropic, gerenciamento de janelas de contexto e automação de engenharia de software.",
+    relatedProjects: ["Certificação Claude Code 101", "Portfólio Ricardo Vendramini"]
+  },
+  {
+    name: "Anthropic Claude API & Tool Use",
+    category: "ai",
+    level: "Avançado",
+    percentage: 94,
+    description: "Integração da API Claude da Anthropic, Function Calling / Tool Use, agentes autônomos de IA e engenharia de contexto avançada.",
+    relatedProjects: ["Certificação Claude Platform 101"]
+  },
+  {
+    name: "AI Engineering & Builder Systems",
+    category: "ai",
+    level: "Avançado",
+    percentage: 94,
+    description: "Fluência em Inteligência Artificial para construtores de produtos digitais, arquitetura de sistemas baseados em LLMs e orquestração de fluxos autônomos.",
+    relatedProjects: ["Certificação AI Fluency for Builder"]
   }
 ];
 
@@ -1337,6 +1364,9 @@ export function getSkillsData(lang = 'pt') {
       ex(31, { level: 'Advanced', description: 'Hosting, domains, DNS zone management, and SSL certificates applied to production projects.', relatedProjects: ['Elite House Piracicaba'] }),
       ex(32, { level: 'Expert', description: 'Automated deployment, high-performance serverless hosting, and domain integration.', relatedProjects: ['Vendramini Informática', 'C4T4T4U Electronics', 'Cigana Morgana'] }),
       ex(33, { level: 'Expert', description: 'Code versioning and hosting of static applications and open source projects.', relatedProjects: ['King of ROMs', 'Festa Fácil Custom'] }),
+      ex(34, { level: 'Expert', description: 'Autonomous development and codebase refactoring with Anthropic\'s Claude Code CLI agent, context window management, and software engineering automation.', relatedProjects: ['Claude Code 101 Certification', 'Ricardo Vendramini Portfolio'] }),
+      ex(35, { level: 'Advanced', description: 'Integration of Anthropic\'s Claude API, Function Calling / Tool Use, autonomous AI agents, and advanced context engineering.', relatedProjects: ['Claude Platform 101 Certification'] }),
+      ex(36, { level: 'Advanced', description: 'AI fluency for digital product builders, LLM-based system architecture, and autonomous workflow orchestration.', relatedProjects: ['AI Fluency for Builder Certification'] }),
     ];
   }
   return skillsData;
