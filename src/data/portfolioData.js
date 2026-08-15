@@ -9,14 +9,15 @@
 import ricardoPhoto from '../images/Ricardo-Vendramini.jpeg';
 import companyLogo from '../images/Icon-Vendramini-Informatica.png';
 import timewalkerCover from '../images/books/image.png';
-import eliteHouseImg from '../images/books/portifolio/Elite-House-Piracicaba.png';
-import vendraminiSiteImg from '../images/books/portifolio/Vendramin-Informatica.png';
-import reiDasRomsImg from '../images/books/portifolio/Rei-das-Roms.png';
-import festaFacilImg from '../images/books/portifolio/Festa-Facil.png';
-import c4t4t4uImg from '../images/books/portifolio/C4t4t4u-Eletronicos.png';
-import ciganaMorganaImg from '../images/books/portifolio/Cigana-Morgana.png';
-import menuDeliveryImg from '../images/books/portifolio/Menu delivery.png';
-import petLifeImg from '../images/books/portifolio/Pet-Life.png';
+import eliteHouseImg from '../images/portifolio/Elite-House-Piracicaba.png';
+import vendraminiSiteImg from '../images/portifolio/Vendramin-Informatica.png';
+import reiDasRomsImg from '../images/portifolio/Rei-das-Roms.png';
+import festaFacilImg from '../images/portifolio/Festa-Facil.png';
+import c4t4t4uImg from '../images/portifolio/C4t4t4u-Eletronicos.png';
+import ciganaMorganaImg from '../images/portifolio/Cigana-Morgana.png';
+import menuDeliveryImg from '../images/portifolio/Menu delivery.png';
+import petLifeImg from '../images/portifolio/Pet-Life.png';
+import taskFlowImg from '../images/portifolio/TaskFLOW.png';
 import designer5kImg from '../images/certificados/web/designer5k.png';
 import htmlCssCertImg from '../images/certificados/HTML-CSS.png';
 import analistaRedesCertImg from '../images/certificados/Analista-Redes.png';
@@ -643,6 +644,24 @@ export const projectsData = [
     date: "2026",
     link: "https://rik-404.github.io/Festa-Facil/",
     github: "https://github.com/rik-404/Festa-Facil",
+    status: "Em Produção"
+  },
+  {
+    id: "task-flow",
+    name: "TaskFLOW",
+    subtitle: "Gestão de Tarefas Inteligente & Produtividade Personalizada",
+    category: "Web App / Produtividade",
+    image: taskFlowImg,
+    badge: "2026 • Em Produção",
+    shortDescription: "Aplicativo web completo de gestão de tarefas inteligente com arquitetura reativa em JavaScript Vanilla. Oferece controle CRUD completo de tarefas, sistema de tags personalizáveis, priorização visual, sub-tarefas, dashboard de progresso diário, alternador de temas (Dark/Light mode) e exportação/importação de dados em JSON com persistência em LocalStorage.",
+    problem: "Profissionais e estudantes necessitam de uma ferramenta de gestão de tarefas leve, ágil, privada e sem necessidade de login ou dependência de servidores externos para organizar a rotina diária com métricas visuais de progresso.",
+    idea: "Desenvolver uma plataforma de produtividade SPA desacoplada de alto desempenho com interface moderna baseada na fonte Plus Jakarta Sans, dashboard estatístico com barra de progresso em tempo real, suporte completo a backup via arquivos JSON e alternador de tema escuro/claro.",
+    construction: "Desenvolvido com HTML5 semântico, CSS3 Vanilla avançado (Design System com variáveis CSS, suporte a temas data-theme dark/light, responsividade Mobile-First com Flexbox e Grid) e JavaScript ES6+ puro (manipulação otimizada da DOM, gerenciamento de estado local, parsing de JSON e LocalStorage API).",
+    result: "Organização diária eficiente com cálculo automático da porcentagem de conclusão de tarefas, portabilidade total dos dados via exportação/importação JSON, zero tempo de carregamento e autonomia completa offline.",
+    technologies: ["HTML5", "CSS3", "JavaScript ES6+", "LocalStorage", "JSON Import/Export", "Design Responsivo", "Dark/Light Theme"],
+    date: "2026",
+    link: "https://rik-404.github.io/Task-FLOW/",
+    github: "https://github.com/rik-404/Task-FLOW",
     status: "Em Produção"
   }
 ];
@@ -1477,6 +1496,20 @@ export function getProjectsData(lang = 'pt') {
         idea: "Build an intuitive web calculator that takes guest counts (adults, children) and calculates exact food, beverage, and disposable supply quantities.",
         construction: "Built with HTML5, CSS3, JavaScript ES6+ algorithms, and GitHub Pages hosting.",
         result: "Instant party supply calculations, budget PDF export, and reduced event planning waste.",
+        status: "In Production"
+      },
+      {
+        ...projectsData[8],
+        title: "TaskFLOW",
+        subtitle: "Smart Task Management & Productivity System",
+        name: "TaskFLOW",
+        badge: "2026 • In Production",
+        category: "Web App / Productivity",
+        shortDescription: "Comprehensive smart task management web application built with reactive Vanilla JavaScript architecture. Features complete CRUD task management, customizable tag system, visual priority flags, sub-tasks, daily progress dashboard, Dark/Light theme toggle, and JSON data import/export with LocalStorage persistence.",
+        problem: "Users and students need a lightweight, fast, private task management tool without login requirements or external server dependencies to organize daily routines with visual progress metrics.",
+        idea: "Develop a high-performance productivity SPA with modern typography (Plus Jakarta Sans), real-time progress dashboard, JSON backup/restore support, and seamless dark/light mode toggle.",
+        construction: "Built with semantic HTML5, advanced Vanilla CSS3 (Design System with CSS custom properties, data-theme dark/light support, Mobile-First responsive layouts), and pure ES6+ JavaScript (optimized DOM manipulation, state management, JSON parsing, LocalStorage API).",
+        result: "Efficient daily organization with automatic completion percentage calculation, complete data portability via JSON backup, zero load times, and full offline autonomy.",
         status: "In Production"
       }
     ];
