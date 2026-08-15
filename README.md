@@ -233,7 +233,8 @@ O terminal interativo fica na seção **Terminal** do site. Digite os comandos a
 **Ricardo Vendramini**  
 *Desenvolvedor, Líder & Criador de Soluções Digitais*  
 - 🏢 **Empresa**: Vendramini Informática
-- 📧 **E-mail**: [ricardovendramini.contato@gmail.com](mailto:ricardovendramini.contato@gmail.com)
+- 📱 **WhatsApp**: [+55 19 99708-3087](https://wa.me/5519997083087)
+- 📧 **E-mail**: [ricardovendramini.contato@protonmail.com](mailto:ricardovendramini.contato@protonmail.com)
 - 💼 **LinkedIn**: [Ricardo Vendramini Cassimiro](https://www.linkedin.com/in/ricardovendraminicassimiro/)
 - 📷 **Instagram**: [@ricardovendramini.dev](https://www.instagram.com/ricardovendramini.dev)
 

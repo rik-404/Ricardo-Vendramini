@@ -26,6 +26,9 @@ import carismaCertImg from '../images/certificados/Carisma.png';
 import excelAvançadoCertImg from '../images/certificados/Excle2010-Avançado.png';
 import lovableCertImg from '../images/certificados/Lovable-Workshop.png.png';
 import pythonCertImg from '../images/certificados/python-fundamental1.png';
+import claudeCodeCertImg from '../images/certificados/Claude Code 101.jpeg';
+import claudePlatformCertImg from '../images/certificados/Claude Plataform 101.jpeg';
+import aiFluencyCertImg from '../images/certificados/AI FLUENCY for BUILDER.jpeg';
 
 export const personalInfo = {
   name: "Ricardo Vendramini",
@@ -51,8 +54,8 @@ export const personalInfo = {
     github: "https://github.com/rik-404",
     facebook: "http://facebook.com/ricardo.cassimiro",
     linkedin: "https://www.linkedin.com/in/ricardovendraminicassimiro/",
-    whatsapp: "https://wa.me/5500000000000",
-    email: "contato@ricardovendramini.dev"
+    whatsapp: "https://wa.me/5519997083087",
+    email: "ricardovendramini.contato@protonmail.com"
   }
 };
 
@@ -907,6 +910,42 @@ export const certificatesData = [
     description: "Certificação nos fundamentos da linguagem Python 3. Aborda sintaxe moderna, tipos primitivos, operadores aritméticos/lógicos, tratamento de dados, módulos, manipulação de texto, estruturas condicionais e resolução algorítmica de problemas.",
     skills: ["Python 3", "Lógica de Programação", "Algoritmos", "Manipulação de Dados", "Tratamento de Strings", "Estruturas Condicionais"],
     badge: "Certificado Oficial"
+  },
+  {
+    id: "claude-code-101",
+    title: "Claude Code 101",
+    subtitle: "Certificação em Engenharia de Software Assistida por IA & Agentic Coding",
+    issuer: "Anthropic / Claude Code",
+    category: "Inteligência Artificial / Agentic Coding & Engenharia",
+    date: "2026",
+    image: claudeCodeCertImg,
+    description: "Certificação em desenvolvimento de software e automação de código utilizando o Claude Code (Anthropic CLI Agent). Domínio de fluxos agentivos de desenvolvimento, refatoração autônoma de projetos, integração via terminal, gerenciamento de contexto, arquitetura de prompts para engenharia e automação avançada de desenvolvimento.",
+    skills: ["Claude Code", "Anthropic AI", "Agentic Coding", "IA Generativa", "Terminal CLI", "Engenharia de Software", "Automação de Código"],
+    badge: "Certificado Oficial"
+  },
+  {
+    id: "claude-platform-101",
+    title: "Claude Platform 101",
+    subtitle: "Certificação na Plataforma Anthropic Claude, API & Arquitetura de LLMs",
+    issuer: "Anthropic / Claude Platform",
+    category: "Inteligência Artificial / API & Arquitetura de LLMs",
+    date: "2026",
+    image: claudePlatformCertImg,
+    description: "Certificação em integração e desenvolvimento na plataforma Anthropic Claude API. Domínio do Anthropic Console, parâmetros de inferência de LLMs (temperature, top_p, max_tokens), engenharia de contexto avançada, Function Calling / Tool Use, agentes de IA, segurança com Guardrails e construção de soluções inteligentes escaláveis.",
+    skills: ["Claude Platform", "Anthropic Console", "Claude API", "Tool Use & Function Calling", "Prompt Engineering", "LLM Architecture", "AI Agents"],
+    badge: "Certificado Oficial"
+  },
+  {
+    id: "ai-fluency-for-builder",
+    title: "AI Fluency for Builder",
+    subtitle: "Certificação em Fluência em Inteligência Artificial para Desenvolvedores & Criadores",
+    issuer: "Anthropic / AI Fluency for Builders",
+    category: "Inteligência Artificial / AI Engineering & Builder Systems",
+    date: "2026",
+    image: aiFluencyCertImg,
+    description: "Certificação avançada em fluência técnica em Inteligência Artificial direcionada a construtores de produtos digitais (Builders/Developers). Domínio de padrões de engenharia de software orientada a IA, arquiteturas de sistemas baseadas em LLMs, orquestração de fluxos autônomos, prototipagem ágil com IA e design de soluções inteligentes end-to-end.",
+    skills: ["AI Fluency", "AI Builder", "AI Engineering", "LLM Systems Architecture", "AI Orchestration", "Rapid Prototyping", "Full-Stack AI Solutions"],
+    badge: "Certificado Oficial"
   }
 ];
 
@@ -1376,6 +1415,33 @@ export function getCertificatesData(lang = 'pt') {
         description: "Certification in Python 3 programming fundamentals. Covers modern syntax, primitive data types, arithmetic/logical operators, data handling, modules, string manipulation, control structures, and algorithmic problem solving.",
         category: "Languages & Backend / Python",
         skills: ["Python 3", "Programming Logic", "Algorithms", "Data Handling", "String Manipulation", "Conditional Structures"],
+        badge: "Official Certificate"
+      },
+      {
+        ...certificatesData[8],
+        title: "Claude Code 101",
+        subtitle: "Certification in AI-Assisted Software Engineering & Agentic Coding",
+        description: "Certification in software engineering and code automation leveraging Claude Code (Anthropic CLI Agent). Mastery of agentic coding workflows, autonomous codebase refactoring, CLI integration, context window optimization, engineering prompt architecture, and advanced developer task automation.",
+        category: "Artificial Intelligence / Agentic Coding",
+        skills: ["Claude Code", "Anthropic AI", "Agentic Coding", "Generative AI", "Terminal CLI", "Software Engineering", "Code Automation"],
+        badge: "Official Certificate"
+      },
+      {
+        ...certificatesData[9],
+        title: "Claude Platform 101",
+        subtitle: "Certification in Anthropic Claude Platform, API & LLM Architecture",
+        description: "Certification in integration and development on the Anthropic Claude API platform. Mastery of Anthropic Console, LLM inference parameters (temperature, top_p, max_tokens), advanced context management, Tool Use / Function Calling, AI agents, Guardrails safety, and building scalable intelligent solutions.",
+        category: "Artificial Intelligence / API & LLM Architecture",
+        skills: ["Claude Platform", "Anthropic Console", "Claude API", "Tool Use & Function Calling", "Prompt Engineering", "LLM Architecture", "AI Agents"],
+        badge: "Official Certificate"
+      },
+      {
+        ...certificatesData[10],
+        title: "AI Fluency for Builder",
+        subtitle: "Certification in AI Fluency for Software Developers & Product Builders",
+        description: "Advanced certification in technical AI fluency tailored for digital product builders and developers. Mastery of AI-driven software engineering patterns, LLM-based system architectures, autonomous workflow orchestration, rapid AI prototyping, and end-to-end intelligent solution design.",
+        category: "Artificial Intelligence / AI Engineering & Builder Systems",
+        skills: ["AI Fluency", "AI Builder", "AI Engineering", "LLM Systems Architecture", "AI Orchestration", "Rapid Prototyping", "Full-Stack AI Solutions"],
         badge: "Official Certificate"
       }
     ];
