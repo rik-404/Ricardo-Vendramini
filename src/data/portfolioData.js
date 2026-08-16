@@ -978,89 +978,67 @@ export const certificatesData = [
 
 export const terminalCommands = {
   welcome: [
-    "RICARDO.DEV Terminal [Versão 1.0.0.2]",
+    "RICARDO.DEV Terminal [Versão 2.0.0]",
     "(c) 2026 Ricardo Vendramini - Vendramini Informática.",
-    "",
-    "> Inicializando módulos do portfólio...",
-    "[OK] Frontend Engine ....... 100%",
-    "[OK] Backend Microservices . 100%",
-    "[OK] Database Connector .... 100%",
-    "[OK] Linux Infrastructure .. 100%",
-    "[OK] Security Protocols .... 100%",
     "",
     "STATUS: SISTEMA ONLINE & OPERACIONAL",
     "",
-    "Digite 'help' ou escolha os atalhos para explorar."
+    "Comandos disponíveis:",
+    "  timewalker - Ativa o Protocolo Timewalker (Web Retrô 1999) ⏳",
+    "  root admin - Acesso ao Modo Administrador Root 🔓",
+    "  portuguese - Altera o idioma do site para Português 🇧🇷",
+    "  english    - Altera o idioma do site para Inglês 🌐",
+    "  dark       - Ativa o Modo Escuro 🌙",
+    "  white      - Ativa o Modo Claro/White ☀️",
+    "  clear      - Limpa a tela do terminal",
+    "",
+    "Digite um comando para executar."
   ],
   help: [
     "Comandos disponíveis:",
     "",
-    "  sobre    - Resumo sobre Ricardo Vendramini & Vendramini Informática",
-    "  skills   - Lista das principais competências técnicas",
-    "  projetos - Lista dos projetos em destaque",
-    "  livros   - Livros e publicações de autoria de Ricardo",
-    "  contato  - Informações de contato direto",
-    "  version  - Mostra a versão do sistema",
-    "  english  - Alterne o idioma do site para Inglês (English) 🌐",
-    "  portugues- Alterne o idioma do site para Português 🇧🇷",
-    "  dark     - Ativa o tema escuro 🌙",
-    "  light    - Ativa o tema claro ☀️",
-    "  clear    - Limpa o histórico do terminal",
+    "  timewalker - Ativa o Protocolo Timewalker (Web Retrô 1999) ⏳",
+    "  root admin - Acesso ao Modo Administrador Root 🔓",
+    "  portuguese - Altera o idioma do site para Português 🇧🇷",
+    "  english    - Altera o idioma do site para Inglês 🌐",
+    "  dark       - Ativa o Modo Escuro 🌙",
+    "  white      - Ativa o Modo Claro/White ☀️",
+    "  clear      - Limpa a tela do terminal",
     "",
-    "Digite qualquer comando para executar."
-  ],
-  games: [
-    "⚡ ARCADE CENTER — Jogos Disponíveis:",
-    "",
-    "★ navinha    - Space Invaders Geometric: destrua aliens com formas geométricas 👾",
-    "★ breakout   - Breakout Arcade: controle a raquete e destrua os blocos neon da tela 🧱",
-    "★ starwars   - Star Wars 3D Crawl: texto de abertura galáctico em 3D 🌌",
-    "",
-    "Digite o nome do jogo para iniciar."
+    "Digite um comando para executar."
   ]
 };
 
 export const terminalCommandsEn = {
   welcome: [
-    "RICARDO.DEV Terminal [Version 1.0.0.2]",
+    "RICARDO.DEV Terminal [Version 2.0.0]",
     "(c) 2026 Ricardo Vendramini - Vendramini Informática.",
-    "",
-    "> Loading portfolio modules...",
-    "[OK] Frontend Engine ....... 100%",
-    "[OK] Backend Microservices . 100%",
-    "[OK] Database Connector .... 100%",
-    "[OK] Linux Infrastructure .. 100%",
-    "[OK] Security Protocols .... 100%",
     "",
     "STATUS: SYSTEM ONLINE & OPERATIONAL",
     "",
-    "Type 'help' or choose one of the shortcuts to explore."
+    "Available commands:",
+    "  timewalker - Activate Timewalker Protocol (1999 Web Era) ⏳",
+    "  root admin - Access Root Administrator Mode 🔓",
+    "  portuguese - Switch site language to Portuguese 🇧🇷",
+    "  english    - Switch site language to English 🌐",
+    "  dark       - Activate Dark Mode 🌙",
+    "  white      - Activate White/Light Mode ☀️",
+    "  clear      - Clear terminal screen",
+    "",
+    "Type a command to execute."
   ],
   help: [
     "Available commands:",
     "",
-    "  about    - Summary about Ricardo Vendramini & Vendramini Informática",
-    "  skills   - List of main technical competencies",
-    "  projects - List of featured projects",
-    "  books    - Books and publications authored by Ricardo",
-    "  contact  - Direct contact information",
-    "  version  - Shows system version",
-    "  english  - Switch site language to English 🌐",
-    "  portugues- Switch site language to Portuguese 🇧🇷",
-    "  dark     - Switch to dark theme 🌙",
-    "  light    - Switch to light theme ☀️",
-    "  clear    - Clears the terminal history",
+    "  timewalker - Activate Timewalker Protocol (1999 Web Era) ⏳",
+    "  root admin - Access Root Administrator Mode 🔓",
+    "  portuguese - Switch site language to Portuguese 🇧🇷",
+    "  english    - Switch site language to English 🌐",
+    "  dark       - Activate Dark Mode 🌙",
+    "  white      - Activate White/Light Mode ☀️",
+    "  clear      - Clear terminal screen",
     "",
-    "Type any command to run it."
-  ],
-  games: [
-    "⚡ ARCADE CENTER — Available Games:",
-    "",
-    "★ navinhab - Space Invaders Geometric: destroy aliens with geometric shapes 👾",
-    "★ breakout - Breakout Arcade: control the paddle and destroy the neon blocks on screen 🧱",
-    "★ starwars - Star Wars 3D Crawl: galactic opening text in 3D 🌌",
-    "",
-    "Type the game name to start."
+    "Type a command to execute."
   ]
 };
 

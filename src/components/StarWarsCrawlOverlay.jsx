@@ -260,7 +260,7 @@ export default function StarWarsCrawlOverlay({ isOpen, onClose }) {
                 <div className="grid grid-cols-2 gap-4 text-sm sm:text-lg font-mono">
                   {skillsData.slice(0, 8).map((skill, idx) => (
                     <div key={idx} className="p-3 bg-[#06140d]/80 border border-[#00ff88]/40 rounded-xl text-center text-[#00ff88]">
-                      ★ {skill.name} ({skill.level})
+                      ★ {skill.name}
                     </div>
                   ))}
                 </div>

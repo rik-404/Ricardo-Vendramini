@@ -245,12 +245,6 @@ export default function Navbar({ onTriggerEasterEgg, onOpenTerminal, theme, onTo
           <a
             href="#hero"
             onClick={handleLogoClick}
-            onMouseEnter={() => {
-              if (glitchPhase === 0) {
-                window.dispatchEvent(new CustomEvent('glove-cursor', { detail: true }));
-              }
-            }}
-            onMouseLeave={() => window.dispatchEvent(new CustomEvent('glove-cursor', { detail: false }))}
             className={`group flex items-center gap-2.5 shrink-0 select-none cursor-pointer ${
               glitchPhase === 1 ? 'animate-glitch-shake' : ''
             }`}

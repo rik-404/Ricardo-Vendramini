@@ -17,8 +17,6 @@ import LeadershipSection from './components/LeadershipSection';
 import CertificatesSection from './components/CertificatesSection';
 import BooksSection from './components/BooksSection';
 import BookModal from './components/BookModal';
-import AchievementsSection from './components/AchievementsSection';
-import AchievementsModal from './components/AchievementsModal';
 import TerminalSection from './components/TerminalSection';
 import TechLabSection from './components/TechLabSection';
 import EasterEggModal from './components/EasterEggModal';
@@ -26,7 +24,6 @@ import BreakoutOverlay from './components/BreakoutOverlay';
 import StarWarsCrawlOverlay from './components/StarWarsCrawlOverlay';
 import Retro1999Overlay from './components/Retro1999Overlay';
 import TimeTravelAnimation from './components/TimeTravelAnimation';
-import AchievementToast, { dispatchAchievementUnlocked } from './components/AchievementToast';
 import { Trash2, RotateCcw } from 'lucide-react';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
@@ -179,14 +176,6 @@ export default function App() {
           matrixIndex++;
           if (matrixIndex === matrixWord.length) {
             triggerMatrixOnly();
-            try {
-              const saved = JSON.parse(localStorage.getItem('ricardodev_achievements') || '[]');
-              if (!saved.includes('matrix')) {
-                saved.push('matrix');
-                localStorage.setItem('ricardodev_achievements', JSON.stringify(saved));
-                dispatchAchievementUnlocked('matrix');
-              }
-            } catch {}
             matrixIndex = 0;
           }
         } else {
@@ -197,14 +186,6 @@ export default function App() {
           breakoutIndex++;
           if (breakoutIndex === breakoutWord.length) {
             setBreakoutGameOpen(true);
-            try {
-              const saved = JSON.parse(localStorage.getItem('ricardodev_achievements') || '[]');
-              if (!saved.includes('breakout')) {
-                saved.push('breakout');
-                localStorage.setItem('ricardodev_achievements', JSON.stringify(saved));
-                dispatchAchievementUnlocked('breakout');
-              }
-            } catch {}
             breakoutIndex = 0;
           }
         } else {
@@ -218,14 +199,6 @@ export default function App() {
           starWarsIndex++;
           if (starWarsIndex === starWarsWord.length) {
             setStarWarsOpen(true);
-            try {
-              const saved = JSON.parse(localStorage.getItem('ricardodev_achievements') || '[]');
-              if (!saved.includes('starwars')) {
-                saved.push('starwars');
-                localStorage.setItem('ricardodev_achievements', JSON.stringify(saved));
-                dispatchAchievementUnlocked('starwars');
-              }
-            } catch {}
             starWarsIndex = 0;
           }
         } else {
@@ -239,14 +212,6 @@ export default function App() {
           cleanIndex++;
           if (cleanIndex === cleanWord.length) {
             setSiteCleaned(true);
-            try {
-              const saved = JSON.parse(localStorage.getItem('ricardodev_achievements') || '[]');
-              if (!saved.includes('clean')) {
-                saved.push('clean');
-                localStorage.setItem('ricardodev_achievements', JSON.stringify(saved));
-                dispatchAchievementUnlocked('clean');
-              }
-            } catch {}
             cleanIndex = 0;
           }
         } else {
@@ -266,14 +231,6 @@ export default function App() {
   const triggerEasterEgg = () => {
     setEasterEggOpen(true);
     setMatrixCanvasMode(true);
-    try {
-      const saved = JSON.parse(localStorage.getItem('ricardodev_achievements') || '[]');
-      if (!saved.includes('konami')) {
-        saved.push('konami');
-        localStorage.setItem('ricardodev_achievements', JSON.stringify(saved));
-        dispatchAchievementUnlocked('konami');
-      }
-    } catch {}
   };
 
   const triggerMatrixOnly = () => {
@@ -467,9 +424,6 @@ export default function App() {
           </button>
         </div>
       )}
-
-      {/* PC-style Achievement Unlock Notification */}
-      <AchievementToast />
     </div>
   );
 }

@@ -6,19 +6,6 @@ export default function CustomCursor() {
   const [isHovered, setIsHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isTouch, setIsTouch] = useState(false);
-  const [gloveMode, setGloveMode] = useState(false);
-
-  useEffect(() => {
-    const handleGlove = (e) => setGloveMode(e.detail);
-    window.addEventListener('glove-cursor', handleGlove);
-    return () => window.removeEventListener('glove-cursor', handleGlove);
-  }, []);
-
-  // Hide native cursor while boxing glove is active
-  useEffect(() => {
-    document.body.style.cursor = gloveMode ? 'none' : '';
-    return () => { document.body.style.cursor = ''; };
-  }, [gloveMode]);
 
   useEffect(() => {
     // Check if device is touch primary
@@ -67,23 +54,6 @@ export default function CustomCursor() {
   }, [position, isTouch]);
 
   if (isTouch) return null;
-
-  // Boxing glove mode: real 🥊 emoji follows the mouse
-  if (gloveMode && isVisible) {
-    return (
-      <div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] select-none"
-        style={{
-          transform: `translate3d(${position.x - 26}px, ${position.y - 22}px, 0) rotate(-20deg)`,
-          fontSize: '38px',
-          lineHeight: 1,
-        }}
-        aria-hidden="true"
-      >
-        🥊
-      </div>
-    );
-  }
 
   if (!isVisible) return null;
 

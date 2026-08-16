@@ -424,6 +424,39 @@ export const translations = {
         books: 'Livros autorais de Ricardo Vendramini: ficção científica, suspense psicológico e reflexões sobre a natureza humana.',
         contact: 'Entre em contato com Ricardo Vendramini, desenvolvedor full stack em Piracicaba-SP, para novos projetos, parcerias e oportunidades.',
       },
+      retro1999: {
+        returnBtn: '[ ⏳ RETORNAR A 2026 ]',
+        notice: {
+          header: '⚠️ VENDRAMINI INFORMÁTICA — CONEXÃO DISCADA ATIVA',
+          title: "YOU'VE GOT MAIL! ✉️",
+          welcomePrefix: 'Bem-vindo à réplica retrô da',
+          welcomeBold: 'Vendramini Informática (Web 1.0 — 1999)',
+          sub: 'Conectado a 56kbps com som MIDI ativo!',
+          enterBtn: '[ ENTRAR NO SITE ]',
+        },
+        footer: {
+          connected: '🌐 Connected to Vendramini Informática (Web 1.0) • Dial-Up 56.0 Kbps • TCP/IP Protocol Active',
+          session: 'Vendramini Informática Interactive Session.',
+        },
+        aim: {
+          title: '💬 Vendramini Instant Messenger (VIM)',
+          chatTitle: 'Conversa Direta com Ricardo_Vendramini',
+          placeholder: 'Enviar mensagem instantânea...',
+          sendBtn: '[ Send ]',
+          welcomeMsg: 'Uh-oh! Bem-vindo ao meu Instant Messenger de 1999!',
+          danteMsg: 'Você sabia que é possível navegar pelo tempo usando código?',
+        },
+        tabs: {
+          web: 'Read / Início',
+          projetos: 'Projetos',
+          skills: 'Skills',
+          certificados: 'Certificados',
+          trajetoria: 'Trajetória',
+          livros: 'Livros',
+          contato: 'Mail / Contato',
+          msdos: 'MS-DOS Prompt',
+        },
+      },
     },
   },
   en: {
@@ -850,6 +883,39 @@ export const translations = {
         books: 'Ricardo Vendramini\'s authored books: science fiction, psychological suspense and reflections on human nature.',
         contact: 'Contact Ricardo Vendramini, full stack developer in Piracicaba-SP, for new projects, partnerships and opportunities.',
       },
+      retro1999: {
+        returnBtn: '[ ⏳ RETURN TO 2026 ]',
+        notice: {
+          header: '⚠️ VENDRAMINI INFORMÁTICA — DIAL-UP CONNECTED',
+          title: "YOU'VE GOT MAIL! ✉️",
+          welcomePrefix: 'Welcome to the retro replica of',
+          welcomeBold: 'Vendramini Informática (Web 1.0 — 1999)',
+          sub: 'Connected at 56kbps with active MIDI sound!',
+          enterBtn: '[ ENTER SITE ]',
+        },
+        footer: {
+          connected: '🌐 Connected to Vendramini Informática (Web 1.0) • Dial-Up 56.0 Kbps • TCP/IP Protocol Active',
+          session: 'Vendramini Informática Interactive Session.',
+        },
+        aim: {
+          title: '💬 Vendramini Instant Messenger (VIM)',
+          chatTitle: 'Direct Chat with Ricardo_Vendramini',
+          placeholder: 'Send instant message...',
+          sendBtn: '[ Send ]',
+          welcomeMsg: 'Uh-oh! Welcome to my 1999 Instant Messenger!',
+          danteMsg: 'Did you know you can navigate through time using code?',
+        },
+        tabs: {
+          web: 'Read / Home',
+          projetos: 'Projects',
+          skills: 'Skills',
+          certificados: 'Certifications',
+          trajetoria: 'Career',
+          livros: 'Books',
+          contato: 'Mail / Contact',
+          msdos: 'MS-DOS Prompt',
+        },
+      },
     },
   },
 };
@@ -881,14 +947,31 @@ export function LanguageProvider({ children }) {
   const t = (path) => {
     const keys = path.split('.');
     let current = translations[lang] || translations.pt;
+    let found = true;
     for (const key of keys) {
       if (current && current[key] !== undefined) {
         current = current[key];
       } else {
-        return path;
+        found = false;
+        break;
       }
     }
-    return current;
+    if (found && typeof current === 'string') return current;
+
+    // Fallback to PT
+    let fallback = translations.pt;
+    let fallbackFound = true;
+    for (const key of keys) {
+      if (fallback && fallback[key] !== undefined) {
+        fallback = fallback[key];
+      } else {
+        fallbackFound = false;
+        break;
+      }
+    }
+    if (fallbackFound && typeof fallback === 'string') return fallback;
+
+    return path;
   };
 
   return (

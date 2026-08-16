@@ -13,7 +13,7 @@
 
 ## 🌟 Visão Geral
 
-Este projeto é mais do que um portfólio profissional tradicional: é uma **experiência digital imersiva** projetada com estética *cyberpunk/glassmorphism*, animações a 60fps em HTML5 Canvas, **internacionalização em tempo real (Português 🇧🇷 / Inglês 🇺🇸)**, um **terminal CLI interativo** integrado com minijogo arcade, um modo **Web 1.0 de 1999 (Timewalker)** com animação de viagem no tempo e um **sistema gamificado de segredos e conquistas (Easter Eggs)**.
+Este projeto é mais do que um portfólio profissional tradicional: é uma **experiência digital imersiva** projetada com estética *cyberpunk/glassmorphism*, animações a 60fps em HTML5 Canvas, **internacionalização em tempo real (Português 🇧🇷 / Inglês 🇺🇸)**, um **terminal CLI interativo** integrado com minijogo arcade, um modo **Web 1.0 de 1999 (Vendramini Informática — Timewalker)** com animação de viagem no tempo e um **sistema gamificado de segredos e conquistas (Easter Eggs)**.
 
 - 🔗 **Portfólio (Demo Vercel)**: [ricardovendramini.vercel.app](https://ricardovendramini.vercel.app/)
 - 🔗 **Website Oficial**: [vendraminiinformatica.com.br](https://vendraminiinformatica.com.br/)
@@ -53,9 +53,9 @@ Este projeto é mais do que um portfólio profissional tradicional: é uma **exp
 | :---: | :---: |
 | ![Modal de Conquistas](arquivos%20README/achivements.png) | ![Conquistas Concluídas](arquivos%20README/achivements-concluidos.png) |
 
-### ⏳ Modo Timewalker (Web 1.0 de 1999) & Viagem no Tempo
+### ⏳ Modo Timewalker (Vendramini Informática — Web 1.0 de 1999) & Viagem no Tempo
 
-| 🏎️ Animação DeLorean (88 MPH) | 🕹️ Site Web 1.0 (800x600) |
+| 🏎️ Animação DeLorean (88 MPH) | 🕹️ Vendramini Web 1.0 (1999) |
 | :---: | :---: |
 | ![Animação DeLorean](arquivos%20README/Anima%C3%A7%C3%A3o-viagem-tempo.png) | ![Site Web 1999](arquivos%20README/Site-1999.png) |
 
@@ -63,18 +63,35 @@ Este projeto é mais do que um portfólio profissional tradicional: é uma **exp
 
 ## ✨ Recursos & Diferenciais
 
-### 1. ⏳ Modo Timewalker (Web 1.0 de 1999) & Animação DeLorean
+### 1. ⏳ Modo Timewalker (Vendramini Informática — Web 1.0 de 1999)
 - **Viagem no Tempo Cinematográfica (`timewalker`)**: Animação em estilo *De Volta para o Futuro* com o DeLorean DMC-12 acelerando a **88 MPH**, velocímetro digital, relógio temporal e rastro de fogo nas rodas (*Fire Trails*).
-- **Layout Fiel Web 1.0 (800x600)**: Container centralizado de 800px, estética vintage em fundo claro, botões em 3D relevo, fontes *Times New Roman / Comic Sans*, links clássicos (azul/roxo/vermelho), caixa de compatibilidade *"Melhor visualizado em Internet Explorer 5"*, contador de visitantes `001337`, selo *"Em Construção"*, Web Rings e Guestbook interativo.
-- **Restauração da Linha Temporal**: Botão `[ RESTAURAR 2026 🔄 ]` com animação de volta ao presente.
+- **Interface Web 1.0 da Vendramini Informática**:
+  - Réplica estilizada da web de 1999 com **branding exclusivo da Vendramini Informática** e **Vendramini.DEV**.
+  - **Tipografia Fiel de 1999 (Web-Safe Fonts)**: Hierarquia estrita baseada nas fontes clássicas da época — **Times New Roman** (títulos), **Arial** (menus e botões), **Verdana** (textos de corpo, bio e guestbook) e **Courier New** (contador 56k, terminal MS-DOS e badges 88x31).
+  - **9 Elementos Retrô & GIFs Animados (Web 1.0)**:
+    1. 🚧 *UNDER CONSTRUCTION* (Placa amarela listrada com cones e animação).
+    2. ✉️ *E-MAIL ME NOW!* (Envelope piscando em neon).
+    3. 🔥 *NEW!* e 🌶️ *HOT!* (Tags piscantes com efeito retro-blink).
+    4. 🌟 *Estrela Girando* (Animação de rotação contínua).
+    5. 🖥️ *Computador CRT Animado* (Indicador de linha discada).
+    6. 🌐 *Best viewed in Internet Explorer 5.0* (Selo 88x31).
+    7. 💻 *Optimized for 800x600 — 256 Colors* (Selo de resolução).
+    8. 🚩 *WELCOME TO MY HOMEPAGE!* (Bandeirinha ondulante em gradiente).
+    9. 🌍 *Planeta Terra Girando* (Globo terrestre em rotação).
+  - **Pop-up de Boas-Vindas ("You've Got Mail! ✉️")**: Alerta com informações de conexão discada a 56kbps e áudio sintetizado em som MIDI 1999.
+  - **Menu Lateral por Canais (Channels Sidebar)**: Navegação limpa por 8 áreas (Welcome, Projetos & Dev, Skills & Tech, Certificados, Trajetória TI, Livros & Obras, Contato Direto e MS-DOS Prompt).
+  - **Rodapé de Status Bar**: Status de protocolo TCP/IP, conexão discada ativa 56.0 Kbps e sessão interativa.
+  - **Suporte Multilíngue (i18n)**: Integrado diretamente ao `LanguageContext` (Português 🇧🇷 e Inglês 🇺🇸).
+  - **MS-DOS 6.22 Prompt**: Shell emulado dentro do modo retrô com comandos como `DIR`, `CLS`, `VER`, `HELP` e `ABOUT`.
+- **Restauração da Linha Temporal**: Botão `[ ⏳ RETORNAR A 2026 ]` para voltar instantaneamente ao presente.
 
 ### 2. 🌐 Internacionalização Dinâmica (i18n PT-BR / EN)
-- **Alternador de Idioma em Tempo Real**: Troca instantânea de todo o ecossistema do site (menus, títulos, descrições de projetos, habilidades, biografia e modais) entre **Português 🇧🇷** e **Inglês 🇺🇸**.
+- **Alternador de Idioma em Tempo Real**: Troca instantânea de todo o ecossistema do site (menus, títulos, descrições de projetos, habilidades, biografia, modais e modo retrô 1999) entre **Português 🇧🇷** e **Inglês 🇺🇸**.
 - **Disjuntor Cyberpunk em Desktop & Badge Exclusivo em Mobile**: Seletor com trilho deslizante neon no desktop e badge compacto com LED pulsante otimizado para navegação mobile.
 - **Persistência de Idioma**: Armazenamento automático da preferência do usuário no `localStorage`.
 
-### 3. 🍔 Portfólio de Soluções & Projetos Atualizados
-Inclui showcase de projetos reais em produção e estudos de engenharia de software:
+### 3. 🍔 Portfólio de Soluções & Arquitetura de Dados Centralizada
+Todos os projetos são carregados da arquitetura central de dados com suporte bilingue e fallbacks robustos de propriedades:
 - **Sabor Express**: Cardápio Digital & Delivery Interativo com suporte híbrido (localStorage + Supabase cloud com RLS), checkout formatado para WhatsApp, dashboard estatístico com Chart.js e alertas sonoros de pedidos.
 - **PetLife**: Página Institucional One Page para clínica veterinária e petshop, com vitrine de serviços médicos, farmácia pet e formulário de agendamento.
 - **Cigana Morgana**: Landing Page mística com rastro de partículas no cursor via Canvas 2D, agendamento online e galeria com lightbox.
@@ -82,6 +99,7 @@ Inclui showcase de projetos reais em produção e estudos de engenharia de softw
 - **Elite House Piracicaba**: Plataforma imobiliária & CRM corporativo com controle RBAC + RLS e integração de Webhooks do Facebook Ads.
 - **Vendramini Informática**: Portal institucional oficial com suporte PWA offline e efeito Matrix.
 - **Rei das ROMs & Festa Fácil**: Plataformas abertas de catalogação de retrojogos e orçamentos para eventos.
+- **TaskFLOW**: Sistema avançado de produtividade e gerenciamento de tarefas com salvamento offline e backup JSON.
 
 ### 4. 🖥️ Terminal CLI Interativo & Minijogo Arcade (v1.0.0.2)
 - **CLI funcional** no próprio site com suporte a diversos comandos de sistema (`help`, `sobre`, `skills`, `projetos`, `livros`, `contato`, `clear`, `reset`).
@@ -99,12 +117,12 @@ Inclui showcase de projetos reais em produção e estudos de engenharia de softw
 
 ### Core & Frameworks
 - **React 18** — Componentes reativos, hooks e gerenciamento de estado moderno.
-- **Vite 5** — Bundler e servidor de desenvolvimento ultrarrápido com *Figma* code splitting (chunks `vendor-react`, `vendor-framer`, `vendor-lucide`).
+- **Vite 5** — Bundler e servidor de desenvolvimento ultrarrápido com code splitting otimizado (chunks `vendor-react`, `vendor-framer`, `vendor-lucide`).
 - **Tailwind CSS 3** — Sistema de design utilitário de alta performance.
 - **Framer Motion 11** — Animações de transição, modais e scroll reativo de alto nível.
 - **Lucide React** — Biblioteca de ícones vetoriais modernos.
 - **Canvas API 2D** — Renderização do starfield, efeito Matrix, minijogos Arcade e partículas a 60fps.
-- **Web Audio API** — Efeitos sonoros sintéticos (notificações de conquista, arcade e ruídos de inseto).
+- **Web Audio API** — Efeitos sonoros sintéticos (notificações de conquista, som MIDI 1999 e efeitos arcade).
 
 ### Linguagens & Core
 - **TypeScript / JavaScript** — Tipagem estática rigorosa, interfaces genéricas e código escalável.
@@ -131,7 +149,6 @@ Inclui showcase de projetos reais em produção e estudos de engenharia de softw
 - **Redes & TCP/IP** — DNS, DHCP e serviços de rede.
 - **PWA & Service Worker** — Suporte offline para aplicações web.
 - **WordPress + Elementor Pro** — CMS para sites gerenciáveis.
-- **Desenvolvimento Assistido por IA (Lovable / Agentic)** — Aceleração de fluxos de produto.
 
 ---
 
@@ -148,7 +165,7 @@ sites/ricardo-vendramini/
 │   │   ├── HeroCanvas.jsx             # Fundo de partículas e efeito chuva Matrix
 │   │   ├── HeroSection.jsx            # Apresentação inicial do portfólio
 │   │   ├── Navbar.jsx                 # Cabeçalho com disjuntor de idioma & badge mobile
-│   │   ├── Retro1999Overlay.jsx       # Layout Web 1.0 de 1999 (800x600)
+│   │   ├── Retro1999Overlay.jsx       # Layout Web 1.0 de 1999 (Vendramini Informática)
 │   │   ├── TimeTravelAnimation.jsx    # Animação DeLorean DMC-12 De Volta para o Futuro
 │   │   ├── TerminalSection.jsx        # CLI interativo e jogo Arcade Space Invaders
 │   │   └── ...                        # Demais modais e seções de conteúdo
@@ -188,19 +205,18 @@ npm install
 ```bash
 npm run dev
 ```
-Isso inicia o Vite em **http://localhost:3003** (porta fixa definida no `vite.config.js`). No terminal, o Vite ainda exibe o endereço correto da sua rede (via `--host`) caso acesse de outro dispositivo. É a opção ideal durante o desenvolvimento: edite os arquivos em `src/` e o browser atualiza sozinho.
+Isso inicia o Vite em **http://localhost:3003** (porta fixa definida no `vite.config.js`).
 
 **4. Gerar a build de produção (para deploy):**
 ```bash
 npm run build
 ```
-Compila e minifica tudo em `dist/`, com **code splitting em chunks separados** (`vendor-react`, `vendor-framer`, `vendor-lucide`) para cache mais eficiente em produção.
+Compila e minifica tudo em `dist/`, com **code splitting em chunks separados** (`vendor-react`, `vendor-framer`, `vendor-lucide`).
 
 **5. Visualizar a build de produção localmente:**
 ```bash
 npm run preview
 ```
-Sobe um servidor estático servindo exatamente o que foi gerado em `dist/` (útil para validar a build antes do deploy).
 
 ---
 

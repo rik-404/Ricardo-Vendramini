@@ -572,7 +572,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       const maskedHistory = [...history, `${t('terminal.passwordPrompt').slice(1)} ${'*'.repeat(inputVal.trim().length)}`];
       setInputVal('');
 
-      if (cmd === 'admin admin' || cmd === 'admin' || cmd === 'root') {
+      if (cmd === 'admin' || cmd === 'root' || cmd === 'admin admin' || cmd === 'root admin' || cmd === 'admin123') {
         setAdminMode(false);
         setShowPostIt(false);
         setHistory([...maskedHistory, '', t('terminal.passOk')]);
@@ -613,7 +613,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
         return;
       } else {
-        setHistory([...maskedHistory, '', t('terminal.wrongPassword'), `> ${t('terminal.tryAgain')} 'root'.`]);
+        setHistory([...maskedHistory, '', t('terminal.wrongPassword'), `> ${t('terminal.tryAgain')} 'root admin'.`]);
         setAdminMode(false);
         setShowPostIt(false);
         return;
@@ -622,8 +622,8 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
     const newHistory = [...history, `ricardo@dev:~$ ${inputVal}`];
 
-    // Root command — easter egg with falling post-it
-    if (cmd === 'root') {
+    // 1. Root / Admin command
+    if (cmd === 'root' || cmd === 'admin' || cmd === 'root admin' || cmd === 'root-admin') {
       postItTriggeredRef.current = true;
       markRootUsed();
       setInputVal('');
@@ -639,97 +639,15 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       ]);
       setAdminMode(true);
 
-      // Post-it falls after a short delay
       setTimeout(() => {
         setShowPostIt(true);
       }, 800);
 
       return;
     }
-    if (cmd === 'clear') {
-      setHistory([]);
-      setInputVal('');
-      return;
-    }
 
-    if (cmd === 'clean' || cmd === 'limpar' || cmd === 'clean-site' || cmd === 'purge') {
-      unlockAchievement('clean');
-      newHistory.push(t('terminal.cleanActivated'));
-      setHistory(newHistory);
-      setInputVal('');
-      if (isModal && onClose) onClose();
-      if (onTriggerClean) onTriggerClean();
-      return;
-    }
-
-    if (cmd === 'restore' || cmd === 'restaurar') {
-      newHistory.push(t('terminal.restoreActivated'));
-      setHistory(newHistory);
-      setInputVal('');
-      if (onRestoreClean) onRestoreClean();
-      return;
-    }
-
-    if (cmd === 'matrix') {
-      unlockAchievement('matrix');
-      newHistory.push(t('terminal.matrixRunning'));
-      setHistory(newHistory);
-      setInputVal('');
-      if (onTriggerEasterEgg) onTriggerEasterEgg();
-      return;
-    }
-
-    if (cmd === 'konami') {
-      unlockAchievement('konami');
-      newHistory.push(t('terminal.konamiActivated'));
-      setHistory(newHistory);
-      setInputVal('');
-      if (onTriggerEasterEgg) onTriggerEasterEgg();
-      return;
-    }
-
-    if (cmd === 'tilt' || cmd === 'balancar' || cmd === 'terremoto') {
-      unlockAchievement('tilt');
-      newHistory.push(t('terminal.tiltActivated'));
-      setHistory(newHistory);
-      setInputVal('');
-
-      if (isModal && onClose) onClose();
-
-      document.body.classList.add('site-tilt-active');
-      setTimeout(() => {
-        document.body.classList.remove('site-tilt-active');
-      }, 3500);
-      return;
-    }
-
-    if (cmd === 'navinha' || cmd === 'play' || cmd === 'space' || cmd === 'invaders') {
-      unlockAchievement('navinha');
-      startGame();
-      setInputVal('');
-      return;
-    }
-
-    if (cmd === 'breakout' || cmd === 'bloquinhos' || cmd === 'tijolos' || cmd === 'arcanoid' || cmd === 'arkanoid') {
-      unlockAchievement('breakout');
-      newHistory.push(t('terminal.breakoutActivated'));
-      setHistory(newHistory);
-      setInputVal('');
-      if (onTriggerBreakout) onTriggerBreakout();
-      return;
-    }
-
-    if (cmd === 'starwars' || cmd === 'star-wars' || cmd === 'vader' || cmd === 'jedi' || cmd === 'forcemode') {
-      unlockAchievement('starwars');
-      newHistory.push(t('terminal.starwarsActivated'));
-      setHistory(newHistory);
-      setInputVal('');
-      if (onTriggerStarWars) onTriggerStarWars();
-      return;
-    }
-
-    if (cmd === 'timewalker' || cmd === 'time-walker' || cmd === 'viagem-no-tempo' || cmd === 'retro' || cmd === '90s') {
-      unlockAchievement('timewalker');
+    // 2. Timewalker command
+    if (cmd === 'timewalker' || cmd === 'timewewalker' || cmd === 'time-walker' || cmd === 'retro' || cmd === '1999') {
       newHistory.push(lang === 'en' ? '> ⏳ TIMEWALKER PROTOCOL ACTIVATED! Traveling back to 1999 Web Era...' : '> ⏳ PROTOCOLO TIMEWALKER ATIVADO! Viajando de volta para a Web Retrô de 1999...');
       setHistory(newHistory);
       setInputVal('');
@@ -742,144 +660,65 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       return;
     }
 
-    if (cmd === 'english' || cmd === 'ingles' || cmd === 'inglês' || cmd === 'en') {
-      unlockAchievement('polyglot');
-      if (changeLang) changeLang('en');
-      else toggleLang();
-      newHistory.push('> 🌐 Switched site language to English!');
-      setHistory(newHistory);
-      setInputVal('');
-      return;
-    }
-
-    if (cmd === 'portugues' || cmd === 'português' || cmd === 'portuguese' || cmd === 'pt') {
-      unlockAchievement('polyglot');
+    // 3. Portuguese language command
+    if (cmd === 'portuguese' || cmd === 'portugues' || cmd === 'português' || cmd === 'pt') {
       if (changeLang) changeLang('pt');
       else toggleLang();
-      newHistory.push('> 🌐 Idioma do site alterado para Português!');
+      newHistory.push('> 🇧🇷 Idioma alterado para Português!');
       setHistory(newHistory);
       setInputVal('');
       return;
     }
 
-    if (cmd === 'lang' || cmd === 'idioma' || cmd === 'language' || cmd === 'polyglot') {
-      unlockAchievement('polyglot');
-      toggleLang();
-      newHistory.push('> 🌐 Idioma alterado com sucesso / Language switched successfully!');
+    // 4. English language command
+    if (cmd === 'english' || cmd === 'ingles' || cmd === 'inglês' || cmd === 'en') {
+      if (changeLang) changeLang('en');
+      else toggleLang();
+      newHistory.push('> 🌐 Language switched to English!');
       setHistory(newHistory);
       setInputVal('');
       return;
     }
 
-    if (cmd === 'doctor' || cmd === 'dr') {
-      unlockAchievement('doctorwho');
-      newHistory.push('> Sistema: Procurando...');
-      setHistory(newHistory);
-      setInputVal('');
-
-      setTimeout(() => {
-        setHistory(prev => [...prev, '> Sistema: Processando...', '>', '> Doctor Who?']);
-      }, 1000);
-      return;
-    }
-
-    if (cmd === 'tardis' || cmd === 'tardis_box' || cmd === 'caixa_azul') {
-      unlockAchievement('tardis');
-      newHistory.push('> 🟦 ABERTURA DE PORTA QUÂNTICA...', '> TARDIS: A caixa azul que é maior por dentro foi ativada!');
-      setHistory(newHistory);
-      setInputVal('');
-      return;
-    }
-
+    // 5. Dark mode command
     if (cmd === 'dark' || cmd === 'escuro') {
       if (theme !== 'dark' && onToggleTheme) onToggleTheme();
-      newHistory.push('> 🌙 Tema escuro ativado!');
+      newHistory.push(lang === 'en' ? '> 🌙 Dark Mode activated!' : '> 🌙 Modo Escuro ativado!');
       setHistory(newHistory);
       setInputVal('');
       return;
     }
 
-    if (cmd === 'light' || cmd === 'claro') {
+    // 6. White/Light mode command
+    if (cmd === 'white' || cmd === 'light' || cmd === 'claro' || cmd === 'branco') {
       if (theme !== 'light' && onToggleTheme) onToggleTheme();
-      newHistory.push('> ☀️ Tema claro ativado!');
+      newHistory.push(lang === 'en' ? '> ☀️ White / Light Mode activated!' : '> ☀️ Modo Claro / White ativado!');
       setHistory(newHistory);
       setInputVal('');
       return;
     }
 
-    if (cmd === 'game' || cmd === 'games' || cmd === 'arcade') {
-      setHistory([...newHistory, ...terminalCommands.games]);
+    // 7. Clear command
+    if (cmd === 'clear' || cmd === 'limpar') {
+      setHistory([]);
       setInputVal('');
       return;
     }
 
-    if (cmd === 'reset' || cmd === 'achievements reset' || cmd === 'reset achievements') {
-      const ALL_OTHER = ['titulo', 'konami', 'matrix', 'navinha', 'root', 'tilt', 'breakout', 'starwars', 'clean', 'polyglot', 'timewalker', 'tardis', 'doctorwho'];
-      const allUnlocked = ALL_OTHER.every(id => achievements.has(id));
-      let resetMsg;
-      try {
-        if (allUnlocked) {
-          localStorage.setItem('ricardodev_achievements', JSON.stringify(['sacrificio']));
-          setAchievements(new Set(['sacrificio']));
-          window.dispatchEvent(new CustomEvent('ricardodev-achievement-unlocked', { detail: { id: 'sacrificio' } }));
-          resetMsg = ['', '💀 SACRIFÍCIO REALIZADO!', '────────────────────────────────────────────────', '> Todas as conquistas foram sacrificadas...', '> Mas uma permanece para sempre.', '> Apenas quem completa tudo pode fazer esse sacrifício.', ''];
-        } else {
-          localStorage.removeItem('ricardodev_achievements');
-          setAchievements(new Set());
-          window.dispatchEvent(new CustomEvent('ricardodev-achievement-unlocked'));
-          resetMsg = ['', t('terminal.achievementsReset'), '────────────────────────────────────────────────', t('terminal.achievementsResetDesc1'), t('terminal.achievementsResetDesc2'), ''];
-        }
-        localStorage.removeItem('ricardodev_root_used');
-        localStorage.removeItem('ricardodev_postit_shown');
-      } catch (e) {}
-      setHistory([...newHistory, ...resetMsg]);
-      setInputVal('');
-      return;
-    }
-
-    if (cmd === 'achievements' || cmd === 'conquistas' || cmd === 'secrets') {
-      setHistory([
-        ...newHistory,
-        '',
-        t('terminal.achievementsGallery'),
-        t('terminal.achievementsGalleryDesc1'),
-        t('terminal.achievementsGalleryDesc2'),
-        ''
-      ]);
-      setInputVal('');
-      return;
-    }
-
-    if (cmd === 'version' || cmd === 'versao' || cmd === 'versão') {
-      setHistory([
-        ...newHistory,
-        '',
-        'RICARDO.DEV Terminal',
-        'Versão: 1.0.0.1',
-        'Build: ' + new Date().toISOString().split('T')[0],
-        'Plataforma: Web (React + Vite)',
-        ''
-      ]);
-      setInputVal('');
-      return;
-    }
-
-    if (cmd === 'help') {
+    // 8. Help command
+    if (cmd === 'help' || cmd === 'ajuda') {
       setHistory([...newHistory, ...(lang === 'en' ? terminalCommandsEn.help : terminalCommands.help)]);
-    } else if (cmd === 'sobre') {
-      setHistory([...newHistory, t('terminal.aboutResp')]);
-    } else if (cmd === 'skills') {
-      setHistory([...newHistory, t('terminal.skillsResp')]);
-    } else if (cmd === 'projetos') {
-      setHistory([...newHistory, t('terminal.projectsResp')]);
-    } else if (cmd === 'livros') {
-      setHistory([...newHistory, t('terminal.booksResp')]);
-    } else if (cmd === 'contato') {
-      setHistory([...newHistory, t('terminal.contactResp')]);
-    } else {
-      setHistory([...newHistory, t('terminal.cmdUnknown').replace('{cmd}', cmd)]);
+      setInputVal('');
+      return;
     }
 
+    // Unrecognized command
+    newHistory.push(
+      lang === 'en'
+        ? `Command not recognized: '${cmd}'. Type 'help' to see available commands.`
+        : `Comando não reconhecido: '${cmd}'. Digite 'help' para ver os comandos disponíveis.`
+    );
+    setHistory(newHistory);
     setInputVal('');
   };
 
@@ -1049,29 +888,6 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
             </form>
           )}
 
-        </div>
-
-        {/* Button to view all achievements / secrets (Locked & Unlocked) */}
-        <div className="mt-8 flex flex-col items-center justify-center">
-          <motion.button
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-            onClick={() => {
-              if (onOpenAchievements) onOpenAchievements();
-              setLocalAchievementsOpen(true);
-            }}
-            className="achv-cta-btn group relative inline-flex items-center gap-3 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-[#0c2e17] via-[#071f11] to-[#0c2e17] border border-[#00ff88]/40 hover:border-[#00ff88] text-white font-bold text-sm shadow-[0_0_25px_rgba(0,255,136,0.15)] hover:shadow-[0_0_35px_rgba(0,255,136,0.35)] transition-all duration-300 overflow-hidden cursor-pointer"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-[#00ff88]/15 via-transparent to-[#00f2fe]/15 opacity-0 group-hover:opacity-100 transition-opacity" />
-            <Trophy className="w-5 h-5 text-[#00ff88] group-hover:rotate-12 transition-transform duration-300" />
-            <span className="relative z-10">{t('terminal.viewAchievements')}</span>
-            <span className="relative z-10 ml-1 px-2.5 py-0.5 rounded-full bg-[#00ff88]/20 text-[#00ff88] text-xs font-mono border border-[#00ff88]/40">
-              {achievements.size}/{Object.keys(ACHIEVEMENTS_META).length}
-            </span>
-          </motion.button>
-          <p className="text-xs font-mono text-slate-400 mt-2.5">
-            Digite <code className="text-[#00ff88] bg-black/40 px-1.5 py-0.5 rounded border border-[#00ff88]/30">help</code> {t('terminal.helpHint')}
-          </p>
         </div>
 
       </div>

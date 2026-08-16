@@ -338,10 +338,7 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
                 <div className="dt-panel relative z-10 p-5 rounded-3xl bg-gradient-to-r from-[#0c2417] via-[#040f09] to-[#0c2417] border-2 border-[#00ff88] shadow-[0_0_50px_rgba(0,255,136,0.6)] flex items-center gap-3">
                   <Car className="w-12 h-12 sm:w-16 sm:h-16 text-[#00ff88] drop-shadow-[0_0_15px_#00ff88]" />
                   <div className="flex flex-col items-start">
-                    <span className="text-base sm:text-xl font-extrabold text-white tracking-widest">
-                      DELOREAN <span className="text-[#00ff88]">DMC-12</span>
-                    </span>
-                    <span className={`text-[10px] font-mono ${speed === 88 ? 'text-[#00ff88] drop-shadow-[0_0_8px_#00ff88] animate-pulse' : 'text-cyan-400'}`}>
+                    <span className={`text-[10px] sm:text-xs font-mono ${speed === 88 ? 'text-[#00ff88] drop-shadow-[0_0_8px_#00ff88] animate-pulse' : 'text-cyan-400'}`}>
                       {speed === 88 ? <span className="flex items-center gap-1"><Zap className="w-3 h-3" /> 1.21 GIGAWATTS ALCANÇADOS!</span> : <span className="flex items-center gap-1"><Flame className="w-3 h-3" /> ACELERANDO PARA 88 MPH...</span>}
                     </span>
                     <div className="mt-1.5 w-full h-1.5 rounded-full bg-black/70 overflow-hidden border border-white/10">

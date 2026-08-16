@@ -673,69 +673,10 @@ html.theme-light .chpw-theme-dark [class*="border-white/"] {
   border-color: rgba(255, 255, 255, 0.12) !important;
 }
 
-/* ── Overlay de Viagem no Tempo (Time Travel) → tema claro ──
-   O overlay troca o chpw-theme-dark por timewalk-scope: em
-   Light Mode a estética neon vira um HUD com fundo branco. */
-html.theme-light .timewalk-scope {
-  background-color: #f4faf7 !important;
-  background-image: radial-gradient(circle at 50% 45%, rgba(16, 185, 129, 0.1), transparent 62%) !important;
-  color: #0f172a !important;
-}
-html.theme-light .timewalk-scope [class*="text-[#00ff88]"] {
-  color: #047857 !important;
-}
-html.theme-light .timewalk-scope [class*="text-cyan-400"] {
-  color: #0e7490 !important;
-}
-html.theme-light .timewalk-scope [class*="text-yellow-400"] {
-  color: #b45309 !important;
-}
-html.theme-light .timewalk-scope [class*="text-red-400"] {
-  color: #dc2626 !important;
-}
-html.theme-light .timewalk-scope [class*="border-[#00ff88]"] {
-  border-color: #059669 !important;
-}
-html.theme-light .timewalk-scope [class*="bg-[#05150a]"],
-html.theme-light .timewalk-scope [class*="bg-[#09120c]"] {
-  background-color: rgba(255, 255, 255, 0.85) !important;
-}
-html.theme-light .timewalk-scope [class*="bg-red-950"] {
-  background-color: #fee2e2 !important;
-}
-html.theme-light .timewalk-scope [class*="bg-yellow-950"] {
-  background-color: #fef3c7 !important;
-}
-html.theme-light .timewalk-scope [class*="bg-cyan-950"] {
-  background-color: #cffafe !important;
-}
-html.theme-light .timewalk-scope [class*="bg-black/90"] {
-  background-color: rgba(255, 255, 255, 0.92) !important;
-}
-html.theme-light .timewalk-scope [class*="bg-black/80"] {
-  background-color: rgba(255, 255, 255, 0.85) !important;
-}
-html.theme-light .timewalk-scope [class*="bg-black/70"] {
-  background-color: rgba(255, 255, 255, 0.78) !important;
-}
-/* Grade de estradas cyberpunk → linhas escuras sobre branco */
-html.theme-light .timewalk-scope .tw-grid {
-  background-image:
-    linear-gradient(to right, rgba(13, 148, 136, 0.3) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(8, 145, 178, 0.28) 1px, transparent 1px) !important;
-}
-html.theme-light .timewalk-scope .tw-streak {
-  background: linear-gradient(to left, #0d9488, transparent) !important;
-  box-shadow: 0 0 8px rgba(13, 148, 136, 0.55) !important;
-}
-html.theme-light .timewalk-scope .tw-vortex {
-  background: conic-gradient(from 0deg, rgba(5, 150, 105, 0) 0deg, rgba(8, 145, 178, 0.35) 40deg, rgba(5, 150, 105, 0) 80deg, rgba(5, 150, 105, 0.25) 160deg, rgba(8, 145, 178, 0.35) 220deg, rgba(5, 150, 105, 0) 280deg) !important;
-}
-html.theme-light .timewalk-scope .tw-ring {
-  background: conic-gradient(from 0deg, transparent 0deg, #059669 30deg, transparent 70deg, transparent 180deg, #0891b2 210deg, transparent 250deg) !important;
-}
-html.theme-light .timewalk-scope [class*="shadow-[0_0_20px_rgba(0,255,136,0.4)]"] {
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.25) !important;
+/* ── Overlay de Viagem no Tempo (Time Travel) ──
+   Garante visual futurista neon de alto contraste e 100% legível em qualquer tema */
+.timewalk-scope {
+  color-scheme: dark;
 }
 
 /* ── Overlay BSOD / Falha Crítica → adapta ao tema claro ── */
