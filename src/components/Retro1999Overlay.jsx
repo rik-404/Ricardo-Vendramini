@@ -61,10 +61,10 @@ export default function Retro1999Overlay({ isOpen, onClose }) {
   const [guestName, setGuestName] = useState('');
   const [guestMsg, setGuestMsg] = useState('');
   const [guestbook, setGuestbook] = useState([
-    { name: 'Dante', text: 'Se você está lendo isso, eu já estive aqui antes de você.', date: '14/08/1999' },
-    { name: 'João (Dev)', text: 'Muito legal o seu site! Lembrou os velhos tempos da internet discada e do Web 1.0!', date: '08/08/1999' },
-    { name: 'Ana', text: 'Como você fez esse visual de 1999? Que nostálgico!', date: '09/08/1999' },
-    { name: 'Ricardo', text: 'Eu não lembro de ter colocado isso aqui... Pelo visto a máquina do tempo funcionou.', date: '14/08/1999' }
+    { name: 'Ricardo', text: 'Eu não lembro de ter colocado isso aqui... Pelo visto a máquina do tempo funcionou.', date: '14/08/1999' },
+    { name: 'Dante Timewalker', text: 'Se você encontrou esta página, o protocolo quântico foi ativado. Abra o MS-DOS e digite: TYPE TIME_LOG.LOG', date: '14/08/1999 23:59' },
+    { name: 'João (Dev)', text: 'Muito legal o seu site! Lembrou os velhos tempos da internet discada!', date: '08/08/1999' },
+    { name: 'Ana', text: 'Como você fez esse visual de 1999? Que nostálgico!', date: '09/08/1999' }
   ]);
 
   // Audio MIDI player state
@@ -190,24 +190,42 @@ export default function Retro1999Overlay({ isOpen, onClose }) {
         'CERTIFICADOS   <DIR>        14-08-1999  10:00',
         'TRAJETORIA     <DIR>        14-08-1999  10:00',
         'LIVROS         <DIR>        14-08-1999  10:00',
-        'CONTATO    TXT          256  14-08-1999  10:00',
+        'TIME_LOG LOG         512    14-08-1999  23:59',
+        'MISTERIO TXT        1024    14-08-1999  23:59',
+        'CONTATO  TXT         256    14-08-1999  10:00',
         ''
       );
     } else if (cmd === 'cls' || cmd === 'clear') {
       setCliHistory(['C:\\RICARDO>']);
       setCliInput('');
       return;
+    } else if (cmd === 'type time_log.log' || cmd === 'type time_log' || cmd === 'time_log' || cmd === 'type misterio.txt') {
+      newHistory.push(
+        '================================================================',
+        ' 🌀 REGISTRO TEMPORAL MULTIVERSO — ANOMALIA DETECTADA (2026)',
+        '================================================================',
+        ' "Se voce encontrou esta mensagem, a homepage de 1999 foi alterada.',
+        '  Dante Timewalker conectou a fenda temporal do ano 2026 com 1999."',
+        '',
+        ' PISTAS PARA CONCLUIR A JORNADA:',
+        '  1. Guestbook: Ricardo deixou uma mensagem estranha sobre a maquina.',
+        '  2. ICQ 99b: Mensagem criptografada no UIN #19998800.',
+        '  3. Links Legais: A anomalia portal [ vendramini.dev ].',
+        '  4. Clique no botao [ ⏳ RETORNAR A 2026 ] no topo para voltar!',
+        '================================================================',
+        ''
+      );
     } else if (cmd === 'help') {
       newHistory.push(
         'Comandos disponiveis:',
-        '  DIR      - Lista arquivos e diretorios',
-        '  CLS      - Limpa a tela',
-        '  HELP     - Mostra esta lista de comandos',
-        '  VER      - Versao MS-DOS',
-        '  ABOUT    - Sobre Ricardo Vendramini',
-        '  EXIT     - Volta para o site principal',
-        '  TIMETRAVEL - Ativa sequencia de salto no tempo',
-        '  CLEAR    - Limpa a tela da janela MS-DOS',
+        '  DIR                  - Lista arquivos e diretorios',
+        '  TYPE TIME_LOG.LOG    - Le o registro temporal misterioso',
+        '  CLS                  - Limpa a tela',
+        '  HELP                 - Mostra esta lista de comandos',
+        '  VER                  - Versao MS-DOS',
+        '  ABOUT                - Sobre Ricardo Vendramini',
+        '  EXIT                 - Volta para o site principal',
+        '  TIMETRAVEL           - Ativa sequencia de salto no tempo',
         ''
       );
     } else if (cmd === 'ver') {
@@ -355,30 +373,7 @@ export default function Retro1999Overlay({ isOpen, onClose }) {
         }
       `}</style>
 
-      {/* Pop-up de alerta Horrível do Windows 95/98 */}
-      {!alertDismissed && (
-        <div className="fixed inset-0 z-[1000000] flex items-center justify-center bg-black/50 p-4">
-          <div className="w-full max-w-sm aol-win-box p-1 shadow-2xl">
-            <div className="aol-[#000080]-header text-white font-bold px-2 py-1 flex items-center justify-between text-xs font-sans">
-              <span>{getText('retro1999.notice.header', '⚠️ VENDRAMINI INFORMÁTICA — CONEXÃO DISCADA ATIVA')}</span>
-              <button onClick={() => setAlertDismissed(true)} className="px-1.5 text-xs bg-[#c0c0c0] text-black font-bold border border-white font-sans">X</button>
-            </div>
-            <div className="p-4 flex items-start gap-3 bg-[#c0c0c0]">
-              <AlertTriangle className="w-8 h-8 text-yellow-500 shrink-0" />
-              <div className="text-xs font-verdana text-black leading-relaxed">
-                <p className="font-bold mb-1 font-serif text-sm">{getText('retro1999.notice.title', "YOU'VE GOT MAIL! ✉️")}</p>
-                <p className="font-verdana">{getText('retro1999.notice.welcomePrefix', 'Bem-vindo à réplica retrô da')} <b className="font-serif">{getText('retro1999.notice.welcomeBold', 'Vendramini Informática (Web 1.0 — 1999)')}</b>!</p>
-                <p className="mt-2 text-slate-800 font-mono text-[11px]">{getText('retro1999.notice.sub', 'Conectado a 56kbps com som MIDI ativo!')}</p>
-              </div>
-            </div>
-            <div className="p-2 flex justify-center bg-[#c0c0c0] border-t border-slate-400">
-              <button onClick={() => setAlertDismissed(true)} className="aol-btn px-6 py-1 text-xs font-sans">
-                {getText('retro1999.notice.enterBtn', '[ ENTRAR NO SITE ]')}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+
 
       {/* ICQ 99b Popup Modal */}
       {imWindowOpen && (
@@ -487,7 +482,8 @@ export default function Retro1999Overlay({ isOpen, onClose }) {
                   { id: 'livros', label: 'Livros & Obras', icon: '📚' },
                   { id: 'contato', label: 'Contato Direto', icon: '📞' },
                   { id: 'msdos', label: 'MS-DOS Prompt', icon: '💾' },
-                  { id: 'mycomputer', label: 'Meu Computador', icon: '🖥️' }
+                  { id: 'mycomputer', label: 'Meu Computador', icon: '🖥️' },
+                  { id: 'coollinks', label: 'Links Legais', icon: '🔗' }
                 ].map((ch) => (
                   <button
                     key={ch.id}
@@ -974,6 +970,85 @@ export default function Retro1999Overlay({ isOpen, onClose }) {
                           className="aol-btn px-4 py-1 text-xs text-blue-950 font-bold font-sans cursor-pointer"
                         >
                           [ OK / Testar Hardware ]
+                        </button>
+                      </div>
+
+                    </div>
+                  </div>
+                )}
+
+                {/* ABA 10: LINKS LEGAIS (COOL LINKS & FAVORITE SITES 1999) */}
+                {activeTab === 'coollinks' && (
+                  <div className="space-y-3 text-xs font-sans">
+                    <h3 className="font-bold text-sm text-[#000080] border-b border-black pb-1 font-serif underline flex items-center gap-1.5">
+                      <span>🔗</span>
+                      <span>Links Legais — Meus Sites Favoritos da Web (1999)</span>
+                    </h3>
+
+                    <div className="aol-win-box p-3 bg-[#fdfdfd] space-y-3 border-2 border-slate-600">
+                      
+                      <div className="bg-[#000080] text-white p-1.5 font-mono font-bold text-xs flex justify-between items-center">
+                        <span>★ MEUS SITES FAVORITOS DA INTERNET ★</span>
+                        <span className="bg-yellow-400 text-black px-1 text-[9px]">HOT LINKS '99</span>
+                      </div>
+
+                      {/* Favorites List */}
+                      <div className="space-y-2 font-mono text-[11px] bg-white aol-win-inset p-3 border border-slate-400">
+                        {[
+                          { name: '★ Yahoo! Brasil', desc: 'O maior portal de busca e categorias da Web!', url: 'https://br.yahoo.com' },
+                          { name: '★ AltaVista Search', desc: 'O buscador mais rápido da Internet discada!', url: 'https://www.altavista.com' },
+                          { name: '★ GeoCities', desc: 'Hospede sua homepage pessoal grátis com 5MB!', url: 'https://www.geocities.com' },
+                          { name: '★ ICQ Central', desc: 'Baixe o ICQ 99b e converse com seus amigos online!', url: 'https://www.icq.com' },
+                          { name: '★ Winamp', desc: 'It really whips the llama\'s ass! Player de MP3!', url: 'https://www.winamp.com' },
+                          { name: '★ Download.com', desc: 'Baixe utilitários, antivirus e programas em 56k!', url: 'https://www.download.com' },
+                          { name: '★ Netscape Communicator', desc: 'O melhor navegador Web com cliente de e-mail!', url: 'https://www.netscape.com' },
+                        ].map((site, idx) => (
+                          <div key={idx} className="flex flex-col border-b border-slate-200 pb-1.5">
+                            <a 
+                              href={site.url} 
+                              target="_blank" 
+                              rel="noreferrer" 
+                              className="font-bold hover:text-purple-800 text-[12px]" 
+                              style={{ color: '#0000ee', textDecoration: 'underline' }}
+                            >
+                              {site.name}
+                            </a>
+                            <span className="text-slate-700 text-[10px] font-verdana">{site.desc}</span>
+                          </div>
+                        ))}
+
+                        {/* 🌀 TEMPORAL ANOMALY LINK: Vendramini.DEV - 2026 */}
+                        <div className="aol-win-box p-2 bg-black text-[#00ff00] border-2 border-green-500 font-mono text-[11px] space-y-1 my-2">
+                          <div className="flex items-center justify-between">
+                            <span className="font-black text-yellow-300 flex items-center gap-1">
+                              <span className="retro-spin">🌀</span>
+                              <span>★ Vendramini.DEV — 2026</span>
+                            </span>
+                            <span className="bg-red-600 text-white px-1 text-[9px] font-bold retro-blink">ANOMALIA TEMPORAL</span>
+                          </div>
+                          <p className="text-[10px] text-green-300 font-verdana">
+                            Portal de Engenharia de Software Full Stack & Arquitetura de Sistemas do Futuro.
+                          </p>
+                          <button
+                            onClick={() => alert("⚠️ ANOMALIA TEMPORAL DETECTADA!\n\nEste site ainda não existe no ano de 1999!\n\nOrigem detectada: Ano de 2026.\nRetorne a 2026 usando o botão no topo da janela para acessar este portal.")}
+                            className="aol-btn py-0.5 px-2 text-[10px] bg-green-900 hover:bg-green-800 text-yellow-300 font-bold border border-green-400 cursor-pointer"
+                            title="This website does not exist yet in 1999."
+                          >
+                            [ ⏳ Tentar Acessar Site do Futuro (2026) ]
+                          </button>
+                        </div>
+
+                      </div>
+
+                      {/* Add my page button */}
+                      <div className="p-2 bg-[#ffffea] aol-win-box text-center border border-yellow-600 space-y-1">
+                        <p className="font-bold text-xs text-blue-900 font-serif">🤝 Troca de Banners & Links</p>
+                        <p className="text-[10px] text-slate-700 font-verdana">Quer trocar links ou colocar o meu banner 88x31 na sua homepage?</p>
+                        <button 
+                          onClick={() => alert("🤝 Solicitação de Troca de Banner enviada com sucesso! Envie o código HTML do seu banner para o meu e-mail!")}
+                          className="aol-btn px-4 py-1 text-xs text-blue-950 font-bold font-sans cursor-pointer"
+                        >
+                          [ 🤝 Adicione minha página aos seus Links! ]
                         </button>
                       </div>
 

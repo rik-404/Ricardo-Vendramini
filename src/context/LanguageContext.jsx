@@ -458,6 +458,7 @@ export const translations = {
           contato: 'Mail / Contato',
           msdos: 'MS-DOS Prompt',
           mycomputer: 'Meu Computador',
+          coollinks: 'Links Legais',
         },
       },
     },
