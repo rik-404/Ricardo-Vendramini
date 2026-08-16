@@ -426,8 +426,8 @@ export const translations = {
       },
       retro1999: {
         returnBtn: '[ ⏳ RETORNAR A 2026 ]',
-        headline1999: 'Seja Bem-vindo à minha Homepage Pessoal na Web! 🌐✨',
-        bio1999: 'Olá! Eu sou o Ricardo! 👋 Bem-vindo ao meu cantinho na Internet! Sou apaixonado por computadores e adoro programação, redes e tecnologia desde criança. Aqui você vai encontrar meus projetos de código, programas, certificados e coisas legais da Web. Não se esqueça de assinar o meu Guestbook antes de ir embora!',
+        headline1999: 'Bem-vindo à minha homepage pessoal! 🌐✨',
+        bio1999: 'Olá! Eu sou o Ricardo! 👋 Bem-vindo à minha homepage pessoal! Eu adoro computadores, programação, a Internet e tecnologia legal. Divirta-se explorando a minha página e não se esqueça de assinar o meu Guestbook!',
         notice: {
           header: '⚠️ VENDRAMINI INFORMÁTICA — CONEXÃO DISCADA ATIVA',
           title: "YOU'VE GOT MAIL! ✉️",

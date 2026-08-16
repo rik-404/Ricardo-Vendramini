@@ -63,8 +63,8 @@ export default function Retro1999Overlay({ isOpen, onClose }) {
   const [guestbook, setGuestbook] = useState([
     { name: 'Ricardo', text: 'Eu não lembro de ter colocado isso aqui... Pelo visto a máquina do tempo funcionou.', date: '14/08/1999' },
     { name: 'Dante Timewalker', text: 'Se você encontrou esta página, o protocolo quântico foi ativado. Abra o MS-DOS e digite: TYPE TIME_LOG.LOG', date: '14/08/1999 23:59' },
-    { name: 'João (Dev)', text: 'Muito legal o seu site! Lembrou os velhos tempos da internet discada!', date: '08/08/1999' },
-    { name: 'Ana', text: 'Como você fez esse visual de 1999? Que nostálgico!', date: '09/08/1999' }
+    { name: 'Dante (2026)', text: 'Se você está lendo isto em 1999, o protocolo de dobra temporal funcionou. Não feche a janela até reconectar o sistema.', date: '15/08/2026 00:01' },
+    { name: 'João (Dev)', text: 'Muito legal o seu site! Lembrou os velhos tempos da internet discada!', date: '08/08/1999' }
   ]);
 
   // Audio MIDI player state
@@ -201,18 +201,14 @@ export default function Retro1999Overlay({ isOpen, onClose }) {
       return;
     } else if (cmd === 'type time_log.log' || cmd === 'type time_log' || cmd === 'time_log' || cmd === 'type misterio.txt') {
       newHistory.push(
-        '================================================================',
-        ' 🌀 REGISTRO TEMPORAL MULTIVERSO — ANOMALIA DETECTADA (2026)',
-        '================================================================',
-        ' "Se voce encontrou esta mensagem, a homepage de 1999 foi alterada.',
-        '  Dante Timewalker conectou a fenda temporal do ano 2026 com 1999."',
         '',
-        ' PISTAS PARA CONCLUIR A JORNADA:',
-        '  1. Guestbook: Ricardo deixou uma mensagem estranha sobre a maquina.',
-        '  2. ICQ 99b: Mensagem criptografada no UIN #19998800.',
-        '  3. Links Legais: A anomalia portal [ vendramini.dev ].',
-        '  4. Clique no botao [ ⏳ RETORNAR A 2026 ] no topo para voltar!',
-        '================================================================',
+        '[23:41:02] SISTEMA ONLINE',
+        '[23:42:17] ELO TEMPORAL DETECTADO',
+        '[23:48:55] USUÁRIO DESCONHECIDO CONECTADO',
+        '[23:55:03] ANO DESTINO: 2026',
+        '[23:59:59] ALERTA...',
+        '',
+        'ARQUIVO CORROMPIDO.',
         ''
       );
     } else if (cmd === 'help') {
@@ -960,6 +956,10 @@ export default function Retro1999Overlay({ isOpen, onClose }) {
                             <span className="font-bold">💾 Drive de Disquete:</span>
                             <span className="text-[#000080] font-black">1.44 MB 3.5" Floppy Disk Drive</span>
                           </div>
+                          <div className="flex justify-between border-b border-dashed border-slate-300 pb-0.5 bg-yellow-100 p-0.5 border border-amber-400">
+                            <span className="font-bold text-amber-900">🧠 Co-Processador IA:</span>
+                            <span className="text-red-700 font-mono font-bold text-[10px]">Neural Engine LLM v4.0 (Anomalia Detectada)</span>
+                          </div>
                         </div>
                       </div>
 
@@ -989,7 +989,7 @@ export default function Retro1999Overlay({ isOpen, onClose }) {
                       
                       <div className="bg-[#000080] text-white p-1.5 font-mono font-bold text-xs flex justify-between items-center">
                         <span>★ MEUS SITES FAVORITOS DA INTERNET ★</span>
-                        <span className="bg-yellow-400 text-black px-1 text-[9px]">HOT LINKS '99</span>
+                        <span className="bg-yellow-400 text-black px-1 text-[9px]">LINKS QUENTES '99</span>
                       </div>
 
                       {/* Favorites List */}
@@ -1032,7 +1032,7 @@ export default function Retro1999Overlay({ isOpen, onClose }) {
                           <button
                             onClick={() => alert("⚠️ ANOMALIA TEMPORAL DETECTADA!\n\nEste site ainda não existe no ano de 1999!\n\nOrigem detectada: Ano de 2026.\nRetorne a 2026 usando o botão no topo da janela para acessar este portal.")}
                             className="aol-btn py-0.5 px-2 text-[10px] bg-green-900 hover:bg-green-800 text-yellow-300 font-bold border border-green-400 cursor-pointer"
-                            title="This website does not exist yet in 1999."
+                            title="Este site ainda não existe no ano de 1999."
                           >
                             [ ⏳ Tentar Acessar Site do Futuro (2026) ]
                           </button>

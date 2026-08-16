@@ -67,9 +67,18 @@ Este projeto é mais do que um portfólio profissional tradicional: é uma **exp
 - **Viagem no Tempo Cinematográfica (`timewalker`)**: Animação em estilo *De Volta para o Futuro* com o DeLorean DMC-12 acelerando a **88 MPH**, velocímetro digital, relógio temporal e rastro de fogo nas rodas (*Fire Trails*).
 - **Interface Web 1.0 da Vendramini Informática**:
   - Réplica estilizada da web de 1999 com **branding exclusivo da Vendramini Informática** e **Vendramini.DEV**.
-  - **Tipografia Fiel de 1999 (Web-Safe Fonts)**: Hierarquia estrita baseada nas fontes clássicas da época — **Times New Roman** (títulos), **Arial** (menus e botões), **Verdana** (textos de corpo, bio e guestbook) e **Courier New** (contador 56k, terminal MS-DOS e badges 88x31).
-  - **🕵️ Trilha de Mistério & ARG (A Fenda Temporal de 1999)**: Experiência narrativa investigativa interconectada entre a mensagem no *Guestbook*, as conversas no *ICQ 99b*, o comando `TYPE TIME_LOG.LOG` no *MS-DOS Prompt* e a anomalia `[ vendramini.dev ]` nos *Links Legais*.
-  - **🖥️ Área "Meu Computador" (Propriedades do Sistema Windows 98)**: Janela de especificações de hardware vintage no menu canal (Pentium II 350 MHz, 64 MB RAM, HD 6.4 GB, IE 5.0, Modem 56K V.90, Trident 3D 4MB e CD-ROM 32X).
+  - **🕵️ 5 Camadas de Experiência Narrativa & ARG (Fenda Temporal 1999 → 2026)**:
+    1. *Camada 1 — Nostalgia*: Estética fiel Web 1.0, sons dial-up/MIDI e fontes da época.
+    2. *Camada 2 — Estranheza*: Presença discreta do TLD `[ vendramini.dev ]`.
+    3. *Camada 3 — Investigação*: Recado misterioso de Dante Timewalker no Guestbook.
+    4. *Camada 4 — Descoberta*: Comando `TYPE TIME_LOG.LOG` no MS-DOS com arquivo corrompido (`FILE CORRUPTED`).
+    5. *Camada 5 — Máquina do Tempo*: Conexão temporal multiverso entre a homepage de 1999 e o portfólio de 2026.
+  - **🌀 4 Anomalias Temporais Sutis**:
+    1. `[ vendramini.dev ]`: TLD inexistente em 1999.
+    2. Referência ao ano de **2026** nos links.
+    3. Tecnologia impossível no *Meu Computador* (`🧠 Co-Processador IA: Neural Engine LLM v4.0`).
+    4. Mensagem impossível no Guestbook datada de `15/08/2026`.
+  - **🇧🇷 100% Português (PT-BR)**: Todos os rótulos, logs do MS-DOS (`ARQUIVO CORROMPIDO`), tooltips, badges, menu de canais e mensagens no Guestbook em português fluido.
   - **Menu Lateral por Canais (Channels Sidebar)**: Navegação limpa por 9 áreas (Início, Projetos & Dev, Skills & Tech, Certificados, Trajetória TI, Livros & Obras, Contato Direto, MS-DOS Prompt, Meu Computador e Links Legais).
   - **Rodapé de Status Bar**: Status de protocolo TCP/IP, conexão discada ativa 56.0 Kbps e sessão interativa.
   - **Suporte Multilíngue (i18n)**: Integrado diretamente ao `LanguageContext` (Português 🇧🇷 e Inglês 🇺🇸).
