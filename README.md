@@ -68,17 +68,16 @@ Este projeto é mais do que um portfólio profissional tradicional: é uma **exp
 - **Interface Web 1.0 da Vendramini Informática**:
   - Réplica estilizada da web de 1999 com **branding exclusivo da Vendramini Informática** e **Vendramini.DEV**.
   - **Tipografia Fiel de 1999 (Web-Safe Fonts)**: Hierarquia estrita baseada nas fontes clássicas da época — **Times New Roman** (títulos), **Arial** (menus e botões), **Verdana** (textos de corpo, bio e guestbook) e **Courier New** (contador 56k, terminal MS-DOS e badges 88x31).
-  - **9 Elementos Retrô & GIFs Animados (Web 1.0)**:
-    1. 🚧 *UNDER CONSTRUCTION* (Placa amarela listrada com cones e animação).
-    2. ✉️ *E-MAIL ME NOW!* (Envelope piscando em neon).
-    3. 🔥 *NEW!* e 🌶️ *HOT!* (Tags piscantes com efeito retro-blink).
-    4. 🌟 *Estrela Girando* (Animação de rotação contínua).
-    5. 🖥️ *Computador CRT Animado* (Indicador de linha discada).
-    6. 🌐 *Best viewed in Internet Explorer 5.0* (Selo 88x31).
-    7. 💻 *Optimized for 800x600 — 256 Colors* (Selo de resolução).
-    8. 🚩 *WELCOME TO MY HOMEPAGE!* (Bandeirinha ondulante em gradiente).
-    9. 🌍 *Planeta Terra Girando* (Globo terrestre em rotação).
-  - **Pop-up de Boas-Vindas ("You've Got Mail! ✉️")**: Alerta com informações de conexão discada a 56kbps e áudio sintetizado em som MIDI 1999.
+  - **8 Imperfeições Autênticas da Web 1.0**:
+    1. ❌ *IMAGE NOT FOUND (Erro 404)*: Caixa com ícone de imagem quebrada (`[ foto_encontro_devs99.gif ]`).
+    2. 🖼️ *Simulação 56k de Imagem Lenta*: Barra de progresso de download em tempo real (`Baixando 56Kbps... 78%`).
+    3. ❌ *Botão de Download Quebrado*: `[ Baixar Netscape 4.7.exe ]` que dispara um alerta retro de Erro 404.
+    4. 🔗 *Links Azuis Sublinhados Clássicos*: Links no estilo `#0000ee` e `#551a8b` visitados no WebRing 1999.
+    5. 🚧 *Seção Em Construção*: Aviso rústico com bordas listradas amarelas e cones.
+    6. 📄 *Corte de Texto Rústico*: Simulação de estouro de texto do Netscape Navigator 4.0.
+    7. 📐 *Tabelas & Banners Assimétricos*: Larguras ímpares de colunas (`cellspacing="3"`) e desalinhamento de 2–3px.
+    8. ⏳ *Anomalia Temporal*: Badge verde em matriz `[ vendramini.dev ]`.
+  - **🖥️ Área "Meu Computador" (Propriedades do Sistema Windows 98)**: Janela de especificações de hardware vintage no menu canal (Pentium II 350 MHz, 64 MB RAM, HD 6.4 GB, IE 5.0, Modem 56K V.90, Trident 3D 4MB e CD-ROM 32X).
   - **Menu Lateral por Canais (Channels Sidebar)**: Navegação limpa por 8 áreas (Welcome, Projetos & Dev, Skills & Tech, Certificados, Trajetória TI, Livros & Obras, Contato Direto e MS-DOS Prompt).
   - **Rodapé de Status Bar**: Status de protocolo TCP/IP, conexão discada ativa 56.0 Kbps e sessão interativa.
   - **Suporte Multilíngue (i18n)**: Integrado diretamente ao `LanguageContext` (Português 🇧🇷 e Inglês 🇺🇸).

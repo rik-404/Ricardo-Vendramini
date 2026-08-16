@@ -426,6 +426,8 @@ export const translations = {
       },
       retro1999: {
         returnBtn: '[ ⏳ RETORNAR A 2026 ]',
+        headline1999: 'Seja Bem-vindo à minha Homepage Pessoal na Web! 🌐✨',
+        bio1999: 'Olá! Eu sou o Ricardo! 👋 Bem-vindo ao meu cantinho na Internet! Sou apaixonado por computadores e adoro programação, redes e tecnologia desde criança. Aqui você vai encontrar meus projetos de código, programas, certificados e coisas legais da Web. Não se esqueça de assinar o meu Guestbook antes de ir embora!',
         notice: {
           header: '⚠️ VENDRAMINI INFORMÁTICA — CONEXÃO DISCADA ATIVA',
           title: "YOU'VE GOT MAIL! ✉️",
@@ -439,12 +441,12 @@ export const translations = {
           session: 'Vendramini Informática Interactive Session.',
         },
         aim: {
-          title: '💬 Vendramini Instant Messenger (VIM)',
-          chatTitle: 'Conversa Direta com Ricardo_Vendramini',
-          placeholder: 'Enviar mensagem instantânea...',
-          sendBtn: '[ Send ]',
-          welcomeMsg: 'Uh-oh! Bem-vindo ao meu Instant Messenger de 1999!',
-          danteMsg: 'Você sabia que é possível navegar pelo tempo usando código?',
+          title: '🌸 ICQ 99b — Vendramini (UIN: #99404199)',
+          chatTitle: '💬 Conversa Direta ICQ (UIN: #99404199)',
+          placeholder: 'Enviar mensagem no ICQ...',
+          sendBtn: '[ Enviar ICQ ]',
+          welcomeMsg: 'Uh-oh! Alguém te enviou uma mensagem no ICQ 99b!',
+          danteMsg: 'Oi! Adicione meu UIN (#19998800) na sua lista do ICQ!',
         },
         tabs: {
           web: 'Read / Início',
@@ -455,6 +457,7 @@ export const translations = {
           livros: 'Livros',
           contato: 'Mail / Contato',
           msdos: 'MS-DOS Prompt',
+          mycomputer: 'Meu Computador',
         },
       },
     },
@@ -885,6 +888,8 @@ export const translations = {
       },
       retro1999: {
         returnBtn: '[ ⏳ RETURN TO 2026 ]',
+        headline1999: 'Welcome to my Personal Homepage on the Web! 🌐✨',
+        bio1999: 'Hi! I\'m Ricardo! 👋 Welcome to my personal homepage! I\'m a computer enthusiast and I love programming, the Internet, networks, and cool tech stuff. Check out my software projects, certifications, pictures and book collection. Don\'t forget to sign my Guestbook before you leave!',
         notice: {
           header: '⚠️ VENDRAMINI INFORMÁTICA — DIAL-UP CONNECTED',
           title: "YOU'VE GOT MAIL! ✉️",
