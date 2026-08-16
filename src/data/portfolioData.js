@@ -472,7 +472,7 @@ export const projectsData = [
     result: "Interface amigável de alta clareza para tutores de animais, apresentação completa dos serviços veterinários e facilidade na marcação de consultas online com excelente adaptação para telas mobile.",
     technologies: ["HTML5", "CSS3", "JavaScript ES6+", "Design Responsivo", "One Page Architecture"],
     date: "2025",
-    link: "https://rik-404.github.io/petlife/",
+    link: "https://rik-404.github.io/PetLife/",
     github: "https://github.com/rik-404/petlife",
     status: "Estudo"
   },
@@ -482,7 +482,7 @@ export const projectsData = [
     subtitle: "Cardápio Digital & Delivery Interativo",
     category: "Plataforma / E-Commerce / Delivery",
     image: menuDeliveryImg,
-    badge: "Ativo • Supabase",
+    badge: "Portfólio • Supabase",
     shortDescription: "Plataforma completa de cardápio digital e delivery interativo projetada para restaurantes, lanchonetes e hamburguerias. Possui suporte híbrido de persistência (localStorage + Supabase cloud com RLS), checkout via WhatsApp, Painel Administrativo em tempo real com gestão CRUD, notificações sonoras e dashboard de métricas com Chart.js.",
     problem: "Estabelecimentos gastronômicos necessitavam de um cardápio digital moderno, ágil e responsivo para exibição de produtos por categoria, captação direta de pedidos via WhatsApp sem taxas abusivas de aplicativos e gerenciamento administrativo de estoque e vendas em tempo real.",
     idea: "Desenvolver uma plataforma de delivery com experiência híbrida (modo local offline e nuvem via Supabase), carrinho de compras dinâmico com cálculo de taxa de entrega, checkout instantâneo formatado para WhatsApp e Painel Admin com Dashboard estatístico Chart.js, notificação sonora de novos pedidos e autenticação segura.",
@@ -490,9 +490,9 @@ export const projectsData = [
     result: "Autonomia total para o estabelecimento gerenciar produtos e pedidos, redução do tempo de atendimento com mensagens padronizadas no WhatsApp, métricas financeiras em tempo real e operabilidade imediata mesmo sem backend via localStorage.",
     technologies: ["HTML5", "CSS3", "JavaScript ES6+", "Supabase", "PostgreSQL", "RLS", "WhatsApp API", "Chart.js", "LocalStorage"],
     date: "2025",
-    link: "https://menu-de-delivery.vercel.app/",
+    link: "https://rik-404.github.io/menu-de-delivery/src/pages/index.html",
     github: "https://github.com/rik-404/menu-de-delivery",
-    status: "Ativo"
+    status: "Portfólio"
   },
   {
     id: "cigana-morgana",
@@ -500,7 +500,7 @@ export const projectsData = [
     subtitle: "Landing Page Mística, Oráculos & Agendamentos Online",
     category: "Portal Institucional / Landing Page",
     image: ciganaMorganaImg,
-    badge: "Em Produção • Vercel",
+    badge: "Publicado • Vercel",
     shortDescription: "Landing page moderna e imersiva para consultoria mística (Tarot, Baralho Cigano, Mesa Radiônica e eventos). Possui animação de fundo interativa em HTML5 Canvas (starfield com rastro de brilhos no cursor), galeria interativa com lightbox, carrossel de depoimentos, FAQ sanfonado e agendamento direto via WhatsApp API.",
     problem: "A consultora mística necessitava de uma vitrine digital sofisticada e envolvente que transmitisse autoridade, beleza visual e facilitasse o agendamento direto de consultas online e presenciais.",
     idea: "Desenvolver um portal místico com estética cyberpunk/glassmorphism em tons de roxo profundo e dourado imperial, efeitos gráficos interativos em Canvas API 2D e conversão em 1-clique pelo WhatsApp.",
@@ -510,7 +510,7 @@ export const projectsData = [
     date: "2026",
     link: "https://ciganamorgana.vercel.app/",
     github: null,
-    status: "Em Produção"
+    status: "Publicado"
   },
   {
     id: "c4t4t4u-eletronicos",
@@ -518,7 +518,7 @@ export const projectsData = [
     subtitle: "E-Commerce, Orçamentos & Gestão de Ordens de Serviço (O.S.)",
     category: "E-Commerce / SaaS",
     image: c4t4t4uImg,
-    badge: "v1.0.2 • Em Produção",
+    badge: "Publicado • Vercel",
     shortDescription: "Plataforma completa de e-commerce e gestão corporativa para loja de eletrônicos e assistência técnica. Integra vitrine virtual com carrinho drawer, checkout via WhatsApp, módulo de Orçamentos com conversão automática para Ordens de Serviço (O.S.), emissão impressa em 2 vias A4, cadastro PF/PJ, controle RBAC de 3 níveis e backend Supabase cloud.",
     problem: "A empresa de eletrônicos e assistência técnica necessitava de um ecossistema integrado para gerenciar simultaneamente a vitrine de produtos online, a captação de orçamentos e a operação técnica de ordens de serviço (O.S.) com emissão de comprovantes de garantia impressos.",
     idea: "Desenvolver uma aplicação SPA robusta desacoplada com checkout de orçamentos via WhatsApp, conversão inteligente de cotações aprovadas para Ordens de Serviço (#OS-xxxx), controle de permissões por vendedor/admin (RBAC) e sincronização cloud no Supabase.",
@@ -565,7 +565,7 @@ export const projectsData = [
     date: "2026",
     link: "https://c4t4t4ueletronicos.vercel.app/",
     github: null,
-    status: "Em Produção"
+    status: "Publicado"
   },
   {
     id: "elite-house-piracicaba",
@@ -573,7 +573,7 @@ export const projectsData = [
     subtitle: "EliteHouseHub — Plataforma Imobiliária & CRM",
     category: "Plataforma / SaaS",
     image: eliteHouseImg,
-    badge: "CRECI 049210-J • Em Produção",
+    badge: "Publicado • CRECI 049210-J",
     shortDescription: "Plataforma imobiliária de alto desempenho para gestão de imóveis, CRM de clientes, controle de corretores (RBAC + RLS), agendamentos, captura automática de leads via Facebook Ads Webhooks e controle financeiro de comissões.",
     problem: "Necessidade de centralizar as operações da imobiliária em um único sistema de alta performance, reduzindo tarefas manuais, integrando o portal público de imóveis ao CRM de vendas e isolando dados sensíveis por corretor e coordenador com segurança RLS.",
     idea: "Desenvolver uma solução completa SPA desacoplada utilizando React 18, TypeScript e Supabase como BaaS (PostgreSQL relacional com Row Level Security), automatizando a captura de leads via Webhooks e fornecendo relatórios gráficos em tempo real.",
@@ -620,7 +620,7 @@ export const projectsData = [
     date: "2025",
     link: "https://elitehousepiracicaba.com.br",
     github: null,
-    status: "Em Produção"
+    status: "Publicado"
   },
   {
     id: "vendramini-informatica-site",
@@ -628,7 +628,7 @@ export const projectsData = [
     subtitle: "Site Oficial & Showcase Institucional Digital",
     category: "Portal Institucional",
     image: vendraminiSiteImg,
-    badge: "Oficial • Ativo",
+    badge: "Publicado • Oficial",
     shortDescription: "Site oficial da Vendramini Informática com arquitetura ultrarrápida em HTML5 semântico, CSS3 com design system cyberpunk glassmorphism, suporte a PWA com Service Worker offline, efeito Matrix em Canvas API e internacionalização dinâmica (i18n PT/EN).",
     problem: "Criar um portal oficial de alta performance que funcionasse como cartão de visitas digital de grande impacto visual, exibindo serviços corporativos, FAQ interativo e portfólio de projetos com internacionalização instantânea.",
     idea: "Desenvolver uma arquitetura estática ultraleve com internacionalização dinâmica (PT 🇧🇷 / EN 🇺🇸) persistida em localStorage, efeito visual Matrix via Canvas API 60fps, cursor neon e pontuação 95+ no Google Lighthouse.",
@@ -638,7 +638,7 @@ export const projectsData = [
     date: "2025",
     link: "https://vendraminiinformatica.com.br/",
     github: null,
-    status: "Ativo"
+    status: "Publicado"
   },
   {
     id: "rei-das-roms",
@@ -646,7 +646,7 @@ export const projectsData = [
     subtitle: "Catalogação de Retrojogos, Consoles Clássicos & Emuladores",
     category: "Web App / Open Source",
     image: reiDasRomsImg,
-    badge: "Open Source • Estudo",
+    badge: "Portfólio • Open Source",
     shortDescription: "Aplicação web interativa desenvolvida para fins educacionais de estudo Front-End (HTML5, CSS3 e JavaScript Vanilla), permitindo a visualização, catalogação e busca em tempo real de retrojogos e consoles clássicos.",
     problem: "Fãs e estudantes de jogos clássicos necessitavam de um catálogo web moderno, leve e totalmente responsivo para pesquisar informações de consoles retrô (Nintendo, PlayStation, SEGA, Xbox) e emuladores com busca dinâmica em tempo real.",
     idea: "Desenvolver uma plataforma estática ultrarápida com filtro dinâmico de busca por sistemas via JavaScript Vanilla, salvamento de preferências no localStorage e navegação modular por gerações de consoles.",
@@ -656,7 +656,7 @@ export const projectsData = [
     date: "2025",
     link: "https://rik-404.github.io/reisdasroms/",
     github: "https://github.com/rik-404/reisdasroms",
-    status: "Open Source"
+    status: "Portfólio"
   },
   {
     id: "festa-facil-personalizados",
@@ -664,7 +664,7 @@ export const projectsData = [
     subtitle: "Vitrine Digital & E-Commerce de Orçamentos via WhatsApp",
     category: "Plataforma / E-Commerce",
     image: festaFacilImg,
-    badge: "Em Produção • Open Source",
+    badge: "Portfólio • Open Source",
     shortDescription: "Plataforma e-commerce e vitrine digital para empresa de papelaria personalizada em São Pedro/SP. Permite navegação por categorias inteligentes, busca em tempo real, montagem de carrinho e envio direto de orçamentos via WhatsApp com Painel Admin completo sincronizado via Supabase + LocalStorage offline fallback.",
     problem: "A loja de papelaria personalizada necessitava de uma vitrine digital intuitiva e sem burocracia de cadastro para exibir produtos (topos de bolo, canecas, caixinhas) e capturar orçamentos formatados diretamente no WhatsApp do atendimento.",
     idea: "Criar uma aplicação e-commerce resiliente com sincronização em tempo real de produtos e categorias via Supabase (PostgreSQL Cloud) e fallback automático offline via LocalStorage, acompanhada de Painel Admin completo.",
@@ -674,7 +674,7 @@ export const projectsData = [
     date: "2026",
     link: "https://rik-404.github.io/Festa-Facil/",
     github: "https://github.com/rik-404/Festa-Facil",
-    status: "Em Produção"
+    status: "Portfólio"
   },
   {
     id: "task-flow",
@@ -682,7 +682,7 @@ export const projectsData = [
     subtitle: "Gestão de Tarefas Inteligente & Produtividade Personalizada",
     category: "Web App / Produtividade",
     image: taskFlowImg,
-    badge: "2026 • Em Produção",
+    badge: "Portfólio • JS Vanilla",
     shortDescription: "Aplicativo web completo de gestão de tarefas inteligente com arquitetura reativa em JavaScript Vanilla. Oferece controle CRUD completo de tarefas, sistema de tags personalizáveis, priorização visual, sub-tarefas, dashboard de progresso diário, alternador de temas (Dark/Light mode) e exportação/importação de dados em JSON com persistência em LocalStorage.",
     problem: "Profissionais e estudantes necessitam de uma ferramenta de gestão de tarefas leve, ágil, privada e sem necessidade de login ou dependência de servidores externos para organizar a rotina diária com métricas visuais de progresso.",
     idea: "Desenvolver uma plataforma de produtividade SPA desacoplada de alto desempenho com interface moderna baseada na fonte Plus Jakarta Sans, dashboard estatístico com barra de progresso em tempo real, suporte completo a backup via arquivos JSON e alternador de tema escuro/claro.",
@@ -692,7 +692,7 @@ export const projectsData = [
     date: "2026",
     link: "https://rik-404.github.io/Task-FLOW/",
     github: "https://github.com/rik-404/Task-FLOW",
-    status: "Em Produção"
+    status: "Portfólio"
   }
 ];
 
