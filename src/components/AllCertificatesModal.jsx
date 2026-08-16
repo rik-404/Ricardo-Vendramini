@@ -76,7 +76,7 @@ export default function AllCertificatesModal({ isOpen, onClose }) {
           <div className="p-6 sm:p-8 border-b border-white/10 shrink-0 bg-[#06100a]/90 relative">
             <button
               onClick={onClose}
-              className="absolute top-6 right-6 p-2.5 rounded-full bg-black/60 border border-white/20 text-white hover:text-[#00ff88] hover:border-[#00ff88] transition-all"
+              className="absolute top-6 right-6 p-2.5 rounded-full bg-black/60 border border-white/20 text-white hover:text-[#00ff88] hover:border-[#00ff88] transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -104,7 +104,7 @@ export default function AllCertificatesModal({ isOpen, onClose }) {
                   placeholder={t('certificates.searchPlaceholder')}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-black/60 border border-white/15 text-white text-xs placeholder:text-slate-500 focus:outline-none focus:border-[#00ff88] transition-all"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-black/60 border border-white/15 text-white text-xs placeholder:text-slate-500 focus:outline-none focus:border-[#00ff88] transition-colors"
                 />
                 {searchQuery && (
                   <button
@@ -122,7 +122,7 @@ export default function AllCertificatesModal({ isOpen, onClose }) {
                   <button
                     key={cat}
                     onClick={() => setActiveFilter(cat)}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-all ${
+                    className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-colors ${
                       activeFilter === cat
                         ? 'bg-[#00ff88] text-black font-bold shadow-glow-sm'
                         : 'bg-black/60 text-slate-300 hover:text-white border border-white/10 hover:border-[#00ff88]/50'
@@ -145,7 +145,7 @@ export default function AllCertificatesModal({ isOpen, onClose }) {
                     setActiveFilter('all');
                     setSearchQuery('');
                   }}
-                  className="mt-4 px-4 py-2 rounded-xl bg-[#00ff88]/20 border border-[#00ff88]/40 text-[#00ff88] text-xs font-mono hover:bg-[#00ff88] hover:text-black transition-all"
+                  className="mt-4 px-4 py-2 rounded-xl bg-[#00ff88]/20 border border-[#00ff88]/40 text-[#00ff88] text-xs font-mono hover:bg-[#00ff88] hover:text-black transition-colors"
                 >
                   {t('certificates.resetFilters')}
                 </button>
@@ -156,7 +156,7 @@ export default function AllCertificatesModal({ isOpen, onClose }) {
                   <div
                     key={cert.id}
                     onClick={() => setSelectedCert(cert)}
-                    className="glass-card rounded-2xl overflow-hidden border border-[#10b981]/25 hover:border-[#00ff88]/70 transition-all duration-300 group cursor-pointer flex flex-col justify-between bg-[#040705]"
+                    className="glass-card rounded-2xl overflow-hidden border border-[#10b981]/25 hover:border-[#00ff88]/70 group cursor-pointer flex flex-col justify-between bg-[#040705]"
                   >
                     <div>
                       {/* Image Container */}
@@ -164,7 +164,7 @@ export default function AllCertificatesModal({ isOpen, onClose }) {
                         <img
                           src={cert.image}
                           alt={cert.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter contrast-[1.02]"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200 filter contrast-[1.02]"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#040705] via-transparent to-black/30 opacity-70 group-hover:opacity-40 transition-opacity" />
 
@@ -219,7 +219,7 @@ export default function AllCertificatesModal({ isOpen, onClose }) {
                           e.stopPropagation();
                           setSelectedCert(cert);
                         }}
-                        className="w-full py-2 px-3 rounded-xl bg-[#092415] hover:bg-[#00ff88] text-[#00ff88] hover:text-black font-mono text-xs font-semibold tracking-wider uppercase transition-all border border-[#00ff88]/30 flex items-center justify-center gap-2"
+                        className="w-full py-2 px-3 rounded-xl bg-[#092415] hover:bg-[#00ff88] text-[#00ff88] hover:text-black font-mono text-xs font-semibold tracking-wider uppercase transition-colors border border-[#00ff88]/30 flex items-center justify-center gap-2"
                       >
                         <Eye className="w-4 h-4" />
                         <span>{t('certificates.view')}</span>
@@ -271,14 +271,14 @@ export default function AllCertificatesModal({ isOpen, onClose }) {
                       href={selectedCert.image}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2.5 rounded-full bg-white/5 hover:bg-[#00ff88]/20 border border-white/10 hover:border-[#00ff88]/40 text-slate-300 hover:text-[#00ff88] transition-all"
+                      className="p-2.5 rounded-full bg-white/5 hover:bg-[#00ff88]/20 border border-white/10 hover:border-[#00ff88]/40 text-slate-300 hover:text-[#00ff88] transition-colors"
                       title={t('certificates.openOriginal')}
                     >
                       <ExternalLink className="w-4 h-4" />
                     </a>
                     <button
                       onClick={() => setSelectedCert(null)}
-                      className="p-2.5 rounded-full bg-white/5 hover:bg-red-500/20 border border-white/10 hover:border-red-500/40 text-slate-300 hover:text-red-400 transition-all"
+                      className="p-2.5 rounded-full bg-white/5 hover:bg-red-500/20 border border-white/10 hover:border-red-500/40 text-slate-300 hover:text-red-400 transition-colors"
                     >
                       <X className="w-5 h-5" />
                     </button>

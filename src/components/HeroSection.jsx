@@ -53,7 +53,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="hero-access-pill inline-flex items-center gap-3 px-4 py-2 rounded-full glass-panel border border-[#00f2fe]/40 mb-8 shadow-glow-sm hover:border-[#00ff88] hover:scale-105 transition-all group cursor-pointer"
+          className="hero-access-pill inline-flex items-center gap-3 px-4 py-2 rounded-full glass-panel border border-[#00f2fe]/40 mb-8 shadow-glow-sm hover:border-[#00ff88] hover:scale-105 transition-[border-color,transform] group cursor-pointer"
         >
           <img
             src={personalInfo.companyLogoUrl}
@@ -110,7 +110,7 @@ export default function HeroSection() {
         >
           <a
             href="#about"
-            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-[#00f2fe] via-[#10b981] to-[#00ff88] text-black font-bold text-base shadow-glow-md hover:shadow-glow-lg transition-all transform hover:-translate-y-1 flex items-center justify-center gap-3 group"
+            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-[#00f2fe] via-[#10b981] to-[#00ff88] text-black font-bold text-base shadow-glow-md hover:shadow-glow-lg transition-[transform,box-shadow] transform hover:-translate-y-1 flex items-center justify-center gap-3 group"
           >
             <span>{t('hero.learnStory')}</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -118,7 +118,7 @@ export default function HeroSection() {
 
           <a
             href="#projects"
-            className="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel border border-[#00f2fe]/40 text-slate-100 hover:text-[#00ff88] hover:border-[#00ff88] font-semibold text-base transition-all transform hover:-translate-y-1 flex items-center justify-center gap-3 group"
+            className="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel border border-[#00f2fe]/40 text-slate-100 hover:text-[#00ff88] hover:border-[#00ff88] font-semibold text-base transition-[background-color,border-color,color,transform] transform hover:-translate-y-1 flex items-center justify-center gap-3 group"
           >
             <span>{t('hero.ctaProjects')}</span>
             <Rocket className="w-5 h-5 text-[#00f2fe] group-hover:rotate-12 transition-transform" />

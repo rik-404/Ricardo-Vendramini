@@ -59,7 +59,7 @@ export default function TechLabSection() {
                 <button
                   key={id}
                   onClick={() => setActiveId(id)}
-                  className={`p-4 rounded-2xl border flex flex-col items-center text-center transition-all duration-300 ${
+                  className={`p-4 rounded-2xl border flex flex-col items-center text-center transition-[background-color,border-color,color,transform] duration-300 ${
                     isActive
                       ? 'bg-[#0c2e17] border-[#00ff88] shadow-glow-md scale-105 text-[#00ff88]'
                       : 'glass-panel border-white/10 text-slate-300 hover:border-[#10b981]/50 hover:text-white'
@@ -79,6 +79,7 @@ export default function TechLabSection() {
             key={activeId}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
             className="p-4 rounded-xl bg-[#040705]/90 border border-[#00ff88]/40 flex flex-col sm:flex-row items-center justify-between gap-4 mt-6 z-10"
           >
             <div className="flex items-center gap-3">

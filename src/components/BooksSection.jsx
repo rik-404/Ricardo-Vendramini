@@ -45,7 +45,7 @@ export default function BooksSection({ onSelectBook }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="lg:col-span-12 glass-card rounded-3xl border border-[#00ff88]/30 p-6 sm:p-8 lg:p-10 relative overflow-hidden bg-[#040705]/90 shadow-glow-sm hover:border-[#00ff88]/60 transition-all duration-500"
+              className="lg:col-span-12 glass-card rounded-3xl border border-[#00ff88]/30 p-6 sm:p-8 lg:p-10 relative overflow-hidden bg-[#040705]/90 shadow-glow-sm hover:border-[#00ff88]/60 transition-[border-color,box-shadow] duration-200"
             >
               {/* Background ambient glow */}
               <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#00ff88]/10 rounded-full blur-3xl pointer-events-none" />
@@ -113,7 +113,7 @@ export default function BooksSection({ onSelectBook }) {
                   <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
                     <button
                       onClick={() => onSelectBook && onSelectBook(book)}
-                      className="px-6 py-3 rounded-xl bg-[#092415] hover:bg-[#00ff88] text-[#00ff88] hover:text-black font-mono text-xs font-bold tracking-wider uppercase transition-all duration-300 border border-[#00ff88]/40 flex items-center gap-2 shadow-glow-sm"
+                      className="px-6 py-3 rounded-xl bg-[#092415] hover:bg-[#00ff88] text-[#00ff88] hover:text-black font-mono text-xs font-bold tracking-wider uppercase transition-colors duration-300 border border-[#00ff88]/40 flex items-center gap-2 shadow-glow-sm"
                     >
                       <Eye className="w-4 h-4" />
                       <span>{t('books.readFull')}</span>

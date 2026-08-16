@@ -185,7 +185,7 @@ export default function StarWarsCrawlOverlay({ isOpen, onClose }) {
         <div className="absolute top-4 right-4 z-50 flex items-center gap-3">
           <button
             onClick={() => setSoundEnabled(!soundEnabled)}
-            className="p-2.5 rounded-full bg-[#06140d]/90 border border-[#00ff88]/50 text-[#00ff88] hover:bg-[#00ff88] hover:text-black transition-all shadow-glow-sm cursor-pointer"
+            className="p-2.5 rounded-full bg-[#06140d]/90 border border-[#00ff88]/50 text-[#00ff88] hover:bg-[#00ff88] hover:text-black transition-colors shadow-glow-sm cursor-pointer"
             title={soundEnabled ? t('starwars.soundOff') : t('starwars.soundOn')}
           >
             {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4 text-slate-500" />}
@@ -193,7 +193,7 @@ export default function StarWarsCrawlOverlay({ isOpen, onClose }) {
 
           <button
             onClick={handleClose}
-            className="px-4 py-2 rounded-full bg-[#06140d]/90 border border-[#00ff88]/50 text-[#00ff88] hover:bg-[#00ff88] hover:text-black transition-all flex items-center gap-2 text-xs font-bold shadow-glow-sm cursor-pointer"
+            className="px-4 py-2 rounded-full bg-[#06140d]/90 border border-[#00ff88]/50 text-[#00ff88] hover:bg-[#00ff88] hover:text-black transition-colors flex items-center gap-2 text-xs font-bold shadow-glow-sm cursor-pointer"
           >
             <X className="w-4 h-4" />
             <span>{t('starwars.restoreGalaxy')}</span>
@@ -283,7 +283,7 @@ export default function StarWarsCrawlOverlay({ isOpen, onClose }) {
                 </p>
                 <button
                   onClick={handleClose}
-                  className="px-8 py-4 rounded-full bg-gradient-to-r from-[#059669] via-[#10b981] to-[#00ff88] text-black font-extrabold text-sm uppercase tracking-widest hover:scale-105 transition-all shadow-glow-md cursor-pointer"
+                  className="px-8 py-4 rounded-full bg-gradient-to-r from-[#059669] via-[#10b981] to-[#00ff88] text-black font-extrabold text-sm uppercase tracking-widest hover:scale-105 transition-transform shadow-glow-md cursor-pointer"
                 >
                   {t('starwars.forceButton')}
                 </button>

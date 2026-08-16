@@ -53,7 +53,7 @@ export default function ContactSection() {
 
             <button
               onClick={handleCopyEmail}
-              className="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel border border-[#00ff88]/40 text-slate-200 hover:text-[#00ff88] font-bold text-base hover:border-[#00ff88] transition-all flex items-center justify-center gap-3 cursor-pointer"
+              className="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel border border-[#00ff88]/40 text-slate-200 hover:text-[#00ff88] font-bold text-base hover:border-[#00ff88] transition-colors flex items-center justify-center gap-3 cursor-pointer"
             >
               {copied ? <Check className="w-5 h-5 text-[#00ff88]" /> : <Copy className="w-5 h-5" />}
               <span>{copied ? (lang === 'en' ? "Email Copied!" : "E-mail Copiado!") : (lang === 'en' ? "Copy Email Address" : "Copiar Endereço de E-mail")}</span>

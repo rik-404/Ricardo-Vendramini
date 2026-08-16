@@ -995,7 +995,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
             </div>
             <button
               onClick={() => setRickrollActive(false)}
-              className="px-3 py-1.5 rounded-xl bg-red-500/20 hover:bg-red-600 text-red-300 hover:text-white border border-red-500/40 transition-all font-mono text-xs flex items-center gap-1.5 cursor-pointer shadow-lg"
+              className="px-3 py-1.5 rounded-xl bg-red-500/20 hover:bg-red-600 text-red-300 hover:text-white border border-red-500/40 transition-colors font-mono text-xs flex items-center gap-1.5 cursor-pointer shadow-lg"
               title={t('terminal.closePanelTitle')}
             >
               <X className="w-4 h-4" />
@@ -1037,14 +1037,20 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
   if (isModal) {
     return (
-      <div className="fixed inset-0 z-[999999] overflow-y-auto bg-[#040805]/95 backdrop-blur-2xl flex flex-col justify-between select-none">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.96 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.96 }}
+        transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
+        className="fixed inset-0 z-[999999] overflow-y-auto bg-[#040805]/95 backdrop-blur-2xl flex flex-col justify-between select-none"
+      >
         {content}
         {/* Local Achievements Modal inside CLI */}
         <AchievementsModal
           isOpen={localAchievementsOpen}
           onClose={() => setLocalAchievementsOpen(false)}
         />
-      </div>
+      </motion.div>
     );
   }
 

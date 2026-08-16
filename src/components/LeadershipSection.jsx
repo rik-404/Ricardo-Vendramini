@@ -53,7 +53,7 @@ export default function LeadershipSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="glass-card p-8 rounded-3xl border border-[#10b981]/25 hover:border-[#00ff88]/50 transition-all duration-300 group relative overflow-hidden"
+                className="glass-card p-8 rounded-3xl border border-[#10b981]/25 hover:border-[#00ff88]/50 group relative overflow-hidden"
               >
                 <div className="absolute top-0 right-0 w-24 h-24 bg-[#00ff88]/5 rounded-bl-full pointer-events-none group-hover:bg-[#00ff88]/15 transition-colors" />
 

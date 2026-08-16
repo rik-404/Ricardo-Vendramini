@@ -59,7 +59,7 @@ export default function TimelineSection() {
 
                   {/* Card Content Container */}
                   <div className="pl-12 sm:pl-0 sm:w-1/2 sm:px-8">
-                    <div className="glass-card p-6 rounded-2xl border border-[#10b981]/25 hover:border-[#00ff88]/50 transition-all">
+                    <div className="glass-card p-6 rounded-2xl border border-[#10b981]/25 hover:border-[#00ff88]/50">
                       
                       {/* Year Badge */}
                       <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0c2e17] border border-[#00ff88]/40 text-[#00ff88] text-xs font-mono mb-3">

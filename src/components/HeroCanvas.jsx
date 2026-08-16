@@ -8,6 +8,7 @@ export default function HeroCanvas({ matrixMode = false, theme = 'dark' }) {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
+    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
     // Palette adapted to the active theme
     const particleColors = isLight
@@ -174,7 +175,12 @@ export default function HeroCanvas({ matrixMode = false, theme = 'dark' }) {
       animationFrameId = requestAnimationFrame(render);
     };
 
-    render();
+    if (reduceMotion) {
+      // frame estático: desenha as partículas uma vez, sem loop
+      for (let i = 0; i < particles.length; i++) particles[i].draw();
+    } else {
+      render();
+    }
 
     return () => {
       cancelAnimationFrame(animationFrameId);

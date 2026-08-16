@@ -46,7 +46,7 @@ export default function SkillsSection({ onOpenAllSkills }) {
           {/* Button to open All Skills Modal */}
           <button
             onClick={onOpenAllSkills}
-            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#08180e] border border-[#00ff88]/40 text-[#00ff88] hover:bg-[#00ff88] hover:text-black font-extrabold text-xs tracking-wider uppercase transition-all duration-300 shadow-glow-sm hover:scale-105 cursor-pointer"
+            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#08180e] border border-[#00ff88]/40 text-[#00ff88] hover:bg-[#00ff88] hover:text-black font-extrabold text-xs tracking-wider uppercase transition-[background-color,color,transform] duration-300 shadow-glow-sm hover:scale-105 cursor-pointer"
           >
             <span>
               {t('skills.viewAll')} ({skillsData.length})
@@ -71,7 +71,7 @@ export default function SkillsSection({ onOpenAllSkills }) {
               <div
                 key={`${skill.name}-${index}`}
                 onClick={() => setActiveSkill(isSelected ? null : skill)}
-                className={`w-[280px] sm:w-[320px] shrink-0 glass-card p-5 rounded-2xl cursor-pointer relative group border transition-all duration-300 flex flex-col justify-between ${
+                className={`w-[280px] sm:w-[320px] shrink-0 glass-card p-5 rounded-2xl cursor-pointer relative group border transition-[background-color] duration-300 flex flex-col justify-between ${
                   isSelected
                     ? 'border-[#00ff88] shadow-glow-md bg-[#0c2e17]/60'
                     : 'border-[#10b981]/25 hover:border-[#00ff88]/70 hover:bg-[#06140d]/50'
@@ -122,11 +122,12 @@ export default function SkillsSection({ onOpenAllSkills }) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
               className="mt-8 p-6 rounded-2xl glass-card border border-[#00ff88]/50 shadow-glow-md relative bg-[#06100a]/90"
             >
               <button
                 onClick={() => setActiveSkill(null)}
-                className="absolute top-4 right-4 p-2 rounded-full bg-black/60 border border-white/20 text-white hover:text-[#00ff88] hover:border-[#00ff88] transition-all"
+                className="absolute top-4 right-4 p-2 rounded-full bg-black/60 border border-white/20 text-white hover:text-[#00ff88] hover:border-[#00ff88] transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>

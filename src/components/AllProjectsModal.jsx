@@ -61,7 +61,7 @@ export default function AllProjectsModal({ isOpen, onClose, onSelectProject }) {
           <div className="p-6 sm:p-8 border-b border-white/10 shrink-0 bg-[#06100a]/90 relative">
             <button
               onClick={onClose}
-              className="absolute top-6 right-6 p-2.5 rounded-full bg-black/60 border border-white/20 text-white hover:text-[#00ff88] hover:border-[#00ff88] transition-all"
+              className="absolute top-6 right-6 p-2.5 rounded-full bg-black/60 border border-white/20 text-white hover:text-[#00ff88] hover:border-[#00ff88] transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -89,7 +89,7 @@ export default function AllProjectsModal({ isOpen, onClose, onSelectProject }) {
                   placeholder={t('projects.searchPlaceholder')}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-black/60 border border-white/15 text-white text-xs placeholder:text-slate-500 focus:outline-none focus:border-[#00ff88] transition-all"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-black/60 border border-white/15 text-white text-xs placeholder:text-slate-500 focus:outline-none focus:border-[#00ff88] transition-colors"
                 />
                 {searchQuery && (
                   <button
@@ -107,7 +107,7 @@ export default function AllProjectsModal({ isOpen, onClose, onSelectProject }) {
                   <button
                     key={cat}
                     onClick={() => setActiveFilter(cat)}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-all ${
+                    className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-colors ${
                       activeFilter === cat
                         ? 'bg-[#00ff88] text-black font-bold shadow-glow-sm'
                         : 'glass-panel text-slate-300 hover:text-white hover:border-[#00ff88]/40'
@@ -137,7 +137,7 @@ export default function AllProjectsModal({ isOpen, onClose, onSelectProject }) {
                       onClose();
                       onSelectProject(project);
                     }}
-                    className="glass-card rounded-2xl overflow-hidden border border-[#10b981]/25 hover:border-[#00ff88]/70 transition-all duration-300 group cursor-pointer flex flex-col justify-between"
+                    className="glass-card rounded-2xl overflow-hidden border border-[#10b981]/25 hover:border-[#00ff88]/70 group cursor-pointer flex flex-col justify-between"
                   >
                     <div>
                       {/* Image Container */}
@@ -222,7 +222,7 @@ export default function AllProjectsModal({ isOpen, onClose, onSelectProject }) {
 
             <button
               onClick={onClose}
-              className="px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-all"
+              className="px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-colors"
             >
               {t('projects.closeGallery')}
             </button>

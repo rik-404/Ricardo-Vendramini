@@ -39,7 +39,7 @@ export default function ProjectModal({ project, onClose }) {
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 p-2.5 rounded-full bg-black/60 border border-white/20 text-white hover:text-[#00ff88] hover:border-[#00ff88] transition-all z-20 cursor-pointer"
+              className="absolute top-4 right-4 p-2.5 rounded-full bg-black/60 border border-white/20 text-white hover:text-[#00ff88] hover:border-[#00ff88] transition-colors z-20 cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -278,7 +278,7 @@ export default function ProjectModal({ project, onClose }) {
 
               <button
                 onClick={onClose}
-                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-white/10 border border-white/20 hover:bg-white/20 text-white text-sm font-semibold transition-all cursor-pointer"
+                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-white/10 border border-white/20 hover:bg-white/20 text-white text-sm font-semibold transition-colors cursor-pointer"
               >
                 {lang === 'en' ? 'Close Case' : 'Fechar Case'}
               </button>

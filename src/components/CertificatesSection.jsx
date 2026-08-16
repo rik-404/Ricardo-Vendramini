@@ -57,7 +57,7 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
           {/* Button to open All Certificates Modal */}
           <button
             onClick={onOpenAllCertificates}
-            className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#059669] via-[#10b981] to-[#00ff88] text-black font-extrabold text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-glow-sm hover:scale-105 transition-all group"
+            className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#059669] via-[#10b981] to-[#00ff88] text-black font-extrabold text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-glow-sm hover:scale-105 transition-transform group"
           >
             <Layers className="w-4 h-4 text-black group-hover:rotate-12 transition-transform" />
             <span>
@@ -81,7 +81,7 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
             <div
               key={`${cert.id}-${index}`}
               onClick={() => setSelectedCert(cert)}
-              className="w-[320px] sm:w-[380px] shrink-0 glass-card rounded-3xl border border-[#10b981]/25 hover:border-[#00ff88]/70 transition-all duration-500 overflow-hidden flex flex-col group relative bg-[#040705]/80 hover:shadow-glow-sm cursor-pointer justify-between"
+              className="w-[320px] sm:w-[380px] shrink-0 glass-card rounded-3xl border border-[#10b981]/25 hover:border-[#00ff88]/70 overflow-hidden flex flex-col group relative bg-[#040705]/80 hover:shadow-glow-sm cursor-pointer justify-between"
             >
               <div>
                 {/* Image Container / Preview */}
@@ -89,7 +89,9 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
                   <img
                     src={cert.image}
                     alt={cert.title}
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 filter contrast-[1.02]"
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-200 filter contrast-[1.02]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#040705] via-transparent to-black/30 opacity-70 group-hover:opacity-40 transition-opacity" />
                   
@@ -159,7 +161,7 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
                         e.stopPropagation();
                         setSelectedCert(cert);
                       }}
-                      className="w-full py-2.5 px-4 rounded-xl bg-[#092415] hover:bg-[#00ff88] text-[#00ff88] hover:text-black font-mono text-xs font-semibold tracking-wider uppercase transition-all duration-300 border border-[#00ff88]/30 flex items-center justify-center gap-2 group/btn shadow-glow-sm"
+                      className="w-full py-2.5 px-4 rounded-xl bg-[#092415] hover:bg-[#00ff88] text-[#00ff88] hover:text-black font-mono text-xs font-semibold tracking-wider uppercase transition-colors duration-300 border border-[#00ff88]/30 flex items-center justify-center gap-2 group/btn shadow-glow-sm"
                     >
                       <Eye className="w-4 h-4 group-hover/btn:scale-110 transition-transform" />
                       <span>{t('certificates.view')}</span>
@@ -216,14 +218,14 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
                       href={selectedCert.image}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2.5 rounded-full bg-white/5 hover:bg-[#00ff88]/20 border border-white/10 hover:border-[#00ff88]/40 text-slate-300 hover:text-[#00ff88] transition-all"
+                      className="p-2.5 rounded-full bg-white/5 hover:bg-[#00ff88]/20 border border-white/10 hover:border-[#00ff88]/40 text-slate-300 hover:text-[#00ff88] transition-colors"
                       title={t('certificates.openOriginal')}
                     >
                       <ExternalLink className="w-4 h-4" />
                     </a>
                     <button
                       onClick={() => setSelectedCert(null)}
-                      className="p-2.5 rounded-full bg-white/5 hover:bg-red-500/20 border border-white/10 hover:border-red-500/40 text-slate-300 hover:text-red-400 transition-all"
+                      className="p-2.5 rounded-full bg-white/5 hover:bg-red-500/20 border border-white/10 hover:border-red-500/40 text-slate-300 hover:text-red-400 transition-colors"
                     >
                       <X className="w-5 h-5" />
                     </button>

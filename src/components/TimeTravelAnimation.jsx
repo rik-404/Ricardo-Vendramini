@@ -344,7 +344,7 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
                     <div className="mt-1.5 w-full h-1.5 rounded-full bg-black/70 overflow-hidden border border-white/10">
                       <div
                         className="h-full bg-gradient-to-r from-[#00f2fe] via-[#10b981] to-[#00ff88] rounded-full shadow-[0_0_8px_#00ff88]"
-                        style={{ width: `${speed}%`, transition: 'width 80ms linear' }}
+                        style={{ transform: `scaleX(${speed / 100})`, transformOrigin: 'left', transition: 'transform 80ms linear' }}
                       />
                     </div>
                   </div>
@@ -370,7 +370,7 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
             <div className="w-full h-2 rounded-full bg-slate-900 overflow-hidden border border-[#00ff88]/30">
               <div
                 className="h-full bg-gradient-to-r from-[#00f2fe] via-[#10b981] to-[#00ff88] rounded-full shadow-[0_0_15px_#00ff88]"
-                style={{ width: `${(speed / 88) * 100}%`, transition: 'width 80ms linear' }}
+                style={{ transform: `scaleX(${speed / 88})`, transformOrigin: 'left', transition: 'transform 80ms linear' }}
               />
             </div>
 

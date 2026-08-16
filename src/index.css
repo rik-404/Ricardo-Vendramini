@@ -11,11 +11,37 @@
     --bg-deep: #080c09;
     --gradient-primary: linear-gradient(135deg, #10b981, #00ff88);
     --gradient-background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(0, 255, 136, 0.05));
+    
+    /* Design Engineering Custom Easings (Emil & Apple) */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
   }
 
   html {
     color-scheme: dark;
     scroll-behavior: smooth;
+  }
+
+  /* Accessibility & Keyboard Focus Polish */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid #00ff88 !important;
+    outline-offset: 3px !important;
+    box-shadow: 0 0 14px rgba(0, 255, 136, 0.45) !important;
+  }
+
+  /* Emil Design Eng: Global Instant Active Press Feedback */
+  button, .btn, [role="button"], a[href], [class*="cursor-pointer"] {
+    transition: transform 140ms var(--ease-out), background-color 150ms ease, border-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+  }
+
+  button:active, .btn:active, [role="button"]:active,
+  a[href]:active, [class*="cursor-pointer"]:active {
+    transform: scale(0.97) !important;
   }
 
   body {
@@ -108,24 +134,52 @@
 }
 
 @layer utilities {
+  /* Apple Design System Translucent Materials & Vibrancy */
   .glass-panel {
     background: rgba(12, 18, 14, 0.75);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.15); /* Light catching material top edge */
   }
   
   .glass-card {
-    background: linear-gradient(135deg, rgba(14, 22, 17, 0.75) 0%, rgba(9, 14, 11, 0.9) 100%);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background: linear-gradient(135deg, rgba(14, 22, 17, 0.8) 0%, rgba(9, 14, 11, 0.92) 100%);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    transition: border-color 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
   }
   
   .glass-card:hover {
-    border-color: rgba(16, 185, 129, 0.35);
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.4);
+    box-shadow: 0 12px 36px -10px rgba(0, 0, 0, 0.6), 0 0 24px rgba(16, 185, 129, 0.15);
+  }
+
+  /* Apple Typography Optical Sizing & Tracking */
+  .apple-display-heading {
+    letter-spacing: -0.028em;
+    line-height: 1.08;
+    font-optical-sizing: auto;
+  }
+
+  .apple-subheading {
+    letter-spacing: -0.012em;
+    line-height: 1.35;
+  }
+
+  .apple-caption {
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* Apple Direct Press Feedback */
+  .apple-press-feedback {
+    transition: transform 120ms var(--ease-out), box-shadow 150ms ease;
+  }
+  .apple-press-feedback:active {
+    transform: scale(0.97) !important;
   }
 
   .text-gradient-cyan-green {
@@ -165,6 +219,42 @@
   }
   .glow-border:hover::before {
     opacity: 1;
+  }
+}
+
+/* Apple Design Accessibility Media Query Fallbacks */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Gentle: keep opacity/color transitions that aid comprehension,
+     drop movement (transform-based motion). */
+  a, button, .btn, [role="button"],
+  .glass-card, .glass-panel,
+  [class*="transition-all"],
+  [class*="transition-transform"],
+  [class*="transition-colors"] {
+    transition-property: background-color, border-color, color, box-shadow, opacity !important;
+    transition-duration: 150ms !important;
+  }
+
+  /* No movement on hover: kill transform-based hovers under reduced motion */
+  [class*="hover:scale-"],
+  [class*="hover:-translate-y-"],
+  [class*="group-hover:scale-"],
+  [class*="group-hover:-translate-y-"] {
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass-panel, .glass-card {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: #0c140e !important;
   }
 }
 
@@ -379,17 +469,17 @@
     transparent
   );
 
-  transform: rotate(20deg);
+  transform: translateX(0) rotate(20deg);
 
   opacity: 0;
 
   transition:
-    left 0.7s ease,
+    transform 0.5s ease,
     opacity 0.3s ease;
 }
 
 .book3d:hover .cover-shine {
-  left: 130%;
+  transform: translateX(300%) rotate(20deg);
   opacity: 1;
 }
 
@@ -1218,4 +1308,14 @@ html.theme-light .hero-access-pill [class*="text-[#00ff88]"] {
 html.theme-light .achv-cta-btn,
 html.theme-light .achv-cta-btn [class*="text-[#00ff88]"] {
   color: #ffffff !important;
+}
+
+/* Touch/coarse pointers fire false hovers on tap — gate hover transforms */
+@media (hover: none) and (pointer: coarse) {
+  [class*="hover:scale-"],
+  [class*="hover:-translate-y-"],
+  [class*="group-hover:scale-"],
+  [class*="group-hover:-translate-y-"] {
+    transform: none !important;
+  }
 }

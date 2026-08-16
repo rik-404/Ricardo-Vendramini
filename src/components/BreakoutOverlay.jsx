@@ -657,7 +657,7 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setSoundEnabled(!soundEnabled)}
-              className="p-2.5 rounded-xl bg-black/60 border border-white/15 text-slate-300 hover:text-[#00ff88] transition-all"
+              className="p-2.5 rounded-xl bg-black/60 border border-white/15 text-slate-300 hover:text-[#00ff88] transition-colors"
               title={soundEnabled ? t('breakout.desactivateSound') : t('breakout.activateSound')}
             >
               {soundEnabled ? <Volume2 className="w-4 h-4 text-[#00ff88]" /> : <VolumeX className="w-4 h-4 text-slate-500" />}
@@ -665,7 +665,7 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
 
             <button
               onClick={restartGame}
-              className="p-2.5 rounded-xl bg-black/60 border border-white/15 text-slate-300 hover:text-[#00ff88] transition-all"
+              className="p-2.5 rounded-xl bg-black/60 border border-white/15 text-slate-300 hover:text-[#00ff88] transition-colors"
               title={t('breakout.restartGame')}
             >
               <RotateCcw className="w-4 h-4" />
@@ -673,7 +673,7 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
 
             <button
               onClick={handleClose}
-              className="p-2.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 hover:text-red-300 transition-all flex items-center gap-1.5 text-xs font-bold"
+              className="p-2.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 hover:text-red-300 transition-colors flex items-center gap-1.5 text-xs font-bold"
             >
               <X className="w-4 h-4" />
               <span>{t('breakout.restoreSiteEsc')}</span>
@@ -702,7 +702,7 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
                   <p className="text-xs text-slate-400">{t('breakout.pausedDesc')}</p>
                   <button
                     onClick={togglePause}
-                    className="w-full py-3 rounded-xl bg-gradient-to-r from-[#059669] to-[#00ff88] text-black font-extrabold text-xs uppercase tracking-wider shadow-glow-sm hover:scale-105 transition-all"
+                    className="w-full py-3 rounded-xl bg-gradient-to-r from-[#059669] to-[#00ff88] text-black font-extrabold text-xs uppercase tracking-wider shadow-glow-sm hover:scale-105 transition-transform"
                   >
                     {t('breakout.continueDestroying')}
                   </button>
@@ -734,7 +734,7 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
                   <div className="flex gap-3">
                     <button
                       onClick={restartGame}
-                      className="flex-1 py-3 rounded-xl bg-gradient-to-r from-[#059669] to-[#00ff88] text-black font-extrabold text-xs uppercase tracking-wider shadow-glow-sm hover:scale-105 transition-all flex items-center justify-center gap-2"
+                      className="flex-1 py-3 rounded-xl bg-gradient-to-r from-[#059669] to-[#00ff88] text-black font-extrabold text-xs uppercase tracking-wider shadow-glow-sm hover:scale-105 transition-transform flex items-center justify-center gap-2"
                     >
                       <RotateCcw className="w-4 h-4" />
                       <span>{t('breakout.tryAgain')}</span>
@@ -774,7 +774,7 @@ export default function BreakoutOverlay({ isOpen, onClose }) {
                   <div className="flex gap-3">
                     <button
                       onClick={handleClose}
-                      className="flex-1 py-3 rounded-xl bg-gradient-to-r from-[#059669] to-[#00ff88] text-black font-extrabold text-xs uppercase tracking-wider shadow-glow-sm hover:scale-105 transition-all flex items-center justify-center gap-2"
+                      className="flex-1 py-3 rounded-xl bg-gradient-to-r from-[#059669] to-[#00ff88] text-black font-extrabold text-xs uppercase tracking-wider shadow-glow-sm hover:scale-105 transition-transform flex items-center justify-center gap-2"
                     >
                       <RotateCcw className="w-4 h-4" />
                       <span>{t('breakout.restoreEntireSite')}</span>

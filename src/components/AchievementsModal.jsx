@@ -111,7 +111,7 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
             <div className="px-6 pt-4 pb-2 border-b border-white/10 flex items-center justify-center gap-2 bg-[#050b07] shrink-0">
               <button
                 onClick={() => setActiveTab('all')}
-                className={`px-4 py-2 rounded-xl text-xs font-bold font-mono transition-all duration-200 border flex items-center gap-1.5 ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold font-mono transition-[background-color,color,border-color,box-shadow] duration-200 border flex items-center gap-1.5 ${
                   activeTab === 'all'
                     ? 'bg-[#0c2e17] text-[#00ff88] border-[#00ff88]/50 shadow-[0_0_12px_rgba(0,255,136,0.2)]'
                     : 'bg-slate-900/60 text-slate-400 border-white/5 hover:text-white hover:bg-slate-800'
@@ -126,7 +126,7 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
 
               <button
                 onClick={() => setActiveTab('unlocked')}
-                className={`px-4 py-2 rounded-xl text-xs font-bold font-mono transition-all duration-200 border flex items-center gap-1.5 cursor-pointer ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold font-mono transition-[background-color,color,border-color,box-shadow] duration-200 border flex items-center gap-1.5 cursor-pointer ${
                   activeTab === 'unlocked'
                     ? 'bg-[#0c2e17] text-[#00ff88] border-[#00ff88]/50 shadow-[0_0_12px_rgba(0,255,136,0.2)]'
                     : 'bg-slate-900/60 text-slate-400 border-white/5 hover:text-white hover:bg-slate-800'
@@ -141,7 +141,7 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
 
               <button
                 onClick={() => setActiveTab('locked')}
-                className={`px-4 py-2 rounded-xl text-xs font-bold font-mono transition-all duration-200 border flex items-center gap-1.5 cursor-pointer ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold font-mono transition-[background-color,color,border-color,box-shadow] duration-200 border flex items-center gap-1.5 cursor-pointer ${
                   activeTab === 'locked'
                     ? 'bg-[#0c2e17] text-[#00ff88] border-[#00ff88]/50 shadow-[0_0_12px_rgba(0,255,136,0.2)]'
                     : 'bg-slate-900/60 text-slate-400 border-white/5 hover:text-white hover:bg-slate-800'
@@ -188,7 +188,7 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
                   return (
                     <div
                       key={id}
-                      className={`flex items-start gap-4 p-3.5 rounded-2xl border transition-all duration-300 ${
+                      className={`flex items-start gap-4 p-3.5 rounded-2xl border transition-[background-color,border-color,box-shadow,opacity] duration-300 ${
                         unlocked
                           ? 'bg-[#0c2e17]/60 border-[#10b981]/50 shadow-[0_0_15px_rgba(0,255,136,0.05)]'
                           : 'bg-black/50 border-white/10 opacity-85 hover:opacity-100'
@@ -244,7 +244,7 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
                             </p>
                           </div>
                         ) : isHintRevealed ? (
-                          <div className="mt-2 p-2.5 rounded-xl bg-black/60 border border-amber-500/30 flex items-start justify-between gap-2 animate-fadeIn">
+                          <div className="mt-2 p-2.5 rounded-xl bg-black/60 border border-amber-500/30 flex items-start justify-between gap-2">
                             <p className="text-[11px] font-mono text-amber-300/90 leading-relaxed italic">
                            {t(`achievements.meta.${id}.hint`)}
                              </p>

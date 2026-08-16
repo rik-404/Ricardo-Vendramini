@@ -41,6 +41,11 @@ export default function CustomCursor() {
   // Smooth trailing effect
   useEffect(() => {
     if (isTouch) return;
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+      // sem lag de trailing: o halo acompanha 1:1, sem loop
+      setTrailingPos(position);
+      return;
+    }
     let animationFrame;
     const followMouse = () => {
       setTrailingPos((prev) => ({

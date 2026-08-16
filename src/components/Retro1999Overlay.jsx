@@ -484,7 +484,7 @@ export default function Retro1999Overlay({ isOpen, onClose }) {
                   <button
                     key={ch.id}
                     onClick={() => setActiveTab(ch.id)}
-                    className={`w-full text-left px-2 py-1 border border-slate-300 font-bold flex items-center justify-between text-xs transition-all font-sans ${
+                    className={`w-full text-left px-2 py-1 border border-slate-300 font-bold flex items-center justify-between text-xs transition-colors font-sans ${
                       activeTab === ch.id
                         ? 'bg-yellow-400 text-black border-white'
                         : 'bg-[#1084d0] text-white hover:bg-blue-600'

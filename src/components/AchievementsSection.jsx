@@ -42,7 +42,7 @@ export default function AchievementsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="glass-card p-6 rounded-3xl border border-[#10b981]/25 hover:border-[#00ff88]/50 transition-all duration-300 relative group overflow-hidden flex flex-col justify-between"
+              className="glass-card p-6 rounded-3xl border border-[#10b981]/25 hover:border-[#00ff88]/50 relative group overflow-hidden flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">

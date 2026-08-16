@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, Settings, Sun, Moon, Terminal, Globe, MoveRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { dispatchAchievementUnlocked } from './AchievementToast';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -19,7 +20,7 @@ function LanguageSegmented() {
     >
       <button
         onClick={toggleLang}
-        className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-mono font-bold transition-all ${
+        className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-mono font-bold transition-[background-color,color,box-shadow] ${
           isPt ? 'hdr-util-active-pt' : 'hdr-util-idle'
         }`}
       >
@@ -28,7 +29,7 @@ function LanguageSegmented() {
       </button>
       <button
         onClick={toggleLang}
-        className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-mono font-bold transition-all ${
+        className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-mono font-bold transition-[background-color,color,box-shadow] ${
           !isPt ? 'hdr-util-active-en' : 'hdr-util-idle'
         }`}
       >
@@ -236,7 +237,7 @@ export default function Navbar({ onTriggerEasterEgg, onOpenTerminal, theme, onTo
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 chpw-header ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,border-color,box-shadow] duration-300 chpw-header ${
           headerLight ? 'chpw-header-light' : ''
         } ${scrolled ? 'chpw-header-scrolled' : 'chpw-header-top'}`}
       >
@@ -251,7 +252,7 @@ export default function Navbar({ onTriggerEasterEgg, onOpenTerminal, theme, onTo
             title={t('nav.brand')}
           >
             <div
-              className={`w-9 h-9 rounded-lg border flex items-center justify-center transition-all shrink-0 ${
+              className={`w-9 h-9 rounded-lg border flex items-center justify-center transition-[border-color,transform] shrink-0 ${
                 glitchPhase > 0 && glitchPhase < 4
                   ? 'border-red-500/60 rotate-12 scale-110'
                   : 'border-[#00f2fe]/40 group-hover:border-[#00ff88] group-hover:scale-105'
@@ -309,7 +310,7 @@ export default function Navbar({ onTriggerEasterEgg, onOpenTerminal, theme, onTo
           <div className="flex items-center gap-2 shrink-0">
             <a
               href="#contact"
-              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-xl bg-gradient-to-r from-[#00f2fe] via-[#10b981] to-[#00ff88] text-black shadow-glow-sm hover:shadow-glow-md transition-all transform hover:-translate-y-0.5 whitespace-nowrap cursor-pointer"
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-xl bg-gradient-to-r from-[#00f2fe] via-[#10b981] to-[#00ff88] text-black shadow-glow-sm hover:shadow-glow-md transition-transform transform hover:-translate-y-0.5 whitespace-nowrap cursor-pointer"
             >
               {t('nav.contactBtn')}
               <MoveRight className="w-3.5 h-3.5" />
@@ -319,7 +320,7 @@ export default function Navbar({ onTriggerEasterEgg, onOpenTerminal, theme, onTo
             <div className="relative" ref={utilitiesRef}>
               <button
                 onClick={() => setUtilitiesOpen((o) => !o)}
-                className={`hdr-btn-ghost p-2 rounded-xl transition-all cursor-pointer select-none ${
+                className={`hdr-btn-ghost p-2 rounded-xl transition-colors cursor-pointer select-none ${
                   utilitiesOpen ? 'chpw-util-open' : ''
                 }`}
                 aria-label={t('nav.utilities')}
@@ -328,8 +329,16 @@ export default function Navbar({ onTriggerEasterEgg, onOpenTerminal, theme, onTo
                 <Settings className="w-4 h-4 hdr-util-icon transition-transform duration-300" style={{ transform: utilitiesOpen ? 'rotate(45deg)' : 'none' }} />
               </button>
 
-              {utilitiesOpen && (
-                <div className="absolute right-0 top-full mt-2 w-64 chpw-drawer rounded-2xl p-2 animate-in fade-in slide-in-from-top-2 duration-150 shadow-xl">
+              <AnimatePresence>
+                {utilitiesOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.97 }}
+                    transition={{ duration: 0.15, ease: [0.23, 1, 0.32, 1] }}
+                    style={{ transformOrigin: 'top right' }}
+                    className="absolute right-0 top-full mt-2 w-64 chpw-drawer rounded-2xl p-2 shadow-xl"
+                  >
                   <p className="px-3 pt-1.5 pb-1 text-[10px] font-mono uppercase tracking-widest hdr-drawer-label">
                     {t('nav.preferences')}
                   </p>
@@ -352,8 +361,9 @@ export default function Navbar({ onTriggerEasterEgg, onOpenTerminal, theme, onTo
                     </span>
                     <span className="text-xs font-medium hdr-util-label">{t('nav.statusOnline')}</span>
                   </div>
-                </div>
-              )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* Mobile hamburger */}
@@ -368,8 +378,15 @@ export default function Navbar({ onTriggerEasterEgg, onOpenTerminal, theme, onTo
         </div>
 
         {/* Mobile drawer — essential links + CTA */}
-        {mobileOpen && (
-          <div className="lg:hidden chpw-drawer border-t hdr-drawer-divider px-6 py-5 animate-in slide-in-from-top duration-200">
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
+              className="lg:hidden chpw-drawer border-t hdr-drawer-divider px-6 py-5"
+            >
             <nav className="flex flex-col gap-1">
               {navLinks.map((item) => (
                 <a
@@ -392,8 +409,9 @@ export default function Navbar({ onTriggerEasterEgg, onOpenTerminal, theme, onTo
                 <MoveRight className="w-4 h-4" />
               </a>
             </div>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* BSOD / Cyberpunk Crash Error Overlay - Phase 3 */}
@@ -496,7 +514,7 @@ export default function Navbar({ onTriggerEasterEgg, onOpenTerminal, theme, onTo
         .chpw-drawer {
           background: rgba(7, 12, 9, 0.92);
           border: 1px solid rgba(0, 255, 136, 0.18);
-          backdrop-filter: blur(24px);
+          backdrop-filter: blur(20px);
         }
         .hdr-drawer-label { color: #64748b; }
         .hdr-drawer-divider { border-color: rgba(255, 255, 255, 0.08); }

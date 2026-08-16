@@ -44,7 +44,7 @@ export default function ProjectsSection({ onSelectProject, onOpenAllProjects }) 
           {/* Button Ver Todos os Projetos */}
           <button
             onClick={onOpenAllProjects}
-            className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#059669] via-[#10b981] to-[#00ff88] text-black font-extrabold text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-glow-sm hover:scale-105 transition-all group cursor-pointer"
+            className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#059669] via-[#10b981] to-[#00ff88] text-black font-extrabold text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-glow-sm hover:scale-105 transition-transform group cursor-pointer"
           >
             <Layers className="w-4 h-4 text-black group-hover:rotate-12 transition-transform" />
             <span>
@@ -68,7 +68,7 @@ export default function ProjectsSection({ onSelectProject, onOpenAllProjects }) 
             <div
               key={`${project.id}-${index}`}
               onClick={() => onSelectProject(project)}
-              className="proj-card w-[320px] sm:w-[380px] shrink-0 glass-card rounded-2xl overflow-hidden border border-[#10b981]/25 hover:border-[#00ff88]/70 transition-all duration-300 group cursor-pointer flex flex-col justify-between"
+              className="proj-card w-[320px] sm:w-[380px] shrink-0 glass-card rounded-2xl overflow-hidden border border-[#10b981]/25 hover:border-[#00ff88]/70 group cursor-pointer flex flex-col justify-between"
             >
               <div>
                 {/* Image Container */}
@@ -76,7 +76,9 @@ export default function ProjectsSection({ onSelectProject, onOpenAllProjects }) 
                   <img
                     src={project.image}
                     alt={project.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 filter brightness-90 contrast-110"
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200 filter brightness-90 contrast-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#040705] via-[#040705]/40 to-transparent" />
 

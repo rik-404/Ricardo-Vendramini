@@ -72,7 +72,7 @@ export default function AboutSection() {
               <img
                 src={personalInfo.photoUrl}
                 alt={personalInfo.name}
-                className="w-full h-[460px] object-cover object-top rounded-xl filter contrast-105 hover:scale-[1.01] transition-all duration-700"
+                className="w-full h-[460px] object-cover object-top rounded-xl filter contrast-105 hover:scale-[1.01] transition-transform duration-200"
               />
 
               {/* Overlay Badge with Company Link */}
@@ -80,7 +80,7 @@ export default function AboutSection() {
                 href={personalInfo.companyWebsite}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute bottom-6 left-6 right-6 p-4 rounded-xl glass-panel border border-[#00ff88]/40 shadow-glow-sm hover:border-[#00f2fe] hover:scale-[1.02] transition-all group bg-[#040705]/90"
+                className="absolute bottom-6 left-6 right-6 p-4 rounded-xl glass-panel border border-[#00ff88]/40 shadow-glow-sm hover:border-[#00f2fe] hover:scale-[1.02] transition-[border-color,transform] group bg-[#040705]/90"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
@@ -145,7 +145,7 @@ export default function AboutSection() {
                 return (
                   <div
                     key={idx}
-                    className={`glass-card p-4 rounded-xl border border-white/10 transition-all duration-300 ${pillar.borderColor}`}
+                    className={`glass-card p-4 rounded-xl border border-white/10 ${pillar.borderColor}`}
                   >
                     <div className="flex items-center gap-2.5 mb-2">
                       <div className={`p-1.5 rounded-lg bg-white/5 border border-white/10 ${pillar.iconColor}`}>

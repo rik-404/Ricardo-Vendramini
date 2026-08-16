@@ -52,7 +52,7 @@ export default function AllSkillsModal({ isOpen, onClose }) {
           <div className="p-6 sm:p-8 border-b border-white/10 shrink-0 bg-[#06100a]/90 relative">
             <button
               onClick={onClose}
-              className="absolute top-6 right-6 p-2.5 rounded-full bg-black/60 border border-white/20 text-white hover:text-[#00ff88] hover:border-[#00ff88] transition-all cursor-pointer"
+              className="absolute top-6 right-6 p-2.5 rounded-full bg-black/60 border border-white/20 text-white hover:text-[#00ff88] hover:border-[#00ff88] transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -87,7 +87,7 @@ export default function AllSkillsModal({ isOpen, onClose }) {
                   placeholder={lang === 'en' ? 'Search technology, tool, or project...' : 'Pesquisar tecnologia, ferramenta ou projeto...'}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-black/60 border border-white/15 text-white text-xs placeholder:text-slate-500 focus:outline-none focus:border-[#00ff88] transition-all"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-black/60 border border-white/15 text-white text-xs placeholder:text-slate-500 focus:outline-none focus:border-[#00ff88] transition-colors"
                 />
                 {searchQuery && (
                   <button
@@ -105,7 +105,7 @@ export default function AllSkillsModal({ isOpen, onClose }) {
                   <button
                     key={cat.id}
                     onClick={() => setActiveCategory(cat.id)}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-all cursor-pointer ${
+                    className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-colors cursor-pointer ${
                       activeCategory === cat.id
                         ? 'bg-[#00ff88] text-black font-bold shadow-glow-sm'
                         : 'glass-panel text-slate-300 hover:text-white hover:border-[#00ff88]/40'
@@ -125,9 +125,10 @@ export default function AllSkillsModal({ isOpen, onClose }) {
           <AnimatePresence>
             {selectedSkillDetail && (
               <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
+                initial={{ opacity: 0, y: -12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
                 className="px-6 py-4 bg-[#08180e] border-b border-[#00ff88]/40 shrink-0 relative"
               >
                 <button
@@ -174,7 +175,7 @@ export default function AllSkillsModal({ isOpen, onClose }) {
                     <div
                       key={index}
                       onClick={() => setSelectedSkillDetail(isSelected ? null : skill)}
-                      className={`glass-card p-5 rounded-2xl cursor-pointer relative group border transition-all duration-300 flex flex-col justify-between ${
+                      className={`glass-card p-5 rounded-2xl cursor-pointer relative group border transition-[background-color] duration-300 flex flex-col justify-between ${
                         isSelected
                           ? 'border-[#00ff88] shadow-glow-md bg-[#0c2e17]/70'
                           : 'border-[#10b981]/25 hover:border-[#00ff88]/70 hover:bg-[#06140d]/60'
@@ -220,7 +221,7 @@ export default function AllSkillsModal({ isOpen, onClose }) {
 
             <button
               onClick={onClose}
-              className="px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-all"
+              className="px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-colors"
             >
               {t('skills.closeCatalog')}
             </button>

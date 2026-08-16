@@ -1,9 +1,10 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function Book3D({ book, onClick }) {
   const { t } = useLanguage();
+  const reduceMotion = useReducedMotion();
   if (!book) return null;
 
   return (
@@ -13,7 +14,7 @@ export default function Book3D({ book, onClick }) {
         className="book3d"
         onClick={() => onClick?.(book)}
         initial={{ rotateX: 8, rotateY: -22, rotateZ: -2 }}
-        whileHover={{
+        whileHover={reduceMotion ? undefined : {
           scale: 1.06,
           rotateX: 4,
           rotateY: -12,

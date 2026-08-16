@@ -40,7 +40,7 @@ export default function BookModal({ book, onClose }) {
         >
           <button
             onClick={onClose}
-            className="absolute top-5 right-5 p-2.5 rounded-full bg-black/60 border border-white/20 text-slate-300 hover:text-[#00ff88] hover:border-[#00ff88] transition-all z-20"
+            className="absolute top-5 right-5 p-2.5 rounded-full bg-black/60 border border-white/20 text-slate-300 hover:text-[#00ff88] hover:border-[#00ff88] transition-colors z-20"
           >
             <X className="w-5 h-5" />
           </button>
@@ -128,7 +128,7 @@ export default function BookModal({ book, onClose }) {
 
                 <button
                   onClick={onClose}
-                  className="px-5 py-2.5 rounded-xl bg-white/10 border border-white/20 text-white font-bold text-xs font-mono hover:bg-white/20 transition-all cursor-pointer"
+                  className="px-5 py-2.5 rounded-xl bg-white/10 border border-white/20 text-white font-bold text-xs font-mono hover:bg-white/20 transition-colors cursor-pointer"
                 >
                   {lang === 'en' ? 'Close' : 'Fechar'}
                 </button>

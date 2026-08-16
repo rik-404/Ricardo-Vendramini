@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import CustomCursor from './components/CustomCursor';
 import HeroCanvas from './components/HeroCanvas';
 import Navbar from './components/Navbar';
@@ -28,6 +29,7 @@ import { Trash2, RotateCcw } from 'lucide-react';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import SeoManager from './components/SeoManager';
+import AchievementToast from './components/AchievementToast';
 import { useLanguage } from './context/LanguageContext';
 
 export default function App() {
@@ -248,6 +250,9 @@ export default function App() {
       {/* Dynamic SEO: section-scoped <title>, meta description & Open Graph tags */}
       <SeoManager />
 
+      {/* Achievement Celebration Toast (mounted once, at root) */}
+      <AchievementToast />
+
       {/* Interactive Custom Cursor */}
       <CustomCursor />
 
@@ -296,7 +301,7 @@ export default function App() {
           </span>
           <button
             onClick={() => setSiteCleaned(false)}
-            className="px-4 py-1.5 rounded-xl bg-gradient-to-r from-[#059669] to-[#00ff88] text-black font-extrabold flex items-center gap-1.5 hover:scale-105 transition-all cursor-pointer shadow-sm"
+            className="px-4 py-1.5 rounded-xl bg-gradient-to-r from-[#059669] to-[#00ff88] text-black font-extrabold flex items-center gap-1.5 hover:scale-105 transition-transform cursor-pointer shadow-sm"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>{t('cleanBanner.restore')} (ESC)</span>
@@ -375,36 +380,38 @@ export default function App() {
       />
 
       {/* Standalone Exclusive Terminal CLI & Easter Eggs Fullscreen Sandbox */}
-      {terminalModalOpen && (
-        <TerminalSection
-          isModal={true}
-          onClose={() => setTerminalModalOpen(false)}
-          theme={theme}
-          onToggleTheme={toggleTheme}
-          onTriggerEasterEgg={() => {
-            setTerminalModalOpen(false);
-            triggerMatrixOnly();
-          }}
-          onTriggerBreakout={() => {
-            setTerminalModalOpen(false);
-            setBreakoutGameOpen(true);
-          }}
-          onTriggerStarWars={() => {
-            setTerminalModalOpen(false);
-            setStarWarsOpen(true);
-          }}
-          onTriggerClean={() => {
-            setTerminalModalOpen(false);
-            setSiteCleaned(true);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
-          onRestoreClean={() => setSiteCleaned(false)}
-          onTriggerTimewalker={() => {
-            setTerminalModalOpen(false);
-            setTimeTravelMode('TO_PAST');
-          }}
-        />
-      )}
+      <AnimatePresence>
+        {terminalModalOpen && (
+          <TerminalSection
+            isModal={true}
+            onClose={() => setTerminalModalOpen(false)}
+            theme={theme}
+            onToggleTheme={toggleTheme}
+            onTriggerEasterEgg={() => {
+              setTerminalModalOpen(false);
+              triggerMatrixOnly();
+            }}
+            onTriggerBreakout={() => {
+              setTerminalModalOpen(false);
+              setBreakoutGameOpen(true);
+            }}
+            onTriggerStarWars={() => {
+              setTerminalModalOpen(false);
+              setStarWarsOpen(true);
+            }}
+            onTriggerClean={() => {
+              setTerminalModalOpen(false);
+              setSiteCleaned(true);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onRestoreClean={() => setSiteCleaned(false)}
+            onTriggerTimewalker={() => {
+              setTerminalModalOpen(false);
+              setTimeTravelMode('TO_PAST');
+            }}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Update Notification */}
       {swUpdated && (
@@ -412,7 +419,7 @@ export default function App() {
           <span className="text-[#00ff88]">🔄 Nova atualização disponível!</span>
           <button
             onClick={handleApplyUpdate}
-            className="px-3 py-1.5 rounded-xl bg-[#00ff88] text-black font-bold hover:scale-105 transition-all"
+            className="px-3 py-1.5 rounded-xl bg-[#00ff88] text-black font-bold hover:scale-105 transition-transform"
           >
             Atualizar
           </button>
