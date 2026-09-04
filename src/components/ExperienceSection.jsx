@@ -14,9 +14,9 @@ export default function ExperienceSection() {
         
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0c140e] border border-[#10b981]/30 mb-4">
-            <Briefcase className="w-3.5 h-3.5 text-[#00ff88]" />
-            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/15 mb-4">
+            <Briefcase className="w-3.5 h-3.5 text-slate-200" />
+            <span className="text-xs font-mono text-slate-200 tracking-widest uppercase">
               {lang === 'en' ? 'Professional Experience' : 'Atuação Profissional'}
             </span>
           </div>
@@ -42,11 +42,11 @@ export default function ExperienceSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="glass-card p-6 sm:p-8 rounded-3xl border border-[#10b981]/25 relative overflow-hidden group hover:border-[#00ff88]/50"
+              className="glass-card p-6 sm:p-8 rounded-3xl border border-white/10 relative overflow-hidden group hover:border-white/40"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-white/10">
                 <div>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0c2e17] text-[#00ff88] text-xs font-mono mb-2">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.08] border border-white/15 text-white text-xs font-mono mb-2">
                     <Building className="w-3.5 h-3.5" />
                     <span>{exp.company}</span>
                   </div>
@@ -63,13 +63,13 @@ export default function ExperienceSection() {
               </p>
 
               <div className="space-y-3">
-                <span className="text-xs font-mono text-[#00ff88] uppercase tracking-wider block">
+                <span className="text-xs font-mono text-white uppercase tracking-wider block font-semibold">
                   {lang === 'en' ? 'Key Contributions & Impact:' : 'Principais Contribuições & Impacto:'}
                 </span>
                 <ul className="space-y-2">
                   {exp.highlights.map((h, i) => (
                     <li key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300 font-light">
-                      <CheckCircle2 className="w-4 h-4 text-[#00ff88] shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-white shrink-0 mt-0.5" />
                       <span>{h}</span>
                     </li>
                   ))}

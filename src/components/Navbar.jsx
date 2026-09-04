@@ -56,7 +56,7 @@ function ThemeRow({ headerLight, onToggle }) {
       <span className={`relative w-9 h-5 rounded-full p-0.5 flex items-center transition-colors hdr-theme-track ${headerLight ? 'hdr-theme-track-on' : ''}`}>
         <span
           className={`w-4 h-4 rounded-full shadow transition-transform duration-300 ${
-            headerLight ? 'translate-x-4 bg-white' : 'translate-x-0 bg-[#00ff88] shadow-[0_0_8px_#00ff88]'
+            headerLight ? 'translate-x-4 bg-white' : 'translate-x-0 bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]'
           }`}
         />
       </span>
@@ -75,13 +75,13 @@ function CliRow({ onOpenTerminal }) {
       title={t('nav.openCli')}
     >
       <span className="flex items-center gap-2.5">
-        <Terminal className="w-4 h-4 text-[#00ff88]" />
+        <Terminal className="w-4 h-4 text-white" />
         <span className="text-xs font-mono font-bold hdr-util-label">
           CLI
         </span>
       </span>
       <span className="flex items-center gap-1.5">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#00ff88] animate-pulse shadow-glow-sm" />
+        <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse shadow-glow-sm" />
         <MoveRight className="w-3.5 h-3.5 hdr-util-icon" />
       </span>
     </button>
@@ -255,14 +255,14 @@ export default function Navbar({ onTriggerEasterEgg, onOpenTerminal, theme, onTo
               className={`w-9 h-9 rounded-lg border flex items-center justify-center transition-[border-color,transform] shrink-0 ${
                 glitchPhase > 0 && glitchPhase < 4
                   ? 'border-red-500/60 rotate-12 scale-110'
-                  : 'border-[#00f2fe]/40 group-hover:border-[#00ff88] group-hover:scale-105'
+                  : 'border-white/20 group-hover:border-white/60 group-hover:scale-105'
               }`}
             >
               <span
                 className={`text-sm font-black tracking-tight ${
                   glitchPhase > 0 && glitchPhase < 4
                     ? 'text-red-500'
-                    : 'text-gradient-green drop-shadow-[0_0_8px_rgba(0,255,136,0.5)]'
+                    : 'text-gradient-green drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]'
                 }`}
               >
                 RV
@@ -299,7 +299,7 @@ export default function Navbar({ onTriggerEasterEgg, onOpenTerminal, theme, onTo
                 >
                   {item.label}
                   {isActive && (
-                    <span className="absolute bottom-0 left-2.5 right-2.5 h-[2px] bg-gradient-to-r from-[#00f2fe] via-[#10b981] to-[#00ff88] rounded-full shadow-glow-sm" />
+                    <span className="absolute bottom-0 left-2.5 right-2.5 h-[2px] bg-gradient-to-r from-white via-slate-200 to-slate-400 rounded-full shadow-glow-sm" />
                   )}
                 </a>
               );
@@ -310,7 +310,7 @@ export default function Navbar({ onTriggerEasterEgg, onOpenTerminal, theme, onTo
           <div className="flex items-center gap-2 shrink-0">
             <a
               href="#contact"
-              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-xl bg-gradient-to-r from-[#00f2fe] via-[#10b981] to-[#00ff88] text-black shadow-glow-sm hover:shadow-glow-md transition-transform transform hover:-translate-y-0.5 whitespace-nowrap cursor-pointer"
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-xl bg-white text-black shadow-glow-sm hover:bg-slate-200 hover:shadow-glow-md transition-all transform hover:-translate-y-0.5 whitespace-nowrap cursor-pointer"
             >
               {t('nav.contactBtn')}
               <MoveRight className="w-3.5 h-3.5" />
@@ -403,7 +403,7 @@ export default function Navbar({ onTriggerEasterEgg, onOpenTerminal, theme, onTo
               <a
                 href="#contact"
                 onClick={() => setMobileOpen(false)}
-                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-[#00f2fe] to-[#00ff88] text-black font-bold text-sm cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-white text-black font-bold text-sm cursor-pointer shadow-glow-sm hover:bg-slate-200"
               >
                 {t('nav.contactBtn')}
                 <MoveRight className="w-4 h-4" />
@@ -462,18 +462,18 @@ export default function Navbar({ onTriggerEasterEgg, onOpenTerminal, theme, onTo
            Header theme tokens (dark default)
         --------------------------------------------------------- */
         .chpw-header {
-          background: rgba(4, 7, 5, 0.55);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+          background: rgba(9, 9, 11, 0.65);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
         .chpw-header-top {
-          background: rgba(4, 7, 5, 0.35);
-          backdrop-filter: blur(8px);
+          background: rgba(9, 9, 11, 0.45);
+          backdrop-filter: blur(12px);
         }
         .chpw-header-scrolled {
-          background: rgba(4, 7, 5, 0.78);
+          background: rgba(9, 9, 11, 0.85);
           backdrop-filter: blur(20px);
-          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
-          border-bottom: 1px solid rgba(0, 242, 254, 0.12);
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.12);
         }
 
         .hdr-text-primary { color: #f8fafc; }
@@ -484,8 +484,8 @@ export default function Navbar({ onTriggerEasterEgg, onOpenTerminal, theme, onTo
           backdrop-filter: blur(12px);
         }
         .nav-link { color: #cbd5e1; }
-        .nav-link:hover { background: rgba(255, 255, 255, 0.06); color: #ffffff; }
-        .nav-link.nav-link-active { color: #00ff88; font-weight: 700; background: rgba(255, 255, 255, 0.05); }
+        .nav-link:hover { background: rgba(255, 255, 255, 0.08); color: #ffffff; }
+        .nav-link.nav-link-active { color: #ffffff; font-weight: 700; background: rgba(255, 255, 255, 0.08); }
 
         .hdr-btn-ghost {
           color: #cbd5e1;
@@ -499,81 +499,81 @@ export default function Navbar({ onTriggerEasterEgg, onOpenTerminal, theme, onTo
         .hdr-util-row:hover { background: rgba(255, 255, 255, 0.08); }
         .hdr-util-idle { color: #94a3b8; background: transparent; }
         .hdr-util-active-pt {
-          color: #00ff88; background: rgba(0, 255, 136, 0.12);
-          box-shadow: inset 0 0 0 1px rgba(0, 255, 136, 0.4);
+          color: #ffffff; background: rgba(255, 255, 255, 0.15);
+          box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
         }
         .hdr-util-active-en {
-          color: #00f2fe; background: rgba(0, 242, 254, 0.12);
-          box-shadow: inset 0 0 0 1px rgba(0, 242, 254, 0.4);
+          color: #ffffff; background: rgba(255, 255, 255, 0.15);
+          box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
         }
         .hdr-glass-ring { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); }
         .hdr-theme-track { background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .hdr-theme-track-on { background: rgba(0, 255, 136, 0.55); border-color: rgba(0, 255, 136, 0.4); }
-        .chpw-header.chpw-header-light .hdr-theme-track-on { background: rgba(16, 185, 129, 0.45); border-color: rgba(16, 185, 129, 0.5); }
+        .hdr-theme-track-on { background: rgba(255, 255, 255, 0.4); border-color: rgba(255, 255, 255, 0.5); }
+        .chpw-header.chpw-header-light .hdr-theme-track-on { background: rgba(15, 23, 42, 0.65); border-color: rgba(15, 23, 42, 0.8); }
 
         .chpw-drawer {
-          background: rgba(7, 12, 9, 0.92);
-          border: 1px solid rgba(0, 255, 136, 0.18);
+          background: rgba(18, 18, 22, 0.94);
+          border: 1px solid rgba(255, 255, 255, 0.15);
           backdrop-filter: blur(20px);
         }
-        .hdr-drawer-label { color: #64748b; }
+        .hdr-drawer-label { color: #71717a; }
         .hdr-drawer-divider { border-color: rgba(255, 255, 255, 0.08); }
-        .chpw-util-open { background: rgba(0, 255, 136, 0.12); color: #00ff88; border-color: rgba(0, 255, 136, 0.4); }
-        .chpw-util-open .hdr-util-icon { color: #00ff88; }
+        .chpw-util-open { background: rgba(255, 255, 255, 0.12); color: #ffffff; border-color: rgba(255, 255, 255, 0.3); }
+        .chpw-util-open .hdr-util-icon { color: #ffffff; }
 
-        .hdr-status-on .hdr-status-core { background: #00ff88; box-shadow: 0 0 8px #00ff88; }
-        .hdr-status-on .hdr-status-ping { background: #00ff88; opacity: 0.5; animation: statusPing 1.8s cubic-bezier(0, 0, 0.2, 1) infinite; }
+        .hdr-status-on .hdr-status-core { background: #ffffff; box-shadow: 0 0 8px rgba(255, 255, 255, 0.8); }
+        .hdr-status-on .hdr-status-ping { background: #ffffff; opacity: 0.5; animation: statusPing 1.8s cubic-bezier(0, 0, 0.2, 1) infinite; }
         .hdr-status-off .hdr-status-core { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
 
         /* ---------------------------------------------------------
            Light theme (affects only this header)
         --------------------------------------------------------- */
         .chpw-header.chpw-header-light {
-          background: rgba(255, 255, 255, 0.72);
+          background: rgba(255, 255, 255, 0.75);
           border-bottom-color: rgba(15, 23, 42, 0.08);
         }
         .chpw-header.chpw-header-light.chpw-header-scrolled {
-          background: rgba(255, 255, 255, 0.82);
-          box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+          background: rgba(255, 255, 255, 0.85);
+          box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
           border-bottom-color: rgba(15, 23, 42, 0.1);
         }
-        .chpw-header.chpw-header-light .hdr-text-primary { color: #0f172a; }
-        .chpw-header.chpw-header-light .hdr-text-muted { color: #475569; }
+        .chpw-header.chpw-header-light .hdr-text-primary { color: #09090b; }
+        .chpw-header.chpw-header-light .hdr-text-muted { color: #71717a; }
         .chpw-header.chpw-header-light .hdr-glass { background: rgba(15, 23, 42, 0.04); border-color: rgba(15, 23, 42, 0.08); }
-        .chpw-header.chpw-header-light .nav-link { color: #475569; }
-        .chpw-header.chpw-header-light .nav-link:hover { background: rgba(15, 23, 42, 0.05); color: #0f172a; }
-        .chpw-header.chpw-header-light .nav-link.nav-link-active { color: #047857; background: rgba(16, 185, 129, 0.1); }
-        .chpw-header.chpw-header-light .hdr-btn-ghost { color: #334155; background: rgba(15, 23, 42, 0.04); border-color: rgba(15, 23, 42, 0.12); }
-        .chpw-header.chpw-header-light .hdr-btn-ghost:hover { background: rgba(15, 23, 42, 0.08); color: #0f172a; }
-        .chpw-header.chpw-header-light .hdr-util-icon { color: #475569; }
-        .chpw-header.chpw-header-light .hdr-util-label { color: #1e293b; }
+        .chpw-header.chpw-header-light .nav-link { color: #52525b; }
+        .chpw-header.chpw-header-light .nav-link:hover { background: rgba(15, 23, 42, 0.05); color: #09090b; }
+        .chpw-header.chpw-header-light .nav-link.nav-link-active { color: #09090b; background: rgba(15, 23, 42, 0.08); }
+        .chpw-header.chpw-header-light .hdr-btn-ghost { color: #3f3f46; background: rgba(15, 23, 42, 0.04); border-color: rgba(15, 23, 42, 0.1); }
+        .chpw-header.chpw-header-light .hdr-btn-ghost:hover { background: rgba(15, 23, 42, 0.08); color: #09090b; }
+        .chpw-header.chpw-header-light .hdr-util-icon { color: #52525b; }
+        .chpw-header.chpw-header-light .hdr-util-label { color: #18181b; }
         .chpw-header.chpw-header-light .hdr-util-row,
-        .chpw-header.chpw-header-light .hdr-glass-ring { background: rgba(15, 23, 42, 0.04); border-color: rgba(15, 23, 42, 0.1); }
+        .chpw-header.chpw-header-light .hdr-glass-ring { background: rgba(15, 23, 42, 0.04); border-color: rgba(15, 23, 42, 0.08); }
         .chpw-header.chpw-header-light .hdr-util-row:hover { background: rgba(15, 23, 42, 0.08); }
-        .chpw-header.chpw-header-light .hdr-util-idle { color: #64748b; }
+        .chpw-header.chpw-header-light .hdr-util-idle { color: #71717a; }
         .chpw-header.chpw-header-light .hdr-theme-track { background: rgba(15, 23, 42, 0.12); border-color: rgba(15, 23, 42, 0.1); }
         .chpw-header.chpw-header-light .chpw-drawer {
-          background: rgba(255, 255, 255, 0.92);
+          background: rgba(255, 255, 255, 0.95);
           border-color: rgba(15, 23, 42, 0.1);
         }
-        .chpw-header.chpw-header-light .hdr-drawer-label { color: #64748b; }
-        .chpw-header.chpw-header-light .hdr-drawer-divider { border-color: rgba(15, 23, 42, 0.1); }
+        .chpw-header.chpw-header-light .hdr-drawer-label { color: #71717a; }
+        .chpw-header.chpw-header-light .hdr-drawer-divider { border-color: rgba(15, 23, 42, 0.08); }
         .chpw-header.chpw-header-light .chpw-util-open {
-          background: rgba(16, 185, 129, 0.15);
-          color: #047857;
-          border-color: rgba(16, 185, 129, 0.5);
+          background: rgba(15, 23, 42, 0.08);
+          color: #09090b;
+          border-color: rgba(15, 23, 42, 0.2);
         }
-        .chpw-header.chpw-header-light .chpw-util-open .hdr-util-icon { color: #047857; }
+        .chpw-header.chpw-header-light .chpw-util-open .hdr-util-icon { color: #09090b; }
         .chpw-header.chpw-header-light .hdr-util-active-pt {
-          color: #047857; background: rgba(16, 185, 129, 0.14);
-          box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.4);
+          color: #09090b; background: rgba(15, 23, 42, 0.1);
+          box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.25);
         }
         .chpw-header.chpw-header-light .hdr-util-active-en {
-          color: #0891b2; background: rgba(8, 145, 178, 0.12);
-          box-shadow: inset 0 0 0 1px rgba(8, 145, 178, 0.4);
+          color: #09090b; background: rgba(15, 23, 42, 0.1);
+          box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.25);
         }
-        .chpw-header.chpw-header-light .chpw-drawer [class*="text-[#00ff88]"] { color: #047857 !important; }
-        .chpw-header.chpw-header-light .chpw-drawer [class*="text-[#00f2fe]"] { color: #0891b2 !important; }
+        .chpw-header.chpw-header-light .chpw-drawer [class*="text-[#00ff88]"] { color: #09090b !important; }
+        .chpw-header.chpw-header-light .chpw-drawer [class*="text-[#00f2fe]"] { color: #09090b !important; }
 
         /* ---------------------------------------------------------
            Animations

@@ -18,12 +18,12 @@ export default function ContactSection() {
     <section id="contact" className="py-24 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="glass-card rounded-3xl border border-[#00ff88]/40 p-8 sm:p-14 relative overflow-hidden shadow-glow-lg text-center flex flex-col items-center">
+        <div className="glass-card rounded-3xl border border-white/15 p-8 sm:p-14 relative overflow-hidden shadow-glow-sm text-center flex flex-col items-center">
           
           {/* Ambient Glow */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] bg-[#00ff88]/15 rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] bg-white/5 rounded-full blur-[100px] pointer-events-none" />
 
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0c2e17] border border-[#00ff88]/40 text-[#00ff88] text-xs font-mono mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.08] border border-white/20 text-white text-xs font-mono mb-6">
             <MessageSquare className="w-3.5 h-3.5" />
             <span>{lang === 'en' ? "Let's Connect" : "Vamos Conectar"}</span>
           </div>
@@ -45,7 +45,7 @@ export default function ContactSection() {
               href={personalInfo.socialLinks.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-[#00f2fe] via-[#10b981] to-[#00ff88] text-black font-extrabold text-base shadow-glow-md hover:scale-105 transition-transform flex items-center justify-center gap-3"
+              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white text-black font-extrabold text-base shadow-glow-sm hover:bg-slate-200 hover:scale-105 transition-all flex items-center justify-center gap-3"
             >
               <Send className="w-5 h-5" />
               <span>{lang === 'en' ? "Chat on WhatsApp" : "Vamos conversar no WhatsApp"}</span>
@@ -53,9 +53,9 @@ export default function ContactSection() {
 
             <button
               onClick={handleCopyEmail}
-              className="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel border border-[#00ff88]/40 text-slate-200 hover:text-[#00ff88] font-bold text-base hover:border-[#00ff88] transition-colors flex items-center justify-center gap-3 cursor-pointer"
+              className="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel border border-white/20 text-slate-200 hover:text-white font-bold text-base hover:border-white/50 transition-colors flex items-center justify-center gap-3 cursor-pointer"
             >
-              {copied ? <Check className="w-5 h-5 text-[#00ff88]" /> : <Copy className="w-5 h-5" />}
+              {copied ? <Check className="w-5 h-5 text-white" /> : <Copy className="w-5 h-5" />}
               <span>{copied ? (lang === 'en' ? "Email Copied!" : "E-mail Copiado!") : (lang === 'en' ? "Copy Email Address" : "Copiar Endereço de E-mail")}</span>
             </button>
           </div>
@@ -66,19 +66,19 @@ export default function ContactSection() {
               href={personalInfo.companyWebsite}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4 rounded-xl glass-panel border border-[#00f2fe]/30 hover:border-[#00ff88] flex flex-col items-center gap-2 group transition-colors shadow-glow-sm col-span-2 sm:col-span-1"
+              className="p-4 rounded-xl glass-panel border border-white/20 hover:border-white/50 flex flex-col items-center gap-2 group transition-colors shadow-glow-sm col-span-2 sm:col-span-1"
             >
-              <Globe className="w-6 h-6 text-[#00f2fe] group-hover:text-[#00ff88] transition-colors" />
-              <span className="text-xs font-mono text-[#00f2fe] font-bold">{t('contact.company')} ↗</span>
+              <Globe className="w-6 h-6 text-white group-hover:text-slate-200 transition-colors" />
+              <span className="text-xs font-mono text-white font-bold">{t('contact.company')} ↗</span>
             </a>
 
             <a
               href={personalInfo.socialLinks.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4 rounded-xl glass-panel border border-white/5 hover:border-[#00ff88]/40 flex flex-col items-center gap-2 group transition-colors"
+              className="p-4 rounded-xl glass-panel border border-white/5 hover:border-white/30 flex flex-col items-center gap-2 group transition-colors"
             >
-              <Github className="w-6 h-6 text-slate-400 group-hover:text-[#00ff88] transition-colors" />
+              <Github className="w-6 h-6 text-slate-400 group-hover:text-white transition-colors" />
               <span className="text-xs font-mono text-slate-300">GitHub</span>
             </a>
 
@@ -86,9 +86,9 @@ export default function ContactSection() {
               href={personalInfo.socialLinks.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4 rounded-xl glass-panel border border-white/5 hover:border-[#00ff88]/40 flex flex-col items-center gap-2 group transition-colors"
+              className="p-4 rounded-xl glass-panel border border-white/5 hover:border-white/30 flex flex-col items-center gap-2 group transition-colors"
             >
-              <Linkedin className="w-6 h-6 text-slate-400 group-hover:text-[#00ff88] transition-colors" />
+              <Linkedin className="w-6 h-6 text-slate-400 group-hover:text-white transition-colors" />
               <span className="text-xs font-mono text-slate-300">LinkedIn</span>
             </a>
 
@@ -96,17 +96,17 @@ export default function ContactSection() {
               href={personalInfo.socialLinks.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4 rounded-xl glass-panel border border-white/5 hover:border-[#00ff88]/40 flex flex-col items-center gap-2 group transition-colors"
+              className="p-4 rounded-xl glass-panel border border-white/5 hover:border-white/30 flex flex-col items-center gap-2 group transition-colors"
             >
-              <PhoneCall className="w-6 h-6 text-slate-400 group-hover:text-[#00ff88] transition-colors" />
+              <PhoneCall className="w-6 h-6 text-slate-400 group-hover:text-white transition-colors" />
               <span className="text-xs font-mono text-slate-300">WhatsApp</span>
             </a>
 
             <a
               href={`mailto:${personalInfo.socialLinks.email}`}
-              className="p-4 rounded-xl glass-panel border border-white/5 hover:border-[#00ff88]/40 flex flex-col items-center gap-2 group transition-colors"
+              className="p-4 rounded-xl glass-panel border border-white/5 hover:border-white/30 flex flex-col items-center gap-2 group transition-colors"
             >
-              <Mail className="w-6 h-6 text-slate-400 group-hover:text-[#00ff88] transition-colors" />
+              <Mail className="w-6 h-6 text-slate-400 group-hover:text-white transition-colors" />
               <span className="text-xs font-mono text-slate-300">{t('misc.emailLabel')}</span>
             </a>
           </div>

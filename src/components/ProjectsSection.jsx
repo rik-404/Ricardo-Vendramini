@@ -21,9 +21,9 @@ export default function ProjectsSection({ onSelectProject, onOpenAllProjects }) 
         
         {/* Section Header */}
         <div className="flex flex-col items-center text-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0c140e] border border-[#00ff88]/30 mb-4">
-            <FolderCode className="w-3.5 h-3.5 text-[#00ff88]" />
-            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/15 mb-4">
+            <FolderCode className="w-3.5 h-3.5 text-slate-200" />
+            <span className="text-xs font-mono text-slate-200 tracking-widest uppercase">
               {lang === 'en' ? 'Solutions Portfolio' : 'Portfólio de Soluções'}
             </span>
           </div>
@@ -44,7 +44,7 @@ export default function ProjectsSection({ onSelectProject, onOpenAllProjects }) 
           {/* Button Ver Todos os Projetos */}
           <button
             onClick={onOpenAllProjects}
-            className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#059669] via-[#10b981] to-[#00ff88] text-black font-extrabold text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-glow-sm hover:scale-105 transition-transform group cursor-pointer"
+            className="px-6 py-3 rounded-xl bg-white text-black font-extrabold text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-glow-sm hover:bg-slate-200 hover:scale-105 transition-all group cursor-pointer"
           >
             <Layers className="w-4 h-4 text-black group-hover:rotate-12 transition-transform" />
             <span>
@@ -60,15 +60,15 @@ export default function ProjectsSection({ onSelectProject, onOpenAllProjects }) 
       <div className="relative w-full overflow-hidden py-4">
         
         {/* Left & Right Gradient Shadows for Seamless Fade */}
-        <div className="absolute top-0 bottom-0 left-0 w-20 sm:w-32 bg-gradient-to-r from-[#040705] to-transparent z-20 pointer-events-none" />
-        <div className="absolute top-0 bottom-0 right-0 w-20 sm:w-32 bg-gradient-to-l from-[#040705] to-transparent z-20 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 left-0 w-20 sm:w-32 bg-gradient-to-r from-bg-deep to-transparent z-20 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 right-0 w-20 sm:w-32 bg-gradient-to-l from-bg-deep to-transparent z-20 pointer-events-none" />
 
         <div className="animate-infinite-marquee flex items-center gap-6 px-4">
           {marqueeProjects.map((project, index) => (
             <div
               key={`${project.id}-${index}`}
               onClick={() => onSelectProject(project)}
-              className="proj-card w-[320px] sm:w-[380px] shrink-0 glass-card rounded-2xl overflow-hidden border border-[#10b981]/25 hover:border-[#00ff88]/70 group cursor-pointer flex flex-col justify-between"
+              className="proj-card w-[320px] sm:w-[380px] shrink-0 glass-card rounded-2xl overflow-hidden border border-white/10 hover:border-white/40 group cursor-pointer flex flex-col justify-between transition-all"
             >
               <div>
                 {/* Image Container */}
@@ -80,27 +80,27 @@ export default function ProjectsSection({ onSelectProject, onOpenAllProjects }) 
                     decoding="async"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200 filter brightness-90 contrast-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#040705] via-[#040705]/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-bg-deep via-bg-deep/40 to-transparent" />
 
                   {/* Top Badge */}
-                  <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full glass-panel border border-[#00ff88]/40 text-[#00ff88] text-[11px] font-mono font-semibold">
+                  <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full glass-panel border border-white/20 text-white text-[11px] font-mono font-semibold">
                     <Sparkles className="w-3 h-3" />
                     <span>{project.badge}</span>
                   </div>
 
                   {/* Status Indicator */}
-                  <div className="absolute top-3 right-3 px-2 py-0.5 rounded-md bg-[#040705]/80 border border-white/10 text-[10px] font-mono text-slate-300">
+                  <div className="absolute top-3 right-3 px-2 py-0.5 rounded-md bg-bg-card/80 border border-white/10 text-[10px] font-mono text-slate-300">
                     {project.status}
                   </div>
                 </div>
 
                 {/* Project Details */}
                 <div className="p-5">
-                  <span className="text-[11px] font-mono text-[#10b981] font-semibold uppercase tracking-wider block mb-1">
+                  <span className="text-[11px] font-mono text-slate-400 font-semibold uppercase tracking-wider block mb-1">
                     {project.category} • {project.date}
                   </span>
 
-                  <h3 className="text-lg font-extrabold text-white mb-1.5 group-hover:text-[#00ff88] transition-colors truncate">
+                  <h3 className="text-lg font-extrabold text-white mb-1.5 group-hover:text-white transition-colors truncate">
                     {project.name}
                   </h3>
 
@@ -113,7 +113,7 @@ export default function ProjectsSection({ onSelectProject, onOpenAllProjects }) 
                     {project.technologies.slice(0, 3).map((tech, tIdx) => (
                       <span
                         key={tIdx}
-                        className="proj-tag px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 text-[10px] font-mono text-slate-300 group-hover:border-[#10b981]/30 transition-colors"
+                        className="proj-tag px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 text-[10px] font-mono text-slate-300 group-hover:border-white/30 transition-colors"
                       >
                         {tech}
                       </span>
@@ -129,7 +129,7 @@ export default function ProjectsSection({ onSelectProject, onOpenAllProjects }) 
 
               {/* Card Footer CTA */}
               <div className="px-5 pb-5 pt-2 border-t border-white/5 flex items-center justify-between">
-                <span className="text-xs font-semibold text-[#00ff88] group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                <span className="text-xs font-semibold text-slate-200 group-hover:text-white group-hover:translate-x-1 transition-all flex items-center gap-1">
                   {t('projects.viewCase')} <ChevronRight className="w-4 h-4" />
                 </span>
 
@@ -139,7 +139,7 @@ export default function ProjectsSection({ onSelectProject, onOpenAllProjects }) 
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-1.5 rounded-lg bg-[#00ff88]/10 text-[#00ff88] hover:bg-[#00ff88]/20 transition-colors"
+                      className="p-1.5 rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors"
                       title={t('projects.openProject')}
                     >
                       <ExternalLink className="w-3.5 h-3.5" />

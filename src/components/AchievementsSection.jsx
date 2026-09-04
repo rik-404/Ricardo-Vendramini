@@ -14,9 +14,9 @@ export default function AchievementsSection() {
         
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0c140e] border border-[#10b981]/30 mb-4">
-            <Trophy className="w-3.5 h-3.5 text-[#00ff88]" />
-            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/15 mb-4">
+            <Trophy className="w-3.5 h-3.5 text-slate-200" />
+            <span className="text-xs font-mono text-slate-200 tracking-widest uppercase">
               {lang === 'en' ? 'Achievements & Impact' : 'Marcos & Feitos'}
             </span>
           </div>
@@ -42,19 +42,19 @@ export default function AchievementsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="glass-card p-6 rounded-3xl border border-[#10b981]/25 hover:border-[#00ff88]/50 relative group overflow-hidden flex flex-col justify-between"
+              className="glass-card p-6 rounded-3xl border border-white/10 hover:border-white/40 relative group overflow-hidden flex flex-col justify-between transition-all"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-3xl font-extrabold font-mono text-[#00ff88]/40 group-hover:text-[#00ff88] transition-colors">
+                  <span className="text-3xl font-extrabold font-mono text-white/30 group-hover:text-white transition-colors">
                     {item.number}
                   </span>
-                  <span className="px-2.5 py-0.5 rounded-full bg-[#0c2e17] text-[#00ff88] text-[10px] font-mono uppercase">
+                  <span className="px-2.5 py-0.5 rounded-full bg-white/[0.08] border border-white/15 text-white text-[10px] font-mono uppercase">
                     {item.category}
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-[#00ff88] transition-colors">
+                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-white transition-colors">
                   {item.title}
                 </h3>
 
@@ -64,7 +64,7 @@ export default function AchievementsSection() {
               </div>
 
               <div className="mt-6 pt-4 border-t border-white/5 flex items-center gap-1.5 text-[11px] font-mono text-slate-400">
-                <Star className="w-3.5 h-3.5 text-[#00ff88]" />
+                <Star className="w-3.5 h-3.5 text-white" />
                 <span>{t('achievements.impactLabel')}</span>
               </div>
             </motion.div>

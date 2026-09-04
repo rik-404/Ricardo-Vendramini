@@ -28,7 +28,7 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
         width: 6 + ((i * 53) % 14) + (i % 3) * 4,
         duration: 0.3 + ((i * 29) % 18) / 100,
         delay: -((i * 47) % 30) / 10,
-        color: i % 2 ? '#00f2fe' : '#00ff88',
+        color: i % 2 ? '#ffffff' : '#e4e4e7',
       })),
     [mode]
   );
@@ -134,12 +134,12 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="timewalk-scope fixed inset-0 z-[9999999] bg-black flex flex-col items-center justify-between p-6 overflow-hidden select-none font-mono text-white"
+        className="timewalk-scope fixed inset-0 z-[9999999] bg-[#09090b] flex flex-col items-center justify-between p-6 overflow-hidden select-none font-mono text-white"
       >
         {/* Chromatic aberration border bleed while accelerating */}
         <div
           className="absolute inset-0 pointer-events-none z-[5]"
-          style={{ boxShadow: speed > 40 ? '0 0 60px 8px rgba(0,255,136,0.12), 0 0 120px 24px rgba(0,242,254,0.08), inset 0 0 80px 20px rgba(0,242,254,0.10)' : 'inset 0 0 80px 20px rgba(0,242,254,0.06)' }}
+          style={{ boxShadow: speed > 40 ? '0 0 60px 8px rgba(255,255,255,0.12), 0 0 120px 24px rgba(161,161,170,0.1), inset 0 0 80px 20px rgba(255,255,255,0.08)' : 'inset 0 0 80px 20px rgba(255,255,255,0.04)' }}
         />
 
         {/* Lightning strikes (pre-88 storm) */}
@@ -150,8 +150,8 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
               className="absolute top-0 w-px h-[45vh]"
               style={{
                 left: `${l.left}%`,
-                background: 'linear-gradient(to bottom, #fff, rgba(255,255,255,0))',
-                filter: 'drop-shadow(0 0 8px #aeb3ff)',
+                background: 'linear-gradient(to bottom, #ffffff, rgba(255,255,255,0))',
+                filter: 'drop-shadow(0 0 10px #ffffff)',
                 opacity: 0,
                 animation: `lightningFlash ${l.duration}s linear ${l.delay}s infinite`,
               }}
@@ -160,12 +160,12 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
         </div>
 
         {/* Animated Cyberpunk Grid Road (speed follows throttle) */}
-        <div className="absolute inset-0 opacity-40 pointer-events-none overflow-hidden">
+        <div className="absolute inset-0 opacity-30 pointer-events-none overflow-hidden">
           <div
             className="tw-grid absolute inset-[-20%]"
             style={{
               backgroundImage:
-                'linear-gradient(to right, rgba(0, 255, 136, 0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 242, 254, 0.3) 1px, transparent 1px)',
+                'linear-gradient(to right, rgba(255, 255, 255, 0.2) 1px, transparent 1px), linear-gradient(to bottom, rgba(161, 161, 170, 0.2) 1px, transparent 1px)',
               backgroundSize: '40px 40px',
               transform: 'perspective(500px) rotateX(60deg) translateY(-60px) scale(2)',
               animation: `gridRoadMove ${gridAnim} linear infinite`,
@@ -187,7 +187,7 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
                 left: '100%',
                 width: `${s.width}vw`,
                 background: `linear-gradient(to left, ${s.color}, transparent)`,
-                boxShadow: `0 0 8px ${s.color}`,
+                boxShadow: `0 0 10px rgba(255, 255, 255, 0.9)`,
                 opacity: speed > 12 ? 1 : 0,
                 animation: `streakMove ${Math.max(0.1, s.duration - speed * 0.0012)}s linear ${s.delay}s infinite`,
               }}
@@ -204,7 +204,7 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
             className="tw-vortex absolute -inset-[35%]"
             style={{
               background:
-                'conic-gradient(from 0deg, rgba(0,255,136,0) 0deg, rgba(0,242,254,0.35) 40deg, rgba(0,255,136,0) 80deg, rgba(0,255,136,0.25) 160deg, rgba(0,242,254,0.35) 220deg, rgba(0,255,136,0) 280deg)',
+                'conic-gradient(from 0deg, rgba(255,255,255,0) 0deg, rgba(255,255,255,0.3) 40deg, rgba(161,161,170,0.1) 80deg, rgba(255,255,255,0.2) 160deg, rgba(228,228,231,0.35) 220deg, rgba(255,255,255,0) 280deg)',
               WebkitMask: 'radial-gradient(closest-side, transparent 30%, black 55%, transparent 72%)',
               mask: 'radial-gradient(closest-side, transparent 30%, black 55%, transparent 72%)',
               animation: 'tunnelSpin 1.1s linear infinite',
@@ -226,13 +226,13 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
                 initial={{ scale: 0, opacity: 0.9 }}
                 animate={{ scale: 4, opacity: 0 }}
                 transition={{ duration: 1.15, ease: 'easeOut' }}
-                className="absolute w-80 h-80 rounded-full border-4 border-[#00f2fe] shadow-[0_0_60px_#00f2fe]"
+                className="absolute w-80 h-80 rounded-full border-4 border-white shadow-[0_0_80px_rgba(255,255,255,0.9)]"
               />
               <motion.div
                 initial={{ scale: 0, opacity: 0.9 }}
                 animate={{ scale: 5, opacity: 0 }}
                 transition={{ duration: 1.3, ease: 'easeOut', delay: 0.1 }}
-                className="absolute w-96 h-96 rounded-full border-2 border-[#00ff88]"
+                className="absolute w-96 h-96 rounded-full border-2 border-zinc-300 shadow-[0_0_50px_rgba(255,255,255,0.5)]"
               />
             </div>
           )}
@@ -245,20 +245,20 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
         >
           {/* Top Digital Flux Capacitor & Destination Circuits */}
           <div className="relative z-10 w-full max-w-2xl text-center space-y-4 pt-4">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#05150a] border border-[#00ff88]/50 shadow-[0_0_20px_rgba(0,255,136,0.4)]">
-              <Clock className="w-4 h-4 text-[#00ff88] animate-spin" />
-              <span className="text-xs font-bold text-[#00ff88] tracking-widest uppercase">
-                {isToPast ? 'PROTOCÓLO DE VIAGEM NO TEMPO // TIMEWALKER' : 'RESTAURANDO LINHA TEMPORAL // PRESENT 2026'}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900/90 border border-white/20 shadow-xl">
+              <Clock className="w-4 h-4 text-zinc-300 animate-spin" />
+              <span className="text-xs font-bold text-zinc-200 tracking-widest uppercase">
+                {isToPast ? 'PROTOCOLO DE VIAGEM NO TEMPO // TIMEWALKER' : 'RESTAURANDO LINHA TEMPORAL // PRESENT 2026'}
               </span>
             </div>
 
             {/* DeLorean Flux Capacitor Circuits Box */}
-            <div className="grid grid-cols-3 gap-2 sm:gap-4 max-w-xl mx-auto p-3 sm:p-4 rounded-2xl bg-[#09120c] border-2 border-[#00ff88]/40 shadow-[0_0_30px_rgba(0,255,136,0.2)]">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 max-w-xl mx-auto p-3 sm:p-4 rounded-2xl bg-zinc-950/90 border border-white/20 shadow-2xl">
               {/* Destination Time */}
-              <div className="p-2 sm:p-3 rounded-xl bg-red-950/80 border border-red-500/50 text-center">
+              <div className="p-2 sm:p-3 rounded-xl bg-red-950/70 border border-red-500/40 text-center">
                 <span className="text-[9px] sm:text-[10px] text-red-400 font-bold block uppercase tracking-wider">DESTINO</span>
                 <span
-                  className={`text-lg sm:text-2xl font-extrabold tracking-wider ${hasJumped ? 'text-red-500 drop-shadow-[0_0_12px_rgba(239,68,68,0.9)]' : 'text-red-500/70'}`}
+                  className={`text-lg sm:text-2xl font-extrabold tracking-wider ${hasJumped ? 'text-red-400 drop-shadow-[0_0_12px_rgba(239,68,68,0.9)]' : 'text-red-500/70'}`}
                   style={hasJumped ? undefined : { textShadow: '0 0 6px rgba(239,68,68,0.4)' }}
                 >
                   {hasJumped ? finalDest : destVal}
@@ -266,18 +266,18 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
               </div>
 
               {/* Present Time */}
-              <div className="p-2 sm:p-3 rounded-xl bg-yellow-950/80 border border-yellow-500/50 text-center">
-                <span className="text-[9px] sm:text-[10px] text-yellow-400 font-bold block uppercase tracking-wider">TEMPO ATUAL</span>
-                <span className={`text-lg sm:text-2xl font-extrabold tracking-wider ${yearDisplay === targetYear ? 'text-[#00ff88] drop-shadow-[0_0_14px_#00ff88] animate-pulse' : 'text-yellow-400'} drop-shadow-[0_0_10px_rgba(234,179,8,0.8)]`}>
+              <div className="p-2 sm:p-3 rounded-xl bg-amber-950/70 border border-amber-500/40 text-center">
+                <span className="text-[9px] sm:text-[10px] text-amber-400 font-bold block uppercase tracking-wider">TEMPO ATUAL</span>
+                <span className={`text-lg sm:text-2xl font-extrabold tracking-wider ${yearDisplay === targetYear ? 'text-white drop-shadow-[0_0_14px_rgba(255,255,255,0.9)] animate-pulse' : 'text-amber-400'} drop-shadow-[0_0_10px_rgba(245,158,11,0.6)]`}>
                   {yearDisplay}
                 </span>
               </div>
 
               {/* Speedometer */}
-              <div className="p-2 sm:p-3 rounded-xl bg-cyan-950/80 border border-cyan-500/50 text-center">
-                <span className="text-[9px] sm:text-[10px] text-cyan-400 font-bold block uppercase tracking-wider">VELOCIDADE</span>
-                <span className={`text-lg sm:text-2xl font-extrabold tracking-wider ${speed === 88 ? 'text-[#00ff88] drop-shadow-[0_0_12px_#00ff88] animate-pulse' : 'text-cyan-400'}`}>
-                  {speed} <span className="text-xs">MPH</span>
+              <div className="p-2 sm:p-3 rounded-xl bg-zinc-900/90 border border-white/20 text-center">
+                <span className="text-[9px] sm:text-[10px] text-zinc-400 font-bold block uppercase tracking-wider">VELOCIDADE</span>
+                <span className={`text-lg sm:text-2xl font-extrabold tracking-wider ${speed === 88 ? 'text-white drop-shadow-[0_0_14px_rgba(255,255,255,1)] animate-pulse' : 'text-zinc-200'}`}>
+                  {speed} <span className="text-xs font-normal text-zinc-400">MPH</span>
                 </span>
               </div>
             </div>
@@ -285,21 +285,21 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
 
           {/* Center: DeLorean Time Machine Car & Sparks FX */}
           <div className="relative my-auto flex flex-col items-center justify-center">
-            {/* Flux capacitor rotating energy rings (speed up with throttle) */}
+            {/* Flux capacitor rotating energy rings (electric white & platinum) */}
             <div
               className="tw-ring absolute w-[420px] h-[420px] rounded-full pointer-events-none"
               style={{
-                background: 'conic-gradient(from 0deg, transparent 0deg, #00ff88 30deg, transparent 70deg, transparent 180deg, #00f2fe 210deg, transparent 250deg)',
+                background: 'conic-gradient(from 0deg, transparent 0deg, #ffffff 30deg, transparent 70deg, transparent 180deg, #a1a1aa 210deg, transparent 250deg)',
                 WebkitMask: 'radial-gradient(closest-side, transparent 76%, black 79%)',
                 mask: 'radial-gradient(closest-side, transparent 76%, black 79%)',
-                opacity: 0.55,
+                opacity: 0.6,
                 animation: `fluxSpin ${fluxSpeed} linear infinite`,
               }}
             />
             <div
               className="tw-ring absolute w-[340px] h-[340px] rounded-full pointer-events-none"
               style={{
-                background: 'conic-gradient(from 180deg, transparent 0deg, #00f2fe 25deg, transparent 60deg, transparent 220deg, #00ff88 255deg, transparent 290deg)',
+                background: 'conic-gradient(from 180deg, transparent 0deg, #e4e4e7 25deg, transparent 60deg, transparent 220deg, #ffffff 255deg, transparent 290deg)',
                 WebkitMask: 'radial-gradient(closest-side, transparent 79%, black 82%)',
                 mask: 'radial-gradient(closest-side, transparent 79%, black 82%)',
                 opacity: 0.5,
@@ -307,9 +307,9 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
               }}
             />
 
-            {/* Lightning Shockwave Ring */}
-            <div className="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full border-2 border-[#00f2fe]/40 animate-ping pointer-events-none opacity-50" />
-            <div className="absolute w-60 h-60 sm:w-80 sm:h-80 rounded-full border-2 border-[#00ff88]/60 animate-pulse pointer-events-none opacity-70" />
+            {/* Electric Shockwave Ring */}
+            <div className="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full border-2 border-white/30 animate-ping pointer-events-none opacity-40" />
+            <div className="absolute w-60 h-60 sm:w-80 sm:h-80 rounded-full border-2 border-white/50 animate-pulse pointer-events-none opacity-60" />
 
             {/* DeLorean Car Visual */}
             <motion.div
@@ -331,19 +331,19 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
                 style={{ opacity: trailsOpacity, transform: `scaleX(${1 + speed / 180})` }}
               />
 
-              {/* DeLorean Body Vector */}
+              {/* DeLorean Body Vector (Brushed Stainless Steel Styling) */}
               <div className="relative w-64 sm:w-80 h-28 sm:h-36 flex items-center justify-center">
-                <div className="absolute top-1/2 -right-20 -translate-y-1/2 w-32 sm:w-44 h-16 bg-gradient-to-r from-[#00f2fe]/80 via-[#00ff88]/40 to-transparent blur-md rounded-full pointer-events-none" />
+                <div className="absolute top-1/2 -right-20 -translate-y-1/2 w-32 sm:w-44 h-16 bg-gradient-to-r from-white/40 via-zinc-400/20 to-transparent blur-md rounded-full pointer-events-none" />
 
-                <div className="dt-panel relative z-10 p-5 rounded-3xl bg-gradient-to-r from-[#0c2417] via-[#040f09] to-[#0c2417] border-2 border-[#00ff88] shadow-[0_0_50px_rgba(0,255,136,0.6)] flex items-center gap-3">
-                  <Car className="w-12 h-12 sm:w-16 sm:h-16 text-[#00ff88] drop-shadow-[0_0_15px_#00ff88]" />
+                <div className="dt-panel relative z-10 p-5 rounded-3xl bg-gradient-to-r from-zinc-900 via-zinc-950 to-zinc-900 border border-white/30 shadow-2xl flex items-center gap-3">
+                  <Car className="w-12 h-12 sm:w-16 sm:h-16 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.7)]" />
                   <div className="flex flex-col items-start">
-                    <span className={`text-[10px] sm:text-xs font-mono ${speed === 88 ? 'text-[#00ff88] drop-shadow-[0_0_8px_#00ff88] animate-pulse' : 'text-cyan-400'}`}>
-                      {speed === 88 ? <span className="flex items-center gap-1"><Zap className="w-3 h-3" /> 1.21 GIGAWATTS ALCANÇADOS!</span> : <span className="flex items-center gap-1"><Flame className="w-3 h-3" /> ACELERANDO PARA 88 MPH...</span>}
+                    <span className={`text-[10px] sm:text-xs font-mono ${speed === 88 ? 'text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.9)] animate-pulse' : 'text-zinc-300'}`}>
+                      {speed === 88 ? <span className="flex items-center gap-1 font-bold text-white"><Zap className="w-3 h-3 text-white" /> 1.21 GIGAWATTS ALCANÇADOS!</span> : <span className="flex items-center gap-1 text-zinc-300"><Flame className="w-3 h-3 text-amber-500" /> ACELERANDO PARA 88 MPH...</span>}
                     </span>
                     <div className="mt-1.5 w-full h-1.5 rounded-full bg-black/70 overflow-hidden border border-white/10">
                       <div
-                        className="h-full bg-gradient-to-r from-[#00f2fe] via-[#10b981] to-[#00ff88] rounded-full shadow-[0_0_8px_#00ff88]"
+                        className="h-full bg-gradient-to-r from-zinc-400 via-white to-zinc-200 rounded-full shadow-[0_0_8px_rgba(255,255,255,0.8)]"
                         style={{ transform: `scaleX(${speed / 100})`, transformOrigin: 'left', transition: 'transform 80ms linear' }}
                       />
                     </div>
@@ -361,27 +361,27 @@ export default function TimeTravelAnimation({ mode, onComplete }) {
 
           {/* Bottom Banner Status */}
           <div className="relative z-10 w-full max-w-xl text-center space-y-2 pb-4">
-            <p className="text-xs sm:text-sm font-bold text-slate-200 tracking-wider">
+            <p className="text-xs sm:text-sm font-medium text-zinc-300 tracking-wider">
               {isToPast
                 ? '"Se você vai construir uma máquina do tempo em um carro, por que não fazer com estilo?"'
                 : '"O seu futuro ainda não foi escrito. O de ninguém foi. O seu futuro é o que você fizer dele."'}
             </p>
 
-            <div className="w-full h-2 rounded-full bg-slate-900 overflow-hidden border border-[#00ff88]/30">
+            <div className="w-full h-2 rounded-full bg-zinc-900 overflow-hidden border border-white/15 shadow-inner">
               <div
-                className="h-full bg-gradient-to-r from-[#00f2fe] via-[#10b981] to-[#00ff88] rounded-full shadow-[0_0_15px_#00ff88]"
+                className="h-full bg-gradient-to-r from-zinc-400 via-white to-zinc-200 rounded-full shadow-[0_0_15px_rgba(255,255,255,0.8)]"
                 style={{ transform: `scaleX(${speed / 88})`, transformOrigin: 'left', transition: 'transform 80ms linear' }}
               />
             </div>
 
-            <p className="text-[11px] text-[#00ff88] font-mono font-bold tracking-widest uppercase animate-pulse">
+            <p className="text-[11px] text-zinc-200 font-mono font-bold tracking-widest uppercase animate-pulse">
               {speed === 88 ? (
-                <span className="flex items-center justify-center gap-2">
-                  <Gauge className="w-3.5 h-3.5" /> SALTO TEMPORAL EM ANDAMENTO...
+                <span className="flex items-center justify-center gap-2 text-white">
+                  <Gauge className="w-3.5 h-3.5 text-white" /> SALTO TEMPORAL EM ANDAMENTO...
                 </span>
               ) : (
-                <span className="flex items-center justify-center gap-2">
-                  <Sparkles className="w-3.5 h-3.5" /> ENTRANDO NA FENDA TEMPORAL...
+                <span className="flex items-center justify-center gap-2 text-zinc-300">
+                  <Sparkles className="w-3.5 h-3.5 text-white" /> ENTRANDO NA FENDA TEMPORAL...
                 </span>
               )}
             </p>

@@ -14,9 +14,9 @@ export default function TimelineSection() {
         
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0c140e] border border-[#10b981]/30 mb-4">
-            <GitCommit className="w-3.5 h-3.5 text-[#00ff88]" />
-            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/15 mb-4">
+            <GitCommit className="w-3.5 h-3.5 text-slate-200" />
+            <span className="text-xs font-mono text-slate-200 tracking-widest uppercase">
               {lang === 'en' ? 'Evolution & Milestones' : 'Evolução & Trajetória'}
             </span>
           </div>
@@ -35,8 +35,8 @@ export default function TimelineSection() {
 
         {/* Timeline Container */}
         <div className="relative max-w-4xl mx-auto">
-          {/* Vertical Green Line */}
-          <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#00ff88] via-[#10b981]/40 to-transparent -translate-x-1/2" />
+          {/* Vertical Titanium Line */}
+          <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-white via-slate-400/40 to-transparent -translate-x-1/2" />
 
           <div className="space-y-12">
             {timelineItems.map((item, index) => {
@@ -53,16 +53,16 @@ export default function TimelineSection() {
                   }`}
                 >
                   {/* Timeline Center Node Circle */}
-                  <div className="absolute left-4 sm:left-1/2 -translate-x-1/2 top-1.5 w-8 h-8 rounded-full bg-[#040705] border-2 border-[#00ff88] flex items-center justify-center shadow-glow-sm z-20">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#00ff88] animate-ping opacity-75" />
+                  <div className="absolute left-4 sm:left-1/2 -translate-x-1/2 top-1.5 w-8 h-8 rounded-full bg-bg-card border-2 border-white/60 flex items-center justify-center shadow-glow-sm z-20">
+                    <span className="w-2.5 h-2.5 rounded-full bg-white animate-ping opacity-75" />
                   </div>
 
                   {/* Card Content Container */}
                   <div className="pl-12 sm:pl-0 sm:w-1/2 sm:px-8">
-                    <div className="glass-card p-6 rounded-2xl border border-[#10b981]/25 hover:border-[#00ff88]/50">
+                    <div className="glass-card p-6 rounded-2xl border border-white/10 hover:border-white/40">
                       
                       {/* Year Badge */}
-                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0c2e17] border border-[#00ff88]/40 text-[#00ff88] text-xs font-mono mb-3">
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.08] border border-white/20 text-white text-xs font-mono mb-3">
                         <Calendar className="w-3.5 h-3.5" />
                         <span>{item.year}</span>
                       </div>
@@ -82,7 +82,7 @@ export default function TimelineSection() {
                             {item.projects.map((proj, pIdx) => (
                               <span
                                 key={pIdx}
-                                className="px-2.5 py-0.5 rounded-md bg-[#040705] border border-[#10b981]/30 text-xs font-medium text-[#00ff88]"
+                                className="px-2.5 py-0.5 rounded-md bg-white/[0.04] border border-white/10 text-xs font-medium text-slate-200"
                               >
                                 {proj}
                               </span>
@@ -111,13 +111,13 @@ export default function TimelineSection() {
                       {/* Key Achievements */}
                       {item.achievements && item.achievements.length > 0 && (
                         <div className="pt-3 border-t border-white/10">
-                          <span className="text-[11px] font-mono text-[#00ff88] flex items-center gap-1 mb-1.5 uppercase">
+                          <span className="text-[11px] font-mono text-white flex items-center gap-1 mb-1.5 uppercase">
                             <Award className="w-3.5 h-3.5" /> {t('timeline.achievementsLabel')}
                           </span>
                           <ul className="space-y-1">
                             {item.achievements.map((ach, aIdx) => (
                               <li key={aIdx} className="text-xs text-slate-400 flex items-start gap-1.5">
-                                <span className="text-[#00ff88] font-bold">•</span>
+                                <span className="text-white font-bold">•</span>
                                 <span>{ach}</span>
                               </li>
                             ))}

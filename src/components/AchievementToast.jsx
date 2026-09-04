@@ -117,39 +117,39 @@ export default function AchievementToast() {
           role="status"
           aria-live="polite"
         >
-          <div className="relative overflow-hidden rounded-2xl border border-[#00ff88]/40 bg-[#050d08]/95 backdrop-blur-md shadow-[0_0_35px_rgba(0,255,136,0.25),0_10px_30px_rgba(0,0,0,0.6)]">
+          <div className="relative overflow-hidden rounded-2xl border border-white/20 bg-zinc-950/95 backdrop-blur-xl shadow-2xl">
             {/* Progress bar */}
             <div
               key={`bar-${current.keyId || current.id}`}
-              className="absolute top-0 left-0 h-[3px] bg-gradient-to-r from-[#00ff88] to-[#00f2fe]"
+              className="absolute top-0 left-0 h-[3px] bg-gradient-to-r from-white via-zinc-400 to-zinc-600"
               style={{ width: '100%', transformOrigin: 'left', animation: 'achvProgress 4.2s linear forwards' }}
             />
 
             <div className="flex items-center gap-3.5 p-4">
               {/* Trophy icon with glow */}
               <div className="relative flex-shrink-0">
-                <div className="absolute inset-0 rounded-full bg-[#00ff88]/30 blur-lg" />
-                <div className="relative w-11 h-11 rounded-full bg-gradient-to-br from-[#0c2e17] to-[#06200e] border border-[#00ff88]/50 flex items-center justify-center">
+                <div className="absolute inset-0 rounded-full bg-white/20 blur-md" />
+                <div className="relative w-11 h-11 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
                   {(() => {
                     const Icon = current.Icon;
-                    return <Icon className="w-5 h-5 text-[#00ff88]" />;
+                    return <Icon className="w-5 h-5 text-white" />;
                   })()}
                 </div>
               </div>
 
               <div className="min-w-0 flex-1">
-                <p className="flex items-center gap-1.5 text-[10px] font-mono tracking-[0.2em] text-[#00ff88]/80 uppercase mb-0.5">
-                  <Award className="w-3 h-3" />
+                <p className="flex items-center gap-1.5 text-[10px] font-mono tracking-[0.2em] text-zinc-300 uppercase mb-0.5">
+                  <Award className="w-3 h-3 text-white" />
                   {t('achievements.toastLabel')}
                 </p>
                 <h4 className="text-sm font-bold text-white truncate leading-tight">
                   {current.title}
                 </h4>
-                <p className="text-[11px] text-slate-400 font-light leading-snug mt-0.5 line-clamp-2">
+                <p className="text-[11px] text-zinc-400 font-light leading-snug mt-0.5 line-clamp-2">
                   {current.description}
                 </p>
                 {current.postUnlockHint && (
-                  <p className="text-[10px] text-[#00ff88]/70 font-mono mt-1 italic">
+                  <p className="text-[10px] text-zinc-400 font-mono mt-1 italic">
                     {current.postUnlockHint}
                   </p>
                 )}
@@ -158,7 +158,7 @@ export default function AchievementToast() {
               {/* Close button */}
               <button
                 onClick={handleDismiss}
-                className="p-1 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-colors cursor-pointer shrink-0"
+                className="p-1 rounded-lg hover:bg-white/10 text-zinc-400 hover:text-white transition-colors cursor-pointer shrink-0"
                 aria-label="Fechar"
               >
                 <X className="w-4 h-4" />

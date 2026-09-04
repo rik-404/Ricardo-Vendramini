@@ -36,11 +36,11 @@ export default function BookModal({ book, onClose }) {
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          className="relative w-full max-w-4xl glass-card rounded-3xl border border-[#00ff88]/50 shadow-glow-lg overflow-hidden z-10 p-5 sm:p-8 space-y-6 max-h-[92vh] overflow-y-auto bg-[#040705]/95"
+          className="relative w-full max-w-4xl glass-card rounded-3xl border border-white/20 shadow-2xl overflow-hidden z-10 p-5 sm:p-8 space-y-6 max-h-[92vh] overflow-y-auto bg-zinc-950/95"
         >
           <button
             onClick={onClose}
-            className="absolute top-5 right-5 p-2.5 rounded-full bg-black/60 border border-white/20 text-slate-300 hover:text-[#00ff88] hover:border-[#00ff88] transition-colors z-20"
+            className="absolute top-5 right-5 p-2.5 rounded-full bg-black/60 border border-white/20 text-slate-300 hover:text-white hover:border-white/40 transition-colors z-20"
           >
             <X className="w-5 h-5" />
           </button>
@@ -51,40 +51,40 @@ export default function BookModal({ book, onClose }) {
               <img
                 src={book.coverImage}
                 alt={book.title}
-                className="w-48 sm:w-56 lg:w-64 h-[310px] sm:h-[370px] object-cover rounded-2xl shadow-glow-md border border-[#10b981]/50 filter contrast-105"
+                className="w-48 sm:w-56 lg:w-64 h-[310px] sm:h-[370px] object-cover rounded-2xl shadow-2xl border border-white/20 filter contrast-105"
               />
-              <span className="mt-3 text-[11px] font-mono text-slate-400">
+              <span className="mt-3 text-[11px] font-mono text-zinc-400">
                 {lang === 'en' ? 'Author:' : 'Autor:'} <strong className="text-white">{personalInfo.name}</strong>
               </span>
             </div>
 
             <div className="space-y-4 text-left flex-1 min-w-0">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0c2e17] border border-[#00ff88]/40 text-[#00ff88] text-xs font-mono">
-                  <Calendar className="w-3.5 h-3.5 text-[#00ff88]" />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-zinc-300 text-xs font-mono">
+                  <Calendar className="w-3.5 h-3.5 text-zinc-400" />
                   {lang === 'en' ? 'Year:' : 'Ano:'} {book.year} • {book.status}
                 </span>
               </div>
 
               <div>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">{book.title}</h2>
-                <p className="text-xs font-mono text-[#00f2fe] mt-0.5">{book.subtitle}</p>
+                <p className="text-xs font-mono text-zinc-400 mt-0.5">{book.subtitle}</p>
               </div>
 
               <div className="space-y-1.5">
-                <h4 className="text-xs font-mono text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <BookOpen className="w-3.5 h-3.5 text-[#00ff88]" /> {lang === 'en' ? 'Official Synopsis:' : 'Sinopse Oficial:'}
+                <h4 className="text-xs font-mono text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
+                  <BookOpen className="w-3.5 h-3.5 text-zinc-400" /> {lang === 'en' ? 'Official Synopsis:' : 'Sinopse Oficial:'}
                 </h4>
-                <p className="text-slate-300 text-xs sm:text-sm font-light leading-relaxed whitespace-pre-line bg-[#071410]/50 p-4 rounded-xl border border-white/5">
+                <p className="text-zinc-300 text-xs sm:text-sm font-light leading-relaxed whitespace-pre-line bg-zinc-900/60 p-4 rounded-xl border border-white/5">
                   {book.synopsis}
                 </p>
               </div>
 
               <div className="space-y-1.5">
-                <h4 className="text-xs font-mono text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[#00ff88]" /> {lang === 'en' ? 'Genre & Themes:' : 'Gênero & Temas:'}
+                <h4 className="text-xs font-mono text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-zinc-400" /> {lang === 'en' ? 'Genre & Themes:' : 'Gênero & Temas:'}
                 </h4>
-                <p className="text-slate-300 text-xs sm:text-sm font-light leading-relaxed">
+                <p className="text-zinc-300 text-xs sm:text-sm font-light leading-relaxed">
                   {book.creationProcess}
                 </p>
               </div>
@@ -92,7 +92,7 @@ export default function BookModal({ book, onClose }) {
               {/* Tags */}
               <div className="flex flex-wrap gap-1.5 pt-1">
                 {book.tags?.map((tag, tIdx) => (
-                  <span key={tIdx} className="book-tag px-2.5 py-0.5 rounded-md bg-[#071910] border border-[#00ff88]/20 text-[#00ff88] text-[11px] font-mono">
+                  <span key={tIdx} className="book-tag px-2.5 py-0.5 rounded-md bg-zinc-900 border border-white/10 text-zinc-300 text-[11px] font-mono">
                     #{tag}
                   </span>
                 ))}
@@ -105,7 +105,7 @@ export default function BookModal({ book, onClose }) {
                       href={book.amazonLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs font-mono uppercase flex items-center gap-2 transition-transform hover:scale-105 shadow-glow-sm"
+                      className="px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs font-mono uppercase flex items-center gap-2 transition-transform hover:scale-105 shadow-md"
                     >
                       <ShoppingCart className="w-4 h-4" />
                       <span>{lang === 'en' ? 'Buy on Amazon' : 'Comprar na Amazon'}</span>
@@ -117,7 +117,7 @@ export default function BookModal({ book, onClose }) {
                       href={book.uiclapLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#059669] via-[#10b981] to-[#00ff88] text-black font-extrabold text-xs font-mono uppercase flex items-center gap-2 transition-transform hover:scale-105 shadow-glow-sm"
+                      className="px-4 py-2.5 rounded-xl bg-white hover:bg-zinc-200 text-zinc-950 font-extrabold text-xs font-mono uppercase flex items-center gap-2 transition-colors shadow-md"
                     >
                       <ShoppingCart className="w-4 h-4" />
                       <span>{lang === 'en' ? 'Buy on UICLAP' : 'Comprar na UICLAP'}</span>

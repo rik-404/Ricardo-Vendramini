@@ -68,7 +68,7 @@ export default function SeoManager() {
     ].join(', ');
     setMeta('keywords', keywords);
     setMeta('author', personalInfo.name);
-    setMeta('theme-color', '#040705');
+    setMeta('theme-color', '#09090b');
 
     // 4. Update JSON-LD Structured Data for Google Rich Snippets
     setJsonLd({

@@ -37,7 +37,7 @@ function CounterItem({ item }) {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="glass-card p-6 rounded-2xl border border-[#10b981]/20 flex flex-col items-center text-center relative overflow-hidden group hover:border-[#00ff88]/50"
+      className="glass-card p-6 rounded-2xl border border-white/10 flex flex-col items-center text-center relative overflow-hidden group hover:border-white/40 shadow-glow-sm"
     >
       <div className="text-3xl sm:text-4xl font-extrabold font-mono text-gradient-green mb-2">
         {item.prefix}{count}{item.suffix}

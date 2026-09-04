@@ -4,13 +4,13 @@
 
 @layer base {
   :root {
-    --primary-cyan: #00f2fe;
-    --primary-green: #00ff88;
-    --brand-primary: #10b981;
-    --brand-neon: #00ff88;
-    --bg-deep: #080c09;
-    --gradient-primary: linear-gradient(135deg, #10b981, #00ff88);
-    --gradient-background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(0, 255, 136, 0.05));
+    --primary-cyan: #f8fafc;
+    --primary-green: #e4e4e7;
+    --brand-primary: #ffffff;
+    --brand-neon: #ffffff;
+    --bg-deep: #09090b;
+    --gradient-primary: linear-gradient(135deg, #ffffff, #a1a1aa);
+    --gradient-background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015));
     
     /* Design Engineering Custom Easings (Emil & Apple) */
     --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -29,9 +29,9 @@
   input:focus-visible,
   textarea:focus-visible,
   select:focus-visible {
-    outline: 2px solid #00ff88 !important;
+    outline: 2px solid #ffffff !important;
     outline-offset: 3px !important;
-    box-shadow: 0 0 14px rgba(0, 255, 136, 0.45) !important;
+    box-shadow: 0 0 14px rgba(255, 255, 255, 0.35) !important;
   }
 
   /* Emil Design Eng: Global Instant Active Press Feedback */
@@ -57,20 +57,19 @@
 
   body.site-timewalker-active {
     font-family: 'Times New Roman', 'Comic Sans MS', 'Courier New', serif !important;
-    background-color: #f4faf6 !important;
-    background-image: linear-gradient(to right, rgba(16, 185, 129, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(16, 185, 129, 0.08) 1px, transparent 1px) !important;
-    background-size: 20px 20px !important;
-    color: #042010 !important;
+    background-color: #c0c0c0 !important;
+    background-image: none !important;
+    color: #000000 !important;
   }
 
   body.site-timewalker-active * {
-    font-family: 'Comic Sans MS', 'Times New Roman', 'Courier New', serif !important;
+    font-family: 'Times New Roman', 'Courier New', serif !important;
     border-style: outset !important;
-    border-width: 3px !important;
-    border-color: #10b981 #044b28 #044b28 #10b981 !important;
-    background-color: #e6f7ee !important;
-    color: #032313 !important;
-    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.25) !important;
+    border-width: 2px !important;
+    border-color: #ffffff #808080 #808080 #ffffff !important;
+    background-color: #c0c0c0 !important;
+    color: #000000 !important;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.4) !important;
     border-radius: 0px !important;
     backdrop-filter: none !important;
     text-shadow: none !important;
@@ -80,28 +79,28 @@
   body.site-timewalker-active h2,
   body.site-timewalker-active h3 {
     color: #ffffff !important;
-    background: linear-gradient(90deg, #059669, #10b981) !important;
-    padding: 6px 14px !important;
-    border: 3px ridge #34d399 !important;
-    text-shadow: 1px 1px 0px #042010 !important;
+    background: linear-gradient(90deg, #000080, #1084d0) !important;
+    padding: 4px 10px !important;
+    border: 2px ridge #ffffff !important;
+    text-shadow: 1px 1px 0px #000000 !important;
   }
 
   body.site-timewalker-active p,
   body.site-timewalker-active span,
   body.site-timewalker-active li {
-    color: #032715 !important;
+    color: #000000 !important;
   }
 
   body.site-timewalker-active a,
   body.site-timewalker-active button {
-    color: #046c4e !important;
-    background-color: #d1fae5 !important;
+    color: #0000ee !important;
+    background-color: #d4d0c8 !important;
     text-decoration: underline !important;
     font-weight: bold !important;
   }
 
   body.site-timewalker-active img {
-    border: 4px ridge #059669 !important;
+    border: 3px ridge #808080 !important;
     filter: contrast(1.1) !important;
   }
 
@@ -121,40 +120,40 @@
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #080c09;
+    background: #09090b;
   }
   ::-webkit-scrollbar-thumb {
-    background: #111a13;
+    background: #27272a;
     border-radius: 3px;
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #10b981;
+    background: #52525b;
   }
 }
 
 @layer utilities {
   /* Apple Design System Translucent Materials & Vibrancy */
   .glass-panel {
-    background: rgba(12, 18, 14, 0.75);
+    background: rgba(18, 18, 22, 0.72);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-top: 1px solid rgba(255, 255, 255, 0.15); /* Light catching material top edge */
+    border-top: 1px solid rgba(255, 255, 255, 0.18); /* Light catching material top edge */
   }
   
   .glass-card {
-    background: linear-gradient(135deg, rgba(14, 22, 17, 0.8) 0%, rgba(9, 14, 11, 0.92) 100%);
+    background: linear-gradient(135deg, rgba(22, 22, 26, 0.8) 0%, rgba(14, 14, 17, 0.92) 100%);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
     transition: border-color 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
   }
   
   .glass-card:hover {
-    border-color: rgba(16, 185, 129, 0.4);
-    box-shadow: 0 12px 36px -10px rgba(0, 0, 0, 0.6), 0 0 24px rgba(16, 185, 129, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 12px 36px -10px rgba(0, 0, 0, 0.7), 0 0 24px rgba(255, 255, 255, 0.08);
   }
 
   /* Apple Typography Optical Sizing & Tracking */
@@ -183,13 +182,13 @@
   }
 
   .text-gradient-cyan-green {
-    background: linear-gradient(135deg, #ffffff 30%, #34d399 70%, #00ff88 100%);
+    background: linear-gradient(135deg, #ffffff 30%, #e2e8f0 70%, #94a3b8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .text-gradient-green {
-    background: linear-gradient(135deg, #ffffff 20%, #10b981 60%, #00ff88 100%);
+    background: linear-gradient(135deg, #ffffff 20%, #d4d4d8 60%, #a1a1aa 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -211,7 +210,7 @@
     content: '';
     position: absolute;
     inset: -1px;
-    background: linear-gradient(90deg, rgba(0,242,254,0), rgba(0,242,254,0.4), rgba(0,255,136,0.4), rgba(0,255,136,0));
+    background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.3), rgba(255,255,255,0.3), rgba(255,255,255,0));
     border-radius: inherit;
     z-index: -1;
     opacity: 0;
@@ -300,18 +299,18 @@
 
   inset: 0;
 
-  background: #07140d;
+  background: #111114;
 
   border-radius: 4px 8px 8px 4px;
 
-  border: 1px solid rgba(0, 255, 136, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 
   transform: translateZ(-12px);
 
   transform-style: preserve-3d;
 
   box-shadow:
-    8px 10px 20px rgba(0, 0, 0, 0.45);
+    8px 10px 20px rgba(0, 0, 0, 0.55);
 }
 
 /* PÁGINAS */
@@ -376,10 +375,10 @@
   background:
     linear-gradient(
       90deg,
-      #06100a 0%,
-      #0b2416 45%,
-      #123b23 70%,
-      #06100a 100%
+      #09090b 0%,
+      #1c1c21 45%,
+      #27272a 70%,
+      #09090b 100%
     );
 
   border-radius: 5px 0 0 5px;
@@ -391,7 +390,7 @@
   transform-origin: right center;
 
   box-shadow:
-    inset -2px 0 4px rgba(0, 255, 136, 0.15);
+    inset -2px 0 4px rgba(255, 255, 255, 0.1);
 }
 
 /* CAPA */
@@ -404,9 +403,9 @@
 
   border-radius: 5px 8px 8px 5px;
 
-  background: #0a0f0c;
+  background: #141418;
 
-  border: 1px solid rgba(0, 255, 136, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.25);
 
   transform: translateZ(7px);
 
@@ -415,9 +414,9 @@
   backface-visibility: hidden;
 
   box-shadow:
-    0 0 0 1px rgba(0, 255, 136, 0.05),
-    8px 12px 25px rgba(0, 0, 0, 0.55),
-    0 0 20px rgba(0, 255, 136, 0.08);
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    8px 12px 25px rgba(0, 0, 0, 0.65),
+    0 0 20px rgba(255, 255, 255, 0.06);
 }
 
 .book-cover img {
@@ -444,9 +443,9 @@
   background:
     linear-gradient(
       135deg,
-      rgba(0, 255, 136, 0.12),
+      rgba(255, 255, 255, 0.1),
       transparent 35%,
-      rgba(0, 0, 0, 0.25)
+      rgba(0, 0, 0, 0.35)
     );
 }
 
@@ -543,7 +542,7 @@ html.theme-light {
 /* ── Fundo global e cores de texto base ──────────────────── */
 html.theme-light body {
   background-color: #f8fafc !important;
-  color: #0f172a !important;
+  color: #09090b !important;
 }
 
 /* ── Superfícies escuras (bg-[#0x...]) → superfícies claras ── */
@@ -553,33 +552,40 @@ html.theme-light [class*="bg-[#080d09]"],
 html.theme-light [class*="bg-[#0a0f0c]"],
 html.theme-light [class*="bg-[#060b08]"],
 html.theme-light [class*="bg-[#0c1a10]"],
-html.theme-light [class*="bg-[#071f11]"] {
-  background-color: #f8fafc !important;
+html.theme-light [class*="bg-[#071f11]"],
+html.theme-light [class*="bg-[#09090b]"],
+html.theme-light [class*="bg-[#0e0e11]"],
+html.theme-light [class*="bg-[#141417]"],
+html.theme-light [class*="bg-[#1c1c21]"] {
+  background-color: #ffffff !important;
 }
 
 /* ── Chips / botões / inputs escuros → translúcidos claros ── */
 html.theme-light [class*="bg-black/60"] {
-  background-color: rgba(255, 255, 255, 0.8) !important;
+  background-color: rgba(255, 255, 255, 0.85) !important;
 }
 html.theme-light [class*="bg-white/5"],
 html.theme-light [class*="bg-white/10"],
 html.theme-light [class*="bg-white/[0.05]"] {
-  background-color: rgba(15, 23, 42, 0.06) !important;
+  background-color: rgba(15, 23, 42, 0.05) !important;
 }
 html.theme-light [class*="bg-slate-800"],
 html.theme-light [class*="bg-slate-900"],
 html.theme-light [class*="bg-slate-950"] {
-  background-color: rgba(15, 23, 42, 0.07) !important;
+  background-color: rgba(15, 23, 42, 0.06) !important;
 }
 html.theme-light [class*="bg-[#071910]"] {
-  background-color: rgba(209, 250, 229, 0.55) !important;
+  background-color: rgba(15, 23, 42, 0.04) !important;
 }
 
 /* ── Bordas brancas → cinza suave ──────────────────────── */
 html.theme-light [class*="border-white/5"],
 html.theme-light [class*="border-white/10"],
 html.theme-light [class*="border-white/15"],
-html.theme-light [class*="border-white/20"] {
+html.theme-light [class*="border-white/20"],
+html.theme-light [class*="border-white/25"],
+html.theme-light [class*="border-white/30"],
+html.theme-light [class*="border-white/40"] {
   border-color: rgba(15, 23, 42, 0.12) !important;
 }
 
@@ -587,69 +593,69 @@ html.theme-light [class*="border-white/20"] {
 html.theme-light .text-white,
 html.theme-light [class*="text-slate-100"],
 html.theme-light [class*="text-slate-200"] {
-  color: #0f172a !important;
+  color: #09090b !important;
 }
 html.theme-light [class*="text-slate-300"] {
-  color: #1e293b !important;
+  color: #18181b !important;
 }
 html.theme-light [class*="text-slate-400"] {
-  color: #475569 !important;
+  color: #3f3f46 !important;
 }
 html.theme-light [class*="text-slate-500"],
 html.theme-light [class*="placeholder:text-slate-500"] {
-  color: #64748b !important;
+  color: #71717a !important;
 }
 html.theme-light [class*="placeholder:text-slate-500"]::placeholder {
-  color: #94a3b8 !important;
+  color: #a1a1aa !important;
 }
 html.theme-light [class*="text-slate-600"] {
-  color: #475569 !important;
+  color: #71717a !important;
 }
 html.theme-light [class*="text-slate-700"] {
-  color: #334155 !important;
+  color: #3f3f46 !important;
 }
 
-/* ── Cyan neon (#00f2fe) → teal escuro legível no claro ── */
-html.theme-light [class*="text-[#00f2fe]"] {
-  color: #0891b2 !important;
+/* ── Acentos legíveis no claro ── */
+html.theme-light [class*="text-[#00f2fe]"],
+html.theme-light [class*="text-[#00ff88]"],
+html.theme-light [class*="text-[#10b981]"] {
+  color: #09090b !important;
 }
-html.theme-light [class*="border-[#00f2fe]"] {
-  border-color: #0891b2 !important;
+html.theme-light [class*="border-[#00f2fe]"],
+html.theme-light [class*="border-[#00ff88]"],
+html.theme-light [class*="border-[#10b981]"] {
+  border-color: rgba(15, 23, 42, 0.18) !important;
 }
 
-/* ── Modais devem manter fundo escuro mesmo no Light Mode ── */
+/* ── Modais devem manter fundo escuro neutro ou translúcido ── */
 html.theme-light [class*="z-[1000]"] > [class*="glass-card"][class*="bg-[#0"],
 html.theme-light [class*="z-[999]"] > [class*="bg-black/"],
 html.theme-light [class*="z-[9999]"] > [class*="bg-black/"],
 html.theme-light [class*="z-[99999]"] > [class*="bg-black/"],
 html.theme-light [class*="z-[99998]"] > [class*="bg-black/"] {
-  background-color: rgba(0, 0, 0, 0.85) !important;
+  background-color: rgba(9, 9, 11, 0.88) !important;
 }
 
 /* ── Glass panels & cards ───────────────────────────────── */
 html.theme-light .glass-panel {
-  background: rgba(255, 255, 255, 0.9) !important;
-  border-color: rgba(15, 23, 42, 0.12) !important;
-  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.08) !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(15, 23, 42, 0.1) !important;
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.06) !important;
 }
 html.theme-light .glass-card {
-  background: linear-gradient(135deg, #ffffff 0%, #f2f7f4 100%) !important;
-  border-color: rgba(15, 23, 42, 0.1) !important;
-  box-shadow: 0 12px 32px -14px rgba(15, 23, 42, 0.16) !important;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
+  box-shadow: 0 12px 32px -14px rgba(15, 23, 42, 0.1) !important;
 }
 html.theme-light .glass-card:hover {
-  border-color: rgba(16, 185, 129, 0.45) !important;
-  box-shadow: 0 14px 36px -14px rgba(15, 23, 42, 0.2) !important;
+  border-color: rgba(15, 23, 42, 0.25) !important;
+  box-shadow: 0 14px 36px -14px rgba(15, 23, 42, 0.16) !important;
 }
 
-/* ── Gradientes de texto neon → tons escuros legíveis ────── */
-html.theme-light .text-gradient-green {
-  background: linear-gradient(135deg, #047857 20%, #059669 60%, #00a06a 100%) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-}
+/* ── Gradientes de texto titânio escuro legíveis ────── */
+html.theme-light .text-gradient-green,
 html.theme-light .text-gradient-cyan-green {
-  background: linear-gradient(135deg, #0369a1 30%, #059669 70%, #0d9488 100%) !important;
+  background: linear-gradient(135deg, #09090b 20%, #27272a 60%, #52525b 100%) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
 }
@@ -659,39 +665,44 @@ html.theme-light .text-gradient-muted {
   -webkit-text-fill-color: transparent !important;
 }
 
-/* ── Stops de gradiente escuros → verdes profundos visíveis ── */
-html.theme-light [class*="from-[#040705]"] { --tw-gradient-from: #0e4930 !important; }
-html.theme-light [class*="via-[#040705]"] { --tw-gradient-via: #13603c !important; }
-html.theme-light [class*="to-[#040705]"] { --tw-gradient-to: #0e4930 !important; }
-html.theme-light [class*="from-[#080d09]"] { --tw-gradient-from: #0b3a27 !important; }
-html.theme-light [class*="via-[#080d09]"] { --tw-gradient-via: #105136 !important; }
+/* ── Stops de gradiente escuros → neutros titânio visíveis ── */
+html.theme-light [class*="from-[#040705]"],
+html.theme-light [class*="from-[#080d09]"],
 html.theme-light [class*="from-[#0c2e17]"],
-html.theme-light [class*="from-[#0c2417]"] { --tw-gradient-from: #059669 !important; }
-html.theme-light [class*="to-[#0c2e17]"],
-html.theme-light [class*="to-[#0c2417]"] { --tw-gradient-to: #0a8f5c !important; }
-html.theme-light [class*="to-[#06200e]"] { --tw-gradient-to: #064e3b !important; }
+html.theme-light [class*="from-[#0c2417]"],
+html.theme-light [class*="from-[#09090b]"] { --tw-gradient-from: #18181b !important; }
+
+html.theme-light [class*="via-[#040705]"],
+html.theme-light [class*="via-[#080d09]"],
 html.theme-light [class*="via-[#071f11]"],
-html.theme-light [class*="via-[#040f09]"] { --tw-gradient-via: #04825a !important; }
-html.theme-light [class*="via-[#071d12]"] { --tw-gradient-via: #1a6b45 !important; }
+html.theme-light [class*="via-[#040f09]"],
+html.theme-light [class*="via-[#071d12]"],
+html.theme-light [class*="via-[#141417]"] { --tw-gradient-via: #27272a !important; }
 
-/* ── Brilhos neon → suaves no claro ──────────────────────── */
-html.theme-light .shadow-glow-sm { box-shadow: 0 2px 14px rgba(16, 185, 129, 0.16) !important; }
-html.theme-light .shadow-glow-md { box-shadow: 0 4px 22px rgba(16, 185, 129, 0.2) !important; }
-html.theme-light .shadow-glow-lg { box-shadow: 0 6px 30px rgba(16, 185, 129, 0.24) !important; }
+html.theme-light [class*="to-[#040705]"],
+html.theme-light [class*="to-[#0c2e17]"],
+html.theme-light [class*="to-[#0c2417]"],
+html.theme-light [class*="to-[#06200e]"],
+html.theme-light [class*="to-[#09090b]"] { --tw-gradient-to: #18181b !important; }
 
-/* ── Banner de citação (About) — gradiente verde-escuro ──── */
+/* ── Sombras neutras suaves no claro ─────────────────────── */
+html.theme-light .shadow-glow-sm { box-shadow: 0 2px 14px rgba(15, 23, 42, 0.08) !important; }
+html.theme-light .shadow-glow-md { box-shadow: 0 4px 22px rgba(15, 23, 42, 0.12) !important; }
+html.theme-light .shadow-glow-lg { box-shadow: 0 6px 30px rgba(15, 23, 42, 0.16) !important; }
+
+/* ── Banner de citação (About) — grafite titânio elegante ── */
 html.theme-light .quote-card {
-  background: linear-gradient(90deg, #0b3a27 0%, #14573a 50%, #0b3a27 100%) !important;
-  border-color: rgba(16, 185, 129, 0.45) !important;
+  background: linear-gradient(90deg, #18181b 0%, #27272a 50%, #18181b 100%) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
 }
 html.theme-light .quote-card .text-white {
-  color: #f0fdf9 !important;
+  color: #f8fafc !important;
 }
 
 /* ── Scrollbar ───────────────────────────────────────────── */
-html.theme-light ::-webkit-scrollbar-track { background: #e9efec; }
-html.theme-light ::-webkit-scrollbar-thumb { background: #b8c4bf; border-color: rgba(15, 23, 42, 0.08); }
-html.theme-light ::-webkit-scrollbar-thumb:hover { background: #10b981; }
+html.theme-light ::-webkit-scrollbar-track { background: #f1f5f9; }
+html.theme-light ::-webkit-scrollbar-thumb { background: #cbd5e1; border-color: rgba(15, 23, 42, 0.08); }
+html.theme-light ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
 /* =========================================================
    SCOPES KEEP-DARK — preservam a estética escura de
@@ -700,27 +711,28 @@ html.theme-light ::-webkit-scrollbar-thumb:hover { background: #10b981; }
 
 /* ── Terminal CLI (adapta ao tema claro) ────────────────── */
 html.theme-light .terminal-flash-target.glass-card {
-  background: linear-gradient(135deg, #ffffff 0%, #f2f7f4 100%) !important;
-  border-color: rgba(16, 185, 129, 0.45) !important;
-  box-shadow: 0 12px 32px -14px rgba(15, 23, 42, 0.18) !important;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+  border-color: rgba(15, 23, 42, 0.18) !important;
+  box-shadow: 0 12px 32px -14px rgba(15, 23, 42, 0.12) !important;
   color-scheme: light;
 }
 html.theme-light .terminal-flash-target [class*="bg-[#040705]"],
 html.theme-light .terminal-flash-target [class*="bg-[#040805]"],
-html.theme-light .terminal-flash-target [class*="bg-[#050906]"] {
-  background-color: #f1f5f9 !important;
+html.theme-light .terminal-flash-target [class*="bg-[#050906]"],
+html.theme-light .terminal-flash-target [class*="bg-[#09090b]"] {
+  background-color: #f8fafc !important;
 }
 html.theme-light .terminal-flash-target .text-white,
 html.theme-light .terminal-flash-target [class*="text-slate-100"],
 html.theme-light .terminal-flash-target [class*="text-slate-200"],
 html.theme-light .terminal-flash-target [class*="text-slate-300"] {
-  color: #0f172a !important;
+  color: #09090b !important;
 }
 html.theme-light .terminal-flash-target [class*="text-slate-400"] {
   color: #475569 !important;
 }
 html.theme-light .terminal-flash-target [class*="text-emerald-400"] {
-  color: #047857 !important;
+  color: #18181b !important;
 }
 html.theme-light .terminal-flash-target [class*="border-white/"] {
   border-color: rgba(15, 23, 42, 0.12) !important;

@@ -23,9 +23,9 @@ export default function LeadershipSection() {
         
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0c140e] border border-[#10b981]/30 mb-4">
-            <Users className="w-3.5 h-3.5 text-[#00ff88]" />
-            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/15 mb-4">
+            <Users className="w-3.5 h-3.5 text-slate-200" />
+            <span className="text-xs font-mono text-slate-200 tracking-widest uppercase">
               {lang === 'en' ? 'Leadership & People' : 'Gestão & Pessoas'}
             </span>
           </div>
@@ -53,15 +53,15 @@ export default function LeadershipSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="glass-card p-8 rounded-3xl border border-[#10b981]/25 hover:border-[#00ff88]/50 group relative overflow-hidden"
+                className="glass-card p-8 rounded-3xl border border-white/10 hover:border-white/40 group relative overflow-hidden transition-all"
               >
-                <div className="absolute top-0 right-0 w-24 h-24 bg-[#00ff88]/5 rounded-bl-full pointer-events-none group-hover:bg-[#00ff88]/15 transition-colors" />
+                <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-bl-full pointer-events-none group-hover:bg-white/10 transition-colors" />
 
-                <div className="w-12 h-12 rounded-2xl bg-[#0c2e17] border border-[#00ff88]/40 flex items-center justify-center text-[#00ff88] shadow-glow-sm mb-6 group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 rounded-2xl bg-white/[0.08] border border-white/20 flex items-center justify-center text-white shadow-glow-sm mb-6 group-hover:scale-110 transition-transform">
                   <IconComponent className="w-6 h-6" />
                 </div>
 
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#00ff88] transition-colors">
+                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-white transition-colors">
                   {pillar.title}
                 </h3>
 

@@ -78,19 +78,19 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 30 }}
             transition={{ type: 'spring', stiffness: 300, damping: 26 }}
-            className="relative w-full max-w-lg rounded-3xl border border-[#00ff88]/40 bg-[#060b08]/95 backdrop-blur-xl shadow-[0_0_50px_rgba(0,255,136,0.2)] overflow-hidden flex flex-col max-h-[90vh]"
+            className="relative w-full max-w-lg rounded-3xl border border-white/20 bg-zinc-950/95 backdrop-blur-xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
           >
             {/* Header */}
-            <div className="px-6 py-5 border-b border-white/10 flex items-center justify-between bg-[#08120b] shrink-0">
+            <div className="px-6 py-5 border-b border-white/10 flex items-center justify-between bg-zinc-900/90 shrink-0">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0c2e17] to-[#06200e] border border-[#00ff88]/50 flex items-center justify-center shadow-[0_0_15px_rgba(0,255,136,0.3)]">
-                  <Trophy className="w-5 h-5 text-[#00ff88]" />
+                <div className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center shadow-md">
+                  <Trophy className="w-5 h-5 text-white" />
                 </div>
                 <div>
                   <h3 className="text-base font-bold text-white">
                     {lang === 'en' ? 'Achievements & Secret Gallery' : 'Galeria de Conquistas & Segredos'}
                   </h3>
-                  <p className="text-[11px] font-mono text-[#00ff88]">
+                  <p className="text-[11px] font-mono text-zinc-400">
                     {lang === 'en'
                       ? `${unlockedCount} of ${DISPLAY_IDS.length} achievements unlocked`
                       : `${unlockedCount} de ${DISPLAY_IDS.length} conquistas desbloqueadas`}
@@ -99,27 +99,26 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
               </div>
               <button
                 onClick={onClose}
-                className="p-2 rounded-xl bg-white/5 text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                className="p-2 rounded-xl bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
                 title={lang === 'en' ? 'Close' : 'Fechar'}
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-
             {/* Tabs Selector Bar */}
-            <div className="px-6 pt-4 pb-2 border-b border-white/10 flex items-center justify-center gap-2 bg-[#050b07] shrink-0">
+            <div className="px-6 pt-4 pb-2 border-b border-white/10 flex items-center justify-center gap-2 bg-zinc-900/60 shrink-0">
               <button
                 onClick={() => setActiveTab('all')}
                 className={`px-4 py-2 rounded-xl text-xs font-bold font-mono transition-[background-color,color,border-color,box-shadow] duration-200 border flex items-center gap-1.5 ${
                   activeTab === 'all'
-                    ? 'bg-[#0c2e17] text-[#00ff88] border-[#00ff88]/50 shadow-[0_0_12px_rgba(0,255,136,0.2)]'
-                    : 'bg-slate-900/60 text-slate-400 border-white/5 hover:text-white hover:bg-slate-800'
+                    ? 'bg-white text-zinc-950 border-white shadow-sm'
+                    : 'bg-zinc-900/60 text-zinc-400 border-white/5 hover:text-white hover:bg-zinc-800'
                 }`}
               >
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>{lang === 'en' ? 'All' : 'Todas'}</span>
-                <span className="px-1.5 py-0.2 rounded-full bg-white/10 text-[10px]">
+                <span className="px-1.5 py-0.2 rounded-full bg-black/20 text-[10px]">
                   {DISPLAY_IDS.length}
                 </span>
               </button>
@@ -128,13 +127,13 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
                 onClick={() => setActiveTab('unlocked')}
                 className={`px-4 py-2 rounded-xl text-xs font-bold font-mono transition-[background-color,color,border-color,box-shadow] duration-200 border flex items-center gap-1.5 cursor-pointer ${
                   activeTab === 'unlocked'
-                    ? 'bg-[#0c2e17] text-[#00ff88] border-[#00ff88]/50 shadow-[0_0_12px_rgba(0,255,136,0.2)]'
-                    : 'bg-slate-900/60 text-slate-400 border-white/5 hover:text-white hover:bg-slate-800'
+                    ? 'bg-white text-zinc-950 border-white shadow-sm'
+                    : 'bg-zinc-900/60 text-zinc-400 border-white/5 hover:text-white hover:bg-zinc-800'
                 }`}
               >
-                <Check className="w-3.5 h-3.5 text-[#00ff88]" />
+                <Check className="w-3.5 h-3.5" />
                 <span>{lang === 'en' ? 'Unlocked' : 'Liberadas'}</span>
-                <span className="px-1.5 py-0.2 rounded-full bg-[#00ff88]/20 text-[#00ff88] text-[10px]">
+                <span className={`px-1.5 py-0.2 rounded-full text-[10px] ${activeTab === 'unlocked' ? 'bg-zinc-200 text-zinc-900' : 'bg-white/10 text-zinc-300'}`}>
                   {unlockedCount}
                 </span>
               </button>
@@ -143,8 +142,8 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
                 onClick={() => setActiveTab('locked')}
                 className={`px-4 py-2 rounded-xl text-xs font-bold font-mono transition-[background-color,color,border-color,box-shadow] duration-200 border flex items-center gap-1.5 cursor-pointer ${
                   activeTab === 'locked'
-                    ? 'bg-[#0c2e17] text-[#00ff88] border-[#00ff88]/50 shadow-[0_0_12px_rgba(0,255,136,0.2)]'
-                    : 'bg-slate-900/60 text-slate-400 border-white/5 hover:text-white hover:bg-slate-800'
+                    ? 'bg-white text-zinc-950 border-white shadow-sm'
+                    : 'bg-zinc-900/60 text-zinc-400 border-white/5 hover:text-white hover:bg-zinc-800'
                 }`}
               >
                 <Lock className="w-3.5 h-3.5 text-amber-400" />
@@ -161,17 +160,17 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
                 <div className="py-12 text-center flex flex-col items-center justify-center">
                   {activeTab === 'unlocked' ? (
                     <>
-                      <Lock className="w-10 h-10 text-slate-600 mb-3" />
+                      <Lock className="w-10 h-10 text-zinc-600 mb-3" />
                       <p className="text-sm font-bold text-white mb-1">{t('achievements.noneUnlocked')}</p>
-                      <p className="text-xs text-slate-400 max-w-xs font-mono">
+                      <p className="text-xs text-zinc-400 max-w-xs font-mono">
                         {t('achievements.noneUnlockedHint')}
                       </p>
                     </>
                   ) : (
                     <>
-                      <Trophy className="w-10 h-10 text-[#00ff88] mb-3 animate-bounce" />
+                      <Trophy className="w-10 h-10 text-white mb-3 animate-bounce" />
                       <p className="text-base font-bold text-white mb-1">{t('achievements.allDone')}</p>
-                      <p className="text-xs text-[#00ff88] max-w-xs font-mono leading-relaxed mt-1">
+                      <p className="text-xs text-zinc-300 max-w-xs font-mono leading-relaxed mt-1">
                         {t('achievements.allDoneHint').replace('{cmd}', '`achievements reset`')}
                       </p>
                     </>
@@ -190,18 +189,18 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
                       key={id}
                       className={`flex items-start gap-4 p-3.5 rounded-2xl border transition-[background-color,border-color,box-shadow,opacity] duration-300 ${
                         unlocked
-                          ? 'bg-[#0c2e17]/60 border-[#10b981]/50 shadow-[0_0_15px_rgba(0,255,136,0.05)]'
+                          ? 'bg-zinc-900/70 border-white/20 shadow-md'
                           : 'bg-black/50 border-white/10 opacity-85 hover:opacity-100'
                       }`}
                     >
                       <div
                         className={`relative flex-shrink-0 w-11 h-11 rounded-xl border flex items-center justify-center mt-0.5 ${
                           unlocked
-                            ? 'border-[#00ff88]/60 bg-gradient-to-br from-[#0c2e17] to-[#06200e] text-[#00ff88] shadow-[0_0_12px_rgba(0,255,136,0.25)]'
-                            : 'border-slate-800 bg-slate-950 text-amber-500/70'
+                            ? 'border-white/20 bg-white/10 text-white shadow-sm'
+                            : 'border-zinc-800 bg-zinc-950 text-amber-500/70'
                         }`}
                       >
-                        {unlocked ? <Icon className="w-5 h-5" /> : <HelpCircle className="w-5 h-5 text-amber-500/70" />}
+                        {unlocked ? <Icon className="w-5 h-5 text-white" /> : <HelpCircle className="w-5 h-5 text-amber-500/70" />}
                       </div>
 
                       <div className="min-w-0 flex-1">
@@ -210,8 +209,8 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
                             {unlocked ? t(`achievements.meta.${id}.title`) : `${t('achievements.lockedTitle')} #${globalIndex}`}
                           </h4>
                           {unlocked ? (
-                            <span className="flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-[#00ff88] shrink-0 bg-[#00ff88]/10 px-2 py-0.5 rounded-md border border-[#00ff88]/30">
-                              <Check className="w-3 h-3" /> {t('achievements.unlockedLabel')}
+                            <span className="flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-zinc-200 shrink-0 bg-white/10 px-2 py-0.5 rounded-md border border-white/15">
+                              <Check className="w-3 h-3 text-white" /> {t('achievements.unlockedLabel')}
                             </span>
                           ) : (
                             <span className="flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-amber-400/80 shrink-0 bg-amber-500/10 px-2 py-0.5 rounded-md border border-amber-500/20">
@@ -222,18 +221,18 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
 
                         {unlocked ? (
                           <>
-                            <p className="text-xs text-slate-300 font-light leading-relaxed mt-1">
+                            <p className="text-xs text-zinc-300 font-light leading-relaxed mt-1">
                               {t(`achievements.meta.${id}.description`)}
                             </p>
                             {t(`achievements.meta.${id}.postUnlockHint`) !== `achievements.meta.${id}.postUnlockHint` && (
-                              <p className="text-[10px] text-[#00ff88]/70 font-mono mt-1 italic">
+                              <p className="text-[10px] text-zinc-400 font-mono mt-1 italic">
                                 {t(`achievements.meta.${id}.postUnlockHint`)}
                               </p>
                             )}
                           </>
                         ) : id === 'sacrificio' && !allOthersUnlocked ? (
                           <div className="mt-2 p-2.5 rounded-xl bg-black/40 border border-white/5">
-                            <p className="text-[11px] font-mono text-slate-500 italic">
+                            <p className="text-[11px] font-mono text-zinc-500 italic">
                               {lang === 'en' ? '🔒 Complete all other achievements first...' : '🔒 Desbloqueie todas as outras conquistas primeiro...'}
                             </p>
                           </div>
@@ -249,13 +248,13 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
                            {t(`achievements.meta.${id}.hint`)}
                              </p>
                             {t(`achievements.meta.${id}.tag`) !== `achievements.meta.${id}.tag` && (
-                              <span className="mt-1 text-[9px] font-mono text-[#00ff88]/60 bg-[#00ff88]/10 px-1.5 py-0.5 rounded border border-[#00ff88]/20">
+                              <span className="mt-1 text-[9px] font-mono text-zinc-300 bg-white/10 px-1.5 py-0.5 rounded border border-white/10">
                                 {t(`achievements.meta.${id}.tag`)}
                               </span>
                             )}
                             <button
                               onClick={() => toggleHint(id)}
-                              className="p-1 rounded bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white shrink-0 transition-colors"
+                              className="p-1 rounded bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white shrink-0 transition-colors"
                               title={t('achievements.hideHint')}
                             >
                               <EyeOff className="w-3.5 h-3.5" />
@@ -263,7 +262,7 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
                           </div>
                         ) : (
                           <div className="mt-2 flex items-center justify-between gap-2 bg-black/40 p-2.5 rounded-xl border border-white/5">
-                            <span className="text-[11px] font-mono text-slate-500 italic">
+                            <span className="text-[11px] font-mono text-zinc-500 italic">
                               {t('achievements.hintHidden')}
                             </span>
                             <button
@@ -284,10 +283,10 @@ export default function AchievementsModal({ isOpen, onClose, achievements: exter
             </div>
 
             {/* Footer */}
-            <div className="px-6 py-4 border-t border-white/10 bg-[#040805] text-center shrink-0">
-              <p className="text-[11px] font-mono text-slate-400">
+            <div className="px-6 py-4 border-t border-white/10 bg-zinc-950 text-center shrink-0">
+              <p className="text-[11px] font-mono text-zinc-400">
                 {unlockedCount === DISPLAY_IDS.length ? (
-                  <span className="text-[#00ff88]">
+                  <span className="text-white">
                     {t('achievements.allDoneHint').replace('{cmd}', 'achievements reset')}
                   </span>
                 ) : (

@@ -13,32 +13,32 @@ export default function AboutSection() {
       emoji: '⚙️',
       title: t('about.buildToWork'),
       description: t('about.buildToWorkDesc'),
-      borderColor: 'hover:border-[#00ff88]/50 hover:bg-[#061c10]/40',
-      iconColor: 'text-[#00ff88]'
+      borderColor: 'hover:border-white/40 hover:bg-white/[0.04]',
+      iconColor: 'text-white'
     },
     {
       icon: Target,
       emoji: '🎯',
       title: t('about.solveProblems'),
       description: t('about.solveProblemsDesc'),
-      borderColor: 'hover:border-[#00f2fe]/50 hover:bg-[#051824]/40',
-      iconColor: 'text-[#00f2fe]'
+      borderColor: 'hover:border-white/40 hover:bg-white/[0.04]',
+      iconColor: 'text-slate-200'
     },
     {
       icon: Users,
       emoji: '👥',
       title: t('about.peopleFirst'),
       description: t('about.peopleFirstDesc'),
-      borderColor: 'hover:border-[#10b981]/50 hover:bg-[#061a12]/40',
-      iconColor: 'text-[#10b981]'
+      borderColor: 'hover:border-white/40 hover:bg-white/[0.04]',
+      iconColor: 'text-slate-200'
     },
     {
       icon: Rocket,
       emoji: '🚀',
       title: t('about.alwaysEvolving'),
       description: t('about.alwaysEvolvingDesc'),
-      borderColor: 'hover:border-[#00ff88]/50 hover:bg-[#061c10]/40',
-      iconColor: 'text-[#00ff88]'
+      borderColor: 'hover:border-white/40 hover:bg-white/[0.04]',
+      iconColor: 'text-white'
     }
   ];
 
@@ -48,9 +48,9 @@ export default function AboutSection() {
         
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#071410] border border-[#00ff88]/30 mb-3">
-            <User className="w-3.5 h-3.5 text-[#00ff88]" />
-            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">{t('about.badge')}</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/15 mb-3">
+            <User className="w-3.5 h-3.5 text-slate-200" />
+            <span className="text-xs font-mono text-slate-200 tracking-widest uppercase">{t('about.badge')}</span>
           </div>
         </div>
 
@@ -66,9 +66,9 @@ export default function AboutSection() {
             className="lg:col-span-5 relative"
           >
             {/* Glow frame behind image */}
-            <div className="absolute -inset-3 bg-gradient-to-tr from-[#00f2fe]/20 via-[#10b981]/25 to-[#00ff88]/20 rounded-3xl blur-xl opacity-60 pointer-events-none" />
+            <div className="absolute -inset-3 bg-gradient-to-tr from-white/10 via-slate-400/8 to-zinc-600/8 rounded-3xl blur-xl opacity-60 pointer-events-none" />
             
-            <div className="relative rounded-2xl overflow-hidden glass-card p-3 border border-[#00ff88]/30 shadow-glow-md bg-[#040705]">
+            <div className="relative rounded-2xl overflow-hidden glass-card p-3 border border-white/15 shadow-glow-sm bg-bg-card">
               <img
                 src={personalInfo.photoUrl}
                 alt={personalInfo.name}
@@ -80,7 +80,7 @@ export default function AboutSection() {
                 href={personalInfo.companyWebsite}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute bottom-6 left-6 right-6 p-4 rounded-xl glass-panel border border-[#00ff88]/40 shadow-glow-sm hover:border-[#00f2fe] hover:scale-[1.02] transition-[border-color,transform] group bg-[#040705]/90"
+                className="absolute bottom-6 left-6 right-6 p-4 rounded-xl glass-panel border border-white/20 shadow-glow-sm hover:border-white/50 hover:scale-[1.02] transition-all group bg-[#09090b]/90"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
@@ -90,13 +90,13 @@ export default function AboutSection() {
                       className="w-10 h-10 object-contain group-hover:scale-110 transition-transform"
                     />
                     <div>
-                      <h4 className="text-sm font-bold text-white group-hover:text-[#00ff88] transition-colors">{personalInfo.name}</h4>
-                      <p className="text-xs text-[#00ff88] font-mono flex items-center gap-1">
-                        {personalInfo.companyName} <span className="text-[10px] text-[#00f2fe]">↗</span>
+                      <h4 className="text-sm font-bold text-white group-hover:text-white transition-colors">{personalInfo.name}</h4>
+                      <p className="text-xs text-slate-300 font-mono flex items-center gap-1">
+                        {personalInfo.companyName} <span className="text-[10px] text-slate-400">↗</span>
                       </p>
                     </div>
                   </div>
-                  <ShieldCheck className="w-6 h-6 text-[#00ff88]" />
+                  <ShieldCheck className="w-6 h-6 text-white" />
                 </div>
               </a>
             </div>
@@ -172,9 +172,9 @@ export default function AboutSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="quote-card max-w-4xl mx-auto p-6 sm:p-8 rounded-2xl glass-card border border-[#00ff88]/40 shadow-glow-md text-center relative bg-gradient-to-r from-[#040705] via-[#071d12] to-[#040705]"
+          className="quote-card max-w-4xl mx-auto p-6 sm:p-8 rounded-2xl glass-card border border-white/15 shadow-glow-sm text-center relative bg-gradient-to-r from-bg-card via-[#1c1c21] to-bg-card"
         >
-          <Quote className="w-8 h-8 text-[#00ff88]/40 mx-auto mb-3" />
+          <Quote className="w-8 h-8 text-white/30 mx-auto mb-3" />
           <blockquote className="text-lg sm:text-2xl font-bold text-white tracking-wide font-sans leading-snug">
             "{lang === 'en' ? "I don't just want to write code. I want to build things that matter." : personalInfo.aboutQuote}"
           </blockquote>

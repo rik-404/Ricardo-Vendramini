@@ -246,7 +246,7 @@ export default function App() {
   };
 
   return (
-    <div className={`relative min-h-screen font-sans selection:bg-[#00ff88] selection:text-black ${theme === 'light' ? 'bg-[#f8fafc] text-slate-900' : 'bg-[#040705] text-slate-100'}`}>
+    <div className={`relative min-h-screen font-sans selection:bg-white selection:text-black ${theme === 'light' ? 'bg-[#f8fafc] text-slate-900' : 'bg-[#09090b] text-zinc-100'}`}>
       {/* Dynamic SEO: section-scoped <title>, meta description & Open Graph tags */}
       <SeoManager />
 
@@ -294,14 +294,14 @@ export default function App() {
 
       {/* Floating Clean Mode Active Banner */}
       {siteCleaned && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[99999] px-6 py-3.5 rounded-2xl bg-[#06140d]/95 border border-[#00ff88]/50 text-white font-mono text-xs shadow-glow-lg flex items-center gap-4 animate-bounce">
-          <span className="flex items-center gap-2 text-[#00ff88]">
-            <Trash2 className="w-4 h-4 text-[#00ff88]" />
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[99999] px-6 py-3.5 rounded-2xl bg-zinc-900/90 backdrop-blur-xl border border-white/20 text-white font-mono text-xs shadow-2xl flex items-center gap-4 animate-bounce">
+          <span className="flex items-center gap-2 text-zinc-200">
+            <Trash2 className="w-4 h-4 text-white" />
             <span>{t('cleanBanner.active')}</span>
           </span>
           <button
             onClick={() => setSiteCleaned(false)}
-            className="px-4 py-1.5 rounded-xl bg-gradient-to-r from-[#059669] to-[#00ff88] text-black font-extrabold flex items-center gap-1.5 hover:scale-105 transition-transform cursor-pointer shadow-sm"
+            className="px-4 py-1.5 rounded-xl bg-white text-zinc-950 font-bold flex items-center gap-1.5 hover:bg-zinc-200 transition-colors cursor-pointer shadow-sm"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>{t('cleanBanner.restore')} (ESC)</span>
@@ -415,17 +415,17 @@ export default function App() {
 
       {/* Update Notification */}
       {swUpdated && (
-        <div className="fixed bottom-6 right-6 z-[99999] px-5 py-3 rounded-2xl bg-[#06140d]/95 border border-[#00ff88]/50 text-white font-mono text-xs shadow-glow-lg flex items-center gap-4 animate-bounce">
-          <span className="text-[#00ff88]">🔄 Nova atualização disponível!</span>
+        <div className="fixed bottom-6 right-6 z-[99999] px-5 py-3 rounded-2xl bg-zinc-900/90 backdrop-blur-xl border border-white/20 text-white font-mono text-xs shadow-2xl flex items-center gap-4 animate-bounce">
+          <span className="text-zinc-200">🔄 Nova atualização disponível!</span>
           <button
             onClick={handleApplyUpdate}
-            className="px-3 py-1.5 rounded-xl bg-[#00ff88] text-black font-bold hover:scale-105 transition-transform"
+            className="px-3 py-1.5 rounded-xl bg-white text-zinc-950 font-bold hover:bg-zinc-200 transition-colors"
           >
             Atualizar
           </button>
           <button
             onClick={() => setSwUpdated(false)}
-            className="text-slate-400 hover:text-white transition-colors"
+            className="text-zinc-400 hover:text-white transition-colors"
           >
             ✕
           </button>

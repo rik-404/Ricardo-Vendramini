@@ -394,10 +394,10 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       if (!g) return;
 
       // Background Starfield Grid
-      ctx.fillStyle = '#050906';
+      ctx.fillStyle = '#09090b';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.strokeStyle = 'rgba(0, 255, 136, 0.04)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
       ctx.lineWidth = 1;
       for (let x = 0; x < canvas.width; x += 25) {
         ctx.beginPath();
@@ -406,11 +406,11 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
         ctx.stroke();
       }
 
-      // Draw Player Ship (Geometric Neon Triangle)
+      // Draw Player Ship (Geometric Titanium / White Stealth Fighter)
       ctx.save();
-      ctx.shadowColor = '#00ff88';
-      ctx.shadowBlur = 10;
-      ctx.fillStyle = '#00ff88';
+      ctx.shadowColor = '#ffffff';
+      ctx.shadowBlur = 12;
+      ctx.fillStyle = '#ffffff';
       ctx.beginPath();
       ctx.moveTo(g.player.x + g.player.width / 2, g.player.y);
       ctx.lineTo(g.player.x, g.player.y + g.player.height);
@@ -420,12 +420,12 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       ctx.fill();
       ctx.restore();
 
-      // Draw Lasers
+      // Draw Lasers (High-Velocity White Energy Beams)
       g.lasers.forEach((l) => {
         ctx.save();
-        ctx.shadowColor = '#00f2fe';
-        ctx.shadowBlur = 8;
-        ctx.fillStyle = '#00f2fe';
+        ctx.shadowColor = '#ffffff';
+        ctx.shadowBlur = 10;
+        ctx.fillStyle = '#ffffff';
         ctx.fillRect(l.x, l.y, l.width, l.height);
         ctx.restore();
       });
@@ -433,20 +433,17 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       // Draw Alien Lasers
       g.alienLasers.forEach((al) => {
         ctx.save();
-        ctx.shadowColor = al.color;
+        ctx.fillStyle = '#ef4444';
+        ctx.shadowColor = '#ef4444';
         ctx.shadowBlur = 6;
-        ctx.fillStyle = al.color;
         ctx.fillRect(al.x, al.y, al.width, al.height);
         ctx.restore();
       });
 
-      // Draw Geometric Aliens
+      // Draw Aliens (Geometric Entities)
       g.aliens.forEach((alien) => {
         if (!alien.alive) return;
-
         ctx.save();
-        ctx.shadowColor = alien.color;
-        ctx.shadowBlur = 8;
         ctx.strokeStyle = alien.color;
         ctx.fillStyle = alien.color + '40'; // Transparent fill
         ctx.lineWidth = 1.5;
@@ -493,7 +490,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
       // Draw Game Over or Victory Overlays
       if (g.gameOver) {
-        ctx.fillStyle = 'rgba(4, 7, 5, 0.85)';
+        ctx.fillStyle = 'rgba(9, 9, 11, 0.9)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.font = 'bold 22px monospace';
         ctx.fillStyle = '#ef4444';
@@ -501,21 +498,21 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
         ctx.fillText(t('terminal.gameOver'), canvas.width / 2, canvas.height / 2 - 15);
 
         ctx.font = '12px monospace';
-        ctx.fillStyle = '#cbd5e1';
+        ctx.fillStyle = '#e4e4e7';
         ctx.fillText(`${t('terminal.finalScore')} ${g.score}`, canvas.width / 2, canvas.height / 2 + 15);
         ctx.fillText(t('terminal.pressRestartSpace'), canvas.width / 2, canvas.height / 2 + 40);
       }
 
       if (g.victory) {
-        ctx.fillStyle = 'rgba(4, 7, 5, 0.85)';
+        ctx.fillStyle = 'rgba(9, 9, 11, 0.9)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.font = 'bold 22px monospace';
-        ctx.fillStyle = '#00ff88';
+        ctx.fillStyle = '#ffffff';
         ctx.textAlign = 'center';
         ctx.fillText(t('terminal.victory'), canvas.width / 2, canvas.height / 2 - 15);
 
         ctx.font = '12px monospace';
-        ctx.fillStyle = '#cbd5e1';
+        ctx.fillStyle = '#e4e4e7';
         ctx.fillText(`${t('terminal.finalScore')} ${g.score}`, canvas.width / 2, canvas.height / 2 + 15);
         ctx.fillText(t('terminal.pressPlayAgainSpace'), canvas.width / 2, canvas.height / 2 + 40);
       }
@@ -562,14 +559,14 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
     }
   };
 
-  const handleCommandSubmit = (e) => {
-    e.preventDefault();
-    const cmd = inputVal.trim().toLowerCase();
+  const runCommand = (commandToRun) => {
+    const raw = (commandToRun !== undefined ? commandToRun : inputVal).trim();
+    const cmd = raw.toLowerCase();
     if (!cmd) return;
 
     // Admin mode: waiting for password
     if (adminMode) {
-      const maskedHistory = [...history, `${t('terminal.passwordPrompt').slice(1)} ${'*'.repeat(inputVal.trim().length)}`];
+      const maskedHistory = [...history, `${t('terminal.passwordPrompt').slice(1)} ${'*'.repeat(raw.length)}`];
       setInputVal('');
 
       if (cmd === 'admin' || cmd === 'root' || cmd === 'admin admin' || cmd === 'root admin' || cmd === 'admin123') {
@@ -620,7 +617,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       }
     }
 
-    const newHistory = [...history, `ricardo@dev:~$ ${inputVal}`];
+    const newHistory = [...history, `ricardo@dev:~$ ${raw}`];
 
     // 1. Root / Admin command
     if (cmd === 'root' || cmd === 'admin' || cmd === 'root admin' || cmd === 'root-admin') {
@@ -660,7 +657,71 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       return;
     }
 
-    // 3. Portuguese language command
+    // 3. Space Invaders Retro Game
+    if (cmd === 'game' || cmd === 'arcade' || cmd === 'space' || cmd === 'navinha' || cmd === 'play') {
+      newHistory.push(lang === 'en' ? '> 🚀 Launching Space Invaders Retro Arcade...' : '> 🚀 Inicializando Arcade Retrô da Navinha...');
+      setHistory(newHistory);
+      setInputVal('');
+      unlockAchievement('navinha');
+      startGame();
+      return;
+    }
+
+    // 4. Breakout Arcade Game
+    if (cmd === 'breakout' || cmd === 'arkanoid' || cmd === 'brick') {
+      newHistory.push(lang === 'en' ? '> 🧱 Launching Breakout Arcade...' : '> 🧱 Inicializando Jogo Breakout...');
+      setHistory(newHistory);
+      setInputVal('');
+      if (onTriggerBreakout) onTriggerBreakout();
+      return;
+    }
+
+    // 5. Star Wars Crawl
+    if (cmd === 'starwars' || cmd === 'star wars' || cmd === 'jedi' || cmd === 'yoda') {
+      newHistory.push(lang === 'en' ? '> 🌌 A long time ago in a galaxy far, far away...' : '> 🌌 Há muito tempo, numa galáxia muito, muito distante...');
+      setHistory(newHistory);
+      setInputVal('');
+      if (onTriggerStarWars) onTriggerStarWars();
+      return;
+    }
+
+    // 6. Matrix Canvas Rain
+    if (cmd === 'matrix' || cmd === 'neo' || cmd === 'canvas') {
+      newHistory.push(lang === 'en' ? '> 🟢 Entering the Matrix...' : '> 🟢 Entrando na Matrix...');
+      setHistory(newHistory);
+      setInputVal('');
+      if (onTriggerEasterEgg) onTriggerEasterEgg();
+      return;
+    }
+
+    // 7. Clean Mode
+    if (cmd === 'clean' || cmd === 'limpar site' || cmd === 'minimal') {
+      newHistory.push(lang === 'en' ? '> 🧹 Zen Mode Activated: UI Elements Hidden.' : '> 🧹 Modo Zen Ativado: Elementos Visuais Ocultados.');
+      setHistory(newHistory);
+      setInputVal('');
+      if (onTriggerClean) onTriggerClean();
+      return;
+    }
+
+    // 8. Achievements Modal & Reset
+    if (cmd === 'achievements' || cmd === 'conquistas' || cmd === 'trophies') {
+      setHistory(newHistory);
+      setInputVal('');
+      setLocalAchievementsOpen(true);
+      return;
+    }
+
+    if (cmd === 'achievements reset' || cmd === 'reset achievements' || cmd === 'reset') {
+      localStorage.removeItem('ricardodev_achievements');
+      setAchievements(new Set());
+      unlockAchievement('sacrificio');
+      newHistory.push(lang === 'en' ? '> 💀 SACRIFICE ACCEPTED! Achievements reset & Secret Achievement unlocked.' : '> 💀 SACRIFÍCIO ACEITO! Conquistas reiniciadas & Conquista Secreta desbloqueada.');
+      setHistory(newHistory);
+      setInputVal('');
+      return;
+    }
+
+    // 9. Portuguese language command
     if (cmd === 'portuguese' || cmd === 'portugues' || cmd === 'português' || cmd === 'pt') {
       if (changeLang) changeLang('pt');
       else toggleLang();
@@ -670,7 +731,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       return;
     }
 
-    // 4. English language command
+    // 10. English language command
     if (cmd === 'english' || cmd === 'ingles' || cmd === 'inglês' || cmd === 'en') {
       if (changeLang) changeLang('en');
       else toggleLang();
@@ -680,7 +741,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       return;
     }
 
-    // 5. Dark mode command
+    // 11. Dark mode command
     if (cmd === 'dark' || cmd === 'escuro') {
       if (theme !== 'dark' && onToggleTheme) onToggleTheme();
       newHistory.push(lang === 'en' ? '> 🌙 Dark Mode activated!' : '> 🌙 Modo Escuro ativado!');
@@ -689,7 +750,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       return;
     }
 
-    // 6. White/Light mode command
+    // 12. White/Light mode command
     if (cmd === 'white' || cmd === 'light' || cmd === 'claro' || cmd === 'branco') {
       if (theme !== 'light' && onToggleTheme) onToggleTheme();
       newHistory.push(lang === 'en' ? '> ☀️ White / Light Mode activated!' : '> ☀️ Modo Claro / White ativado!');
@@ -698,28 +759,47 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       return;
     }
 
-    // 7. Clear command
+    // 13. Clear command
     if (cmd === 'clear' || cmd === 'limpar') {
       setHistory([]);
       setInputVal('');
       return;
     }
 
-    // 8. Help command
+    // 14. Help command
     if (cmd === 'help' || cmd === 'ajuda') {
       setHistory([...newHistory, ...(lang === 'en' ? terminalCommandsEn.help : terminalCommands.help)]);
       setInputVal('');
       return;
     }
 
+    // Navigation commands
+    const validSections = ['about', 'experience', 'skills', 'projects', 'certificates', 'books', 'contact'];
+    if (validSections.includes(cmd)) {
+      newHistory.push(lang === 'en' ? `> 🧭 Navigating to #${cmd}...` : `> 🧭 Navegando para #${cmd}...`);
+      setHistory(newHistory);
+      setInputVal('');
+      const el = document.getElementById(cmd);
+      if (el) {
+        if (isModal && onClose) onClose();
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+      return;
+    }
+
     // Unrecognized command
     newHistory.push(
       lang === 'en'
-        ? `Command not recognized: '${cmd}'. Type 'help' to see available commands.`
-        : `Comando não reconhecido: '${cmd}'. Digite 'help' para ver os comandos disponíveis.`
+        ? `Command not recognized: '${cmd}'. Type 'help' or click a quick-action chip.`
+        : `Comando não reconhecido: '${cmd}'. Digite 'help' ou clique em um atalho rápido.`
     );
     setHistory(newHistory);
     setInputVal('');
+  };
+
+  const handleCommandSubmit = (e) => {
+    if (e) e.preventDefault();
+    runCommand(inputVal);
   };
 
   const content = (
@@ -728,13 +808,13 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       
       {/* Section Header */}
       <div className="flex flex-col items-center text-center mb-6 sm:mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0c140e] border border-[#10b981]/30 mb-3">
-          <TerminalIcon className="w-3.5 h-3.5 text-[#00ff88]" />
-          <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">{t('terminal.badge')}</span>
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/15 mb-3">
+          <TerminalIcon className="w-3.5 h-3.5 text-slate-200" />
+          <span className="text-xs font-mono text-slate-200 tracking-widest uppercase">{t('terminal.badge')}</span>
         </div>
 
         <h2 ref={cliTitleRef} className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white mb-2 select-none">
-          RICARDO.<span className="text-[#00ff88]">DEV</span> {t('terminal.titleTerm')}
+          RICARDO.<span className="text-white">DEV</span> {t('terminal.titleTerm')}
         </h2>
         {isModal && (
           <p className="text-xs text-slate-400 font-mono">
@@ -744,10 +824,10 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       </div>
 
       {/* Terminal Window Mockup */}
-      <div className="terminal-flash-target max-w-4xl mx-auto glass-card rounded-2xl border border-[#00ff88]/40 overflow-hidden shadow-[0_0_50px_rgba(0,255,136,0.15)] font-mono text-xs sm:text-sm">
+      <div className="terminal-flash-target max-w-4xl mx-auto glass-card rounded-2xl border border-white/20 overflow-hidden shadow-glow-sm font-mono text-xs sm:text-sm">
         
         {/* Top Bar */}
-        <div className="bg-[#040705] px-4 py-3 border-b border-white/10 flex items-center justify-between">
+        <div className="bg-bg-card px-4 py-3 border-b border-white/10 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block cursor-pointer" onClick={isModal ? onClose : undefined} title="Fechar" />
             <span className="w-3 h-3 rounded-full bg-yellow-500/80 inline-block" />
@@ -760,8 +840,8 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
           <div className="flex items-center gap-3">
             {gameActive ? (
               <div className="flex items-center gap-4 text-xs font-bold text-white">
-                <span className="text-[#00ff88]">{t('terminal.points')} {score}</span>
-                <span className="text-[#00f2fe]">{t('terminal.lives')} {'❤️'.repeat(lives)}</span>
+                <span className="text-white">{t('terminal.points')} {score}</span>
+                <span className="text-slate-300">{t('terminal.lives')} {'❤️'.repeat(lives)}</span>
                 <button
                   onClick={() => setGameActive(false)}
                   className="px-2 py-0.5 rounded bg-red-500/20 text-red-400 hover:bg-red-500/40 text-[11px] flex items-center gap-1 border border-red-500/30 cursor-pointer"
@@ -770,8 +850,8 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
                 </button>
               </div>
             ) : (
-              <div className="flex items-center gap-2 text-[#00ff88] text-xs">
-                <span className="w-2 h-2 rounded-full bg-[#00ff88] animate-pulse" />
+              <div className="flex items-center gap-2 text-slate-200 text-xs">
+                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
                 <span>{t('terminal.online')}</span>
               </div>
             )}
@@ -791,12 +871,12 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
           {/* Terminal Screen / Canvas Game Container */}
           {gameActive ? (
-            <div className="relative bg-[#050906] flex flex-col items-center justify-center p-4">
+            <div className="relative bg-bg-card flex flex-col items-center justify-center p-4">
               <canvas
                 ref={canvasRef}
                 width={540}
                 height={320}
-                className="w-full max-w-[540px] h-[320px] rounded-xl border border-[#00ff88]/30 bg-[#050906] shadow-inner"
+                className="w-full max-w-[540px] h-[320px] rounded-xl border border-white/20 bg-bg-deep shadow-inner"
               />
 
               {/* Touch Controls Bar for Mobile/Tablet */}
@@ -804,14 +884,14 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => handleTouchMove('left')}
-                    className="p-3 rounded-xl bg-white/10 text-white hover:bg-[#00ff88]/20 hover:text-[#00ff88] border border-white/10"
+                    className="p-3 rounded-xl bg-white/10 text-white hover:bg-white/20 hover:text-white border border-white/10 cursor-pointer"
                     title={t('terminal.moveLeft')}
                   >
                     <ArrowLeft className="w-5 h-5" />
                   </button>
                   <button
                     onClick={() => handleTouchMove('right')}
-                    className="p-3 rounded-xl bg-white/10 text-white hover:bg-[#00ff88]/20 hover:text-[#00ff88] border border-white/10"
+                    className="p-3 rounded-xl bg-white/10 text-white hover:bg-white/20 hover:text-white border border-white/10 cursor-pointer"
                     title={t('terminal.moveRight')}
                   >
                     <ArrowRight className="w-5 h-5" />
@@ -820,30 +900,30 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
                 <button
                   onClick={handleTouchShoot}
-                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#00f2fe] to-[#00ff88] text-black font-extrabold text-xs flex items-center gap-2 shadow-glow-sm"
+                  className="px-6 py-3 rounded-xl bg-white text-black hover:bg-slate-200 font-extrabold text-xs flex items-center gap-2 shadow-glow-sm cursor-pointer"
                 >
                   <Zap className="w-4 h-4" /> {t('terminal.shoot')}
                 </button>
               </div>
             </div>
           ) : (
-            <div ref={outputContainerRef} className="p-6 bg-[#050906]/90 min-h-[300px] max-h-[420px] overflow-y-auto space-y-2 text-slate-200">
+            <div ref={outputContainerRef} className="p-6 bg-bg-card/90 min-h-[300px] max-h-[420px] overflow-y-auto space-y-2 text-slate-200">
               {history.map((line, idx) => (
                 <div
                   key={idx}
                   className={
                     line.startsWith('ricardo@dev')
-                      ? 'text-[#00ff88] font-bold'
+                      ? 'text-white font-bold'
                       : line.startsWith('[OK]')
-                      ? 'text-emerald-400'
+                      ? 'text-slate-200'
                       : line.startsWith('STATUS:')
-                      ? 'text-[#00ff88] font-extrabold'
+                      ? 'text-white font-extrabold'
                       : line.startsWith('★')
                       ? 'text-[#f59e0b] font-semibold drop-shadow-[0_0_6px_rgba(245,158,11,0.4)]'
                       : line.startsWith('⚡')
-                      ? 'text-[#a855f7] font-extrabold text-sm tracking-wide drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]'
+                      ? 'text-slate-200 font-extrabold text-sm tracking-wide'
                       : line.startsWith('Comandos')
-                      ? 'text-[#00f2fe] font-bold'
+                      ? 'text-slate-200 font-bold'
                       : line.includes('WARNING')
                       ? 'text-red-500 font-extrabold text-base animate-pulse'
                       : line.startsWith('[███')
@@ -851,13 +931,13 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
                       : line.includes('Deleting')
                       ? 'text-red-400 font-bold'
                       : line.includes('Brincadeira')
-                      ? 'text-[#00ff88] font-extrabold text-base drop-shadow-[0_0_10px_rgba(0,255,136,0.6)]'
+                      ? 'text-white font-extrabold text-base drop-shadow-[0_0_10px_rgba(255,255,255,0.6)]'
                       : line.includes('Boa tentativa')
                       ? 'text-[#f59e0b] font-bold text-sm'
                       : line.includes('Sou dev')
                       ? 'text-slate-400 italic text-xs'
                       : line.includes('Firewall')
-                      ? 'text-emerald-400 font-bold'
+                      ? 'text-slate-200 font-bold'
                       : 'text-slate-300'
                   }
                 >
@@ -869,8 +949,8 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
           {/* Terminal Input Form */}
           {!gameActive && (
-            <form onSubmit={handleCommandSubmit} className="bg-[#040705] px-4 py-3 border-t border-white/10 flex items-center gap-2">
-              <span className={`font-bold shrink-0 ${adminMode ? 'text-yellow-400' : 'text-[#00ff88]'}`}>
+            <form onSubmit={handleCommandSubmit} className="bg-bg-card px-4 py-3 border-t border-white/10 flex items-center gap-2">
+              <span className={`font-bold shrink-0 ${adminMode ? 'text-yellow-400' : 'text-white'}`}>
                 {adminMode ? t('terminal.passwordPrompt') : t('terminal.prompt')}
               </span>
               <input
@@ -882,7 +962,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
                 className="w-full bg-transparent text-white focus:outline-none font-mono text-xs sm:text-sm placeholder-slate-600"
                 autoFocus
               />
-              <button type="submit" className="p-1.5 rounded bg-[#10b981]/20 text-[#00ff88] hover:bg-[#10b981]/40 cursor-pointer">
+              <button type="submit" className="p-1.5 rounded bg-white/10 text-white hover:bg-white/20 cursor-pointer">
                 <Play className="w-3.5 h-3.5" />
               </button>
             </form>

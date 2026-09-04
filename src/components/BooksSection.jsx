@@ -15,9 +15,9 @@ export default function BooksSection({ onSelectBook }) {
         
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#071410] border border-[#00ff88]/30 mb-4">
-            <BookOpen className="w-3.5 h-3.5 text-[#00ff88]" />
-            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/15 mb-4">
+            <BookOpen className="w-3.5 h-3.5 text-slate-200" />
+            <span className="text-xs font-mono text-slate-200 tracking-widest uppercase">
               {lang === 'en' ? 'Literature & Publications' : 'Literatura & Publicações'}
             </span>
           </div>
@@ -45,19 +45,19 @@ export default function BooksSection({ onSelectBook }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="lg:col-span-12 glass-card rounded-3xl border border-[#00ff88]/30 p-6 sm:p-8 lg:p-10 relative overflow-hidden bg-[#040705]/90 shadow-glow-sm hover:border-[#00ff88]/60 transition-[border-color,box-shadow] duration-200"
+              className="lg:col-span-12 glass-card rounded-3xl border border-white/10 p-6 sm:p-8 lg:p-10 relative overflow-hidden bg-bg-card/90 shadow-glow-sm hover:border-white/30 transition-all duration-200"
             >
               {/* Background ambient glow */}
-              <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#00ff88]/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute -top-24 -right-24 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none" />
 
               <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12 relative z-10">
                 
                 {/* 3D Book Interactive Preview Column */}
                 <div className="shrink-0 flex flex-col items-center">
-                  <div className="p-4 rounded-3xl bg-[#071910]/80 border border-[#00ff88]/20 shadow-2xl relative group">
+                  <div className="p-4 rounded-3xl bg-white/[0.04] border border-white/10 shadow-2xl relative group">
                     <Book3D book={book} onClick={onSelectBook} />
                     <div className="mt-4 text-center">
-                      <span className="text-[11px] font-mono text-[#00ff88] flex items-center justify-center gap-1">
+                      <span className="text-[11px] font-mono text-slate-300 flex items-center justify-center gap-1">
                         <Sparkles className="w-3 h-3" /> {t('books.interact3d')}
                       </span>
                     </div>
@@ -67,12 +67,12 @@ export default function BooksSection({ onSelectBook }) {
                 {/* Book Details & Synopsis Column */}
                 <div className="flex-1 text-left space-y-5">
                   <div className="flex flex-wrap items-center gap-3">
-                    <span className="book-tag px-3 py-1 rounded-full bg-[#0c2e17] border border-[#00ff88]/40 text-[#00ff88] text-xs font-mono flex items-center gap-1.5 shadow-sm">
-                      <ShieldCheck className="w-3.5 h-3.5 text-[#00ff88]" />
+                    <span className="book-tag px-3 py-1 rounded-full bg-white/[0.08] border border-white/20 text-white text-xs font-mono flex items-center gap-1.5 shadow-sm">
+                      <ShieldCheck className="w-3.5 h-3.5 text-white" />
                       {book.status || t('books.published')}
                     </span>
                     <span className="px-3 py-1 rounded-full bg-black/60 border border-white/10 text-slate-300 text-xs font-mono flex items-center gap-1.5">
-                      <Calendar className="w-3.5 h-3.5 text-[#00f2fe]" />
+                      <Calendar className="w-3.5 h-3.5 text-slate-300" />
                       {t('books.release')} {book.year}
                     </span>
                   </div>
@@ -80,17 +80,17 @@ export default function BooksSection({ onSelectBook }) {
                   <div>
                     <h3 
                       onClick={() => onSelectBook && onSelectBook(book)}
-                      className="text-2xl sm:text-4xl font-extrabold text-white hover:text-[#00ff88] transition-colors cursor-pointer tracking-tight"
+                      className="text-2xl sm:text-4xl font-extrabold text-white hover:text-slate-200 transition-colors cursor-pointer tracking-tight"
                     >
                       {book.title}
                     </h3>
-                    <p className="text-sm font-mono text-[#00f2fe] mt-1">{book.subtitle}</p>
+                    <p className="text-sm font-mono text-slate-400 mt-1">{book.subtitle}</p>
                   </div>
 
                   {/* Synopsis Teaser */}
                   <div className="space-y-2">
                     <h4 className="text-xs font-mono text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                      <BookOpen className="w-3.5 h-3.5 text-[#00ff88]" /> {t('books.synopsis')}
+                      <BookOpen className="w-3.5 h-3.5 text-slate-200" /> {t('books.synopsis')}
                     </h4>
                     <p className="text-slate-300 text-sm font-light leading-relaxed line-clamp-4">
                       {book.synopsis}
@@ -102,7 +102,7 @@ export default function BooksSection({ onSelectBook }) {
                     {book.tags?.map((tag, tIdx) => (
                       <span
                         key={tIdx}
-                        className="book-tag px-3 py-1 rounded-md bg-[#071910] border border-[#00ff88]/20 text-[#00ff88] text-xs font-mono flex items-center gap-1"
+                        className="book-tag px-3 py-1 rounded-md bg-white/[0.04] border border-white/10 text-slate-300 text-xs font-mono flex items-center gap-1"
                       >
                         <Tag className="w-3 h-3" /> #{tag}
                       </span>
@@ -113,7 +113,7 @@ export default function BooksSection({ onSelectBook }) {
                   <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
                     <button
                       onClick={() => onSelectBook && onSelectBook(book)}
-                      className="px-6 py-3 rounded-xl bg-[#092415] hover:bg-[#00ff88] text-[#00ff88] hover:text-black font-mono text-xs font-bold tracking-wider uppercase transition-colors duration-300 border border-[#00ff88]/40 flex items-center gap-2 shadow-glow-sm"
+                      className="px-6 py-3 rounded-xl bg-white text-black hover:bg-slate-200 font-mono text-xs font-bold tracking-wider uppercase transition-all duration-300 flex items-center gap-2 shadow-glow-sm cursor-pointer"
                     >
                       <Eye className="w-4 h-4" />
                       <span>{t('books.readFull')}</span>
@@ -137,7 +137,7 @@ export default function BooksSection({ onSelectBook }) {
                           href={book.uiclapLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-5 py-3 rounded-xl bg-gradient-to-r from-[#059669] via-[#10b981] to-[#00ff88] text-black font-extrabold text-xs font-mono uppercase tracking-wider flex items-center gap-2 transition-transform hover:scale-105 shadow-glow-sm"
+                          className="px-5 py-3 rounded-xl bg-white/[0.1] hover:bg-white/[0.2] border border-white/20 text-white font-extrabold text-xs font-mono uppercase tracking-wider flex items-center gap-2 transition-all hover:scale-105 shadow-glow-sm"
                         >
                           <ShoppingCart className="w-4 h-4" />
                           <span>{t('books.buyUiclap')}</span>

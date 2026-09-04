@@ -10,15 +10,15 @@ export default function HeroCanvas({ matrixMode = false, theme = 'dark' }) {
     const ctx = canvas.getContext('2d');
     const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
-    // Palette adapted to the active theme
+    // Palette adapted to the active theme (Titanium Monochromatic)
     const particleColors = isLight
-      ? ['#059669', '#10b981', '#34d399']
-      : ['#10b981', '#34d399', '#00ff88'];
-    const particleAlphaBase = isLight ? 0.16 : 0.08;
-    const particleAlphaRange = isLight ? 0.12 : 0.08;
-    const linkMaxAlpha = isLight ? 0.4 : 0.22;
-    const mouseLineColor = isLight ? '#0891b2' : '#00f2fe';
-    const matrixRgb = isLight ? '245, 250, 247' : '4, 7, 5';
+      ? ['#52525b', '#71717a', '#a1a1aa']
+      : ['#ffffff', '#e2e8f0', '#94a3b8'];
+    const particleAlphaBase = isLight ? 0.14 : 0.08;
+    const particleAlphaRange = isLight ? 0.12 : 0.12;
+    const linkMaxAlpha = isLight ? 0.35 : 0.22;
+    const mouseLineColor = isLight ? '#18181b' : '#ffffff';
+    const matrixRgb = isLight ? '248, 250, 252' : '9, 9, 11';
 
     let animationFrameId;
     let width = (canvas.width = window.innerWidth);

@@ -66,23 +66,23 @@ export default function CustomCursor() {
     <>
       {/* Outer Halo */}
       <div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full transition-transform duration-100 ease-out border border-[#00ff88]/40"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full transition-transform duration-100 ease-out border border-white/40"
         style={{
           transform: `translate3d(${trailingPos.x - (isHovered ? 24 : 16)}px, ${trailingPos.y - (isHovered ? 24 : 16)}px, 0) scale(${isHovered ? 1.4 : 1})`,
           width: '32px',
           height: '32px',
-          backgroundColor: isHovered ? 'rgba(0, 255, 136, 0.08)' : 'rgba(16, 185, 129, 0.03)',
-          boxShadow: isHovered ? '0 0 20px rgba(0, 255, 136, 0.3)' : 'none',
+          backgroundColor: isHovered ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255, 255, 255, 0.03)',
+          boxShadow: isHovered ? '0 0 20px rgba(255, 255, 255, 0.25)' : 'none',
         }}
       />
       {/* Inner Dot */}
       <div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full bg-[#00ff88]"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full bg-white"
         style={{
           transform: `translate3d(${position.x - 4}px, ${position.y - 4}px, 0)`,
           width: '8px',
           height: '8px',
-          boxShadow: '0 0 10px #00ff88, 0 0 20px #00ff88',
+          boxShadow: '0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.4)',
         }}
       />
     </>

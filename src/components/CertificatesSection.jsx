@@ -34,9 +34,9 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
         
         {/* Section Header */}
         <div className="flex flex-col items-center text-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#071410] border border-[#00ff88]/30 mb-4">
-            <Award className="w-3.5 h-3.5 text-[#00ff88]" />
-            <span className="text-xs font-mono text-[#00ff88] tracking-widest uppercase">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/10 mb-4">
+            <Award className="w-3.5 h-3.5 text-zinc-300" />
+            <span className="text-xs font-mono text-zinc-400 tracking-widest uppercase">
               {lang === 'en' ? 'Certifications & Credentials' : 'Especializações & Qualificações'}
             </span>
           </div>
@@ -48,7 +48,7 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
             </span>
           </h2>
 
-          <p className="text-slate-400 max-w-2xl font-light text-base mb-6">
+          <p className="text-zinc-400 max-w-2xl font-light text-base mb-6">
             {lang === 'en'
               ? 'Continuous education, diplomas, and official certifications.'
               : 'Formação continuada, diplomas e credenciais profissionais reconhecidas.'}
@@ -57,13 +57,13 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
           {/* Button to open All Certificates Modal */}
           <button
             onClick={onOpenAllCertificates}
-            className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#059669] via-[#10b981] to-[#00ff88] text-black font-extrabold text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-glow-sm hover:scale-105 transition-transform group"
+            className="px-6 py-3 rounded-xl bg-white hover:bg-zinc-200 text-zinc-950 font-extrabold text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-md hover:scale-105 transition-transform group"
           >
-            <Layers className="w-4 h-4 text-black group-hover:rotate-12 transition-transform" />
+            <Layers className="w-4 h-4 text-zinc-950 group-hover:rotate-12 transition-transform" />
             <span>
               {t('certificates.viewAll')} ({certificatesData.length})
             </span>
-            <ChevronRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
+            <ChevronRight className="w-4 h-4 text-zinc-950 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
 
@@ -73,19 +73,19 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
       <div className="relative w-full overflow-hidden py-4">
         
         {/* Left & Right Gradient Shadows for Seamless Fade */}
-        <div className="absolute top-0 bottom-0 left-0 w-20 sm:w-32 bg-gradient-to-r from-[#040705] to-transparent z-20 pointer-events-none" />
-        <div className="absolute top-0 bottom-0 right-0 w-20 sm:w-32 bg-gradient-to-l from-[#040705] to-transparent z-20 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 left-0 w-20 sm:w-32 bg-gradient-to-r from-[#09090b] to-transparent z-20 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 right-0 w-20 sm:w-32 bg-gradient-to-l from-[#09090b] to-transparent z-20 pointer-events-none" />
 
         <div className="animate-infinite-marquee flex items-center gap-6 px-4">
           {marqueeCertificates.map((cert, index) => (
             <div
               key={`${cert.id}-${index}`}
               onClick={() => setSelectedCert(cert)}
-              className="w-[320px] sm:w-[380px] shrink-0 glass-card rounded-3xl border border-[#10b981]/25 hover:border-[#00ff88]/70 overflow-hidden flex flex-col group relative bg-[#040705]/80 hover:shadow-glow-sm cursor-pointer justify-between"
+              className="w-[320px] sm:w-[380px] shrink-0 glass-card rounded-3xl border border-white/10 hover:border-white/30 overflow-hidden flex flex-col group relative bg-zinc-900/50 hover:shadow-xl cursor-pointer justify-between transition-all"
             >
               <div>
                 {/* Image Container / Preview */}
-                <div className="relative h-52 overflow-hidden bg-[#0a120c]">
+                <div className="relative h-52 overflow-hidden bg-zinc-950">
                   <img
                     src={cert.image}
                     alt={cert.title}
@@ -93,25 +93,25 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
                     decoding="async"
                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-200 filter contrast-[1.02]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#040705] via-transparent to-black/30 opacity-70 group-hover:opacity-40 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-black/30 opacity-70 group-hover:opacity-40 transition-opacity" />
                   
                   {/* Hover Action Overlay */}
-                  <div className="absolute inset-0 bg-[#00ff88]/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
-                    <span className="px-4 py-2 rounded-full bg-[#040705]/90 border border-[#00ff88] text-[#00ff88] text-xs font-mono font-semibold flex items-center gap-2 shadow-lg">
+                  <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+                    <span className="px-4 py-2 rounded-full bg-zinc-950/90 border border-white text-white text-xs font-mono font-semibold flex items-center gap-2 shadow-lg">
                       <Eye className="w-4 h-4" /> {t('certificates.zoom')}
                     </span>
                   </div>
 
                   {/* Badge Overlay */}
                   <div className="absolute top-3 left-3">
-                    <span className="cert-official-badge px-3 py-1 rounded-full bg-[#040705]/90 backdrop-blur-md border border-[#00ff88]/40 text-[#00ff88] text-[11px] font-mono flex items-center gap-1.5 shadow-md">
-                      <ShieldCheck className="w-3.5 h-3.5 text-[#00ff88]" />
+                    <span className="cert-official-badge px-3 py-1 rounded-full bg-zinc-950/90 backdrop-blur-md border border-white/20 text-zinc-300 text-[11px] font-mono flex items-center gap-1.5 shadow-md">
+                      <ShieldCheck className="w-3.5 h-3.5 text-zinc-300" />
                       {cert.badge}
                     </span>
                   </div>
 
                   <div className="absolute top-3 right-3">
-                    <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-slate-300 text-[11px] font-mono">
+                    <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-zinc-300 text-[11px] font-mono">
                       {cert.date}
                     </span>
                   </div>
@@ -120,20 +120,20 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
                 {/* Card Content */}
                 <div className="p-5 flex-1 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center gap-2 text-xs font-mono text-[#00f2fe] uppercase tracking-wider mb-1.5">
+                    <div className="flex items-center gap-2 text-xs font-mono text-zinc-400 uppercase tracking-wider mb-1.5">
                       <Sparkles className="w-3.5 h-3.5" />
                       <span>{cert.category}</span>
                     </div>
 
-                    <h3 className="text-xl font-bold text-white group-hover:text-[#00ff88] transition-colors mb-1 truncate">
+                    <h3 className="text-xl font-bold text-white group-hover:text-zinc-200 transition-colors mb-1 truncate">
                       {cert.title}
                     </h3>
 
-                    <p className="text-xs font-medium text-slate-400 mb-2 truncate">
+                    <p className="text-xs font-medium text-zinc-400 mb-2 truncate">
                       {cert.subtitle}
                     </p>
 
-                    <p className="text-slate-300 text-xs font-light line-clamp-3 leading-relaxed mb-4">
+                    <p className="text-zinc-300 text-xs font-light line-clamp-3 leading-relaxed mb-4">
                       {cert.description}
                     </p>
                   </div>
@@ -144,13 +144,13 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
                       {cert.skills?.slice(0, 3).map((skill, sIdx) => (
                         <span
                           key={sIdx}
-                          className="px-2 py-0.5 rounded-md bg-[#071910] border border-[#00ff88]/20 text-slate-300 text-[10px] font-mono"
+                          className="px-2 py-0.5 rounded-md bg-zinc-900 border border-white/10 text-zinc-300 text-[10px] font-mono"
                         >
                           {skill}
                         </span>
                       ))}
                       {cert.skills?.length > 3 && (
-                        <span className="px-1.5 py-0.5 rounded bg-white/5 text-[10px] font-mono text-slate-400">
+                        <span className="px-1.5 py-0.5 rounded bg-white/5 text-[10px] font-mono text-zinc-400">
                           +{cert.skills.length - 3}
                         </span>
                       )}
@@ -161,7 +161,7 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
                         e.stopPropagation();
                         setSelectedCert(cert);
                       }}
-                      className="w-full py-2.5 px-4 rounded-xl bg-[#092415] hover:bg-[#00ff88] text-[#00ff88] hover:text-black font-mono text-xs font-semibold tracking-wider uppercase transition-colors duration-300 border border-[#00ff88]/30 flex items-center justify-center gap-2 group/btn shadow-glow-sm"
+                      className="w-full py-2.5 px-4 rounded-xl bg-white/10 hover:bg-white text-zinc-200 hover:text-zinc-950 font-mono text-xs font-semibold tracking-wider uppercase transition-colors duration-300 border border-white/15 flex items-center justify-center gap-2 group/btn shadow-sm"
                     >
                       <Eye className="w-4 h-4 group-hover/btn:scale-110 transition-transform" />
                       <span>{t('certificates.view')}</span>
@@ -194,22 +194,22 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                className="relative w-full max-w-5xl max-h-[90vh] bg-[#040705] border border-[#00ff88]/40 rounded-3xl overflow-hidden shadow-2xl z-10 flex flex-col"
+                className="relative w-full max-w-5xl max-h-[90vh] bg-zinc-950 border border-white/20 rounded-3xl overflow-hidden shadow-2xl z-10 flex flex-col"
               >
                 {/* Modal Header */}
-                <div className="p-4 sm:p-6 border-b border-[#00ff88]/20 flex items-center justify-between bg-[#071410]/90">
+                <div className="p-4 sm:p-6 border-b border-white/10 flex items-center justify-between bg-zinc-900/90">
                   <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-xl bg-[#00ff88]/10 border border-[#00ff88]/30">
-                      <Award className="w-5 h-5 text-[#00ff88]" />
+                    <div className="p-2 rounded-xl bg-white/10 border border-white/20">
+                      <Award className="w-5 h-5 text-white" />
                     </div>
                     <div>
                       <h3 className="text-lg font-bold text-white flex items-center gap-2">
                         {selectedCert.title}
-                        <span className="text-xs px-2.5 py-0.5 rounded-full bg-[#00ff88]/20 text-[#00ff88] font-mono border border-[#00ff88]/30">
+                        <span className="text-xs px-2.5 py-0.5 rounded-full bg-white/10 text-zinc-200 font-mono border border-white/15">
                           {selectedCert.badge}
                         </span>
                       </h3>
-                      <p className="text-xs text-slate-400 font-mono">{selectedCert.subtitle}</p>
+                      <p className="text-xs text-zinc-400 font-mono">{selectedCert.subtitle}</p>
                     </div>
                   </div>
 
@@ -218,7 +218,7 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
                       href={selectedCert.image}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2.5 rounded-full bg-white/5 hover:bg-[#00ff88]/20 border border-white/10 hover:border-[#00ff88]/40 text-slate-300 hover:text-[#00ff88] transition-colors"
+                      className="p-2.5 rounded-full bg-white/5 hover:bg-white/20 border border-white/10 hover:border-white/40 text-zinc-300 hover:text-white transition-colors"
                       title={t('certificates.openOriginal')}
                     >
                       <ExternalLink className="w-4 h-4" />
@@ -233,23 +233,23 @@ export default function CertificatesSection({ onOpenAllCertificates }) {
                 </div>
 
                 {/* Certificate Image Body */}
-                <div className="flex-1 overflow-auto p-4 sm:p-6 bg-[#020503] flex items-center justify-center">
+                <div className="flex-1 overflow-auto p-4 sm:p-6 bg-black flex items-center justify-center">
                   <img
                     src={selectedCert.image}
                     alt={selectedCert.title}
-                    className="max-w-full max-h-[70vh] object-contain rounded-xl border border-[#00ff88]/20 shadow-2xl"
+                    className="max-w-full max-h-[70vh] object-contain rounded-xl border border-white/15 shadow-2xl"
                   />
                 </div>
 
                 {/* Modal Footer */}
-                <div className="p-4 sm:p-5 border-t border-[#00ff88]/20 bg-[#071410]/90 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-slate-400">
+                <div className="p-4 sm:p-5 border-t border-white/10 bg-zinc-900/90 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-zinc-400">
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#00ff88]" />
+                    <CheckCircle2 className="w-4 h-4 text-white" />
                     <span>{t('certificates.issuer')} {selectedCert.issuer} ({selectedCert.date})</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {selectedCert.skills?.map((sk, idx) => (
-                      <span key={idx} className="px-2 py-0.5 rounded bg-[#0c2e17] text-[#00ff88] text-[10px]">
+                      <span key={idx} className="px-2 py-0.5 rounded bg-white/10 text-zinc-300 text-[10px]">
                         #{sk}
                       </span>
                     ))}
