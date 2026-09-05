@@ -824,16 +824,20 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       </div>
 
       {/* Terminal Window Mockup */}
-      <div className="terminal-flash-target max-w-4xl mx-auto glass-card rounded-2xl border border-white/20 overflow-hidden shadow-glow-sm font-mono text-xs sm:text-sm">
+      <div className="terminal-flash-target max-w-4xl mx-auto rounded-2xl border border-white/15 bg-zinc-950/90 backdrop-blur-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_40px_rgba(255,255,255,0.03)] font-mono text-xs sm:text-sm">
         
-        {/* Top Bar */}
-        <div className="bg-bg-card px-4 py-3 border-b border-white/10 flex items-center justify-between">
+        {/* Top Bar - macOS Titanium Chassis */}
+        <div className="bg-white/[0.03] px-4 py-3 border-b border-white/10 flex items-center justify-between select-none">
           <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block cursor-pointer" onClick={isModal ? onClose : undefined} title="Fechar" />
-            <span className="w-3 h-3 rounded-full bg-yellow-500/80 inline-block" />
-            <span className="w-3 h-3 rounded-full bg-green-500/80 inline-block" />
-            <span className="ml-2 text-slate-400 text-xs">
-              {gameActive ? t('terminal.arcadeMode') : 'bash - 80x24 (CLI Environment)'}
+            <span
+              className="w-3 h-3 rounded-full bg-[#ff5f56] hover:brightness-110 shadow-[0_0_8px_rgba(255,95,86,0.4)] inline-block cursor-pointer transition-transform active:scale-90"
+              onClick={isModal ? onClose : undefined}
+              title={lang === 'en' ? 'Close Window' : 'Fechar Janela'}
+            />
+            <span className="w-3 h-3 rounded-full bg-[#ffbd2e] hover:brightness-110 shadow-[0_0_8px_rgba(255,189,46,0.4)] inline-block cursor-default" />
+            <span className="w-3 h-3 rounded-full bg-[#27c93f] hover:brightness-110 shadow-[0_0_8px_rgba(39,201,63,0.4)] inline-block cursor-default" />
+            <span className="ml-2 text-zinc-400 text-xs font-mono">
+              {gameActive ? t('terminal.arcadeMode') : 'zsh — ricardo@macbook-pro:~ (80×24)'}
             </span>
           </div>
 
@@ -841,25 +845,25 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
             {gameActive ? (
               <div className="flex items-center gap-4 text-xs font-bold text-white">
                 <span className="text-white">{t('terminal.points')} {score}</span>
-                <span className="text-slate-300">{t('terminal.lives')} {'❤️'.repeat(lives)}</span>
+                <span className="text-zinc-300">{t('terminal.lives')} {'❤️'.repeat(lives)}</span>
                 <button
                   onClick={() => setGameActive(false)}
-                  className="px-2 py-0.5 rounded bg-red-500/20 text-red-400 hover:bg-red-500/40 text-[11px] flex items-center gap-1 border border-red-500/30 cursor-pointer"
+                  className="px-2 py-0.5 rounded bg-red-500/20 text-red-300 hover:bg-red-500/40 text-[11px] flex items-center gap-1 border border-red-500/30 cursor-pointer transition-colors"
                 >
                   <X className="w-3 h-3" /> {t('terminal.exit')}
                 </button>
               </div>
             ) : (
-              <div className="flex items-center gap-2 text-slate-200 text-xs">
-                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-                <span>{t('terminal.online')}</span>
+              <div className="flex items-center gap-2 text-zinc-300 text-xs font-mono">
+                <span className="w-2 h-2 rounded-full bg-white shadow-[0_0_6px_#fff] animate-pulse" />
+                <span className="tracking-wider uppercase text-[10px] text-zinc-400">{t('terminal.online')}</span>
               </div>
             )}
 
             {isModal && (
               <button
                 onClick={onClose}
-                className="px-2.5 py-1 rounded-lg bg-red-500/20 text-red-300 hover:bg-red-600 hover:text-white border border-red-500/40 text-xs font-mono font-bold flex items-center gap-1 transition-colors cursor-pointer"
+                className="px-2.5 py-1 rounded-lg bg-white/10 text-white hover:bg-white/20 border border-white/15 text-xs font-mono font-medium flex items-center gap-1 transition-all cursor-pointer"
                 title={lang === 'en' ? 'Exit CLI & Return to Portfolio' : 'Sair do CLI & Voltar ao Portfólio'}
               >
                 <X className="w-3.5 h-3.5" />
@@ -871,12 +875,12 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
           {/* Terminal Screen / Canvas Game Container */}
           {gameActive ? (
-            <div className="relative bg-bg-card flex flex-col items-center justify-center p-4">
+            <div className="relative bg-zinc-950 flex flex-col items-center justify-center p-4">
               <canvas
                 ref={canvasRef}
                 width={540}
                 height={320}
-                className="w-full max-w-[540px] h-[320px] rounded-xl border border-white/20 bg-bg-deep shadow-inner"
+                className="w-full max-w-[540px] h-[320px] rounded-xl border border-white/20 bg-black shadow-[0_0_30px_rgba(255,255,255,0.05)]"
               />
 
               {/* Touch Controls Bar for Mobile/Tablet */}
@@ -884,14 +888,14 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => handleTouchMove('left')}
-                    className="p-3 rounded-xl bg-white/10 text-white hover:bg-white/20 hover:text-white border border-white/10 cursor-pointer"
+                    className="p-3 rounded-xl bg-white/10 text-white hover:bg-white/20 hover:text-white border border-white/10 cursor-pointer active:scale-95 transition-all"
                     title={t('terminal.moveLeft')}
                   >
                     <ArrowLeft className="w-5 h-5" />
                   </button>
                   <button
                     onClick={() => handleTouchMove('right')}
-                    className="p-3 rounded-xl bg-white/10 text-white hover:bg-white/20 hover:text-white border border-white/10 cursor-pointer"
+                    className="p-3 rounded-xl bg-white/10 text-white hover:bg-white/20 hover:text-white border border-white/10 cursor-pointer active:scale-95 transition-all"
                     title={t('terminal.moveRight')}
                   >
                     <ArrowRight className="w-5 h-5" />
@@ -900,14 +904,14 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
 
                 <button
                   onClick={handleTouchShoot}
-                  className="px-6 py-3 rounded-xl bg-white text-black hover:bg-slate-200 font-extrabold text-xs flex items-center gap-2 shadow-glow-sm cursor-pointer"
+                  className="px-6 py-3 rounded-xl bg-white text-black hover:bg-zinc-200 font-extrabold text-xs flex items-center gap-2 shadow-[0_0_15px_rgba(255,255,255,0.3)] cursor-pointer active:scale-95 transition-all"
                 >
                   <Zap className="w-4 h-4" /> {t('terminal.shoot')}
                 </button>
               </div>
             </div>
           ) : (
-            <div ref={outputContainerRef} className="p-6 bg-bg-card/90 min-h-[300px] max-h-[420px] overflow-y-auto space-y-2 text-slate-200">
+            <div ref={outputContainerRef} className="p-6 bg-zinc-950/80 min-h-[300px] max-h-[420px] overflow-y-auto space-y-2 text-zinc-200">
               {history.map((line, idx) => (
                 <div
                   key={idx}
@@ -915,17 +919,17 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
                     line.startsWith('ricardo@dev')
                       ? 'text-white font-bold'
                       : line.startsWith('[OK]')
-                      ? 'text-slate-200'
+                      ? 'text-zinc-200'
                       : line.startsWith('STATUS:')
                       ? 'text-white font-extrabold'
                       : line.startsWith('★')
                       ? 'text-[#f59e0b] font-semibold drop-shadow-[0_0_6px_rgba(245,158,11,0.4)]'
                       : line.startsWith('⚡')
-                      ? 'text-slate-200 font-extrabold text-sm tracking-wide'
+                      ? 'text-white font-extrabold text-sm tracking-wide'
                       : line.startsWith('Comandos')
-                      ? 'text-slate-200 font-bold'
+                      ? 'text-zinc-200 font-bold'
                       : line.includes('WARNING')
-                      ? 'text-red-500 font-extrabold text-base animate-pulse'
+                      ? 'text-red-400 font-extrabold text-base animate-pulse'
                       : line.startsWith('[███')
                       ? 'text-red-400 font-mono font-bold'
                       : line.includes('Deleting')
@@ -935,10 +939,10 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
                       : line.includes('Boa tentativa')
                       ? 'text-[#f59e0b] font-bold text-sm'
                       : line.includes('Sou dev')
-                      ? 'text-slate-400 italic text-xs'
+                      ? 'text-zinc-400 italic text-xs'
                       : line.includes('Firewall')
-                      ? 'text-slate-200 font-bold'
-                      : 'text-slate-300'
+                      ? 'text-zinc-200 font-bold'
+                      : 'text-zinc-300'
                   }
                 >
                   {line}
@@ -947,10 +951,36 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
             </div>
           )}
 
+          {/* Quick Action Chips Bar */}
+          {!gameActive && (
+            <div className="bg-zinc-900/40 border-t border-white/10 px-4 py-2.5 flex items-center gap-2 overflow-x-auto scrollbar-none text-[11px] font-mono">
+              <span className="text-zinc-500 shrink-0 select-none">
+                {lang === 'en' ? 'Quick run:' : 'Atalhos:'}
+              </span>
+              {[
+                { label: 'help', cmd: 'help' },
+                { label: 'timewalker ⏳', cmd: 'timewalker' },
+                { label: 'arcade 🎮', cmd: 'game' },
+                { label: 'root admin 🔓', cmd: 'root' },
+                { label: 'achievements 🏆', cmd: 'achievements' },
+                { label: 'clear 🧹', cmd: 'clear' },
+              ].map((chip) => (
+                <button
+                  key={chip.cmd}
+                  type="button"
+                  onClick={() => runCommand(chip.cmd)}
+                  className="px-2.5 py-1 rounded-lg bg-white/[0.06] hover:bg-white/15 text-zinc-300 hover:text-white border border-white/10 transition-all cursor-pointer whitespace-nowrap active:scale-95"
+                >
+                  {chip.label}
+                </button>
+              ))}
+            </div>
+          )}
+
           {/* Terminal Input Form */}
           {!gameActive && (
-            <form onSubmit={handleCommandSubmit} className="bg-bg-card px-4 py-3 border-t border-white/10 flex items-center gap-2">
-              <span className={`font-bold shrink-0 ${adminMode ? 'text-yellow-400' : 'text-white'}`}>
+            <form onSubmit={handleCommandSubmit} className="bg-zinc-950 px-4 py-3 border-t border-white/10 flex items-center gap-2">
+              <span className={`font-bold shrink-0 font-mono ${adminMode ? 'text-yellow-400' : 'text-white'}`}>
                 {adminMode ? t('terminal.passwordPrompt') : t('terminal.prompt')}
               </span>
               <input
@@ -959,11 +989,15 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
                 value={inputVal}
                 onChange={(e) => setInputVal(e.target.value)}
                 placeholder={adminMode ? t('terminal.passwordPlaceholder') : t('terminal.helpPlaceholder')}
-                className="w-full bg-transparent text-white focus:outline-none font-mono text-xs sm:text-sm placeholder-slate-600"
+                className="w-full bg-transparent text-white focus:outline-none font-mono text-xs sm:text-sm placeholder-zinc-600"
                 autoFocus
               />
-              <button type="submit" className="p-1.5 rounded bg-white/10 text-white hover:bg-white/20 cursor-pointer">
-                <Play className="w-3.5 h-3.5" />
+              <button
+                type="submit"
+                className="p-1.5 rounded-lg bg-white/10 text-white hover:bg-white/20 border border-white/10 transition-colors cursor-pointer"
+                title={lang === 'en' ? 'Execute command' : 'Executar comando'}
+              >
+                <Play className="w-3.5 h-3.5 fill-white" />
               </button>
             </form>
           )}
@@ -1051,6 +1085,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
                 transform: translateY(10px) rotate(2deg) scale(1.05);
               }
               80% {
+                opacity: 1;
                 transform: translateY(-5px) rotate(-1deg) scale(0.98);
               }
               100% {
@@ -1066,16 +1101,16 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
       {rickrollActive && createPortal(
         <div className="rickroll-scope fixed inset-0 z-[999999] flex flex-col items-center justify-center bg-black/95 backdrop-blur-2xl p-4 overflow-y-auto">
           {/* Top bar fake admin */}
-          <div className="absolute top-0 left-0 right-0 bg-[#0d1510] border-b border-[#00ff88]/30 px-6 py-4 flex items-center justify-between z-[1000000]">
+          <div className="absolute top-0 left-0 right-0 bg-zinc-950/90 border-b border-white/15 px-6 py-4 flex items-center justify-between z-[1000000] backdrop-blur-md">
             <div className="flex items-center gap-3">
-              <span className="w-3 h-3 rounded-full bg-red-500" />
-              <span className="w-3 h-3 rounded-full bg-yellow-500" />
-              <span className="w-3 h-3 rounded-full bg-green-500" />
-              <span className="ml-3 text-white/90 text-xs sm:text-sm font-mono font-bold">{t('terminal.adminPanel')}</span>
+              <span className="w-3 h-3 rounded-full bg-[#ff5f56]" />
+              <span className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+              <span className="w-3 h-3 rounded-full bg-[#27c93f]" />
+              <span className="ml-3 text-white text-xs sm:text-sm font-mono font-bold">{t('terminal.adminPanel')}</span>
             </div>
             <button
               onClick={() => setRickrollActive(false)}
-              className="px-3 py-1.5 rounded-xl bg-red-500/20 hover:bg-red-600 text-red-300 hover:text-white border border-red-500/40 transition-colors font-mono text-xs flex items-center gap-1.5 cursor-pointer shadow-lg"
+              className="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/15 transition-colors font-mono text-xs flex items-center gap-1.5 cursor-pointer shadow-lg"
               title={t('terminal.closePanelTitle')}
             >
               <X className="w-4 h-4" />
@@ -1084,7 +1119,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
           </div>
 
           {/* YouTube Video */}
-          <div className="w-full max-w-4xl aspect-video mt-16 rounded-2xl overflow-hidden border-2 border-[#00ff88]/40 shadow-[0_0_80px_rgba(0,255,136,0.3)] bg-black">
+          <div className="w-full max-w-4xl aspect-video mt-16 rounded-2xl overflow-hidden border-2 border-white/20 shadow-[0_0_80px_rgba(255,255,255,0.15)] bg-black">
             <iframe
               width="100%"
               height="100%"
@@ -1102,10 +1137,10 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
             <p className="text-2xl sm:text-3xl font-extrabold text-white mb-2">
               🎵 Never Gonna Give You Up!
             </p>
-            <p className="text-slate-300 text-sm font-mono">
+            <p className="text-zinc-300 text-sm font-mono">
               {t('terminal.trollMessage')}
             </p>
-            <p className="text-[#00ff88] text-xs font-mono mt-2 font-bold">
+            <p className="text-white text-xs font-mono mt-2 font-bold tracking-wider">
               {t('terminal.rickrolled')}
             </p>
           </div>
@@ -1122,7 +1157,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.96 }}
         transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
-        className="fixed inset-0 z-[999999] overflow-y-auto bg-[#040805]/95 backdrop-blur-2xl flex flex-col justify-between select-none"
+        className="fixed inset-0 z-[999999] overflow-y-auto bg-zinc-950/95 backdrop-blur-2xl flex flex-col justify-between select-none"
       >
         {content}
         {/* Local Achievements Modal inside CLI */}
