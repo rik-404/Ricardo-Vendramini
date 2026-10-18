@@ -1170,7 +1170,7 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
   }
 
   return (
-    <section ref={sectionRef} id="terminal" className="py-24 relative z-10">
+    <section ref={sectionRef} id="terminal" className="py-16 sm:py-20 lg:py-24 relative z-10">
       {content}
       <AchievementsModal
         isOpen={localAchievementsOpen}

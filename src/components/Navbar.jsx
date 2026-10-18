@@ -202,7 +202,7 @@ export default function Navbar({ onTriggerEasterEgg, onOpenTerminal, theme, onTo
   const renderBrandText = () => {
     if (glitchPhase === 0) {
       return (
-        <span className="font-sans text-sm sm:text-base tracking-wider font-extrabold flex items-center gap-1.5 hdr-text-primary">
+        <span className="font-sans text-sm sm:text-base tracking-wider font-extrabold flex items-center gap-0.5 hdr-text-primary">
           RICARDO<span className="text-gradient-green">.DEV</span>
         </span>
       );

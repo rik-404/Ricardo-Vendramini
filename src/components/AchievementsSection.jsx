@@ -9,7 +9,7 @@ export default function AchievementsSection() {
   const achievements = getAchievementsData(lang);
 
   return (
-    <section id="achievements" className="py-24 relative z-10">
+    <section id="achievements" className="py-16 sm:py-20 lg:py-24 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

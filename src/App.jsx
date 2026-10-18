@@ -270,7 +270,7 @@ export default function App() {
       </div>
 
       {/* Main Experience Layout */}
-      <main className={`relative z-10 space-y-12 transition-opacity duration-500 ${siteCleaned ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+      <main className={`relative z-10 transition-opacity duration-500 ${siteCleaned ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <HeroSection />
         <AboutSection />
         <StatsSection />

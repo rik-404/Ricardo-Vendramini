@@ -53,7 +53,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="hero-access-pill inline-flex items-center gap-3 px-4 py-2 rounded-full glass-panel border border-white/20 mb-8 shadow-glow-sm hover:border-white/50 hover:scale-105 transition-[border-color,transform] group cursor-pointer"
+          className="hero-access-pill inline-flex items-center gap-2 sm:gap-3 whitespace-nowrap px-3 sm:px-4 py-2 rounded-full glass-panel border border-white/20 mb-8 shadow-glow-sm hover:border-white/50 hover:scale-105 transition-[border-color,transform] group cursor-pointer"
         >
           <img
             src={personalInfo.companyLogoUrl}
@@ -63,12 +63,12 @@ export default function HeroSection() {
           <span className="text-xs font-mono text-slate-200 font-semibold group-hover:text-white transition-colors">
             {personalInfo.companyName}
           </span>
-          <span className="text-slate-500">•</span>
-          <span className="relative flex h-2 w-2">
+          <span className="hidden sm:inline text-slate-500">•</span>
+          <span className="relative hidden sm:flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
           </span>
-          <span className="text-xs font-mono text-slate-200 tracking-wider uppercase flex items-center gap-1 group-hover:text-white">
+          <span className="text-[11px] sm:text-xs font-mono text-slate-200 tracking-wider uppercase flex items-center gap-1 pl-2 sm:pl-0 border-l border-white/15 sm:border-0 group-hover:text-white">
             {t('hero.access')} ↗
           </span>
         </motion.a>
@@ -79,16 +79,16 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight max-w-5xl leading-snug mb-6 min-h-[2.5em] sm:min-h-[2.4em] flex items-baseline justify-center flex-wrap overflow-visible"
+          className="text-[2.5rem] sm:text-6xl md:text-7xl font-extrabold tracking-tight max-w-5xl leading-[1.1] sm:leading-snug mb-6 min-h-[3.4em] sm:min-h-[2.4em] text-center [text-wrap:balance] overflow-visible"
         >
-          <span>{currentPrefix}</span>
+          <span>{currentPrefix}</span>{currentGradient && !currentPrefix.endsWith(' ') ? " " : null}
           {currentGradient && (
             <span className="text-gradient-cyan-green drop-shadow-[0_0_35px_rgba(255,255,255,0.25)]">
               {currentGradient}
             </span>
           )}
           {/* Blinking Cursor Bar */}
-          <span className="inline-block w-1 sm:w-1.5 h-[0.75em] bg-white animate-pulse ml-1 align-baseline shadow-glow-sm rounded-sm" />
+          <span className="inline-block w-1 sm:w-1.5 h-[0.75em] bg-current animate-pulse ml-1 align-baseline shadow-glow-sm rounded-sm" />
         </motion.h1>
 
         {/* Subheadline */}

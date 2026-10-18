@@ -15,7 +15,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 relative z-10">
+    <section id="contact" className="py-16 sm:py-20 lg:py-24 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="glass-card rounded-3xl border border-white/15 p-8 sm:p-14 relative overflow-hidden shadow-glow-sm text-center flex flex-col items-center">
@@ -107,7 +107,7 @@ export default function ContactSection() {
               className="p-4 rounded-xl glass-panel border border-white/5 hover:border-white/30 flex flex-col items-center gap-2 group transition-colors"
             >
               <Mail className="w-6 h-6 text-slate-400 group-hover:text-white transition-colors" />
-              <span className="text-xs font-mono text-slate-300">{t('misc.emailLabel')}</span>
+              <span className="text-xs font-mono text-slate-300">{t('contact.emailLabel')}</span>
             </a>
           </div>
 

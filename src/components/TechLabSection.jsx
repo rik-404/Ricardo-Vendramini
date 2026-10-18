@@ -19,7 +19,7 @@ export default function TechLabSection() {
   const activeNode = { id: activeId, name: t(`techlab.nodes.${activeId}.name`), desc: t(`techlab.nodes.${activeId}.desc`) };
 
   return (
-    <section className="py-24 relative z-10 overflow-hidden">
+    <section className="py-16 sm:py-20 lg:py-24 relative z-10 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -51,7 +51,7 @@ export default function TechLabSection() {
           </svg>
 
           {/* Interactive Tech Nodes */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 relative z-10 my-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 relative z-10 my-auto">
             {techNodeIds.map((id, idx) => {
               const IconComp = techIcons[id];
               const isActive = activeId === id;
@@ -80,7 +80,7 @@ export default function TechLabSection() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
-            className="p-4 rounded-xl bg-bg-card/95 border border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4 mt-6 z-10"
+            className="p-4 rounded-xl glass-panel border border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4 mt-6 z-10"
           >
             <div className="flex items-center gap-3">
               <Sparkles className="w-5 h-5 text-white shrink-0" />
