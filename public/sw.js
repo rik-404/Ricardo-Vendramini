@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ricardodev-v3';
+const CACHE_NAME = 'ricardodev-v4';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -35,6 +35,9 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(event.request.url);
 
+  // Only handle same-origin requests; let the browser deal with fonts, CDNs, etc.
+  if (url.origin !== self.location.origin) return;
+
   // Network First for HTML / navigation requests to avoid stale index.html
   if (event.request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname === '/') {
     event.respondWith(
@@ -48,7 +51,11 @@ self.addEventListener('fetch', (event) => {
           }
           return response;
         })
-        .catch(() => caches.match(event.request) || caches.match('/index.html'))
+        .catch(() =>
+          caches.match(event.request)
+            .then((cached) => cached || caches.match('/index.html'))
+            .then((cached) => cached || Response.error())
+        )
     );
     return;
   }
@@ -65,7 +72,9 @@ self.addEventListener('fetch', (event) => {
         }
         return response;
       })
-      .catch(() => caches.match(event.request))
+      .catch(() =>
+        caches.match(event.request).then((cached) => cached || Response.error())
+      )
   );
 });
 
