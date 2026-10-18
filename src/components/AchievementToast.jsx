@@ -1,25 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Award, Gamepad2, KeyRound, Terminal, Trash2, Trophy, Sparkles, Zap, Activity, Languages, Clock, Skull, X, RotateCw, RefreshCw } from 'lucide-react';
+import { Award, Gamepad2, KeyRound, Terminal, Sparkles, Zap, Skull, X } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
-export const ACHIEVEMENT_IDS = ['titulo', 'konami', 'matrix', 'navinha', 'root', 'tilt', 'breakout', 'starwars', 'clean', 'polyglot', 'timewalker', 'tardis', 'doctorwho'];
+export const ACHIEVEMENT_IDS = ['titulo', 'navinha', 'root', 'breakout', 'starwars'];
 export const ALL_OTHER_IDS = [...ACHIEVEMENT_IDS];
 
 export const ACHIEVEMENTS_META = {
   titulo: { icon: Zap },
-  konami: { icon: Trophy },
-  matrix: { icon: Sparkles },
   navinha: { icon: Gamepad2 },
   root: { icon: KeyRound },
-  tilt: { icon: Activity },
   breakout: { icon: Gamepad2 },
   starwars: { icon: Sparkles },
-  clean: { icon: Trash2 },
-  polyglot: { icon: Languages },
-  timewalker: { icon: Clock },
-  tardis: { icon: RotateCw },
-  doctorwho: { icon: RefreshCw },
   sacrificio: { icon: Skull, isSpecial: true },
 };
 

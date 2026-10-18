@@ -959,9 +959,6 @@ export default function TerminalSection({ onTriggerEasterEgg, onOpenAchievements
               </span>
               {[
                 { label: 'help', cmd: 'help' },
-                { label: 'timewalker ⏳', cmd: 'timewalker' },
-                { label: 'arcade 🎮', cmd: 'game' },
-                { label: 'root admin 🔓', cmd: 'root' },
                 { label: 'achievements 🏆', cmd: 'achievements' },
                 { label: 'clear 🧹', cmd: 'clear' },
               ].map((chip) => (
