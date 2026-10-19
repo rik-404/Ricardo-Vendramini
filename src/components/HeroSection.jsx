@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Code, Layers, Sparkles, Terminal, ChevronDown, Rocket, Building2 } from 'lucide-react';
+import { ArrowRight, Code, Layers, Sparkles, Terminal, ChevronDown, Rocket, Building2, Gamepad2 } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -106,7 +106,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mb-16"
+          className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mb-6"
         >
           <a
             href="#about"
@@ -124,6 +124,22 @@ export default function HeroSection() {
             <Rocket className="w-5 h-5 text-slate-200 group-hover:text-white group-hover:rotate-12 transition-all" />
           </a>
         </motion.div>
+
+        {/* New project spotlight: Horda Voxel game */}
+        <motion.a
+          href="/jogos/horda-voxel.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+          className="inline-flex items-center gap-2.5 whitespace-nowrap px-4 py-2 rounded-full glass-panel border border-white/20 text-sm text-slate-200 hover:text-white hover:border-white/50 transition-[border-color,color,transform] hover:-translate-y-0.5 mb-16 group"
+        >
+          <Gamepad2 className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+          <span className="hidden sm:inline font-mono text-[11px] uppercase tracking-wider text-slate-400">{t('hero.newProject')}</span>
+          <span className="font-semibold">{t('hero.tryGame')}</span>
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </motion.a>
 
         {/* Tech Stack Interactive Floating Grid Concept */}
         <motion.div
