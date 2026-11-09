@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Painel da demo · Horda Voxel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Chakra+Petch:wght@400;600&display=swap">
+<style>
+:root{
+  --void:#0c0a12; --stone:#191521; --stone-2:#231d2d; --edge:#3b3249; --bone:#efe6d6; --dust:#a99db8;
+  --gold:#f2b84b; --blood:#e5473c; --arcane:#62b8ff; --moss:#7fcf5a;
+  --display:'Silkscreen','Courier New',monospace; --body:'Chakra Petch',system-ui,-apple-system,'Segoe UI',sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{min-height:100%}
+body{
+  margin:0;background:var(--void);color:var(--bone);font-family:var(--body);font-size:16px;line-height:1.45;
+  padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(28px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));
+}
+main{max-width:660px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+h1{font-family:var(--display);font-size:clamp(22px,5.6vw,34px);line-height:1;margin:0;letter-spacing:.01em}
+h1 span{color:var(--gold)}
+.sub{margin:0;color:var(--dust);font-size:14px}
+.card{background:var(--stone);border:2px solid var(--edge);box-shadow:5px 5px 0 #000;padding:16px;display:flex;flex-direction:column;gap:12px}
+.card h2{font-family:var(--display);font-size:15px;margin:0;letter-spacing:.04em;color:var(--bone)}
+label{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--dust)}
+input[type=password],input[type=text]{
+  font:inherit;background:var(--void);color:var(--bone);border:2px solid var(--edge);border-radius:0;padding:12px;width:100%;
+}
+input:focus-visible,button:focus-visible,label:hover{outline:2px solid var(--gold);outline-offset:2px}
+button{
+  font-family:var(--display);font-size:13px;letter-spacing:.03em;color:var(--void);background:var(--gold);
+  border:2px solid var(--gold);padding:14px 16px;min-height:48px;cursor:pointer;box-shadow:4px 4px 0 #000;
+  transition:transform .12s,filter .12s;
+}
+button:hover{transform:translateY(-2px);filter:brightness(1.08)}
+button:active{transform:translateY(1px);box-shadow:2px 2px 0 #000}
+button:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+button.ghost{background:transparent;color:var(--bone);border-color:var(--edge);box-shadow:none;min-height:44px;padding:10px 12px}
+button.danger{background:transparent;color:var(--blood);border-color:#5c2a29;box-shadow:none;min-height:44px;padding:10px 12px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.drop{border:2px dashed var(--edge);padding:18px;text-align:center;color:var(--dust);font-size:14px;transition:border-color .12s,background .12s}
+.drop.over{border-color:var(--gold);background:var(--stone-2);color:var(--bone)}
+.drop strong{color:var(--bone);display:block;margin-bottom:4px;font-family:var(--display);font-size:13px}
+input[type=file]{display:none}
+.filename{font-size:13px;color:var(--arcane);word-break:break-all}
+.status{font-size:14px;min-height:20px}
+.status[data-kind=ok]{color:var(--moss)}
+.status[data-kind=err]{color:var(--blood)}
+.status[data-kind=busy]{color:var(--dust)}
+ul.builds{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.build{background:var(--stone-2);border:2px solid var(--edge);padding:12px;display:flex;flex-direction:column;gap:10px}
+.build.active{border-color:var(--moss)}
+.build .meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--dust)}
+.build .meta b{color:var(--bone);font-weight:600;font-family:var(--display);font-size:12px;word-break:break-all}
+.badge{font-family:var(--display);font-size:11px;color:var(--void);background:var(--moss);padding:3px 7px;align-self:flex-start}
+a.plain{color:var(--arcane);font-size:14px}
+.note{font-size:13px;color:var(--dust)}
+@media (min-width:520px){.build{flex-direction:row;align-items:center;justify-content:space-between}.build .meta{flex:1}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>HORDA <span>VOXEL</span> · painel da demo</h1>
+    <p class="sub">Suba um HTML standalone e ele vira a demo jogável na hora, sem deploy.</p>
+  </header>
+
+  <section class="card" id="gate">
+    <h2>PASSCODE</h2>
+    <label for="passcode">Senha de publicação
+      <input id="passcode" type="password" inputmode=text autocomplete=current-password spellcheck=false placeholder="DEMO_ADMIN_TOKEN">
+    </label>
+    <div class="row">
+      <button id="enter" type="button">Entrar</button>
+      <a class="plain" href="/jogos/horda-voxel.html" target="_blank" rel="noopener">abrir demo atual</a>
+    </div>
+    <p class="status" id="gate-status" role="status"></p>
+  </section>
+
+  <section class="card" id="panel" hidden>
+    <h2>NOVA BUILD</h2>
+    <div class="drop" id="drop">
+      <strong>Arraste o .html aqui</strong>
+      ou use o botão abaixo (no celular abre o seletor de arquivos)
+      <div class="filename" id="filename" aria-live="polite"></div>
+    </div>
+    <label for="file">Arquivo da demo
+      <span class="row"><button id="pick" type="button" class="ghost">Escolher .html</button></span>
+      <input id="file" type="file" accept=".html,text/html">
+    </label>
+    <label for="label">Nome da versão (opcional)
+      <input id="label" type="text" maxlength="28" placeholder="horda-1.4-touch">
+    </label>
+    <div class="row">
+      <button id="publish" type="button" disabled>Enviar e ativar</button>
+      <button id="refresh" type="button" class="ghost">Recarregar lista</button>
+    </div>
+    <p class="note">Máximo 4 MB por arquivo. Builds ficam guardadas: você pode voltar atrás em qualquer uma.</p>
+    <p class="status" id="panel-status" role="status"></p>
+  </section>
+
+  <section class="card" id="builds-card" hidden>
+    <h2>BUILDS <span class="note" id="builds-count"></span></h2>
+    <ul class="builds" id="builds"></ul>
+  </section>
+</main>
+
+<script>
+const DEMO_URL = '/jogos/horda-voxel.html';
+const TOKEN_KEY = 'oathbound.demoAdminPasscode';
+const gate = document.getElementById('gate');
+const panel = document.getElementById('panel');
+const buildsCard = document.getElementById('builds-card');
+const buildsEl = document.getElementById('builds');
+const buildsCount = document.getElementById('builds-count');
+const passcodeEl = document.getElementById('passcode');
+const fileEl = document.getElementById('file');
+const dropEl = document.getElementById('drop');
+const filenameEl = document.getElementById('filename');
+const labelEl = document.getElementById('label');
+const publishEl = document.getElementById('publish');
+const gateStatus = document.getElementById('gate-status');
+const panelStatus = document.getElementById('panel-status');
+
+let active = null;
+
+passcodeEl.value = localStorage.getItem(TOKEN_KEY) || '';
+
+function setStatus(el, text, kind) {
+  el.textContent = text;
+  el.dataset.kind = kind || '';
+}
+
+function fmtSize(bytes) {
+  if (!Number.isFinite(bytes)) return '?';
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(0) + ' KB';
+  return (bytes / 1024 / 1024).toFixed(2) + ' MB';
+}
+
+function fmtDate(value) {
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? String(value) : date.toLocaleString('pt-BR');
+}
+
+function headers() {
+  return { 'x-demo-passcode': passcodeEl.value.trim() };
+}
+
+async function call(url, options) {
+  const response = await fetch(url, options);
+  const text = await response.text();
+  let data = null;
+  try { data = text ? JSON.parse(text) : null; } catch { /* HTML de erro ou página estática */ }
+  if (!response.ok) {
+    throw new Error((data && data.error) || 'HTTP ' + response.status + ' — verifique se a função /api/demo está publicada.');
+  }
+  return data;
+}
+
+function renderBuilds(builds) {
+  buildsEl.textContent = '';
+  buildsCount.textContent = builds.length + ' guardada(s)';
+  builds.forEach((build) => {
+    const li = document.createElement('li');
+    li.className = 'build' + (build.slug === active ? ' active' : '');
+
+    const info = document.createElement('div');
+    info.className = 'meta';
+    const badge = document.createElement('span');
+    badge.className = 'badge';
+    badge.textContent = 'NO AR';
+    badge.hidden = build.slug !== active;
+    const title = document.createElement('b');
+    title.textContent = build.slug;
+    const size = document.createElement('span');
+    size.textContent = fmtSize(build.size);
+    const when = document.createElement('span');
+    when.textContent = fmtDate(build.uploadedAt);
+    info.append(badge, title, size, when);
+
+    const actions = document.createElement('div');
+    actions.className = 'row';
+
+    const open = document.createElement('button');
+    open.className = 'ghost';
+    open.type = 'button';
+    open.textContent = 'Ver';
+    open.dataset.act = 'open';
+    open.dataset.slug = build.slug;
+    open.dataset.url = build.url;
+
+    actions.append(open);
+    if (build.slug !== active) {
+      const activate = document.createElement('button');
+      activate.className = 'ghost';
+      activate.type = 'button';
+      activate.textContent = 'Ativar';
+      activate.dataset.act = 'activate';
+      activate.dataset.slug = build.slug;
+      actions.append(activate);
+    }
+    const remove = document.createElement('button');
+    remove.className = 'danger';
+    remove.type = 'button';
+    remove.textContent = 'Apagar';
+    remove.dataset.act = 'delete';
+    remove.dataset.slug = build.slug;
+    actions.append(remove);
+
+    li.append(info, actions);
+    buildsEl.append(li);
+  });
+}
+
+async function loadBuilds(keepStatus) {
+  setStatus(panelStatus, 'Carregando builds…', 'busy');
+  try {
+    const data = await call('/api/demo/builds', { headers: headers() });
+    localStorage.setItem(TOKEN_KEY, passcodeEl.value.trim());
+    active = data.active;
+    renderBuilds(data.builds || []);
+    panel.hidden = false;
+    buildsCard.hidden = false;
+    gate.hidden = true;
+    if (!keepStatus) {
+      setStatus(panelStatus, data.builds && data.builds.length ? 'Pronto.' : 'Nenhuma build enviada ainda — a demo mostra a versão padrão.', 'ok');
+    }
+  } catch (error) {
+    if (/passcode/i.test(error.message)) {
+      localStorage.removeItem(TOKEN_KEY);
+      passcodeEl.value = '';
+      setStatus(panelStatus, '', '');
+      setStatus(gateStatus, error.message, 'err');
+    } else {
+      setStatus(panelStatus, error.message, 'err');
+    }
+  }
+}
+
+function syncPublishEnabled() {
+  publishEl.disabled = !fileEl.files || fileEl.files.length === 0;
+  filenameEl.textContent = fileEl.files && fileEl.files[0] ? fileEl.files[0].name + ' · ' + fmtSize(fileEl.files[0].size) : '';
+}
+
+document.getElementById('enter').addEventListener('click', () => {
+  if (!passcodeEl.value.trim()) {
+    setStatus(gateStatus, 'Digite o passcode.', 'err');
+    return;
+  }
+  void loadBuilds();
+});
+
+passcodeEl.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    document.getElementById('enter').click();
+  }
+});
+
+document.getElementById('pick').addEventListener('click', () => fileEl.click());
+fileEl.addEventListener('change', syncPublishEnabled);
+
+['dragenter', 'dragover'].forEach((type) => {
+  dropEl.addEventListener(type, (event) => {
+    event.preventDefault();
+    dropEl.classList.add('over');
+  });
+});
+['dragleave', 'drop'].forEach((type) => {
+  dropEl.addEventListener(type, (event) => {
+    event.preventDefault();
+    dropEl.classList.remove('over');
+  });
+});
+dropEl.addEventListener('drop', (event) => {
+  const file = event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0];
+  if (!file) return;
+  const transfer = new DataTransfer();
+  transfer.items.add(file);
+  fileEl.files = transfer.files;
+  syncPublishEnabled();
+});
+
+publishEl.addEventListener('click', async () => {
+  const file = fileEl.files && fileEl.files[0];
+  if (!file) return;
+  if (file.size > 4 * 1024 * 1024) {
+    setStatus(panelStatus, 'Passa de 4 MB. Divida em single-file HTML ou use o upload direto pro Blob.', 'err');
+    return;
+  }
+  publishEl.disabled = true;
+  setStatus(panelStatus, 'Enviando ' + fmtSize(file.size) + '…', 'busy');
+  try {
+    const query = labelEl.value.trim() ? '?label=' + encodeURIComponent(labelEl.value.trim()) : '';
+    const data = await call('/api/demo/upload' + query, {
+      method: 'POST',
+      headers: { ...headers(), 'content-type': 'application/octet-stream' },
+      body: file,
+    });
+    active = data.active;
+    fileEl.value = '';
+    labelEl.value = '';
+    syncPublishEnabled();
+    await loadBuilds(true);
+    setStatus(panelStatus, 'Publicada: ' + data.build.slug + ' — já é a demo ao vivo.', 'ok');
+  } catch (error) {
+    setStatus(panelStatus, error.message, 'err');
+    publishEl.disabled = !fileEl.files || fileEl.files.length === 0;
+  }
+});
+
+document.getElementById('refresh').addEventListener('click', () => void loadBuilds());
+
+buildsEl.addEventListener('click', async (event) => {
+  const button = event.target.closest('button');
+  if (!button) return;
+  const slug = button.dataset.slug;
+  const act = button.dataset.act;
+  if (act === 'open') {
+    window.open(button.dataset.url, '_blank', 'noopener');
+    return;
+  }
+  if (act === 'delete' && !window.confirm('Apagar a build ' + slug + ' definitivamente?')) return;
+
+  button.disabled = true;
+  setStatus(panelStatus, act === 'delete' ? 'Apagando…' : 'Ativando…', 'busy');
+  try {
+    const data = await call('/api/demo/builds?action=' + act + '&slug=' + encodeURIComponent(slug), {
+      method: 'POST',
+      headers: headers(),
+    });
+    active = data.active;
+    await loadBuilds(true);
+    setStatus(panelStatus, act === 'delete' ? 'Apagada: ' + slug : 'No ar: ' + data.active, 'ok');
+  } catch (error) {
+    setStatus(panelStatus, error.message, 'err');
+    button.disabled = false;
+  }
+});
+
+if (passcodeEl.value) void loadBuilds();
+</script>
+</body>
+</html>

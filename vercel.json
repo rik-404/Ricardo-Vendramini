@@ -5,6 +5,18 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
+      "source": "/jogos/horda-voxel.html",
+      "destination": "/api/demo/serve"
+    },
+    {
+      "source": "/mundo",
+      "destination": "/mundo/index.html"
+    },
+    {
+      "source": "/mundo/",
+      "destination": "/mundo/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
@@ -24,6 +36,15 @@
         {
           "key": "Expires",
           "value": "0"
+        }
+      ]
+    },
+    {
+      "source": "/(jogos/painel.html|api/demo/(.*))",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
         }
       ]
     },

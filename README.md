@@ -176,6 +176,17 @@ sites/ricardo-vendramini/
 │   ├── App.jsx                        # Layout raiz, estados globais e rotas
 │   ├── index.css                      # Estilos base, animações e utilities Tailwind
 │   └── main.jsx                       # Ponto de entrada React
+├── api/demo/
+│   ├── serve.js                       # Entrega a build ativa da demo (mesma origem, no-store)
+│   ├── upload.js                      # Upload autenticado do HTML da demo para o Blob
+│   └── builds.js                      # Lista, ativa (rollback) e apaga builds guardadas
+├── lib/
+│   └── demoAdmin.js                   # Passcode, slugs validados e operações no Vercel Blob
+├── public/
+│   ├── jogos/
+│   │   ├── painel.html                # Painel de publicação da demo (mobile-first)
+│   │   └── default.html               # Snapshot estático servido enquanto não há build no Blob
+│   └── sw.js                          # Service worker network-first
 ├── package.json
 └── vite.config.js
 ```
@@ -217,6 +228,25 @@ Compila e minifica tudo em `dist/`, com **code splitting em chunks separados** (
 ```bash
 npm run preview
 ```
+
+---
+
+## 🕹️ Walkthrough: Publicar a demo do jogo sem redeploy
+
+A demo jogável em `/jogos/horda-voxel.html` não é mais um arquivo estático: a rota é atendida por `api/demo/serve.js`, que entrega o build marcado como ativo no **Vercel Blob**. Você publica do celular, em segundos, sem commit e sem esperar o Vercel rebuildar.
+
+**Uma vez só (preparo):**
+1. No projeto do Vercel: **Storage → Create Storage → Blob**, acesso **Public**, conectado a *Production* e *Preview*. Isso injeta `BLOB_READ_WRITE_TOKEN` automaticamente.
+2. Em **Settings → Environment Variables**, crie `DEMO_ADMIN_TOKEN` com o passcode de publicação (guarde, pois é o que protege o upload).
+3. Faça um deploy para a rota `/api/demo/*` existir.
+
+**A cada build novo:**
+1. Abra `/jogos/painel.html` (página não indexada, protegida pelo passcode).
+2. Escolha ou arraste o HTML standalone da demo (até 4 MB, limite do body de uma Vercel Function) e toque em **Enviar e ativar**.
+3. O build vira `jogos/builds/<slug>.html` no Blob, o ponteiro `jogos/active.txt` aponta pra ele e `/jogos/horda-voxel.html` passa a servir o novo arquivo — na mesma origem, então os saves em `localStorage` de quem joga continuam lá.
+4. A lista de builds permite **Ativar** (rollback instantâneo para qualquer versão anterior), **Ver** (abre a URL crua do Blob) e **Apagar**.
+
+Sem nenhum build enviado, a rota redireciona para `public/jogos/default.html`, o snapshot estático que estava no ar antes.
 
 ---
 

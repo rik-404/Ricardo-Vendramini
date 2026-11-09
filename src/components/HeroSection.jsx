@@ -123,6 +123,15 @@ export default function HeroSection() {
             <span>{t('hero.ctaProjects')}</span>
             <Rocket className="w-5 h-5 text-slate-200 group-hover:text-white group-hover:rotate-12 transition-all" />
           </a>
+
+          {/* Portfólio jogável: o mesmo conteúdo, andando por uma vila em voxel (public/mundo) */}
+          <a
+            href="/mundo/"
+            className="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel border border-emerald-300/40 text-slate-100 hover:text-white hover:border-emerald-300/80 font-semibold text-base transition-all transform hover:-translate-y-1 flex items-center justify-center gap-3 group"
+          >
+            <span>{t('hero.ctaWorld')}</span>
+            <Gamepad2 className="w-5 h-5 text-emerald-300 group-hover:rotate-12 transition-all" />
+          </a>
         </motion.div>
 
         {/* New project spotlight: Horda Voxel game */}

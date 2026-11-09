@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Mundo · Ricardo Vendramini</title>
+<meta name="description" content="O portfólio do Ricardo Vendramini em forma de jogo: ande pela vila, chegue perto dos quadros e conheça cada projeto.">
+<meta property="og:title" content="Mundo · Ricardo Vendramini — portfólio jogável">
+<meta property="og:description" content="Ande pela vila e conheça os projetos do Ricardo Vendramini.">
+<meta property="og:image" content="/og-image.png">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Chakra+Petch:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mundo.css?v=1">
+</head>
+<body>
+<canvas id="cena" aria-hidden="true"></canvas>
+
+<!-- tela de entrada -->
+<section id="entrada" class="tela">
+  <div class="cartao">
+    <img class="foto" src="img/ricardo.jpeg" alt="Foto do Ricardo Vendramini">
+    <p class="pre">portfólio jogável</p>
+    <h1>Ricardo Vendramini</h1>
+    <p class="cargo" id="entrada-cargo"></p>
+    <p class="como">Ande pela vila e chegue perto dos quadros para ver cada projeto.</p>
+    <div class="teclas"><span><b>WASD</b> ou <b>setas</b> para andar</span><span><b>E</b> para abrir</span><span class="toque-so">no celular: arraste o dedo</span></div>
+    <button id="comecar" class="btn grande" type="button">Começar a explorar</button>
+    <div class="linha-btns">
+      <button id="entrada-lista" class="btn fantasma" type="button">Ver em lista</button>
+      <a class="btn fantasma" href="/">Voltar ao site</a>
+    </div>
+    <p class="carregando" id="carregando">carregando o mundo…</p>
+  </div>
+</section>
+
+<!-- HUD -->
+<header id="hud" hidden>
+  <div class="hud-progresso"><span class="hud-ic">◆</span> Projetos vistos <b id="hud-vistos">0</b>/<b id="hud-total">0</b><div class="barra"><i id="hud-barra"></i></div></div>
+  <nav class="hud-btns">
+    <button id="hud-lista" class="btn mini" type="button">Lista</button>
+    <button id="hud-contato" class="btn mini" type="button">Contato</button>
+    <a class="btn mini" href="/">Site</a>
+  </nav>
+</header>
+<div id="dica" hidden></div>
+<button id="acao" class="btn" type="button" hidden></button>
+<div id="joy" hidden><i></i></div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<!-- painel do projeto / sobre / livro / contato -->
+<div id="painel" class="tela" hidden>
+  <article class="janela" role="dialog" aria-modal="true" aria-labelledby="pn-titulo">
+    <button class="fechar" id="pn-fechar" type="button" aria-label="Fechar">✕</button>
+    <div id="pn-corpo"></div>
+  </article>
+</div>
+
+<!-- lista acessível de todos os projetos -->
+<div id="lista" class="tela" hidden>
+  <article class="janela larga" role="dialog" aria-modal="true" aria-labelledby="ls-titulo">
+    <button class="fechar" id="ls-fechar" type="button" aria-label="Fechar">✕</button>
+    <h2 id="ls-titulo">Todos os projetos</h2>
+    <div id="ls-grade" class="grade"></div>
+  </article>
+</div>
+
+<noscript><div class="sem-js"><h1>Ricardo Vendramini</h1><p>O portfólio jogável precisa de JavaScript. <a href="/">Veja o portfólio normal</a>.</p></div></noscript>
+
+<script src="lib/three.min.js"></script>
+<script src="dados.js?v=1"></script>
+<script src="mundo.js?v=1"></script>
+</body>
+</html>
